@@ -15,7 +15,7 @@
           class="shadow-sm"
           @click="goDetailList"
         >
-          <b-card-text> 강원도 춘천시 </b-card-text>
+          <b-card-text> 경기도 가평군 </b-card-text>
           <b-row class="ml-1 pl-1">
             <div style="text-align: left;">
               <span class="reviewLike mt-4">
