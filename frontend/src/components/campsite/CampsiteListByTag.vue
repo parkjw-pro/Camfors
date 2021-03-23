@@ -74,11 +74,6 @@ export default {
 }
 </script>
 <style scoped>
-.campsiteList {
-  margin: 0 auto;
-<<<<<<< HEAD
-  width: 80%;
-=======
->>>>>>> f8e60257e4a2145bc75344de92f49ef66b90dec8
-}
+
+
 </style>
