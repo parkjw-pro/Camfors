@@ -1,4 +1,61 @@
 <template>
+<<<<<<< HEAD
+  <div>
+    <div
+     v-for="(item, index) in tagList" :key="index">
+      <swipertest :tag="item" /> 
+
+    </div>
+
+  </div>
+</template>
+
+<script>
+import 'swiper/swiper-bundle.css'
+import swipertest from '@/components/campsite/swipertest'
+
+
+export default {
+  components: {
+    swipertest
+  },
+  data: function() {
+    return {
+      tagList: ['야경이 좋은 곳', '아이들이랑 가고 싶은 곳', '산책하기 좋은 곳'],
+      swiperOption: {
+        direction: 'vertical',
+        pagination: {
+          el: '.swiper-pagination',
+          type: 'bullets',
+        },
+      },
+    };
+  },
+  methods: {
+    enlarge(event) {
+      event.currentTarget.classList.add('large');
+    },
+  },
+  created: async function() {
+    console.log(this.tagList[0]);
+  },
+};
+</script>
+
+<style>
+
+</style>
+<style scoped>
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.swiper-container {
+  height: 500px;
+}
+</style>
+=======
     <div>
         <p>검색결과</p>
 
@@ -30,3 +87,4 @@ export default {
     }
 }
 </script>
+>>>>>>> f8e60257e4a2145bc75344de92f49ef66b90dec8

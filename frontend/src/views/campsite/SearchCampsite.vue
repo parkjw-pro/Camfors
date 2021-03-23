@@ -1,6 +1,18 @@
 <template>
     <div>
         <!-- 검색 부분 -->
+<<<<<<< HEAD
+        
+        <!-- <SearchCampsiteByTag /> -->
+        <SearchCampsiteByWord />
+        
+        
+        
+        
+        <!-- 검색 결과 -->
+        <!-- <CampsiteListByTag /> -->
+        <CampsiteListByWord />
+=======
         <div class="Search">
             <div class=tagGroup>
                 <div style="width:50%; margin:0 auto; color:white; font-size:30px;">#추천태그</div><hr>
@@ -27,24 +39,46 @@
         
         <CampsiteListByTag />
         <div style="height:3000px;"></div>
+>>>>>>> f8e60257e4a2145bc75344de92f49ef66b90dec8
 
     </div>
 </template>
 <script>
+<<<<<<< HEAD
+// import SearchCampsiteByTag from '@/components/campsite/SearchCampsiteByTag';
+import SearchCampsiteByWord from '@/components/campsite/SearchCampsiteByWord';
+// import CampsiteListByTag from '@/components/campsite/CampsiteListByTag';
+import CampsiteListByWord from '@/components/campsite/CampsiteListByWord';
+export default {
+  name: 'SearchCampsite',
+  components: {
+    // CampsiteListByTag,
+    // SearchCampsiteByTag,
+    CampsiteListByWord,
+    SearchCampsiteByWord
+=======
 import CampsiteListByTag from '@/components/campsite/CampsiteListByTag';
 export default {
   name: 'SearchCampsite',
   components: {
     CampsiteListByTag,
+>>>>>>> f8e60257e4a2145bc75344de92f49ef66b90dec8
   },
   data() {
       return {
           value: [],
+<<<<<<< HEAD
+          ByTag: true,
+=======
+>>>>>>> f8e60257e4a2145bc75344de92f49ef66b90dec8
       }
   }
 };
 </script>
 <style scoped>
+<<<<<<< HEAD
+
+=======
 .Search{
     width: 100%;
     height: 70vh;
@@ -70,6 +104,7 @@ export default {
 button {
     margin: 0 1% 8px 0;
 }
+>>>>>>> f8e60257e4a2145bc75344de92f49ef66b90dec8
 
 
 </style>
