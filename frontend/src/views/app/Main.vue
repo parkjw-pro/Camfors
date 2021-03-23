@@ -17,19 +17,15 @@
     <div
      v-for="(item, index) in tagList" :key="index">
 <swipertest :tag="item" /> 
-<!-- <swipertest/> -->
+
     </div>
-    <!-- <Slider /> -->
+
   </div>
 </template>
 
 <script>
-// import Movie from '@/components/campsite/Movie'
 import 'swiper/swiper-bundle.css'
-// import { swiper, swiperSlide } from 'vue-awesome-swiper';
 import swipertest from '@/components/campsite/swipertest'
-// import Slider from '@/components/campsite/Slider';
-
 
 
 export default {
