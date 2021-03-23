@@ -7,9 +7,13 @@
       <span class="font-weight-bold" style="font-size: large;">{{ tag }}</span>
     </div>
     <b-row>
-      <div class="card mb-4 " style="width: 18rem;" 
-      v-for="(item, index) in campsiteList" :key="index">
-    <!-- <b-card
+      <div
+        class="card mb-4 "
+        style="width: 18rem;"
+        v-for="(item, index) in campsiteList"
+        :key="index"
+      >
+        <!-- <b-card
         header-tag="header"
         header-bg-variant="white"
         footer-tag="footer"
@@ -17,7 +21,7 @@
         style="width: 18rem;"
         v-for="(item, index) in campsiteList" :key="index"
       >  -->
-              <!-- <template #header style="padding: 0, 0;">
+        <!-- <template #header style="padding: 0, 0;">
           <img height="100%" width="100%" src="@/assets/mainpage/campsite1.jpg" />
       </template> -->
         <img height="70%" width="100%" src="@/assets/mainpage/campsite1.jpg" />
@@ -26,8 +30,8 @@
         <!-- 2.3 리뷰 내용 -->
         <!-- 2.4 리뷰 생성일자 -->
         <!-- <b-row class="ml-2 pl-2" > -->
-          <h6 class="card-title" >A캠핑장</h6>
-          <p class="card-text" >강원도 춘천시</p>
+        <h6 class="card-title">A캠핑장</h6>
+        <p class="card-text">강원도 춘천시</p>
         <!-- </b-row> -->
 
         <!-- 3. footer 부분 -->
@@ -62,23 +66,22 @@
 
 <script>
 export default {
-  name: 'CampsiteList',
+  name: "CampsiteList",
   props: {
-    tag: String,
+    tag: String
   },
   data: function() {
     return {
-      campsiteList: [1, 2, 3, 4, 5, 6],
+      campsiteList: [1, 2, 3, 4, 5, 6]
     };
-  },
+  }
 };
 </script>
 <style>
-card-header{
-    padding: 1.75rem 1.25rem;
+card-header {
+  padding: 1.75rem 1.25rem;
 }
-p{
-    margin-bottom : 0 !important;
+p {
+  margin-bottom: 0 !important;
 }
-
 </style>

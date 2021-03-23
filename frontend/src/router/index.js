@@ -11,34 +11,34 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/main',
-    name: 'Main',
-    component: Main,
+    path: "/main",
+    name: "Main",
+    component: Main
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: Login,
+    path: "/login",
+    name: "Login",
+    component: Login
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: Register,
+    path: "/register",
+    name: "Register",
+    component: Register
   },
   {
-    path: '/mypage',
-    name: 'Mypage',
-    component: Mypage,
+    path: "/mypage",
+    name: "Mypage",
+    component: Mypage
   },
   {
-    path: '/searchCampsite',
-    name: 'SearchCampsite',
-    component: SearchCampsite,
+    path: "/searchCampsite",
+    name: "SearchCampsite",
+    component: SearchCampsite
   },
   {
-    path: '/campsiteDetail/:campsiteId',
-    name: 'CampsiteDetail',
-    component: CampsiteDetail,
+    path: "/campsiteDetail/:campsiteId",
+    name: "CampsiteDetail",
+    component: CampsiteDetail
   }
   // {
   //   path: "/about",
@@ -53,7 +53,6 @@ const routes = [
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes,
- 
+  routes
 });
 export default router;
