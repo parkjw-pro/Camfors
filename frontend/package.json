@@ -13,20 +13,14 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/vue-fontawesome": "^2.0.2",
     "@vue/composition-api": "^1.0.0-rc.5",
-<<<<<<< HEAD
-=======
     "axios": "^0.21.1",
->>>>>>> f8e60257e4a2145bc75344de92f49ef66b90dec8
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
     "node-sass": "^5.0.0",
     "sass-loader": "^10.1.1",
     "swiper": "^6.5.0",
-<<<<<<< HEAD
-=======
     "vee-validate": "^3.4.5",
->>>>>>> f8e60257e4a2145bc75344de92f49ef66b90dec8
     "vue": "^2.6.12",
     "vue-awesome-swiper": "^4.1.1",
     "vue-router": "^3.2.0",
