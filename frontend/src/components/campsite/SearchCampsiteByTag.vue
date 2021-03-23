@@ -14,7 +14,9 @@
         </b-button>
       </div>
       <div class="searchButton">
-        <b-button block class="button" v-on:click="changeIsTag">word로 검색</b-button>
+        <b-button block class="button" v-on:click="changeIsTag"
+          >word로 검색</b-button
+        >
         <b-button block class="button" variant="danger">검색하기</b-button>
       </div>
     </div>
@@ -37,7 +39,7 @@ export default {
         { caption: "#생태교육", state: false },
         { caption: "#별 보기 좋은", state: false }
       ],
-      checkedTag: [],
+      checkedTag: []
     };
   },
   computed: {
@@ -47,8 +49,8 @@ export default {
   },
   methods: {
     changeIsTag() {
-      this.$emit('IsTag', false)
-    },
+      this.$emit("IsTag", false);
+    }
   }
 };
 </script>

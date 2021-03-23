@@ -15,8 +15,8 @@ export default {
     return {
       cssProps: {
         backgroundImage: `url(${require("@/assets/mypage/mypage.jpg")})`,
-        width: "1920px",
-        height: "1080px",
+        width: "100vw",
+        height: "100vh",
         position: "relative"
       },
       credentials: {
