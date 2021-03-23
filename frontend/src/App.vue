@@ -1,34 +1,29 @@
 <template>
-  <div id="app" class="pb-5" style="position: relative; z-index: 2;"> 
+  <div id="app" style="position: relative; z-index: 2;">
     <div><Navbar /></div>
     <div style="position: relative; z-index: 1;">
-      <router-view ></router-view>
+      <router-view></router-view>
     </div>
   </div>
 </template>
 <script>
-import Navbar from '@/components/app/Navbar'
+import Navbar from "@/components/app/Navbar";
 //import 'vue-select/dist/vue-select.css';
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Navbar,
-  },
-  
-}
+    Navbar
+  }
+};
 </script>
 <style>
-<<<<<<< HEAD
-
-=======
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 /* 2번 폰트 - 나눔펜 스크립트 */
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
 /* 3번 폰트 - Hanna */
 @import url(//fonts.googleapis.com/earlyaccess/hanna.css);
 
-@import url('https://fonts.googleapis.com/css2?family=Jua&display=swap');
->>>>>>> f8e60257e4a2145bc75344de92f49ef66b90dec8
+@import url("https://fonts.googleapis.com/css2?family=Jua&display=swap");
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -49,8 +44,6 @@ export default {
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-<<<<<<< HEAD
-=======
 
 #box {
   display: block;
@@ -58,7 +51,5 @@ export default {
   position: absolute;
   left: 25%;
   margin-top: 15%;
-  padding-bottom: 7%;
 }
->>>>>>> f8e60257e4a2145bc75344de92f49ef66b90dec8
 </style>

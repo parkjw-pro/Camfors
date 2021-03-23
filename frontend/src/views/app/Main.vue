@@ -1,5 +1,5 @@
 <template>
-  <div id = "main">
+  <div id="main">
     <div>
       <video
         height="40%"
@@ -14,26 +14,22 @@
       </video>
     </div>
     <!-- <div style="text-align: center; margin : 0 auto; width: 50%;"> -->
-<<<<<<< HEAD
     <div
-=======
-    <div style="background-color: #FFFFF0"
->>>>>>> f8e60257e4a2145bc75344de92f49ef66b90dec8
-     v-for="(item, index) in tagList" :key="index">
-<swipertest :tag="item" /> 
-
+      style="background-color: #FFFFF0"
+      v-for="(item, index) in tagList"
+      :key="index"
+    >
+      <swipertest :tag="item" />
     </div>
-
   </div>
 </template>
 
 <script>
-import 'swiper/swiper-bundle.css'
-import swipertest from '@/components/campsite/swipertest'
-
+import "swiper/swiper-bundle.css";
+import swipertest from "@/components/campsite/swipertest";
 
 export default {
-  name: 'Main',
+  name: "Main",
   components: {
     // Movie,
     // swiper,
@@ -44,33 +40,33 @@ export default {
   },
   data: function() {
     return {
-<<<<<<< HEAD
-      tagList: ['야경이 좋은 곳', '아이들이랑 가고 싶은 곳', '산책하기 좋은 곳'],
-=======
-      tagList: ['야경이 좋은 곳', '아이들이랑 가고 싶은 곳', '산책하기 좋은 곳', '주차하기 편한 곳'],
->>>>>>> f8e60257e4a2145bc75344de92f49ef66b90dec8
+      tagList: [
+        "야경이 좋은 곳",
+        "아이들이랑 가고 싶은 곳",
+        "산책하기 좋은 곳",
+        "주차하기 편한 곳"
+      ],
       swiperOption: {
-        direction: 'vertical',
+        direction: "vertical",
         pagination: {
-          el: '.swiper-pagination',
-          type: 'bullets',
-        },
-      },
+          el: ".swiper-pagination",
+          type: "bullets"
+        }
+      }
     };
   },
   methods: {
     enlarge(event) {
-      event.currentTarget.classList.add('large');
-    },
+      event.currentTarget.classList.add("large");
+    }
   },
   created: async function() {
     console.log(this.tagList[0]);
-  },
+  }
 };
 </script>
 
 <style>
-
 /* 파스텔 컬러 */
 .color_red {
   background-color: #f5d5cb;

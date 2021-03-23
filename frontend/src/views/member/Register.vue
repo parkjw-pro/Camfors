@@ -12,7 +12,11 @@
         <!-- 2.1.1 아이디 -->
         <b-row id="accountBox">
           <b-col align-self="left">
-            <ValidationProvider name="이메일" rules="required|email" v-slot="{ errors }">
+            <ValidationProvider
+              name="이메일"
+              rules="required|email"
+              v-slot="{ errors }"
+            >
               <b-form-group>
                 <label
                   style="float:left; padding-right:10px; padding-top:5px; color : white"
@@ -28,21 +32,35 @@
                   required
                   @keypress.enter="check_user_email"
                 ></b-form-input>
-                <b-button id="btn_signup" style="margin-top:3px" size="sm" @click="check_user_email"
+                <b-button
+                  id="btn_signup"
+                  style="margin-top:3px"
+                  size="sm"
+                  @click="check_user_email"
                   >메일 인증</b-button
                 >
                 <br />
                 <br />
-                <small id="error3" class="text-danger" style=" margin-top:5px">{{
-                  errors[0]
-                }}</small>
+                <small
+                  id="error3"
+                  class="text-danger"
+                  style=" margin-top:5px"
+                  >{{ errors[0] }}</small
+                >
               </b-form-group>
             </ValidationProvider>
           </b-col>
         </b-row>
-        <b-row v-if="this.possible_email && this.credentials.email" id="accountBox">
+        <b-row
+          v-if="this.possible_email && this.credentials.email"
+          id="accountBox"
+        >
           <b-col align-self="left">
-            <ValidationProvider name="인증코드" rules="required|min:4" v-slot="{ errors }">
+            <ValidationProvider
+              name="인증코드"
+              rules="required|min:4"
+              v-slot="{ errors }"
+            >
               <b-form-group>
                 <label
                   style="float:left; padding-right:10px; padding-top:5px; color : white"
@@ -67,16 +85,23 @@
                 >
                 <br />
                 <br />
-                <small id="error4" class="text-danger" style=" margin-top:5px; color : white">{{
-                  errors[0]
-                }}</small>
+                <small
+                  id="error4"
+                  class="text-danger"
+                  style=" margin-top:5px; color : white"
+                  >{{ errors[0] }}</small
+                >
               </b-form-group>
             </ValidationProvider>
           </b-col>
         </b-row>
         <b-row id="accountBox">
           <b-col align-self="left">
-            <ValidationProvider name="비밀번호" rules="required|min:6" v-slot="{ errors }">
+            <ValidationProvider
+              name="비밀번호"
+              rules="required|min:6"
+              v-slot="{ errors }"
+            >
               <b-form-group>
                 <label
                   style="float:left; padding-right:10px; padding-top:5px; color : white"
@@ -94,9 +119,12 @@
                 ></b-form-input>
                 <br />
                 <br />
-                <small id="error5" class="text-danger" style=" margin-top:5px; color : white">{{
-                  errors[0]
-                }}</small>
+                <small
+                  id="error5"
+                  class="text-danger"
+                  style=" margin-top:5px; color : white"
+                  >{{ errors[0] }}</small
+                >
               </b-form-group>
             </ValidationProvider>
           </b-col>
@@ -124,9 +152,12 @@
                 ></b-form-input>
                 <br />
                 <br />
-                <small id="error6" class="text-danger" style=" margin-top:5px">{{
-                  errors[0]
-                }}</small>
+                <small
+                  id="error6"
+                  class="text-danger"
+                  style=" margin-top:5px"
+                  >{{ errors[0] }}</small
+                >
               </b-form-group>
             </ValidationProvider>
           </b-col>
@@ -134,7 +165,11 @@
         <!-- 2.1.2 닉네임 -->
         <b-row id="accountBox">
           <b-col align-self="left">
-            <ValidationProvider name="닉네임" rules="required|min:2" v-slot="{ errors }">
+            <ValidationProvider
+              name="닉네임"
+              rules="required|min:2"
+              v-slot="{ errors }"
+            >
               <b-form-group>
                 <label
                   style="float:left; padding-right:10px; padding-top:5px; color : white"
@@ -159,16 +194,23 @@
                 >
                 <br />
                 <br />
-                <small id="error2" class="text-danger" style=" margin-top:5px">{{
-                  errors[0]
-                }}</small>
+                <small
+                  id="error2"
+                  class="text-danger"
+                  style=" margin-top:5px"
+                  >{{ errors[0] }}</small
+                >
               </b-form-group>
             </ValidationProvider>
           </b-col>
         </b-row>
         <b-row id="accountBox">
           <b-col align-self="left">
-            <ValidationProvider name="주소" rules="required|min:2" v-slot="{ errors }">
+            <ValidationProvider
+              name="주소"
+              rules="required|min:2"
+              v-slot="{ errors }"
+            >
               <b-form-group>
                 <label
                   style="float:left; padding-right:10px; padding-top:5px; color : white"
@@ -193,16 +235,23 @@
                 >
                 <br />
                 <br />
-                <small id="error2" class="text-danger" style=" margin-top:5px">{{
-                  errors[0]
-                }}</small>
+                <small
+                  id="error2"
+                  class="text-danger"
+                  style=" margin-top:5px"
+                  >{{ errors[0] }}</small
+                >
               </b-form-group>
             </ValidationProvider>
           </b-col>
         </b-row>
         <b-row id="accountBox">
           <b-col align-self="left">
-            <ValidationProvider name="생일" rules="required|min:2" v-slot="{ errors }">
+            <ValidationProvider
+              name="생일"
+              rules="required|min:2"
+              v-slot="{ errors }"
+            >
               <b-form-group>
                 <label
                   style="float:left; padding-right:10px; padding-top:5px; color : white"
@@ -227,9 +276,12 @@
                 >
                 <br />
                 <br />
-                <small id="error2" class="text-danger" style=" margin-top:5px">{{
-                  errors[0]
-                }}</small>
+                <small
+                  id="error2"
+                  class="text-danger"
+                  style=" margin-top:5px"
+                  >{{ errors[0] }}</small
+                >
               </b-form-group>
             </ValidationProvider>
           </b-col>
@@ -237,7 +289,11 @@
       </b-col>
       <!-- 버튼 -->
       <div>
-        <b-button id="btn_signup" class="mx-3" @click="$router.push({ name: 'Login' })">
+        <b-button
+          id="btn_signup"
+          class="mx-3"
+          @click="$router.push({ name: 'Login' })"
+        >
           로그인 페이지
         </b-button>
         <b-button id="btn_signup" class="mx-3" @click="onSubmit()">
@@ -249,39 +305,39 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { ValidationProvider } from 'vee-validate';
+import axios from "axios";
+import { ValidationProvider } from "vee-validate";
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   components: {
-    ValidationProvider,
+    ValidationProvider
     // extend,
   },
-  name: 'Register',
+  name: "Register",
   data() {
     return {
       cssProps: {
-        backgroundImage: `url(${require('@/assets/register/register.jpg')})`,
-        width: '1920px',
-        height: '1080px',
-        position: 'relative',
+        backgroundImage: `url(${require("@/assets/register/register.jpg")})`,
+        width: "100vw",
+        height: "100vh",
+        position: "relative"
       },
       credentials: {
-        userId: '',
-        nickname: '',
-        email: '',
-        password: '',
+        userId: "",
+        nickname: "",
+        email: "",
+        password: ""
       },
-      password_confirmation: '',
+      password_confirmation: "",
       possible_email: false,
-      emailCode: '',
+      emailCode: "",
 
       checkId: false,
       checkNickname: false,
       checkEmail: false,
-      checkEmailCode: false,
+      checkEmailCode: false
     };
   },
   methods: {
@@ -291,38 +347,41 @@ export default {
         this.checkNickname == false ||
         this.checkEmail == false ||
         this.checkEmailCode == false ||
-        document.getElementById('error5').innerHTML != '' ||
-        document.getElementById('error6').innerHTML != ''
+        document.getElementById("error5").innerHTML != "" ||
+        document.getElementById("error6").innerHTML != ""
       ) {
-        alert('중복체크 및 유효성 검사 확인 바랍니다.');
+        alert("중복체크 및 유효성 검사 확인 바랍니다.");
       } else {
         axios
           .post(`${SERVER_URL}/user`, this.credentials)
           .then(() => {
-            alert('회원가입 성공');
-            window.location.href = '/account';
+            alert("회원가입 성공");
+            window.location.href = "/account";
           })
           .catch(() => {
-            alert('서버에 문제가 생겼습니다. 다시 가입 바랍니다.');
-            window.location.href = '/account';
+            alert("서버에 문제가 생겼습니다. 다시 가입 바랍니다.");
+            window.location.href = "/account";
           });
       }
     },
     check_user_nickname: function() {
-      if (this.credentials.nickname == '' || document.getElementById('error2').innerHTML != '') {
-        alert('닉네임 다시입력 바랍니다.');
-        this.credentials.nickname = '';
+      if (
+        this.credentials.nickname == "" ||
+        document.getElementById("error2").innerHTML != ""
+      ) {
+        alert("닉네임 다시입력 바랍니다.");
+        this.credentials.nickname = "";
       } else {
         axios
           .get(`${SERVER_URL}/user/nickname/${this.credentials.nickname}`)
           .then(() => {
-            alert('사용 가능한 닉네임 입니다.');
+            alert("사용 가능한 닉네임 입니다.");
             this.checkNickname = true;
           })
           .catch(() => {
-            if (this.credentials.nickname != '') {
-              alert('현재 사용중인 닉네임 입니다.');
-              this.credentials.nickname = '';
+            if (this.credentials.nickname != "") {
+              alert("현재 사용중인 닉네임 입니다.");
+              this.credentials.nickname = "";
             }
           });
       }
@@ -331,53 +390,58 @@ export default {
       if (
         this.checkId == false ||
         this.checkNickname == false ||
-        this.credentials.email == '' ||
-        document.getElementById('error3').innerHTML != ''
+        this.credentials.email == "" ||
+        document.getElementById("error3").innerHTML != ""
       ) {
-        alert('닉네임,아이디 중복체크 확인및 이메일 다시 입력 바랍니다.');
-        this.credentials.email = '';
+        alert("닉네임,아이디 중복체크 확인및 이메일 다시 입력 바랍니다.");
+        this.credentials.email = "";
       } else {
         axios
           .post(`${SERVER_URL}/user/email`, this.credentials)
           .then(() => {
-            alert('사용 가능한 이메일 입니다. 인증코드 입력바랍니다.');
+            alert("사용 가능한 이메일 입니다. 인증코드 입력바랍니다.");
             this.checkEmail = true;
             this.possible_email = true;
           })
           .catch(() => {
-            if (this.credentials.email != '') {
-              alert('현재 사용중인 이메일 입니다.');
-              this.credentials.email = '';
+            if (this.credentials.email != "") {
+              alert("현재 사용중인 이메일 입니다.");
+              this.credentials.email = "";
             }
           });
       }
     },
     check_user_emailCode: function() {
-      if (this.emailCode == '' || document.getElementById('error4').innerHTML != '') {
-        alert('인증코드 다시입력 바랍니다.');
+      if (
+        this.emailCode == "" ||
+        document.getElementById("error4").innerHTML != ""
+      ) {
+        alert("인증코드 다시입력 바랍니다.");
       } else {
         axios
-          .post(`${SERVER_URL}/user/email/${this.credentials.userId}/${this.emailCode}`)
+          .post(
+            `${SERVER_URL}/user/email/${this.credentials.userId}/${this.emailCode}`
+          )
           .then(() => {
             this.checkEmailCode = true;
-            alert('인증완료');
+            alert("인증완료");
           })
           .catch(() => {
-            if (this.emailCode != '') {
-              alert('인증번호가 일치하지 않습니다.');
-              this.emailCode = '';
+            if (this.emailCode != "") {
+              alert("인증번호가 일치하지 않습니다.");
+              this.emailCode = "";
             }
           });
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
 <style scoped>
 .regisimg::before {
   background-color: #000;
-  content: '';
+  content: "";
   opacity: 0.5;
   position: absolute;
   top: 0px;
@@ -395,11 +459,11 @@ export default {
   background-color: #695549;
 }
 
-input[type='password'] {
+input[type="password"] {
   font: small-caption;
   font-size: 16px;
 }
 ::placeholder {
-  font-family: 'Jeju Gothic', sans-serif;
+  font-family: "Jeju Gothic", sans-serif;
 }
 </style>

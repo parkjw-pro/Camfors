@@ -1,39 +1,32 @@
 <template>
   <div>
-      <h2>{{ campsiteId }}</h2>
+    <h2>{{ campsiteId }}</h2>
     <!-- <div style="text-align: center; margin : 0 auto; width: 50%;"> -->
-<div>디테일 화면입니다.</div>
-
+    <div>디테일 화면입니다.</div>
   </div>
 </template>
 
 <script>
-
-
-
 export default {
-  name: 'CampsiteDetail',
-  components: {
-
-  },
+  name: "CampsiteDetail",
+  components: {},
   data: function() {
     return {
-      campsiteId : '',
+      campsiteId: ""
     };
   },
   methods: {
     enlarge(event) {
-      event.currentTarget.classList.add('large');
-    },
+      event.currentTarget.classList.add("large");
+    }
   },
   created: async function() {
-    this.campsiteId = this.$route.params.campsiteId
-  },
+    this.campsiteId = this.$route.params.campsiteId;
+  }
 };
 </script>
 
 <style>
-
 /* 파스텔 컬러 */
 .color_red {
   background-color: #f5d5cb;
