@@ -14,11 +14,7 @@
       </video>
     </div>
     <!-- <div style="text-align: center; margin : 0 auto; width: 50%;"> -->
-<<<<<<< HEAD
-    <div
-=======
     <div style="background-color: #FFFFF0"
->>>>>>> f8e60257e4a2145bc75344de92f49ef66b90dec8
      v-for="(item, index) in tagList" :key="index">
 <swipertest :tag="item" /> 
 
@@ -44,11 +40,7 @@ export default {
   },
   data: function() {
     return {
-<<<<<<< HEAD
-      tagList: ['야경이 좋은 곳', '아이들이랑 가고 싶은 곳', '산책하기 좋은 곳'],
-=======
       tagList: ['야경이 좋은 곳', '아이들이랑 가고 싶은 곳', '산책하기 좋은 곳', '주차하기 편한 곳'],
->>>>>>> f8e60257e4a2145bc75344de92f49ef66b90dec8
       swiperOption: {
         direction: 'vertical',
         pagination: {
