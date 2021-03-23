@@ -2,8 +2,8 @@
   <div>
     <!-- 태그 검색 -->
     
-    <SearchCampsiteByTag @IsTag="parents" v-if="(IsTag === true)" />
-    <SearchCampsiteByWord v-else-if="(IsTag === false)" />
+    <SearchCampsiteByTag @IsTag="parents" v-if="IsTag" />
+    <SearchCampsiteByWord v-else-if="!IsTag" />
     {{ IsTag }}
 
     <CampsiteListByTag />
