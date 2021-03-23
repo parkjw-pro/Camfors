@@ -8,7 +8,7 @@
         autoplay
         muted
         loop
-        poster="@/assets/mainpage/main2.mp4"
+        poster="@/assets/mainpage/main.mp4"
       >
         <source :src="require('@/assets/mainpage/main.mp4')" type="video/mp4" />
       </video>
