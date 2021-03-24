@@ -16,5 +16,5 @@ Including another URLconf
 from django.urls import path, include
 
 urlpatterns = [
-    path('', include('camp.urls')),
+    path('camp/', include('camp.urls')),
 ]
