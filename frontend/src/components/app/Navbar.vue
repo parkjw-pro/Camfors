@@ -1,7 +1,7 @@
 <template>
    <div>
   <b-navbar class="navbar" :class="{'change_color': scrollPosition > 50}" toggleable="lg" type="dark" fixed="top">
-    <b-navbar-brand href="/">Phoenix</b-navbar-brand>
+    <b-navbar-brand href="/main">Phoenix</b-navbar-brand>
         <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
         <b-nav-item href="/searchCampsite">나만의 캠핑장을 찾아보세요</b-nav-item>
@@ -16,9 +16,9 @@
           
         </b-nav-form>
 
-        <b-nav-item href="#">로그인</b-nav-item>
+        <b-nav-item @click="goLogin">로그인</b-nav-item>
         <b-nav-item href="#">로그아웃</b-nav-item>
-        <b-nav-item href="#">마이페이지</b-nav-item>
+        <b-nav-item @click="goMypage">마이페이지</b-nav-item>
 
       </b-navbar-nav>
     </b-collapse>
@@ -42,8 +42,22 @@ export default {
   methods: {
     updateScroll() {
        this.scrollPosition = window.scrollY
-    }
+    },
+    goLogin: function() {
+      // 리뷰 작성 페이지로 넘어가준다!!
+      // console.log("보냅니다", this.store);
+      console.log("로그인페이지로 이동")
+      this.$router.push({ name: 'Login'});
+    },
+    goMypage: function() {
+      // 리뷰 작성 페이지로 넘어가준다!!
+      // console.log("보냅니다", this.store);
+      console.log("마이페이지로 이동")
+      this.$router.push({ name: 'Mypage'});
+    },
+
   }
+
   
 }
 

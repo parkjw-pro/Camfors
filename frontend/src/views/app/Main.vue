@@ -8,28 +8,24 @@
         autoplay
         muted
         loop
-        poster="@/assets/mainpage/main2.mp4"
+        poster="@/assets/mainpage/main.mp4"
       >
         <source :src="require('@/assets/mainpage/main.mp4')" type="video/mp4" />
       </video>
     </div>
     <!-- <div style="text-align: center; margin : 0 auto; width: 50%;"> -->
-    <div
+    <div style="background-color: #FFFFF0"
      v-for="(item, index) in tagList" :key="index">
 <swipertest :tag="item" /> 
-<!-- <swipertest/> -->
+
     </div>
-    <!-- <Slider /> -->
+
   </div>
 </template>
 
 <script>
-// import Movie from '@/components/campsite/Movie'
 import 'swiper/swiper-bundle.css'
-// import { swiper, swiperSlide } from 'vue-awesome-swiper';
 import swipertest from '@/components/campsite/swipertest'
-// import Slider from '@/components/campsite/Slider';
-
 
 
 export default {
@@ -44,7 +40,7 @@ export default {
   },
   data: function() {
     return {
-      tagList: ['야경이 좋은 곳', '아이들이랑 가고 싶은 곳', '산책하기 좋은 곳'],
+      tagList: ['야경이 좋은 곳', '아이들이랑 가고 싶은 곳', '산책하기 좋은 곳', '주차하기 편한 곳'],
       swiperOption: {
         direction: 'vertical',
         pagination: {

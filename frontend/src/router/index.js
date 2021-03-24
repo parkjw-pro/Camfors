@@ -2,6 +2,11 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Main from "@/views/app/Main.vue";
 import SearchCampsite from "@/views/campsite/SearchCampsite.vue";
+import CampsiteDetail from "@/views/campsite/CampsiteDetail.vue";
+import Login from "@/views/member/Login.vue";
+import Register from "@/views/member/Register.vue";
+import Mypage from "@/views/member/Mypage.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -11,9 +16,29 @@ const routes = [
     component: Main,
   },
   {
+    path: '/login',
+    name: 'Login',
+    component: Login,
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    component: Register,
+  },
+  {
+    path: '/mypage',
+    name: 'Mypage',
+    component: Mypage,
+  },
+  {
     path: '/searchCampsite',
     name: 'SearchCampsite',
     component: SearchCampsite,
+  },
+  {
+    path: '/campsiteDetail/:campsiteId',
+    name: 'CampsiteDetail',
+    component: CampsiteDetail,
   }
   // {
   //   path: "/about",
