@@ -34,7 +34,7 @@ def camptaglist(request, tag_id):
     try:
         query_sets = Campsite.objects.filter(campsite_id__in=Subquery(CampsiteTag.objects
                                                                       .filter(tag_id=tag_id)
-                                                                      .values('campsite_id'))).order_by("likeCount")[:20]
+                                                                      .values('campsite_id'))).order_by('likeCount')[:20]
     except Campsite.DoesNotExist:
         return HttpResponse(status=404)
 
@@ -49,10 +49,10 @@ def camptaglist(request, tag_id):
 @csrf_exempt
 def campLikesList(request):
     try:
-        campsite = Campsite.objects.get()
+        query_sets = Campsite.objects.all().order_by('-likeCount')[:20]
     except Campsite.DoesNotExist:
         return HttpResponse(status=404)
 
-    if request.method == 'GET':
-        serializer = campLikesListSerializer(campsite,many=True)
+    if request.method == 'GET' and len(query_sets) > 0:
+        serializer = CampsiteSerializer(query_sets, many=True)
         return JsonResponse(serializer.data, safe=False)
