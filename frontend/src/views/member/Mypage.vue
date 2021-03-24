@@ -1,10 +1,14 @@
 <template>
   <!-- <div :style="cssProps"> -->
   <div :style="cssProps" class="loginimg">
-    <div id="box">
+    <div id="mypage">
       <h2>마이페이지</h2>
-      
     </div>
+    <div id="my1">
+      내정보
+    </div>
+    <span id="my2">좋아요</span>
+    <span id="my3">리뷰</span>
   </div>
 </template>
 
@@ -67,7 +71,7 @@ export default {
 
 <style scoped>
 .loginimg::before {
-  background-color: #000;
+  background-color: rgb(0, 0, 0);
   content: '';
   opacity: 0.5;
   position: absolute;
@@ -80,5 +84,37 @@ export default {
   color: #fff;
   text-align: center;
   font-weight: bold;
+}
+
+#mypage {
+  display: block;
+  width: 50%;
+  position: absolute;
+  left: 25%;
+  margin-top: 5%;
+}
+#my1 {
+  display: block;
+  width: 50%;
+  position: absolute;
+  left: 25%;
+  margin-top: 17%;
+  color: aqua;
+}
+#my2 {
+  display: block;
+  width: 50%;
+  position: absolute;
+  left: 10%;
+  margin-top: 30%;
+  color: aqua;
+}
+#my3 {
+  display: block;
+  width: 50%;
+  position: absolute;
+  left: 40%;
+  margin-top: 30%;
+  color: aqua;
 }
 </style>

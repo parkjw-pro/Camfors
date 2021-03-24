@@ -1,40 +1,40 @@
 <template>
-    <div>
-        <!-- 검색 부분 -->
+  <div>
+    <!-- 태그 검색 -->
+    
+    <SearchCampsiteByTag @IsTag="parents" v-if="IsTag" />
+    <SearchCampsiteByWord v-else-if="!IsTag" />
+    {{ IsTag }}
 
-        
-        <!-- <SearchCampsiteByTag /> -->
-        <SearchCampsiteByWord />
-        
-  
-        <!-- 검색 결과 -->
-        <!-- <CampsiteListByTag /> -->
-        <CampsiteListByWord />
-
-    </div>
+    <CampsiteListByTag />
+    <CampsiteListByWord />
+  </div>
 </template>
 <script>
-// import SearchCampsiteByTag from '@/components/campsite/SearchCampsiteByTag';
-import SearchCampsiteByWord from '@/components/campsite/SearchCampsiteByWord';
-// import CampsiteListByTag from '@/components/campsite/CampsiteListByTag';
-import CampsiteListByWord from '@/components/campsite/CampsiteListByWord';
+import SearchCampsiteByTag from "@/components/campsite/SearchCampsiteByTag";
+import SearchCampsiteByWord from "@/components/campsite/SearchCampsiteByWord";
+import CampsiteListByTag from "@/components/campsite/CampsiteListByTag";
+import CampsiteListByWord from "@/components/campsite/CampsiteListByWord";
 export default {
-  name: 'SearchCampsite',
+  name: "SearchCampsite",
   components: {
-    // CampsiteListByTag,
-    // SearchCampsiteByTag,
+    CampsiteListByTag,
+    SearchCampsiteByTag,
     CampsiteListByWord,
     SearchCampsiteByWord
   },
   data() {
-      return {
-          value: [],
-          ByTag: true,
-      }
+    return {
+      value: [],
+      IsTag: true
+    };
+  },
+  methods: {
+    parents(data) {
+      this.IsTag = data;
+      console.log(this.IsTag);
+    }
   }
 };
 </script>
-<style scoped>
-
-
-</style>
+<style scoped></style>

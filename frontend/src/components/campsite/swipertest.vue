@@ -78,7 +78,7 @@ export default {
       campsiteList: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
       swiperOption: {
         slidesPerView: 5,
-        spaceBetween: 30,
+        spaceBetween: 20,
         slidesPerGroup: 5,
         loop: true,
         loopFillGroupWithBlank: false,
@@ -142,7 +142,7 @@ export default {
 .shadow-sm {
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
 }
-/* .card {
+.card {
   border: none;
-} */
+}
 </style>
