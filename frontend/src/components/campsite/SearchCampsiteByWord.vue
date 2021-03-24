@@ -11,7 +11,7 @@
         ></b-form-input>
       </div>
       <div class="searchButton">
-        <b-button block class="button">태그로 검색</b-button>
+        <b-button block class="button" v-on:click="changeIsTag">태그로 검색</b-button>
         <b-button block class="button" variant="danger">검색하기</b-button>
       </div>
     </div>
@@ -27,6 +27,11 @@ export default {
   computed: {
     btnStates() {
       return this.buttons.map(btn => btn.state);
+    }
+  },
+  methods: {
+    changeIsTag() {
+      this.$emit("IsTag", true);
     }
   }
 };
