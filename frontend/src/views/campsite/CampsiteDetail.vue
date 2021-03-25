@@ -57,17 +57,20 @@ export default {
   components: {
     // Map
   },
+  created() {
+  },
   data: function() {
     return {
+      campDetail:[],
       campsiteId: "",
       tagList: [
         "#가족들과 가기 좋은",
         "#물놀이 하기 좋은",
         "#봄",
-        "#바다가 보이는"
-      ]
+        "#바다가 보이는",
+      ],
     };
-  }
+  },
 };
 </script>
 <style scoped>

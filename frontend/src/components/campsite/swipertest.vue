@@ -9,7 +9,7 @@
       <swiper-slide v-for="(item, index) in campsiteList" :key="index">
         <b-card @click="goDetailList(item.campsite_id)">
           <b-card-img :src="item.firstImageUrlV" height="170px"></b-card-img>
-          <span class="my-2" style="font-size:20px">{{
+          <span class="my-2" style="font-size:18px">{{
             item.campsite_name
           }}</span>
           <b-card-text>{{ item.doNm }} {{ item.sigunguNm }}</b-card-text>
@@ -17,7 +17,6 @@
             <div style="text-align: left;">
               <span class="reviewLike mt-4">
                 <!--좋아요 여부와 좋아요 수-->
-
                 <b-icon
                   icon="suit-heart-fill"
                   variant="danger"
@@ -122,8 +121,9 @@ export default {
         name: "CampsiteDetail",
         params: { campsiteId: campsite_id }
       });
-    }
-  }
+      this.$store.dispatch("campsiteDetail", campsite_id);
+    },
+  },
 };
 </script>
 

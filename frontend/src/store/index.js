@@ -1,39 +1,38 @@
 import Vue from "vue";
 import Vuex from "vuex";
-// import axios from "axios";
+import axios from "axios";
 
 Vue.use(Vuex);
 
-// const SERVER_URL = "http://localhost:8000";
+const SERVER_URL = "http://localhost:8000";
 
 export default new Vuex.Store({
   state: {
-    // tagCampList: []
+    detailInfo: [],
   },
   getters: {
-    // getCampList(state) {
-    //   return state.tagCampList;
-    // },
+    getDetailInfo(state) {
+      return state.detailInfo;
+    },
   },
   mutations: {
-    // setCampList(state, payload) {
-    //   state.tagCampList = [];
-    //   state.tagCampList = payload;
-    // },
+    setDetailInfo(state, payload) {
+      state.detailInfo = payload;
+    }
   },
   actions: {
-    // getTagList(context, tag_id) {
-    //   axios({
-    //     method: "get",
-    //     url: `${SERVER_URL}/camp/camptaglist/${tag_id}`,
-    //   })
-    //     .then((res) => {
-    //       context.commit("setCampList", res.data);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
+    campsiteDetail(context, campsite_id) {
+      axios({
+        method: "get",
+        url: `${SERVER_URL}/camp/getDetail/${campsite_id}`,
+      })
+        .then(res => {
+          context.commit("setDetailInfo", res.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
   },
   modules: {}
 });
