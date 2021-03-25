@@ -1,7 +1,9 @@
 from camp import views
-from django.urls import path, include
+from django.urls import path
 
 urlpatterns = [
-    path('camp/', views.campSite_list),
-    path('camp/<int:pk>/', views.campSite_detail),
+    path('getList', views.campSite_list),
+    path('getDetail/<int:pk>/', views.campSite_detail),
+    path('camptaglist/<int:tag_id>', views.camptaglist),
+    path('camplikeslist', views.campLikesList)
 ]

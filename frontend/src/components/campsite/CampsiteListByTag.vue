@@ -78,6 +78,5 @@ export default {
 <style scoped>
 .campsiteList {
   margin: 0 auto;
-  width: 80%;
 }
 </style>

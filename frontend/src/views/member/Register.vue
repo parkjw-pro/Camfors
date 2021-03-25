@@ -11,7 +11,7 @@
       <b-col class="mx-3">
         <!-- 2.1.1 아이디 -->
         <b-row id="accountBox">
-          <b-col align-self="left">
+          <b-col align-self="right">
             <ValidationProvider
               name="이메일"
               rules="required|email"
@@ -104,7 +104,7 @@
             >
               <b-form-group>
                 <label
-                  style="float:left; padding-right:10px; padding-top:5px; color : white"
+                  style="float:left; padding-right:17px; padding-top:5px; color : white"
                   for="password"
                   >비밀번호:
                 </label>
@@ -213,7 +213,7 @@
             >
               <b-form-group>
                 <label
-                  style="float:left; padding-right:10px; padding-top:5px; color : white"
+                  style="float:left; padding-right:22px; padding-top:5px; color : white"
                   for="nickname"
                   >주소:
                 </label>
@@ -254,7 +254,7 @@
             >
               <b-form-group>
                 <label
-                  style="float:left; padding-right:10px; padding-top:5px; color : white"
+                  style="float:left; padding-right:22px; padding-top:5px; color : white"
                   for="nickname"
                   >생일:
                 </label>
@@ -465,5 +465,13 @@ input[type="password"] {
 }
 ::placeholder {
   font-family: "Jeju Gothic", sans-serif;
+}
+
+#box {
+  display: block;
+  width: 50%;
+  position: absolute;
+  left: 25%;
+  margin-top: 8%;
 }
 </style>
