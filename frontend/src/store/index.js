@@ -1,10 +1,10 @@
 import Vue from "vue";
 import Vuex from "vuex";
-// import axios from "axios";
+import axios from "axios";
 
 Vue.use(Vuex);
 
-// const SERVER_URL = "http://localhost:8000";
+const SERVER_URL = "http://localhost:8000";
 
 export default new Vuex.Store({
   state: {
@@ -22,18 +22,18 @@ export default new Vuex.Store({
     // },
   },
   actions: {
-    // getTagList(context, tag_id) {
-    //   axios({
-    //     method: "get",
-    //     url: `${SERVER_URL}/camp/camptaglist/${tag_id}`,
-    //   })
-    //     .then((res) => {
-    //       context.commit("setCampList", res.data);
-    //     })
-    //     .catch((error) => {
-    //       console.log(error);
-    //     });
-    // },
+    campsiteDetail(context, campsite_id) {
+      axios({
+        method: "get",
+        url: `${SERVER_URL}/camp/getDetail/${campsite_id}`,
+      })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
   modules: {},
 });
