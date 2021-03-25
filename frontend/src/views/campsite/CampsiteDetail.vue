@@ -3,7 +3,7 @@
 
     <!-- 캠핑장 소개 컨텐츠 (이름, 태그) -->
     <div class="contentsBox">
-      <h2 style="color:white;">캠핑장이름</h2>
+      <h2 style="color:white;">{{ getDetailInfo.campsite_name }}</h2>
       <div class="tag" v-for="(tag, idx) in tagList" :key="idx">
         {{ tag }}
       </div>
@@ -13,22 +13,19 @@
       <div class="campsiteInfoImg">
         <b-img
           id="campsiteImg"
-          src="https://gocamping.or.kr/img/2018/sub/camp/camp_typebg_02.jpg"
+          :src="getDetailInfo.firstImageUrlV"
           alt="Responsive image"
         ></b-img>
       </div>
 
       <div class="campsiteInfoList">
         <b-list-group flush>
-          <b-list-group-item>경북 예천군 보문면 옥천길 30</b-list-group-item>
+          <b-list-group-item>{{ getDetailInfo.addr1 }}</b-list-group-item>
+          <b-list-group-item>{{ getDetailInfo.intro }}</b-list-group-item>
           <b-list-group-item
-            >새움정은 예천군에 위치한 폐교된 옥천분교를 리모델링하여 약용식물,
-            곤충관찰, 자수체험 등 현장교육을 할 수 있는 교육농장이면서, 드넓은
-            600여평의 잔디위에서 시골학교에서의 캠핑체험을 할 수 있는 소규모
-            캠핑장입니다.</b-list-group-item
-          >
-          <b-list-group-item
-            ><b-button variant="secondary">홈페이지</b-button>
+            ><b-button variant="secondary" :href="getDetailInfo.homepage"
+              >홈페이지</b-button
+            >
             <b-button variant="secondary">예약하기</b-button></b-list-group-item
           >
           <b-list-group-item
@@ -53,17 +50,22 @@
 </template>
 
 <script>
-// import Map from "@/components/campsiteDetail/Map";
+import Map from "@/components/campsiteDetail/Map";
+import { mapGetters } from "vuex";
 export default {
   name: "CampsiteDetail",
   components: {
-    // Map
+    Map,
   },
   created() {
+    this.$store.dispatch("campsiteDetail", this.$route.params.campsiteId);
+  },
+  computed: {
+    ...mapGetters(["getDetailInfo"]),
   },
   data: function() {
     return {
-      campDetail:[],
+      campDetail: [],
       campsiteId: "",
       tagList: [
         "#가족들과 가기 좋은",
