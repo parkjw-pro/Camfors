@@ -34,7 +34,7 @@ export default {
     // Movie,
     // swiper,
     // swiperSlide,
-    swipertest,
+    swipertest
     // Slider,
     // CampsiteList,
   },
@@ -50,16 +50,16 @@ export default {
         direction: "vertical",
         pagination: {
           el: ".swiper-pagination",
-          type: "bullets",
-        },
-      },
+          type: "bullets"
+        }
+      }
     };
   },
   methods: {
     enlarge(event) {
       event.currentTarget.classList.add("large");
-    },
-  },
+    }
+  }
 };
 </script>
 

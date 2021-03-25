@@ -17,6 +17,16 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
+          <b-nav-form>
+            <b-form-input
+              size="sm"
+              class="mr-sm-2"
+              placeholder=""
+            ></b-form-input>
+            <b-button size="sm" class="my-2 my-sm-0" type="submit"
+              >Search</b-button
+            >
+          </b-nav-form>
 
           <b-nav-item @click="goLogin">로그인</b-nav-item>
           <b-nav-item href="#">로그아웃</b-nav-item>
