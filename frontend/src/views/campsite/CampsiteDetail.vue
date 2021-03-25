@@ -1,5 +1,7 @@
 <template>
   <div>
+
+    <!-- 캠핑장 소개 컨텐츠 (이름, 태그) -->
     <div class="contentsBox">
       <h2 style="color:white;">캠핑장이름</h2>
       <div class="tag" v-for="(tag, idx) in tagList" :key="idx">
@@ -84,6 +86,19 @@ export default {
   padding: 10%;
 }
 
+
+.bar {
+  width: 100%;
+  height: auto;
+  padding: 9px 0;
+  background: #eff0f4;
+  position: relative;
+}
+
+.container {
+  padding-top: 2%;
+}
+
 .tag {
   color: white;
   display: inline-block;
@@ -91,27 +106,60 @@ export default {
 }
 
 #campsiteImg {
-  width: 90%;
-  height: 300px;
+  width: 100%;
+  height: 400px;
 }
 
-.campsiteInfo {
-  padding: 2% 10%;
+/* .campsiteInfo {
   display: inline-block;
-}
+} */
 
-.campsiteInfoImg {
+/* .campsiteInfoImg {
   float: left;
   width: 50%;
-}
+} */
 
 .campsiteInfoList {
-  float: left;
-  width: 50%;
+  /* float: left; */
+  /* width: 50%; */
   text-align: left;
 }
 
 .map {
   width: 30%;
+  float:left;
 }
+
+.campsiteIntro {
+  margin-top:40px;
+  width: 100%;
+  border-top: 1px solid rgba(77, 74, 74, 0.459);
+}
+
+.facility {
+  margin-top:40px;
+  border-top: 1px solid rgba(77, 74, 74, 0.459);
+}
+.facilityIcon {
+    width: 90%;
+    height: auto;
+    overflow: hidden;
+    padding: 30px 3%;
+    background: #f9f9f9;
+    border-radius: 5px;
+    margin: 0 auto;
+}
+
+.comment {
+  margin-top:40px;
+  border-top: 1px solid rgba(77, 74, 74, 0.459);
+}
+
+@media (min-width: 1281px) {
+  .container, .container-sm, .container-md, .container-lg, .container-xl {
+    max-width: 1250px;
+  }
+}
+
+
 </style>
