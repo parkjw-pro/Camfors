@@ -71,13 +71,8 @@ export default {
 
 <style scoped>
 .loginimg::before {
-<<<<<<< HEAD
   background-color: #000;
   content: "";
-=======
-  background-color: rgb(0, 0, 0);
-  content: '';
->>>>>>> 88cfdcf79a570418e42c9b4b8f95772101810bba
   opacity: 0.5;
   position: absolute;
   top: 0px;

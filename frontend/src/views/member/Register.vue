@@ -11,17 +11,12 @@
       <b-col class="mx-3">
         <!-- 2.1.1 아이디 -->
         <b-row id="accountBox">
-<<<<<<< HEAD
-          <b-col align-self="left">
+          <b-col align-self="right">
             <ValidationProvider
               name="이메일"
               rules="required|email"
               v-slot="{ errors }"
             >
-=======
-          <b-col align-self="right">
-            <ValidationProvider name="이메일" rules="required|email" v-slot="{ errors }">
->>>>>>> 88cfdcf79a570418e42c9b4b8f95772101810bba
               <b-form-group>
                 <label
                   style="float:left; padding-right:10px; padding-top:5px; color : white"
