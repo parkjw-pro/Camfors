@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="pb-5" style="position: relative; z-index: 2;">
+  <div id="app" style="position: relative; z-index: 2;">
     <div><Navbar /></div>
     <div style="position: relative; z-index: 1;">
       <router-view></router-view>
@@ -51,6 +51,5 @@ export default {
   position: absolute;
   left: 25%;
   margin-top: 15%;
-  padding-bottom: 7%;
 }
 </style>

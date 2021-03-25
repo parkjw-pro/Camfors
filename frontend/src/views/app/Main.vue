@@ -8,7 +8,7 @@
         autoplay
         muted
         loop
-        poster="@/assets/mainpage/main2.mp4"
+        poster="@/assets/mainpage/main.mp4"
       >
         <source :src="require('@/assets/mainpage/main.mp4')" type="video/mp4" />
       </video>
@@ -41,10 +41,10 @@ export default {
   data: function() {
     return {
       tagList: [
-        "야경이 좋은 곳",
-        "아이들이랑 가고 싶은 곳",
-        "산책하기 좋은 곳",
-        "주차하기 편한 곳"
+        { name: "반려견 동반 가능", id: 5 },
+        { name: "아이들이랑 가고 싶은 곳", id: 13 },
+        { name: "산책하기 좋은 곳", id: 12 },
+        { name: "바다가 보이는 곳", id: 7 }
       ],
       swiperOption: {
         direction: "vertical",
@@ -59,9 +59,6 @@ export default {
     enlarge(event) {
       event.currentTarget.classList.add("large");
     }
-  },
-  created: async function() {
-    console.log(this.tagList[0]);
   }
 };
 </script>

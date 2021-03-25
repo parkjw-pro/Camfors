@@ -7,7 +7,7 @@
       type="dark"
       fixed="top"
     >
-      <b-navbar-brand href="/main">Phoenix</b-navbar-brand>
+      <b-navbar-brand href="/">Phoenix</b-navbar-brand>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item href="/searchCampsite"
