@@ -53,7 +53,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "CampsiteDetail",
   components: {
-    Map,
+    Map
   },
   created() {
     this.$store.dispatch("campsiteDetail", this.$route.params.campsiteId);
