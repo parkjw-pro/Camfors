@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import mysettings
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -21,20 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-<<<<<<< HEAD:backend/BackEnd/BackEnd/settings.py
-<<<<<<< HEAD:backend/BackEnd/settings.py
-SECRET_KEY = mysettings.SECRET_KEY
-=======
-SECRET_KEY = '%6k#i82wt(5=pfwf-n&l5)$l(we*q&lbs_nilu!l9)rs^kit%4'
->>>>>>> b9cf2e1054c909ef21ef960bc19c491dd3ef81ff:backend/BackEnd/BackEnd/settings.py
-=======
 SECRET_KEY = '-tnxrx-h#h&ip$^478@2cvdfw#$b$7k(sx5)((-x&8sstj*sg%'
->>>>>>> c27e414619de6642d0623ad02095bdefe215dac4:backend/BackEnd/settings.py
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = '*'
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -46,20 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-<<<<<<< HEAD:backend/BackEnd/BackEnd/settings.py
-
-    #app
-    'main',
-
-    #drf
-    'rest_framework',
-    'drf_yasg',
-
-=======
     'camp',
     'rest_framework',
     'corsheaders',
->>>>>>> c27e414619de6642d0623ad02095bdefe215dac4:backend/BackEnd/settings.py
 ]
 
 MIDDLEWARE = [
@@ -97,9 +77,6 @@ WSGI_APPLICATION = 'BackEnd.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-<<<<<<< HEAD:backend/BackEnd/settings.py
-DATABASES = mysettings.DATABASES
-=======
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -113,7 +90,6 @@ DATABASES = {
         }
     }
 }
->>>>>>> b9cf2e1054c909ef21ef960bc19c491dd3ef81ff:backend/BackEnd/BackEnd/settings.py
 
 # rest api  사용 시 적용
 REST_FRAMEWORK = {
@@ -148,7 +124,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'ko-kr'
 
-TIME_ZONE = 'Asia/Seoul'
+TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
