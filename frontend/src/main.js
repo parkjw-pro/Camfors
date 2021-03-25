@@ -4,6 +4,15 @@ import router from "./router";
 import store from "./store";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 
+//fort-awesome
+import { library as faLibrary } from '@fortawesome/fontawesome-svg-core' 
+import { faVolleyballBall, faWater, faFish, faCircle, faPaw} from '@fortawesome/free-solid-svg-icons' 
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+// Set up FontAwesome 
+faLibrary.add(faVolleyballBall, faWater, faFish, faCircle, faPaw) 
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+
 // Import Bootstrap an BootstrapVue CSS files (order is important)
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
