@@ -16,7 +16,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 @import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
 /* 2번 폰트 - 나눔펜 스크립트 */
 @import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
