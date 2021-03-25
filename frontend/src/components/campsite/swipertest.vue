@@ -3,21 +3,16 @@
     <br />
     <br />
     <h3 style="text-align: left; font-family: 'Hanna', sans-serif;">
-      {{ tag }}
+      {{ tag.name }}
     </h3>
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide v-for="(item, index) in campsiteList" :key="index">
-        <b-card
-          title="SSAFY 캠핑장"
-          img-src="https://gocamping.or.kr/upload/camp/3/thumb/thumb_720_6791ufBTEV41l7kb7jgUuvkF.jpg"
-          img-alt="Image"
-          img-top
-          tag="article"
-          style=""
-          class="shadow-sm"
-          @click="goDetailList"
-        >
-          <b-card-text> 경기도 가평군 </b-card-text>
+        <b-card @click="goDetailList(item.campsite_id)">
+          <b-card-img :src="item.firstImageUrlV" height="170px"></b-card-img>
+          <span class="my-2" style="font-size:20px">{{
+            item.campsite_name
+          }}</span>
+          <b-card-text>{{ item.doNm }} {{ item.sigunguNm }}</b-card-text>
           <b-row class="ml-1 pl-1">
             <div style="text-align: left;">
               <span class="reviewLike mt-4">
@@ -38,7 +33,7 @@
                   @click="likeReview()"
                 ></b-icon>
               </span>
-              <small class="ml-1">n명이 좋아합니다.</small>
+              <small class="ml-1">{{ item.likeCount }}명이 좋아합니다.</small>
             </div>
           </b-row>
           <!-- <b-button href="#" variant="primary">구경하기!</b-button> -->
@@ -64,40 +59,35 @@
 <script>
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import "swiper/swiper-bundle.css";
+import axios from "axios";
+
+const SERVER_URL = "http://localhost:8000";
 
 export default {
   name: "swiper-example-loop-group",
   title: "Loop mode with multiple slides per group",
   props: {
-    tag: String
+    tag: Object,
   },
   components: {
     swiper,
-    swiperSlide
+    swiperSlide,
+  },
+  created() {
+    axios({
+      method: "get",
+      url: `${SERVER_URL}/camp/camptaglist/${this.tag.id}`,
+    })
+      .then((res) => {
+        this.campsiteList = res.data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
   data() {
     return {
-      campsiteList: [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19
-      ],
+      campsiteList: [],
       swiperOption: {
         slidesPerView: 5,
         spaceBetween: 20,
@@ -106,29 +96,34 @@ export default {
         loopFillGroupWithBlank: false,
         pagination: {
           el: ".swiper-pagination",
-          clickable: true
+          clickable: true,
         },
 
         navigation: {
           nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        }
+          prevEl: ".swiper-button-prev",
+        },
       },
-      campsiteId: "1234"
+      campsiteId: "1234",
     };
   },
+  computed: {
+    getCampList() {
+      return this.$store.getters["getCampList"];
+    },
+  },
   methods: {
-    goDetailList: function() {
+    goDetailList: function(campsite_id) {
       // 리뷰 작성 페이지로 넘어가준다!!
       // console.log("보냅니다", this.store);
       console.log("디테일로 이동");
-      console.log(this.campsiteId);
+      console.log(campsite_id);
       this.$router.push({
         name: "CampsiteDetail",
-        params: { campsiteId: this.campsiteId }
+        params: { campsiteId: campsite_id },
       });
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -168,6 +163,6 @@ export default {
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
 }
 .card {
-  border: none;
+  /* border: none; */
 }
 </style>
