@@ -55,11 +55,13 @@ import Map from "@/components/campsiteDetail/Map";
 export default {
   name: "CampsiteDetail",
   components: {
-    Map,
+    Map
   },
-  created() {},
+  created() {
+  },
   data: function() {
     return {
+      campDetail:[],
       campsiteId: "",
       tagList: [
         "#가족들과 가기 좋은",

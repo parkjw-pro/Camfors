@@ -8,18 +8,17 @@ const SERVER_URL = "http://localhost:8000";
 
 export default new Vuex.Store({
   state: {
-    // tagCampList: []
+    detailInfo: [],
   },
   getters: {
-    // getCampList(state) {
-    //   return state.tagCampList;
-    // },
+    getDetailInfo(state) {
+      return state.detailInfo;
+    },
   },
   mutations: {
-    // setCampList(state, payload) {
-    //   state.tagCampList = [];
-    //   state.tagCampList = payload;
-    // },
+    setDetailInfo(state, payload) {
+      state.detailInfo = payload;
+    }
   },
   actions: {
     campsiteDetail(context, campsite_id) {
@@ -27,10 +26,10 @@ export default new Vuex.Store({
         method: "get",
         url: `${SERVER_URL}/camp/getDetail/${campsite_id}`,
       })
-        .then((res) => {
-          console.log(res);
+        .then(res => {
+          context.commit("setDetailInfo", res.data);
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
