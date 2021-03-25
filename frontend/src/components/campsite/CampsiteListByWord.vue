@@ -1,18 +1,14 @@
 <template>
   <div>
-    <div
-     v-for="(item, index) in tagList" :key="index">
-      <swipertest :tag="item" /> 
-
+    <div v-for="(item, index) in tagList" :key="index">
+      <swipertest :tag="item" />
     </div>
-
   </div>
 </template>
 
 <script>
-import 'swiper/swiper-bundle.css'
-import swipertest from '@/components/campsite/swipertest'
-
+import "swiper/swiper-bundle.css";
+import swipertest from "@/components/campsite/swipertest";
 
 export default {
   components: {
@@ -20,30 +16,32 @@ export default {
   },
   data: function() {
     return {
-      tagList: ['야경이 좋은 곳', '아이들이랑 가고 싶은 곳', '산책하기 좋은 곳'],
+      tagList: [
+        "야경이 좋은 곳",
+        "아이들이랑 가고 싶은 곳",
+        "산책하기 좋은 곳"
+      ],
       swiperOption: {
-        direction: 'vertical',
+        direction: "vertical",
         pagination: {
-          el: '.swiper-pagination',
-          type: 'bullets',
-        },
-      },
+          el: ".swiper-pagination",
+          type: "bullets"
+        }
+      }
     };
   },
   methods: {
     enlarge(event) {
-      event.currentTarget.classList.add('large');
-    },
+      event.currentTarget.classList.add("large");
+    }
   },
   created: async function() {
     console.log(this.tagList[0]);
-  },
+  }
 };
 </script>
 
-<style>
-
-</style>
+<style></style>
 <style scoped>
 .swiper-slide {
   display: flex;
