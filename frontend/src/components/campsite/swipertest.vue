@@ -2,7 +2,7 @@
   <div id="taglist">
     <br />
     <br />
-    <h3 style="text-align: left; font-family: 'Hanna', sans-serif;">
+    <h3 style="text-align: left; font-family: 'Hanna', sans-serif; color: white;">
       {{ tag.name }}
     </h3>
     <swiper class="swiper" :options="swiperOption">
@@ -151,7 +151,8 @@ export default {
 .card-body {
   margin-top: 0;
   padding: 0;
-  background-color: #fffff0;
+  background-color: rgb(71, 64, 64);
+  color: whitesmoke;
 }
 .card-text {
   margin-bottom: 5px;
@@ -163,7 +164,7 @@ export default {
 .shadow-sm {
   box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
 }
-.card {
-  /* border: none; */
-}
+/* .card- {
+
+} */
 </style>
