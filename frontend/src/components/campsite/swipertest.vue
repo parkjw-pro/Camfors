@@ -61,7 +61,7 @@ import { swiper, swiperSlide } from "vue-awesome-swiper";
 import "swiper/swiper-bundle.css";
 import axios from "axios";
 
-const SERVER_URL = "http://localhost:8000";
+const SERVER_URL = "http://www.camfors.shop:8000";
 
 export default {
   name: "swiper-example-loop-group",
