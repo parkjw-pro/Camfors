@@ -173,11 +173,9 @@ npm run serve
 
 ## 배포
 
-<<<<<<< HEAD
+
 > http://www.camfors.shop
-=======
-> 아직 미배포
->>>>>>> dbc13659af3af6eb6aef199896c95adc4ea458f6
+
 
 
 
