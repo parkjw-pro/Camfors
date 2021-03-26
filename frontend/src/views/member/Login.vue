@@ -129,4 +129,11 @@ export default {
   text-align: center;
   font-weight: bold;
 }
+#box {
+  display: block;
+  width: 50%;
+  position: absolute;
+  left: 25%;
+  margin-top: 15%;
+}
 </style>

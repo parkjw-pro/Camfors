@@ -50,12 +50,12 @@
 </template>
 
 <script>
-import Map from "@/components/campsiteDetail/Map";
+// import Map from "@/components/campsiteDetail/Map";
 import { mapGetters } from "vuex";
 export default {
   name: "CampsiteDetail",
   components: {
-    Map,
+    // Map,
   },
   created() {
     this.$store.dispatch("campsiteDetail", this.$route.params.campsiteId);
