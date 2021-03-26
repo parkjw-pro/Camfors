@@ -9,16 +9,30 @@
       </div>
     </div>
 
-    <!-- <div class="campsiteInfo">
-      <div class="campsiteInfoImg">
+    <!-- gray bar -->
+    <div class="bar"></div>
+
+    <!-- 캠핑장 상세페이지 컨테이너 -->
+    <b-container>
+
+
+    <div class="row campsiteInfo">
+      <div class="col-sm-6 col-md-6 campsiteInfoImg">
         <b-img
+           v-if="getDetailInfo.firstImageUrlV.length>0"
           id="campsiteImg"
           :src="getDetailInfo.firstImageUrlV"
           alt="Responsive image"
         ></b-img>
+        <b-img
+          v-else
+          id="campsiteImg"
+          src="https://cdn.pixabay.com/photo/2019/07/25/17/09/camp-4363073_960_720.png"
+          alt="Responsive image"
+        ></b-img>
       </div>
 
-      <div class="campsiteInfoList">
+      <div class="col-sm-6 col-md-6 campsiteInfoList">
         <b-list-group flush>
           <b-list-group-item>{{ getDetailInfo.addr1 }}</b-list-group-item>
           <b-list-group-item>{{ getDetailInfo.intro }}</b-list-group-item>
@@ -40,22 +54,49 @@
       </div>
     </div>
 
-    <div class="campsiteIntro">
-      <h2>캠핑장소개</h2>
-      <div class="map">
-        <Map />
-      </div>
-    </div> -->
+    <!-- 캠핑장 소개 -->
+        <!-- <div class="campsiteIntro">
+          <h3 style="margin-top:20px; text-align:left;"><b-icon icon="caret-right-fill" font-scale="1"></b-icon>캠핑장소개</h3>
+          <div class="row">
+            <div class="col-5">캠핑장 주요 시설 자세한 소개</div>
+            <div class="col-1"></div>    
+            <div class="col-5"><Map /></div>   
+          </div>
+        </div> -->
+
+      <!-- 편의시설 -->
+        <!-- <div class="facility">
+          <h3 style="margin-top:20px; text-align:left;"><b-icon icon="caret-right-fill" font-scale="1"></b-icon>편의시설</h3>
+          <div class="row facilityIcon">
+            <div style="text-align:center; padding-right:50px; padding-top:10px;"><font-awesome-icon icon="volleyball-ball" class="fa-3x" /><p>운동시설</p></div>
+            <div style="text-align:center; padding-right:50px; padding-top:10px;"><font-awesome-icon icon="water" class="fa-3x" /><p>물놀이/강</p></div>
+            <div style="text-align:center; padding-right:50px; padding-top:10px;"><font-awesome-icon icon="fish" class="fa-3x" /><p>낚시</p></div>
+            <div style="text-align:center; padding-right:50px; padding-top:10px;"><font-awesome-icon icon="circle" class="fa-3x" /><p>운동장</p></div>
+            <div style="text-align:center; padding-right:50px; padding-top:10px;"><font-awesome-icon icon="paw" class="fa-3x" /><p>반려견 동반</p></div>
+          </div>
+        </div> -->
+
+      <!-- 한 줄 리뷰 -->
+        <!-- <div class="comment">
+         <h3 style="margin-top:20px; text-align:left;"><b-icon icon="caret-right-fill" font-scale="1"></b-icon>한 줄 리뷰</h3>
+        </div> -->
+
+      </b-container>
+
+
+
+
+
   </div>
 </template>
 
 <script>
-import Map from "@/components/campsiteDetail/Map";
+// import Map from "@/components/campsiteDetail/Map";
 import { mapGetters } from "vuex";
 export default {
   name: "CampsiteDetail",
   components: {
-    Map,
+    // Map,
   },
   created() {
     this.$store.dispatch("campsiteDetail", this.$route.params.campsiteId);
