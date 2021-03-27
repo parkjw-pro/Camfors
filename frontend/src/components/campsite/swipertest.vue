@@ -8,8 +8,16 @@
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide v-for="(item, index) in campsiteList" :key="index">
         <b-card @click="goDetailList(item.campsite_id)">
-          <b-card-img v-if="item.firstImageUrlV.length>0" :src="item.firstImageUrlV" height="170px"></b-card-img>
-          <b-card-img v-else src="https://cdn.pixabay.com/photo/2019/07/25/17/09/camp-4363073_960_720.png" height="170px"></b-card-img>
+          <b-card-img
+            v-if="item.firstImageUrlV.length > 0"
+            :src="item.firstImageUrlV"
+            height="170px"
+          ></b-card-img>
+          <b-card-img
+            v-else
+            src="https://cdn.pixabay.com/photo/2019/07/25/17/09/camp-4363073_960_720.png"
+            height="170px"
+          ></b-card-img>
           <span class="my-2" style="font-size:18px">{{
             item.campsite_name
           }}</span>
@@ -61,7 +69,7 @@ import { swiper, swiperSlide } from "vue-awesome-swiper";
 import "swiper/swiper-bundle.css";
 import axios from "axios";
 
-const SERVER_URL = "http://www.camfors.shop:8000";
+const SERVER_URL = "http://localhost:8000";
 
 export default {
   name: "swiper-example-loop-group",
@@ -107,11 +115,6 @@ export default {
       campsiteId: "1234"
     };
   },
-  computed: {
-    getCampList() {
-      return this.$store.getters["getCampList"];
-    }
-  },
   methods: {
     goDetailList: function(campsite_id) {
       // 리뷰 작성 페이지로 넘어가준다!!
@@ -122,7 +125,6 @@ export default {
         name: "CampsiteDetail",
         params: { campsiteId: campsite_id }
       });
-      this.$store.dispatch("campsiteDetail", campsite_id);
     },
   },
 };
