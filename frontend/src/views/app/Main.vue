@@ -1,6 +1,6 @@
 <template>
   <div id="main">
-    <div>
+    <div style="background-color: black">
       <video
         height="40%"
         width="100%"
@@ -15,7 +15,7 @@
     </div>
     <!-- <div style="text-align: center; margin : 0 auto; width: 50%;"> -->
     <div
-      style="background-color: #FFFFF0"
+      style="background-color: black"
       v-for="(item, index) in tagList"
       :key="index"
     >
@@ -78,6 +78,7 @@ export default {
 
 .color_green {
   background-color: #d7ecd9;
+  background-color: black;
 }
 
 .color_purple {
