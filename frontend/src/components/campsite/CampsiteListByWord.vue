@@ -9,7 +9,7 @@
 <script>
 import "swiper/swiper-bundle.css";
 import swipertest from "@/components/campsite/swipertest";
-
+import { mapGetters } from "vuex";
 export default {
   components: {
     swipertest
@@ -37,6 +37,12 @@ export default {
   },
   created: async function() {
     console.log(this.tagList[0]);
+  },
+  computed:{
+    ...mapGetters({
+      getSearchWordList: "campStore/getSearchWordList"
+      
+    })
   }
 };
 </script>
