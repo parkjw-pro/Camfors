@@ -3,10 +3,10 @@
     <br />
     <br />
     <h3 style="text-align: left; font-family: 'Hanna', sans-serif; color: white;">
-      {{ tag.name }}
+      {{ tag[1].tag_name }}
     </h3>
     <swiper class="swiper" :options="swiperOption">
-      <swiper-slide v-for="(item, index) in campsiteList" :key="index">
+      <swiper-slide v-for="(item, index) in tag" :key="index">
         <b-card @click="goDetailList(item.campsite_id)">
           <b-card-img
             v-if="item.firstImageUrlV.length > 0"
@@ -55,9 +55,6 @@
 <script>
 import { swiper, swiperSlide } from "vue-awesome-swiper";
 import "swiper/swiper-bundle.css";
-import axios from "axios";
-
-const SERVER_URL = "http://localhost:8000";
 
 export default {
   name: "swiper-example-loop-group",
@@ -69,21 +66,8 @@ export default {
     swiper,
     swiperSlide
   },
-  created() {
-    axios({
-      method: "get",
-      url: `${SERVER_URL}/camp/camptaglist/${this.tag.id}`
-    })
-      .then(res => {
-        this.campsiteList = res.data;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  },
   data() {
     return {
-      campsiteList: [],
       swiperOption: {
         slidesPerView: 5,
         spaceBetween: 20,
@@ -100,7 +84,6 @@ export default {
           prevEl: ".swiper-button-prev"
         }
       },
-      campsiteId: "1234"
     };
   },
   methods: {
