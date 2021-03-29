@@ -31,7 +31,7 @@ export default {
     enlarge(event) {
       event.currentTarget.classList.add("large");
     }
-  },
+  }
 };
 </script>
 

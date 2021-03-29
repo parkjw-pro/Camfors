@@ -9,7 +9,7 @@ const store = new Vuex.Store({
   modules: {
     userStore: userStore,
     campStore: campStore
-  },
+  }
 });
 
 export default store;

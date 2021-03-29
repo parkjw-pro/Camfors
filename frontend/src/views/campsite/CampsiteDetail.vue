@@ -16,26 +16,18 @@
       <div class="row campsiteInfo">
         <div class="col-sm-6 col-md-6 campsiteInfoImg">
           <b-img
-            v-if="
-              getDetailInfo.firstImageUrlV &&
-                getDetailInfo.firstImageUrlV.length > 0
-            "
             id="campsiteImg"
             :src="getDetailInfo.firstImageUrlV"
-            alt="Responsive image"
-          ></b-img>
-          <b-img
-            v-else
-            id="campsiteImg"
-            src="https://cdn.pixabay.com/photo/2019/07/25/17/09/camp-4363073_960_720.png"
             alt="Responsive image"
           ></b-img>
         </div>
 
         <div class="col-sm-6 col-md-6 campsiteInfoList">
           <b-list-group flush>
+            <b-list-group-item>{{ getDetailInfo.indutyV }}</b-list-group-item>
             <b-list-group-item>{{ getDetailInfo.addr1 }}</b-list-group-item>
             <b-list-group-item>{{ getDetailInfo.intro }}</b-list-group-item>
+            <b-list-group-item>{{ getDetailInfo.tel }}</b-list-group-item>
             <b-list-group-item
               ><b-button variant="secondary" :href="getDetailInfo.homepage"
                 >홈페이지</b-button
@@ -57,41 +49,79 @@
       </div>
 
       <!-- 캠핑장 소개 -->
-      <!-- <div class="campsiteIntro">
-          <h3 style="margin-top:20px; text-align:left;"><b-icon icon="caret-right-fill" font-scale="1"></b-icon>캠핑장소개</h3>
-          <div class="row">
-            <div class="col-5">캠핑장 주요 시설 자세한 소개</div>
-            <div class="col-1"></div>    
-            <div class="col-5"><Map /></div>   
+      <div class="campsiteIntro">
+        <h3 style="margin-top:20px; text-align:left;">
+          <b-icon icon="caret-right-fill" font-scale="1"></b-icon>캠핑장소개
+        </h3>
+        <div class="row">
+          <div class="col-5">캠핑장 주요 시설 자세한 소개</div>
+          <div class="col-1"></div>
+          <div class="col-5">
+            <Map :mapX="getDetailInfo.mapX" :mapY="getDetailInfo.mapY" />
           </div>
-        </div> -->
+        </div>
+      </div>
 
       <!-- 편의시설 -->
-      <!-- <div class="facility">
-          <h3 style="margin-top:20px; text-align:left;"><b-icon icon="caret-right-fill" font-scale="1"></b-icon>편의시설</h3>
-          <div class="row facilityIcon">
-            <div style="text-align:center; padding-right:50px; padding-top:10px;"><font-awesome-icon icon="volleyball-ball" class="fa-3x" /><p>운동시설</p></div>
-            <div style="text-align:center; padding-right:50px; padding-top:10px;"><font-awesome-icon icon="water" class="fa-3x" /><p>물놀이/강</p></div>
-            <div style="text-align:center; padding-right:50px; padding-top:10px;"><font-awesome-icon icon="fish" class="fa-3x" /><p>낚시</p></div>
-            <div style="text-align:center; padding-right:50px; padding-top:10px;"><font-awesome-icon icon="circle" class="fa-3x" /><p>운동장</p></div>
-            <div style="text-align:center; padding-right:50px; padding-top:10px;"><font-awesome-icon icon="paw" class="fa-3x" /><p>반려견 동반</p></div>
+      <div class="facility">
+        <h3 style="margin-top:20px; text-align:left;">
+          <b-icon icon="caret-right-fill" font-scale="1"></b-icon>편의시설
+        </h3>
+        <div class="row facilityIcon">
+          <div style="text-align:center; padding-right:50px; padding-top:10px;">
+            <font-awesome-icon icon="volleyball-ball" class="fa-3x" />
+            <p>운동시설</p>
           </div>
-        </div> -->
+          <div style="text-align:center; padding-right:50px; padding-top:10px;">
+            <font-awesome-icon icon="water" class="fa-3x" />
+            <p>물놀이/강</p>
+          </div>
+          <div style="text-align:center; padding-right:50px; padding-top:10px;">
+            <font-awesome-icon icon="fish" class="fa-3x" />
+            <p>낚시</p>
+          </div>
+          <div style="text-align:center; padding-right:50px; padding-top:10px;">
+            <font-awesome-icon icon="circle" class="fa-3x" />
+            <p>운동장</p>
+          </div>
+          <div style="text-align:center; padding-right:50px; padding-top:10px;">
+            <font-awesome-icon icon="paw" class="fa-3x" />
+            <p>반려견 동반</p>
+          </div>
+        </div>
+      </div>
 
       <!-- 한 줄 리뷰 -->
-      <!-- <div class="comment">
-         <h3 style="margin-top:20px; text-align:left;"><b-icon icon="caret-right-fill" font-scale="1"></b-icon>한 줄 리뷰</h3>
-        </div> -->
+      <div class="comment">
+        <h3 style="margin-top:20px; text-align:left;">
+          <b-icon icon="caret-right-fill" font-scale="1"></b-icon>한 줄 리뷰
+        </h3>
+        <Comment />
+      </div>
+
+      <!-- 블로그 리뷰 -->
+      <div class="blogReview">
+        <h3 style="margin-top:20px; text-align:left;">
+          <b-icon icon="caret-right-fill" font-scale="1"></b-icon>블로그 리뷰
+        </h3>
+        <BlogReview :name="getDetailInfo.campsite_name" />
+      </div>
     </b-container>
   </div>
 </template>
 
 <script>
-// import Map from "@/components/campsiteDetail/Map";
+import Map from "@/components/campsiteDetail/Map";
+import Comment from "@/components/campsiteDetail/Comment";
+import BlogReview from "@/components/campsiteDetail/BlogReview";
 import { mapGetters } from "vuex";
 export default {
   name: "CampsiteDetail",
-  components: {},
+  components: {
+    Map,
+    Comment,
+    BlogReview
+  },
   created() {
     this.$store.dispatch(
       "campStore/campsiteDetail",
@@ -101,7 +131,7 @@ export default {
   computed: {
     ...mapGetters({
       getDetailInfo: "campStore/getDetailInfo"
-    }),
+    })
   },
   data: function() {
     return {
@@ -111,10 +141,10 @@ export default {
         "#가족들과 가기 좋은",
         "#물놀이 하기 좋은",
         "#봄",
-        "#바다가 보이는",
-      ],
+        "#바다가 보이는"
+      ]
     };
-  },
+  }
 };
 </script>
 <style scoped>
@@ -150,19 +180,7 @@ export default {
   width: 100%;
   height: 400px;
 }
-
-/* .campsiteInfo {
-  display: inline-block;
-} */
-
-/* .campsiteInfoImg {
-  float: left;
-  width: 50%;
-} */
-
 .campsiteInfoList {
-  /* float: left; */
-  /* width: 50%; */
   text-align: left;
 }
 
@@ -196,13 +214,18 @@ export default {
   border-top: 1px solid rgba(77, 74, 74, 0.459);
 }
 
+.blogReview {
+  margin-top: 40px;
+  border-top: 1px solid rgba(77, 74, 74, 0.459);
+}
+
 @media (min-width: 1281px) {
   .container,
   .container-sm,
   .container-md,
   .container-lg,
   .container-xl {
-    max-width: 1250px;
+    max-width: 90%;
   }
 }
 </style>

@@ -2,11 +2,16 @@
   <div id="taglist">
     <br />
     <br />
-    <h3 style="text-align: left; font-family: 'Hanna', sans-serif; color: black;">
+    <h3
+      style="text-align: left; font-family: 'Hanna', sans-serif; color: black;"
+    >
       {{ tag[0][0].tag_name }}
     </h3>
     <swiper class="swiper" :options="swiperOption">
-      <swiper-slide v-for="(item, index) in tag.slice(1,tag.length)" :key="index">
+      <swiper-slide
+        v-for="(item, index) in tag.slice(1, tag.length)"
+        :key="index"
+      >
         <b-card @click="goDetailList(item[0].campsite_id)">
           <b-card-img
             v-if="item[0].firstImageUrlV.length > 0"
@@ -41,7 +46,9 @@
                   @click="likeReview()"
                 ></b-icon>
               </span>
-              <small class="ml-1">{{ item[0].likeCount }}명이 좋아합니다.</small>
+              <small class="ml-1"
+                >{{ item[0].likeCount }}명이 좋아합니다.</small
+              >
             </div>
           </b-row>
         </b-card>
@@ -82,9 +89,8 @@ export default {
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev"
-        },
-
-      },
+        }
+      }
       // tagName : Array
     };
   },
@@ -98,10 +104,10 @@ export default {
         name: "CampsiteDetail",
         params: { campsiteId: campsite_id }
       });
-    },
-  },
+    }
+  }
   // created : {
-    
+
   // }
 };
 </script>

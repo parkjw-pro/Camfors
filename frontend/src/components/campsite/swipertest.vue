@@ -2,7 +2,9 @@
   <div id="taglist">
     <br />
     <br />
-    <h3 style="text-align: left; font-family: 'Hanna', sans-serif; color: white;">
+    <h3
+      style="text-align: left; font-family: 'Hanna', sans-serif; color: white;"
+    >
       {{ tag.name }}
     </h3>
     <swiper class="swiper" :options="swiperOption">
@@ -57,7 +59,7 @@ import { swiper, swiperSlide } from "vue-awesome-swiper";
 import "swiper/swiper-bundle.css";
 import axios from "axios";
 
-const SERVER_URL = "http://localhost:8000";
+const SERVER_URL = "http://www.camfors.shop:8000";
 
 export default {
   name: "swiper-example-loop-group",
@@ -113,8 +115,8 @@ export default {
         name: "CampsiteDetail",
         params: { campsiteId: campsite_id }
       });
-    },
-  },
+    }
+  }
 };
 </script>
 

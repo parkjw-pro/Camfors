@@ -5,22 +5,25 @@
     <SearchCampsiteByWord @IsTag="parents" v-else-if="!IsTag" />
 
     <CampsiteListByTag :SearchTagList="getSearchTagList" v-if="IsTag" />
-    <CampsiteListByWord :SearchWordList="getSearchWordList" v-else-if="!IsTag" />
+    <CampsiteListByWord
+      :SearchWordList="getSearchWordList"
+      v-else-if="!IsTag"
+    />
   </div>
 </template>
 <script>
-import SearchCampsiteByTag from '@/components/campsite/SearchCampsiteByTag';
-import SearchCampsiteByWord from '@/components/campsite/SearchCampsiteByWord';
-import CampsiteListByTag from '@/components/campsite/CampsiteListByTag';
-import CampsiteListByWord from '@/components/campsite/CampsiteListByWord';
-import { mapGetters } from 'vuex';
+import SearchCampsiteByTag from "@/components/campsite/SearchCampsiteByTag";
+import SearchCampsiteByWord from "@/components/campsite/SearchCampsiteByWord";
+import CampsiteListByTag from "@/components/campsite/CampsiteListByTag";
+import CampsiteListByWord from "@/components/campsite/CampsiteListByWord";
+import { mapGetters } from "vuex";
 export default {
-  name: 'SearchCampsite',
+  name: "SearchCampsite",
   components: {
     CampsiteListByTag,
     SearchCampsiteByTag,
     CampsiteListByWord,
-    SearchCampsiteByWord,
+    SearchCampsiteByWord
   },
   data() {
     return {
@@ -28,17 +31,17 @@ export default {
       IsTag: true,
       Isclicked: true,
       flag: true,
-      searchTagList: [],
+      searchTagList: []
     };
   },
   methods: {
     parents(data) {
       this.IsTag = data;
       if (data === true) {
-        console.log('태그결과화면');
+        console.log("태그결과화면");
       }
       console.log(this.IsTag);
-    },
+    }
     // searched(data) {
     //   console.log(data);
     //   this.flag = !this.flag;
@@ -48,12 +51,12 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getSearchTagList: 'campStore/getSearchTagList',
+      getSearchTagList: "campStore/getSearchTagList"
     }),
     ...mapGetters({
-      getSearchWordList: 'campStore/getSearchWordList',
-    }),
-  },
+      getSearchWordList: "campStore/getSearchWordList"
+    })
+  }
 };
 </script>
 <style scoped></style>
