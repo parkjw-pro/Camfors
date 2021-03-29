@@ -1,6 +1,6 @@
 <template>
   <div id="main">
-    <div>
+    <div style="background-color: black">
       <video
         height="40%"
         width="100%"
@@ -15,7 +15,7 @@
     </div>
     <!-- <div style="text-align: center; margin : 0 auto; width: 50%;"> -->
     <div
-      style="background-color: #FFFFF0"
+      style="background-color: black"
       v-for="(item, index) in tagList"
       :key="index"
     >
@@ -41,10 +41,11 @@ export default {
   data: function() {
     return {
       tagList: [
-        { name: "반려견 동반 가능", id: 5 },
-        { name: "아이들이랑 가고 싶은 곳", id: 13 },
+        { name: "산과 함께하는 곳", id: 6 },
+        { name: "바다가 보이는 곳", id: 7 },
         { name: "산책하기 좋은 곳", id: 12 },
-        { name: "바다가 보이는 곳", id: 7 }
+        { name: "가족들과 가기 좋은", id: 5 },
+        { name: "아이들이랑 가고 싶은 곳", id: 13 }
       ],
       swiperOption: {
         direction: "vertical",
@@ -75,6 +76,7 @@ export default {
 
 .color_green {
   background-color: #d7ecd9;
+  background-color: black;
 }
 
 .color_purple {

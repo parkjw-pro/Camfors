@@ -1,6 +1,7 @@
 <template>
   <div>
     <h3>검색결과</h3>
+    {{ SearchTagList }}
 
     <b-form-group v-slot="{ ariaDescribedby }">
       <b-form-checkbox-group
@@ -60,6 +61,9 @@
 <script>
 export default {
   name: "CampsiteListByTag",
+  props: {
+    SearchTagList: Array
+  },
   data() {
     return {
       selected: [], // Must be an array reference!

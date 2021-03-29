@@ -4,8 +4,11 @@
     <SearchCampsiteByTag @IsTag="parents" v-if="IsTag" />
     <SearchCampsiteByWord @IsTag="parents" v-else-if="!IsTag" />
 
-    <CampsiteListByTag v-if="IsTag" />
-    <CampsiteListByWord v-else-if="!IsTag" />
+    <CampsiteListByTag :SearchTagList="getSearchTagList" v-if="IsTag" />
+    <CampsiteListByWord
+      :SearchWordList="getSearchWordList"
+      v-else-if="!IsTag"
+    />
   </div>
 </template>
 <script>
@@ -13,6 +16,7 @@ import SearchCampsiteByTag from "@/components/campsite/SearchCampsiteByTag";
 import SearchCampsiteByWord from "@/components/campsite/SearchCampsiteByWord";
 import CampsiteListByTag from "@/components/campsite/CampsiteListByTag";
 import CampsiteListByWord from "@/components/campsite/CampsiteListByWord";
+import { mapGetters } from "vuex";
 export default {
   name: "SearchCampsite",
   components: {
@@ -24,14 +28,34 @@ export default {
   data() {
     return {
       value: [],
-      IsTag: true
+      IsTag: true,
+      Isclicked: true,
+      flag: true,
+      searchTagList: []
     };
   },
   methods: {
     parents(data) {
       this.IsTag = data;
+      if (data === true) {
+        console.log("태그결과화면");
+      }
       console.log(this.IsTag);
     }
+    // searched(data) {
+    //   console.log(data);
+    //   this.flag = !this.flag;
+    //   console.log(this.getSearchWordList)
+    //   //  $("CampsiteListByTag").load(window.location.href + "CampsiteListByTag");
+    // },
+  },
+  computed: {
+    ...mapGetters({
+      getSearchTagList: "campStore/getSearchTagList"
+    }),
+    ...mapGetters({
+      getSearchWordList: "campStore/getSearchWordList"
+    })
   }
 };
 </script>

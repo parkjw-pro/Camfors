@@ -1,26 +1,23 @@
 <template>
   <div>
-    <div v-for="(item, index) in tagList" :key="index">
-      <swipertest :tag="item" />
+    <div v-for="(item, index) in SearchWordList" :key="index">
+      <ListByWordSwiper :tag="item" />
     </div>
   </div>
 </template>
 
 <script>
 import "swiper/swiper-bundle.css";
-import swipertest from "@/components/campsite/swipertest";
-
+import ListByWordSwiper from "@/components/campsite/ListByWordSwiper";
 export default {
   components: {
-    swipertest
+    ListByWordSwiper
+  },
+  props: {
+    SearchWordList: Array
   },
   data: function() {
     return {
-      tagList: [
-        "야경이 좋은 곳",
-        "아이들이랑 가고 싶은 곳",
-        "산책하기 좋은 곳"
-      ],
       swiperOption: {
         direction: "vertical",
         pagination: {
@@ -34,9 +31,6 @@ export default {
     enlarge(event) {
       event.currentTarget.classList.add("large");
     }
-  },
-  created: async function() {
-    console.log(this.tagList[0]);
   }
 };
 </script>

@@ -8,13 +8,16 @@
           id="input"
           v-model="word"
           placeholder="검색어를 입력하세요"
+          @keyup.enter="searchWord"
         ></b-form-input>
       </div>
       <div class="searchButton">
+        <b-button block class="button" variant="danger" v-on:click="searchWord"
+          >검색하기</b-button
+        >
         <b-button block class="button" v-on:click="changeIsTag"
           >태그로 검색</b-button
         >
-        <b-button block class="button" variant="danger">검색하기</b-button>
       </div>
     </div>
   </div>
@@ -34,6 +37,11 @@ export default {
   methods: {
     changeIsTag() {
       this.$emit("IsTag", true);
+    },
+    searchWord() {
+      console.log(this.word);
+      this.$store.dispatch("campStore/searchByWord", this.word);
+      this.word = "";
     }
   }
 };

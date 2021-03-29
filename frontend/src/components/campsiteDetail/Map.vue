@@ -8,7 +8,7 @@
 const KAKAO_API_KEY = process.env.VUE_APP_KAKAO_API_KEY;
 export default {
   components: {},
-  props: ['mapX', 'mapY'],
+  props: ["mapX", "mapY"],
   data: function() {
     return {};
   },
@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     initMap() {
-      console.log(this.mapX, this.mapY)
+      console.log(this.mapX, this.mapY);
       let container = document.getElementById("map");
       let options = {
         center: new kakao.maps.LatLng(this.mapY, this.mapX),

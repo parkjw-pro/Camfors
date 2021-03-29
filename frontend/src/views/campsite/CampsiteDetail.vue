@@ -56,7 +56,9 @@
         <div class="row">
           <div class="col-5">캠핑장 주요 시설 자세한 소개</div>
           <div class="col-1"></div>
-          <div class="col-5"><Map :mapX=getDetailInfo.mapX :mapY=getDetailInfo.mapY /></div>
+          <div class="col-5">
+            <Map :mapX="getDetailInfo.mapX" :mapY="getDetailInfo.mapY" />
+          </div>
         </div>
       </div>
 
@@ -97,13 +99,12 @@
         <Comment />
       </div>
 
-
       <!-- 블로그 리뷰 -->
       <div class="blogReview">
         <h3 style="margin-top:20px; text-align:left;">
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>블로그 리뷰
         </h3>
-        <BlogReview />
+        <BlogReview :name="getDetailInfo.campsite_name" />
       </div>
     </b-container>
   </div>
@@ -121,7 +122,7 @@ export default {
     Comment,
     BlogReview
   },
-   created() {
+  created() {
     this.$store.dispatch(
       "campStore/campsiteDetail",
       this.$route.params.campsiteId
@@ -130,7 +131,7 @@ export default {
   computed: {
     ...mapGetters({
       getDetailInfo: "campStore/getDetailInfo"
-    }),
+    })
   },
   data: function() {
     return {
@@ -141,7 +142,7 @@ export default {
         "#물놀이 하기 좋은",
         "#봄",
         "#바다가 보이는"
-      ],
+      ]
     };
   }
 };
