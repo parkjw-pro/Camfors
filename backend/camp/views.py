@@ -95,3 +95,14 @@ def campWordResult(request):
             return HttpResponse(status=404)
 
     return JsonResponse(result, safe=False)
+
+@csrf_exempt
+def campTagResult(request):
+    if request.method == 'POST':
+        try:
+            taglist = request.POST.getlist('list[]')
+            print(taglist[0])
+        except Campsite.DoesNotExist:
+            return HttpResponse(status=404)
+
+    return JsonResponse("qweasd", safe=False)
