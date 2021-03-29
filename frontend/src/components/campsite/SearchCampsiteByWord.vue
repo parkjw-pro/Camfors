@@ -33,12 +33,14 @@ export default {
     btnStates() {
       return this.buttons.map((btn) => btn.state);
     },
+
   },
   methods: {
     changeIsTag() {
       this.$emit("IsTag", true);
     },
     searchWord() {
+      console.log(this.word);
       this.$store.dispatch("campStore/searchByWord", this.word);
       this.word = "";
     },

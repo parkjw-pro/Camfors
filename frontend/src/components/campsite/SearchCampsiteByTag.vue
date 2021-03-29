@@ -17,7 +17,7 @@
         <b-button block class="button" v-on:click="changeIsTag"
           >word로 검색</b-button
         >
-        <b-button block class="button" variant="danger">검색하기</b-button>
+        <b-button block class="button" variant="danger" v-on:click="searchTag">검색하기</b-button>
       </div>
     </div>
   </div>
@@ -39,7 +39,8 @@ export default {
         { caption: "#생태교육", state: false },
         { caption: "#별 보기 좋은", state: false }
       ],
-      checkedTag: []
+      checkedTag: [],
+      selectedTag: [],
     };
   },
   computed: {
@@ -50,6 +51,16 @@ export default {
   methods: {
     changeIsTag() {
       this.$emit("IsTag", false);
+    },
+    searchTag() {
+      console.log("태그검색");
+      for (let index = 0; index < this.buttons.length; index++) {
+        if(this.buttons[index].state === true){
+          this.selectedTag.push(this.buttons[index].caption);
+        }
+      }
+      this.$store.dispatch("campStore/searchByTag", this.selectedTag);
+      //this.$emit("IsTag", false);
     }
   }
 };

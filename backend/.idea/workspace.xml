@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8426ed1-8c31-402c-bd74-0706fb03052a" name="Default Changelist" comment="" />
+<<<<<<< HEAD
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+=======
+>>>>>>> 3ba563f6c4bf1b1b4c2d3886b2edae74de821ace
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+<<<<<<< HEAD
   <component name="FUSProjectUsageTrigger">
     <session id="-1153850055">
       <usages-collector id="statistics.lifecycle.project">
@@ -121,6 +125,8 @@
       </file>
     </leaf>
   </component>
+=======
+>>>>>>> 3ba563f6c4bf1b1b4c2d3886b2edae74de821ace
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -220,18 +226,6 @@
       </console-settings>
     </option>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -246,8 +240,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14342366" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />

@@ -30,6 +30,9 @@ export default {
   methods: {
     parents(data) {
       this.IsTag = data;
+      if(data===true){
+        console.log("태그결과화면");
+      }
       console.log(this.IsTag);
     }
   }
