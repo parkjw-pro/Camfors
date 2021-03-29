@@ -4,8 +4,9 @@ from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Subquery
 import json
-from .models import Campsite, CampsiteTag
-from .serializers import CampsiteSerializer,CampsiteDetailSerializer
+from django.db.models import Q
+from .models import Campsite, CampsiteTag, Tag
+from .serializers import CampsiteSerializer, CampsiteDetailSerializer, TagSerializer
 # jsonparser로 requset body 데이터 얻을수 있음
 
 
@@ -61,10 +62,36 @@ def campWordResult(request):
         try:
             word = json.loads(request.body)
             searchword = word.get('word')
-            campid = Campsite.objects.filter(campsite_name__icontains=searchword).values_list('campsite_id', flat=True)
-            for index in campid:
-                print(index)
+            query = CampsiteTag.objects.filter(campsite_id__in=Subquery(
+                Campsite.objects.filter(Q(campsite_name__icontains=searchword)| Q(addr1__icontains=searchword)|
+                                        Q(indutyV__icontains=searchword)).values('campsite_id')
+            )).values('campsite_id', 'tag_id').order_by('tag_id')
+
+            result = []
+            idx = -1
+            default = 0
+
+            for id in query:
+                campid = id.get('campsite_id')
+                tagid = id.get('tag_id')
+
+                qs = Campsite.objects.filter(pk=campid)
+                tg = Tag.objects.filter(pk=tagid)
+
+                camp = CampsiteSerializer(qs, many=True)
+                tag = TagSerializer(tg, many=True)
+
+                if default != tagid:
+                    line = []
+                    idx = idx+1
+                    line.append(tag.data)
+                    line.append(camp.data)
+                    result.append(line)
+                    default = tagid
+                else:
+                    result[idx].append(camp.data)
+
         except Campsite.DoesNotExist:
             return HttpResponse(status=404)
-        # serializer = CampsiteSerializer(query_sets, many=True)
-    return JsonResponse(word, safe=False)
+
+    return JsonResponse(result, safe=False)
