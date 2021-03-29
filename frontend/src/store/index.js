@@ -4,16 +4,16 @@ import axios from "axios";
 
 Vue.use(Vuex);
 
-const SERVER_URL = "http://localhost:8000";
+const SERVER_URL = "http://www.camfors.shop:8000";
 
 export default new Vuex.Store({
   state: {
-    detailInfo: [],
+    detailInfo: []
   },
   getters: {
     getDetailInfo(state) {
       return state.detailInfo;
-    },
+    }
   },
   mutations: {
     setDetailInfo(state, payload) {
@@ -24,7 +24,7 @@ export default new Vuex.Store({
     campsiteDetail(context, campsite_id) {
       axios({
         method: "get",
-        url: `${SERVER_URL}/camp/getDetail/${campsite_id}`,
+        url: `${SERVER_URL}/camp/getDetail/${campsite_id}`
       })
         .then(res => {
           context.commit("setDetailInfo", res.data);
@@ -32,7 +32,7 @@ export default new Vuex.Store({
         .catch(error => {
           console.log(error);
         });
-    },
+    }
   },
   modules: {}
 });
