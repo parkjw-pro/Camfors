@@ -2,15 +2,15 @@
   <div id="taglist">
     <br />
     <br />
-    <h3 style="text-align: left; font-family: 'Hanna', sans-serif; color: white;">
-      {{ tag[0].tag_name }}
+    <h3 style="text-align: left; font-family: 'Hanna', sans-serif; color: black;">
+      {{ tag[0][0].tag_name }}
     </h3>
     <swiper class="swiper" :options="swiperOption">
-      <swiper-slide v-for="(item, index) in tag" :key="index">
-        <b-card @click="goDetailList(item.campsite_id)">
+      <swiper-slide v-for="(item, index) in tag.slice(1,tag.length)" :key="index">
+        <b-card @click="goDetailList(item[0].campsite_id)">
           <b-card-img
-            v-if="item.firstImageUrlV.length > 0"
-            :src="item.firstImageUrlV"
+            v-if="item[0].firstImageUrlV.length > 0"
+            :src="item[0].firstImageUrlV"
             height="170px"
           ></b-card-img>
           <b-card-img
@@ -19,9 +19,9 @@
             height="170px"
           ></b-card-img>
           <span class="my-2" style="font-size:18px">{{
-            item.campsite_name
+            item[0].campsite_name
           }}</span>
-          <b-card-text>{{ item.doNm }} {{ item.sigunguNm }}</b-card-text>
+          <b-card-text>{{ item[0].doNm }} {{ item[0].sigunguNm }}</b-card-text>
           <b-row class="ml-1 pl-1">
             <div style="text-align: left;">
               <span class="reviewLike mt-4">
@@ -41,7 +41,7 @@
                   @click="likeReview()"
                 ></b-icon>
               </span>
-              <small class="ml-1">{{ item.likeCount }}명이 좋아합니다.</small>
+              <small class="ml-1">{{ item[0].likeCount }}명이 좋아합니다.</small>
             </div>
           </b-row>
         </b-card>
@@ -60,7 +60,7 @@ export default {
   name: "swiper-example-loop-group",
   title: "Loop mode with multiple slides per group",
   props: {
-    tag: Object
+    tag: Array
   },
   components: {
     swiper,
@@ -72,7 +72,7 @@ export default {
         slidesPerView: 5,
         spaceBetween: 20,
         slidesPerGroup: 5,
-        loop: true,
+        loop: false,
         loopFillGroupWithBlank: false,
         pagination: {
           el: ".swiper-pagination",
@@ -82,8 +82,10 @@ export default {
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev"
-        }
+        },
+
       },
+      // tagName : Array
     };
   },
   methods: {
@@ -98,6 +100,9 @@ export default {
       });
     },
   },
+  // created : {
+    
+  // }
 };
 </script>
 

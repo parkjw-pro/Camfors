@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="(item, index) in tagList" :key="index">
+    <div v-for="(item, index) in SearchWordList" :key="index">
       <ListByWordSwiper :tag="item" />
     </div>
   </div>
@@ -9,7 +9,6 @@
 <script>
 import "swiper/swiper-bundle.css";
 import ListByWordSwiper from "@/components/campsite/ListByWordSwiper";
-import { mapGetters } from "vuex";
 export default {
   components: {
     ListByWordSwiper
@@ -19,12 +18,6 @@ export default {
   },
   data: function() {
     return {
-      tagList: {
-        tag : 
-        {
-          data : []
-        }
-      },
       swiperOption: {
         direction: "vertical",
         pagination: {
@@ -39,15 +32,6 @@ export default {
       event.currentTarget.classList.add("large");
     }
   },
-  created: async function() {
-    console.log(this.tagList[0]);
-  },
-  computed:{
-    ...mapGetters({
-      getSearchWordList: "campStore/getSearchWordList"
-      
-    })
-  }
 };
 </script>
 

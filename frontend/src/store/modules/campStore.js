@@ -8,13 +8,14 @@ const campStore = {
   state: {
     detailInfo: [],
     searchWordList: [],
-    searchTagList: [],
+    searchTagList: [[]],
   },
   getters: {
     getDetailInfo(state) {
       return state.detailInfo;
     },
     getSearchWordList(state) {
+      console.log(state.searchWordList[0])
       return state.searchWordList;
     },
     getSearchTagList(state) {
