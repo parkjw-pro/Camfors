@@ -14,10 +14,8 @@
         </b-button>
       </div>
       <div class="searchButton">
-        <b-button block class="button" v-on:click="changeIsTag"
-          >word로 검색</b-button
-        >
         <b-button block class="button" variant="danger" v-on:click="searchTag">검색하기</b-button>
+        <b-button block class="button" v-on:click="changeIsTag">단어로 검색</b-button>
       </div>
     </div>
   </div>
@@ -27,17 +25,28 @@ export default {
   data() {
     return {
       buttons: [
-        { caption: "#가족들과 가기 좋은", state: false },
-        { caption: "#물놀이 하기 좋은", state: false },
-        { caption: "#봄", state: false },
-        { caption: "#바다가 보이는", state: false },
-        { caption: "#반려견 동반", state: false },
-        { caption: "#문화유적", state: false },
-        { caption: "#산이 보이는", state: false },
-        { caption: "#계곡옆", state: false },
-        { caption: "#익스트림", state: false },
-        { caption: "#생태교육", state: false },
-        { caption: "#별 보기 좋은", state: false }
+        { caption: '#봄에 가기 좋은', state: false, id: 1 },
+        { caption: '#여름에 가기 좋은', state: false, id: 2 },
+        { caption: '#가을에 가기 좋은', state: false, id: 3 },
+        { caption: '#겨울에 가기 좋은', state: false, id: 4 },
+        { caption: '#반려견 동반이 가능한', state: false, id: 5 },
+        { caption: '#산이 보이는', state: false, id: 6 },
+        { caption: '#바다가 보이는', state: false, id: 7 },
+        { caption: '#계곡 옆에 있는', state: false, id: 8 },
+        { caption: '#도심 속에 있는', state: false, id: 9 },
+        { caption: '#섬 속에 있는', state: false, id: 10 },
+        { caption: '#물 놀이 하기 좋은', state: false, id: 11 },
+        { caption: '#산책 하기 좋은', state: false, id: 12 },
+        { caption: '#아이들 놀기 좋은', state: false, id: 13 },
+        { caption: '#카라반', state: false, id: 14 },
+        { caption: '#글램핑', state: false, id: 15 },
+        { caption: '#자동차', state: false, id: 16 },
+        { caption: '#체험 프로그램이 있는', state: false, id: 17 },
+        { caption: '#장비 대여가 가능한', state: false, id: 18 },
+        { caption: '#개인 트레일러 동반 가능한', state: false, id: 19 },
+        { caption: '#가족들과 가기 좋은', state: false, id: 20 },
+        { caption: '#커플끼리 가기 좋은', state: false, id: 21 },
+        { caption: '#혼자서도 가기 좋은', state: false, id: 22 },
       ],
       checkedTag: [],
       selectedTag: [],
@@ -45,31 +54,32 @@ export default {
   },
   computed: {
     btnStates() {
-      return this.buttons.map(btn => btn.state);
-    }
+      return this.buttons.map((btn) => btn.state);
+    },
   },
   methods: {
     changeIsTag() {
-      this.$emit("IsTag", false);
+      this.$emit('IsTag', false);
     },
     searchTag() {
-      console.log("태그검색");
+      console.log('태그검색');
       for (let index = 0; index < this.buttons.length; index++) {
-        if(this.buttons[index].state === true){
-          this.selectedTag.push(this.buttons[index].caption);
+        if (this.buttons[index].state === true) {
+          this.selectedTag.push(this.buttons[index].id);
         }
       }
-      this.$store.dispatch("campStore/searchByTag", this.selectedTag);
+      this.$store.dispatch('campStore/searchByTag', this.selectedTag);
+      this.selectedTag = [];
       //this.$emit("IsTag", false);
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>
 .searchBox {
   width: 100%;
   height: 70vh;
-  background-image: url("../../assets/SearchPageImage2.jpg");
+  background-image: url('../../assets/SearchPageImage2.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

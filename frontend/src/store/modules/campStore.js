@@ -18,6 +18,7 @@ const campStore = {
       return state.searchWordList;
     },
     getSearchTagList(state) {
+ 
       return state.searchTagList;
     }
   },
@@ -57,7 +58,7 @@ const campStore = {
       })
         .then(res => {
           console.log(res.data);
-          context.commit("searchWordList", res.data);
+          context.commit("setSearchWordList", res.data);
         })
         .catch(error => {
           console.log(error);
@@ -66,7 +67,7 @@ const campStore = {
 
     searchByTag(context, tagList) {
       console.log("searchByTag");
-      console.log(tagList);
+      context.commit("setSearchTagList", tagList);
       axios({
         method: "post",
         url: `${SERVER_URL}/camp/gettagresult/`,
@@ -76,7 +77,8 @@ const campStore = {
       })
         .then(res => {
           console.log(res);
-          context.commit("searchTagList", res.data);
+          context.commit("setSearchTagList", res.data);
+          //context.commit("searchTagList", tagList);
         })
         .catch(error => {
           console.log(error);
