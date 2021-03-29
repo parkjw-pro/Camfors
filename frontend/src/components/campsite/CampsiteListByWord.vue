@@ -14,6 +14,9 @@ export default {
   components: {
     ListByWordSwiper
   },
+  props: {
+    SearchWordList: Array
+  },
   data: function() {
     return {
       tagList: {

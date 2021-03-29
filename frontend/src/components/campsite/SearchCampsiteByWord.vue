@@ -12,12 +12,8 @@
         ></b-form-input>
       </div>
       <div class="searchButton">
-        <b-button block class="button" v-on:click="changeIsTag"
-          >태그로 검색</b-button
-        >
-        <b-button block class="button" variant="danger" @click="searchWord"
-          >검색하기</b-button
-        >
+        <b-button block class="button" variant="danger" v-on:click="searchTag">검색하기</b-button>
+        <b-button block class="button" v-on:click="changeIsTag">태그로 검색</b-button>
       </div>
     </div>
   </div>
@@ -26,23 +22,22 @@
 export default {
   data() {
     return {
-      word: "",
+      word: '',
     };
   },
   computed: {
     btnStates() {
       return this.buttons.map((btn) => btn.state);
     },
-
   },
   methods: {
     changeIsTag() {
-      this.$emit("IsTag", true);
+      this.$emit('IsTag', true);
     },
     searchWord() {
       console.log(this.word);
-      this.$store.dispatch("campStore/searchByWord", this.word);
-      this.word = "";
+      this.$store.dispatch('campStore/searchByWord', this.word);
+      this.word = '';
     },
   },
 };
@@ -51,7 +46,7 @@ export default {
 .searchBox {
   width: 100%;
   height: 70vh;
-  background-image: url("../../assets/SearchPageImage2.jpg");
+  background-image: url('../../assets/SearchPageImage2.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
