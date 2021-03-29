@@ -12,7 +12,7 @@
         ></b-form-input>
       </div>
       <div class="searchButton">
-        <b-button block class="button" variant="danger" v-on:click="searchTag">검색하기</b-button>
+        <b-button block class="button" variant="danger" v-on:click="searchWord">검색하기</b-button>
         <b-button block class="button" v-on:click="changeIsTag">태그로 검색</b-button>
       </div>
     </div>
