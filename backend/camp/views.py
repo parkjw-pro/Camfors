@@ -61,7 +61,7 @@ def campWordResult(request):
         try:
             word = json.loads(request.body)
             searchword = word.get('word')
-            campid = Campsite.objects.filter(campsite_name__icontains=searchword).values_list('campsite_id',flat=True)
+            campid = Campsite.objects.filter(campsite_name__icontains=searchword).values_list('campsite_id', flat=True)
             for index in campid:
                 print(index)
         except Campsite.DoesNotExist:
