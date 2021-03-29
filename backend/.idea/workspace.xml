@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8426ed1-8c31-402c-bd74-0706fb03052a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/campsite/SearchCampsiteByTag.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/campsite/SearchCampsiteByTag.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/campsite/SearchCampsiteByWord.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/campsite/SearchCampsiteByWord.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/store/modules/campStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/store/modules/campStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/camp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/camp/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +43,6 @@
     <option name="width" value="1235" />
     <option name="height" value="765" />
   </component>
-  <component name="ProjectId" id="1qLF4PSaBIa13M1buDFY7lObw7W" />
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>
@@ -100,10 +96,6 @@
       <pane id="Scope" />
     </panes>
   </component>
-  <component name="ProjectViewState">
-    <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
@@ -116,7 +108,6 @@
       </console-settings>
     </option>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -131,8 +122,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14342366" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -228,22 +218,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/camp/views.py">
+    <entry file="file://$PROJECT_DIR$/camp/serializers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="69" column="41" lean-forward="true" selection-start-line="69" selection-start-column="41" selection-end-line="69" selection-end-column="41" />
+        <state relative-caret-position="300">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <element signature="e#0#38#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/camp/serializers.py">
+    <entry file="file://$PROJECT_DIR$/camp/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="12" column="24" lean-forward="true" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+        <state relative-caret-position="300">
+          <caret line="69" column="41" lean-forward="true" selection-start-line="69" selection-start-column="41" selection-end-line="69" selection-end-column="41" />
           <folding>
-            <element signature="e#0#38#0" expanded="true" />
+            <element signature="e#0#35#0" expanded="true" />
           </folding>
         </state>
       </provider>

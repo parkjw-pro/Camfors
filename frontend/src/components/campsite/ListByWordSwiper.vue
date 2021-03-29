@@ -3,7 +3,7 @@
     <br />
     <br />
     <h3 style="text-align: left; font-family: 'Hanna', sans-serif; color: white;">
-      {{ tag[1].tag_name }}
+      {{ tag[0].tag_name }}
     </h3>
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide v-for="(item, index) in tag" :key="index">
