@@ -9,9 +9,9 @@
             type="text"
             class="form-control"
             style="color: #695549; width:50%; text-align:center; display:block; margin: 0 auto;"
-            placeholder="ID"
-            id="userId"
-            v-model="credentials.userId"
+            placeholder="Email"
+            id="email"
+            v-model="credentials.email"
             @keypress.enter="login"
             autofocus
           />
@@ -28,7 +28,7 @@
           />
         </div>
         <div v-if="!error_check_login">
-          <p>ID 또는 비밀번호를 다시 확인해주세요.</p>
+          <p>이메일 또는 비밀번호를 다시 확인해주세요.</p>
         </div>
         <div>
           <b-button
@@ -69,7 +69,7 @@ export default {
         position: "relative"
       },
       credentials: {
-        userId: "",
+        email: "",
         password: ""
       },
       error_check_login: true
@@ -83,7 +83,7 @@ export default {
       // LOGIN 액션 실행
       // 서버와 통신(axios)을 해 토큰값을 얻어야 하므로 Actions를 호출.
       this.$store
-        .dispatch("LOGIN", this.credentials)
+        .dispatch("userStore/LOGIN", this.credentials)
         .then(() => {
           // 나중에 getUser() 함수 사용하기!!!
           // location 정보가 있으면 Home으로 보내기!
@@ -93,8 +93,7 @@ export default {
           // } else {
           //   this.$router.replace('/location')
           // }
-          this.selectBadge();
-          this.$router.replace("/location/first");
+          this.$router.replace("/");
         })
         .catch(({ message }) => (this.msg = message));
     },
@@ -103,13 +102,6 @@ export default {
     }
   },
   created: async function() {},
-  computed: {
-    bagimg() {
-      return {
-        backgroundImage: `url${require("@/assets/Login/login.jpg")}`
-      };
-    }
-  }
 };
 </script>
 

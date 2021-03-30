@@ -29,7 +29,7 @@
           </b-nav-form>
 
           <b-nav-item @click="goLogin">로그인</b-nav-item>
-          <b-nav-item href="#">로그아웃</b-nav-item>
+          <b-nav-item  @click="logout">로그아웃</b-nav-item>
           <b-nav-item @click="goMypage">마이페이지</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
@@ -63,7 +63,16 @@ export default {
       // console.log("보냅니다", this.store);
       console.log("마이페이지로 이동");
       this.$router.push({ name: "Mypage" });
-    }
+    },
+    logout: function() {
+      this.$store
+        .dispatch('userStore/LOGOUT')
+        .then(() => {
+          // this.$router.push({ name: 'Home' })
+          this.$router.push({ name: '/' });
+        })
+        .catch(({ message }) => (this.msg = message));
+    },
   }
 };
 </script>

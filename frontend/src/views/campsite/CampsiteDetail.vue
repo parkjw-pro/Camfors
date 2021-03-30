@@ -16,8 +16,15 @@
       <div class="row campsiteInfo">
         <div class="col-sm-6 col-md-6 campsiteInfoImg">
           <b-img
+          v-if="getDetailInfo.firstImageUrlV.length>0"
             id="campsiteImg"
             :src="getDetailInfo.firstImageUrlV"
+            alt="Responsive image"
+          ></b-img>
+            <b-img
+            v-else
+            id="campsiteImg"
+            src="https://cdn.pixabay.com/photo/2019/07/25/17/09/camp-4363073_960_720.png"
             alt="Responsive image"
           ></b-img>
         </div>
@@ -134,6 +141,7 @@ export default {
     })
   },
   data: function() {
+    console.log(this.$route.params.campsiteId)
     return {
       campDetail: [],
       campsiteId: "",

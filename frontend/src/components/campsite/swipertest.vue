@@ -59,7 +59,7 @@ import { swiper, swiperSlide } from "vue-awesome-swiper";
 import "swiper/swiper-bundle.css";
 import axios from "axios";
 
-const SERVER_URL = "http://www.camfors.shop:8000";
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   name: "swiper-example-loop-group",
@@ -111,10 +111,13 @@ export default {
       // console.log("보냅니다", this.store);
       console.log("디테일로 이동");
       console.log(campsite_id);
+      console.log(this.$store.state.detailInfo);
+      this.$store.state.detailInfo = [1];
       this.$router.push({
         name: "CampsiteDetail",
         params: { campsiteId: campsite_id }
       });
+      console.log(this.$store.state.detailInfo);
     }
   }
 };
