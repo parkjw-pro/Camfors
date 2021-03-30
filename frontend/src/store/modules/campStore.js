@@ -1,6 +1,10 @@
 import axios from "axios";
 
+<<<<<<< HEAD
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
+=======
 const SERVER_URL = process.env.VUE_APP_SERVER_URL
+>>>>>>> b888fd488b9df6dd4220b9a0c47a886f2773d7d3
 
 const campStore = {
   namespaced: true,
@@ -66,14 +70,10 @@ const campStore = {
     },
 
     searchByTag(context, tagList) {
-      console.log("searchByTag");
-      context.commit("setSearchTagList", tagList);
       axios({
         method: "post",
         url: `${SERVER_URL}/camp/gettagresult/`,
-        data: {
-          list: tagList
-        }
+        data: tagList
       })
         .then(res => {
           console.log(res);

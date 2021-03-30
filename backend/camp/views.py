@@ -96,13 +96,20 @@ def campWordResult(request):
 
     return JsonResponse(result, safe=False)
 
+
 @csrf_exempt
 def campTagResult(request):
     if request.method == 'POST':
         try:
-            taglist = request.POST.getlist('list[]')
-            print(taglist[0])
+            taglist = json.loads(request.body)
+            result = []
+            for tagid in taglist:
+                queryset = Campsite.objects.filter(campsite_id__in=Subquery(CampsiteTag.objects.filter(tag_id=tagid)
+                                                                          .values('campsite_id'))).order_by('likeCount')[:50]
+                serializer = CampsiteSerializer(queryset, many=True)
+                result.append(serializer.data)
+
         except Campsite.DoesNotExist:
             return HttpResponse(status=404)
 
-    return JsonResponse("qweasd", safe=False)
+    return JsonResponse(result, safe=False)
