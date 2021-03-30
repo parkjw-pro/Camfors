@@ -8,7 +8,8 @@ const campStore = {
   state: {
     detailInfo: [],
     searchWordList: [],
-    searchTagList: [[]]
+    searchTagList: [[]],
+    searchTagListName: [],
   },
   getters: {
     getDetailInfo(state) {
@@ -20,6 +21,9 @@ const campStore = {
     },
     getSearchTagList(state) {
       return state.searchTagList;
+    },
+    getSearchTagListName(state) {
+      return state.searchTagListName;
     }
   },
   mutations: {
@@ -31,6 +35,9 @@ const campStore = {
     },
     setSearchTagList(state, payload) {
       state.searchTagList = payload;
+    },
+    setSearchTagListName(state, payload) {
+      state.searchTagListName = payload;
     }
   },
   actions: {
@@ -79,7 +86,11 @@ const campStore = {
         .catch(error => {
           console.log(error);
         });
-    }
+    },
+    searchByTagName(context, tagList) {
+      context.commit("setSearchTagListName", tagList);
+
+    },
   }
 };
 export default campStore;

@@ -25,11 +25,8 @@ SECRET_KEY = '-tnxrx-h#h&ip$^478@2cvdfw#$b$7k(sx5)((-x&8sstj*sg%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
-ALLOWED_HOSTS = ['www.camfors.shop', 'localhost']
-=======
 ALLOWED_HOSTS = ['*']
->>>>>>> d15e9a02863178829c82ca4e92c822d8d91901c3
+
 
 
 # Application definition
