@@ -4,12 +4,9 @@
     <list default="true" id="195938c7-1b34-468e-a02c-5c578954c529" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/campsite/swipertest.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/campsite/swipertest.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BackEnd/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/store/modules/campStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/store/modules/campStore.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/store/modules/userStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/store/modules/userStore.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/views/campsite/CampsiteDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/campsite/CampsiteDetail.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/views/member/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/member/Login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/views/member/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/member/Register.vue" afterDir="false" />
     </list>
@@ -110,6 +107,27 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
