@@ -1,10 +1,6 @@
 import axios from "axios";
 
-<<<<<<< HEAD
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
-=======
-const SERVER_URL = process.env.VUE_APP_SERVER_URL
->>>>>>> b888fd488b9df6dd4220b9a0c47a886f2773d7d3
 
 const campStore = {
   namespaced: true,
