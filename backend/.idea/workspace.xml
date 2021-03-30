@@ -6,7 +6,15 @@
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/BackEnd/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/settings.py" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/../frontend/src/store/modules/campStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/store/modules/campStore.js" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/BackEnd/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/BackEnd/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/store/modules/campStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/store/modules/campStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/store/modules/userStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/store/modules/userStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/member/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/member/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/member/Register.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/member/Register.vue" afterDir="false" />
+>>>>>>> d15e9a02863178829c82ca4e92c822d8d91901c3
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,11 +186,25 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
+<<<<<<< HEAD
+=======
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+      </list>
+    </option>
+  </component>
+>>>>>>> d15e9a02863178829c82ca4e92c822d8d91901c3
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
+<<<<<<< HEAD
             <State>
               <option name="RECENTLY_FILTERED_USER_GROUPS">
                 <collection />
@@ -191,6 +213,9 @@
                 <collection />
               </option>
             </State>
+=======
+            <State />
+>>>>>>> d15e9a02863178829c82ca4e92c822d8d91901c3
           </value>
         </entry>
       </map>

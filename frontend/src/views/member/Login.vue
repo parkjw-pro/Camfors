@@ -47,7 +47,7 @@
             >회원가입</span
           >
           |
-          <span style="color: #695549; cursor: pointer;" @click="toFind"
+          <span style="color: #695549; cursor: pointer;"
             >비밀번호찾기</span
           >
         </div>
@@ -93,7 +93,7 @@ export default {
           // } else {
           //   this.$router.replace('/location')
           // }
-          this.$router.replace("/");
+          window.location.href = '/';
         })
         .catch(({ message }) => (this.msg = message));
     },

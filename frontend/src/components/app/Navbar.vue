@@ -28,9 +28,9 @@
             >
           </b-nav-form>
 
-          <b-nav-item @click="goLogin">로그인</b-nav-item>
-          <b-nav-item  @click="logout">로그아웃</b-nav-item>
-          <b-nav-item @click="goMypage">마이페이지</b-nav-item>
+          <b-nav-item v-if="!login"  @click="goLogin">로그인</b-nav-item>
+          <b-nav-item v-if="login"  @click="logout">로그아웃</b-nav-item>
+          <b-nav-item v-if="login"  @click="goMypage">마이페이지</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -40,6 +40,9 @@
 <script>
 export default {
   name: "Navbar",
+  props: {
+    login: Boolean
+  },
   data() {
     return {
       scrollPosition: null
