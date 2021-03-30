@@ -10,7 +10,8 @@ export default {
   components: {},
   props: ["mapX", "mapY"],
   data: function() {
-    return {};
+    return {
+    };
   },
   mounted() {
     window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
