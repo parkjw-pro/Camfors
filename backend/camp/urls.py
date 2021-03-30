@@ -7,5 +7,5 @@ urlpatterns = [
     path('camptaglist/<int:tag_id>', views.camptaglist),
     path('camplikeslist/', views.campLikesList),
     path('getwordresult/', views.campWordResult),
-    path('gettagresult/', views.campWordResult)
+    path('gettagresult/', views.campTagResult)
 ]

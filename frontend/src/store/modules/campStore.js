@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const SERVER_URL = "http://localhost:8000";
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 const campStore = {
   namespaced: true,
@@ -67,14 +67,10 @@ const campStore = {
     },
 
     searchByTag(context, tagList) {
-      console.log("searchByTag");
-      context.commit("setSearchTagList", tagList);
       axios({
         method: "post",
         url: `${SERVER_URL}/camp/gettagresult/`,
-        data: {
-          list: tagList
-        }
+        data: tagList
       })
         .then(res => {
           console.log(res);
