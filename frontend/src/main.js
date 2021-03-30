@@ -12,11 +12,12 @@ import {
   faFish,
   faCircle,
   faPaw,
+  faTrash
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 // Set up FontAwesome
-faLibrary.add(faVolleyballBall, faWater, faFish, faCircle, faPaw);
+faLibrary.add(faVolleyballBall, faWater, faFish, faCircle, faPaw, faTrash);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
@@ -30,5 +31,5 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
-  render: h => h(App),
+  render: h => h(App)
 }).$mount("#app");

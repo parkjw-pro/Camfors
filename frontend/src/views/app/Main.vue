@@ -46,8 +46,6 @@ export default {
         { name: "산책하기 좋은 곳", id: 12 },
         { name: "가족들과 가기 좋은", id: 5 },
         { name: "아이들이랑 가고 싶은 곳", id: 13 }
-        
-        
       ],
       swiperOption: {
         direction: "vertical",

@@ -1,6 +1,10 @@
 import axios from "axios";
 
+<<<<<<< HEAD
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
+=======
+const SERVER_URL = process.env.VUE_APP_SERVER_URL
+>>>>>>> b888fd488b9df6dd4220b9a0c47a886f2773d7d3
 
 const campStore = {
   namespaced: true,
@@ -8,18 +12,17 @@ const campStore = {
   state: {
     detailInfo: [],
     searchWordList: [],
-    searchTagList: [[]],
+    searchTagList: [[]]
   },
   getters: {
     getDetailInfo(state) {
       return state.detailInfo;
     },
     getSearchWordList(state) {
-      console.log(state.searchWordList[0])
+      console.log(state.searchWordList[0]);
       return state.searchWordList;
     },
     getSearchTagList(state) {
- 
       return state.searchTagList;
     }
   },

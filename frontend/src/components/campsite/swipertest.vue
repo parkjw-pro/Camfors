@@ -2,7 +2,9 @@
   <div id="taglist">
     <br />
     <br />
-    <h3 style="text-align: left; font-family: 'Hanna', sans-serif; color: white;">
+    <h3
+      style="text-align: left; font-family: 'Hanna', sans-serif; color: white;"
+    >
       {{ tag.name }}
     </h3>
     <swiper class="swiper" :options="swiperOption">
@@ -109,12 +111,15 @@ export default {
       // console.log("보냅니다", this.store);
       console.log("디테일로 이동");
       console.log(campsite_id);
+      console.log(this.$store.state.detailInfo);
+      this.$store.state.detailInfo = [1];
       this.$router.push({
         name: "CampsiteDetail",
         params: { campsiteId: campsite_id }
       });
-    },
-  },
+      console.log(this.$store.state.detailInfo);
+    }
+  }
 };
 </script>
 

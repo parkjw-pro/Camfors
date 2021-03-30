@@ -61,7 +61,7 @@
 <script>
 export default {
   name: "CampsiteListByTag",
-    props: {
+  props: {
     SearchTagList: Array
   },
   data() {
@@ -76,8 +76,7 @@ export default {
       ],
       campsiteList: [1, 2, 3, 4, 5, 6]
     };
-  },
-
+  }
 };
 </script>
 <style scoped>
