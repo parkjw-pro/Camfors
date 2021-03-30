@@ -57,7 +57,7 @@
           <div class="col-5">캠핑장 주요 시설 자세한 소개</div>
           <div class="col-1"></div>
           <div class="col-5">
-            <Map :mapX="getDetailInfo.mapX" :mapY="getDetailInfo.mapY" />
+            <Map v-if="getDetailInfo.mapX" :mapX="getDetailInfo.mapX" :mapY="getDetailInfo.mapY" />
           </div>
         </div>
       </div>
@@ -104,7 +104,7 @@
         <h3 style="margin-top:20px; text-align:left;">
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>블로그 리뷰
         </h3>
-        <BlogReview :name="getDetailInfo.campsite_name" />
+        <BlogReview v-if="getDetailInfo.campsite_name" :name="getDetailInfo.campsite_name" />
       </div>
     </b-container>
   </div>
