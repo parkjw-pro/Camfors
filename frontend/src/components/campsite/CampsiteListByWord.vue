@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import "swiper/swiper-bundle.css";
+import "swiper/css/swiper.css";
 import ListByWordSwiper from "@/components/campsite/ListByWordSwiper";
 export default {
   components: {

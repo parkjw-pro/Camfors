@@ -60,16 +60,16 @@
 </template>
 
 <script>
-import { swiper, swiperSlide } from "vue-awesome-swiper";
-import "swiper/swiper-bundle.css";
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
 
 export default {
   name: "swiper-example-loop-group",
   title: "Loop mode with multiple slides per group",
   props: {},
   components: {
-    swiper,
-    swiperSlide
+    Swiper,
+    SwiperSlide
   },
   data() {
     return {
