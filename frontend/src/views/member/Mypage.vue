@@ -43,12 +43,11 @@ export default {
   methods: {
     getUserCampsite: function (){
       console.log(this.email)
-          axios({
-      method: "get",
-      url: `${SERVER_URL}/user/mypage/${this.email}`
-    })
+      axios
+      .post(`${SERVER_URL}/user/like`, this.email)
       .then(res => {
         this.likeCampsiteList = res.data;
+        console.log(res.data);
       })
       .catch(error => {
         console.log(error);
@@ -58,7 +57,7 @@ export default {
   },
   created() {
     const userInfo = JSON.parse(localStorage.getItem('Login-token'))
-    this.email = userInfo[0]
+    this.email = userInfo[0][0]
     this.getUserCampsite()
 
   },
