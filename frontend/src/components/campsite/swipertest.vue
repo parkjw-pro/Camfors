@@ -8,9 +8,10 @@
       {{ tag.name }}
     </h3>
     <swiper class="swiper" :options="swiperOption">
-      <swiper-slide v-for="(item, index) in campsiteList" :key="index">
-        <b-card @click="goDetailList(item.campsite_id)">
+      <swiper-slide v-for="(item, index) in campsiteList" :key="index" >
+        <b-card >
           <b-card-img
+          @click="goDetailList(item.campsite_id)"
             v-if="item.firstImageUrlV.length > 0"
             :src="item.firstImageUrlV"
             height="170px"
