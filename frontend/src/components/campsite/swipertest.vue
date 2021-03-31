@@ -55,8 +55,8 @@
 </template>
 
 <script>
-import { swiper, swiperSlide } from "vue-awesome-swiper";
-import "swiper/swiper-bundle.css";
+import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import "swiper/css/swiper.css";
 import axios from "axios";
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
@@ -68,8 +68,8 @@ export default {
     tag: Object
   },
   components: {
-    swiper,
-    swiperSlide
+    Swiper,
+    SwiperSlide
   },
   created() {
     axios({

@@ -22,7 +22,7 @@
     "jquery": "^3.6.0",
     "node-sass": "^5.0.0",
     "sass-loader": "^10.1.1",
-    "swiper": "^6.5.0",
+    "swiper": "5.3.7",
     "vee-validate": "^3.4.5",
     "vue": "^2.6.12",
     "vue-awesome-swiper": "^4.1.1",

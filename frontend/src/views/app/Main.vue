@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import "swiper/swiper-bundle.css";
+import "swiper/css/swiper.css";
 import swipertest from "@/components/campsite/swipertest";
 
 export default {
