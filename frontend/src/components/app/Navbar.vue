@@ -10,7 +10,7 @@
       <b-navbar-brand href="/">Phoenix</b-navbar-brand>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="/searchCampsite"
+          <b-nav-item @click="goSearch"
             >나만의 캠핑장을 찾아보세요</b-nav-item
           >
         </b-navbar-nav>
@@ -66,6 +66,10 @@ export default {
       // console.log("보냅니다", this.store);
       console.log("마이페이지로 이동");
       this.$router.push({ name: "Mypage" });
+    },
+    goSearch: function() {
+      console.log("검색페이지로 이동");
+      this.$router.push({ name: "SearchCampsite" });
     },
     logout: function() {
       this.$store

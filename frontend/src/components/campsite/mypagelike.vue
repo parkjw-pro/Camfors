@@ -1,7 +1,6 @@
 <template>
   <div id="taglist">
     <h3 style="text-align: left; font-family: 'Hanna', sans-serif;">
-      {{ tag }}
     </h3>
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide v-for="(item, index) in campsiteList" :key="index">
@@ -66,7 +65,9 @@ import "swiper/css/swiper.css";
 export default {
   name: "swiper-example-loop-group",
   title: "Loop mode with multiple slides per group",
-  props: {},
+  props: {
+    likeList : Array
+  },
   components: {
     Swiper,
     SwiperSlide
