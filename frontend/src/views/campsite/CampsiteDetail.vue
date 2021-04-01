@@ -103,6 +103,7 @@
         <h3 style="margin-top:20px; text-align:left;">
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>한 줄 리뷰
         </h3>
+
         <Comment />
       </div>
 
@@ -114,6 +115,7 @@
         <BlogReview v-if="getDetailInfo.campsite_name" :name="getDetailInfo.campsite_name" />
       </div>
     </b-container>
+
   </div>
 </template>
 
@@ -137,7 +139,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getDetailInfo: "campStore/getDetailInfo"
+      getDetailInfo: "campStore/getDetailInfo",
     })
   },
   data: function() {

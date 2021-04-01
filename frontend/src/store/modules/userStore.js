@@ -10,6 +10,7 @@ const userStore = {
     email: '',
     nickname: '',
     changeState: '',
+    userId: '',
   },
   getters: {
     getAccessToken(state) {
@@ -32,17 +33,25 @@ const userStore = {
       }
       return state.nickname;
     },
+    getUserId(state) {
+      if (localStorage.getItem('Login-token') != undefined) {
+        return JSON.parse(localStorage.getItem('Login-token'))['user_id'];
+      }
+      return state.userId;
+    },
   },
   mutations: {
     LOGIN(state, payload) {
       state.accessToken = payload['token'];
       state.email = payload['email'];
       state.nickname = payload['nickname'];
+      state.userId = payload['user_id'];
     },
     LOGOUT(state) {
       state.accessToken = null;
       state.email = '';
       state.nickname = '';
+      state.userId = '';
     },
   },
 
