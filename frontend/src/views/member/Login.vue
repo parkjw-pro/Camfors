@@ -40,7 +40,6 @@
           >
         </div>
         <div class="small">
-          <!-- <router-link :to="{ name: 'Signup' }">회원가입</router-link>
       |
       <router-link :to="{ name: 'FindPassword' }">비밀번호찾기</router-link> -->
           <span style="color: #695549; cursor: pointer;" @click="toSignup"
@@ -85,15 +84,14 @@ export default {
       this.$store
         .dispatch("userStore/LOGIN", this.credentials)
         .then(() => {
-          // 나중에 getUser() 함수 사용하기!!!
-          // location 정보가 있으면 Home으로 보내기!
-          // const userAddress = JSON.parse(localStorage.getItem('Login-token'))["user_address"]
-          // if (userAddress !== null) {
-          //   location.replace('/home')
-          // } else {
-          //   this.$router.replace('/location')
-          // }
-          window.location.href = '/';
+
+          // 로컬스토리지 정보가 있으면 홈화면으로, 아니면 다시 로그인화면으로
+          const userId = JSON.parse(localStorage.getItem('Login-token'))["user_id"]
+          if (userId !== null) {
+            location.replace('/')
+          } else {
+            this.$router.replace('/login')
+          }
         })
         .catch(({ message }) => (this.msg = message));
     },
