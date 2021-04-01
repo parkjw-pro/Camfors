@@ -29,10 +29,6 @@ export default {
   data() {
     return {
       buttons: [
-        { caption: "#봄에 가기 좋은", state: false, id: 1 },
-        { caption: "#여름에 가기 좋은", state: false, id: 2 },
-        { caption: "#가을에 가기 좋은", state: false, id: 3 },
-        { caption: "#겨울에 가기 좋은", state: false, id: 4 },
         { caption: "#반려견 동반이 가능한", state: false, id: 5 },
         { caption: "#산이 보이는", state: false, id: 6 },
         { caption: "#바다가 보이는", state: false, id: 7 },
@@ -48,9 +44,6 @@ export default {
         { caption: "#체험 프로그램이 있는", state: false, id: 17 },
         { caption: "#장비 대여가 가능한", state: false, id: 18 },
         { caption: "#개인 트레일러 동반 가능한", state: false, id: 19 },
-        { caption: "#가족들과 가기 좋은", state: false, id: 20 },
-        { caption: "#커플끼리 가기 좋은", state: false, id: 21 },
-        { caption: "#혼자서도 가기 좋은", state: false, id: 22 }
       ],
       checkedTag: [],
       selectedTag: [],

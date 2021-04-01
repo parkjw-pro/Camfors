@@ -2,52 +2,14 @@
   <div id="taglist">
     <br />
     <br />
-    <h3
-      style="text-align: left; font-family: 'Hanna', sans-serif; color: white;"
-    >
+    <h3 style="text-align: left; font-family: 'Hanna', sans-serif; color: white;">
       {{ tag.name }}
     </h3>
-    <swiper class="swiper" :options="swiperOption" @click-slide="clickSlide">
-      <swiper-slide v-for="(item, index) in campsiteList" :key="index" >
-        <b-card>
-          <b-card-img
-            v-if="item.firstImageUrlV.length > 0"
-            :src="item.firstImageUrlV"
-            height="170px"
-          ></b-card-img>
-          <b-card-img
-            v-else
-            src="https://cdn.pixabay.com/photo/2019/07/25/17/09/camp-4363073_960_720.png"
-            height="170px"
-          ></b-card-img>
-          <span class="my-2" style="font-size:18px">{{
-            item.campsite_name
-          }}</span>
-          <b-card-text>{{ item.doNm }} {{ item.sigunguNm }}</b-card-text>
-          <b-row class="ml-1 pl-1">
-            <div style="text-align: left;">
-              <span class="reviewLike mt-4" >
-                <!--좋아요 여부와 좋아요 수-->
-                
-                <b-icon
-                  icon="suit-heart-fill"
-                  variant="danger"
-                  font-scale="1.5"
-                  v-if="liked"
-                  @click="likeReview()"
-                ></b-icon>
-                <b-icon
-                  icon="suit-heart"
-                  variant="danger"
-                  font-scale="1.5"
-                  v-else
-                  @click="likeReview()"
-                ></b-icon>
-              </span>
-              <small class="ml-1">{{ item.likeCount }}명이 좋아합니다.</small>
-            </div>
-          </b-row>
-        </b-card>
+    <swiper class="swiper" :options="swiperOption" >
+      <swiper-slide v-for="(item, index) in campsiteList" :key="index">
+        <div>
+          <swiperBlock :item = "item"/>
+        </div>
       </swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
@@ -56,33 +18,42 @@
 </template>
 
 <script>
-import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import "swiper/css/swiper.css";
-import axios from "axios";
+import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
+import swiperBlock from "@/components/campsite/swiperBlock";
+import 'swiper/css/swiper.css';
+import axios from 'axios';
+import { mapGetters } from "vuex";
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
-  name: "swiper-example-loop-group",
-  title: "Loop mode with multiple slides per group",
+  name: 'swiper-example-loop-group',
+  title: 'Loop mode with multiple slides per group',
   props: {
-    tag: Object
+    tag: Object,
   },
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    swiperBlock
   },
   created() {
     axios({
-      method: "get",
-      url: `${SERVER_URL}/camp/camptaglist/${this.tag.id}`
+      method: 'get',
+      url: `${SERVER_URL}/camp/camptaglist/${this.tag.id}`,
     })
-      .then(res => {
+      .then((res) => {
+        console.log(res.data)
         this.campsiteList = res.data;
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
+  },
+  computed: {
+    ...mapGetters({
+      getUserId: 'userStore/userId',
+    }),
   },
   data() {
     return {
@@ -91,34 +62,23 @@ export default {
         slidesPerView: 5,
         spaceBetween: 20,
         slidesPerGroup: 5,
-        loop: true,
+        loop: false,
         loopFillGroupWithBlank: false,
         pagination: {
-          el: ".swiper-pagination",
-          clickable: true
+          el: '.swiper-pagination',
+          clickable: true,
         },
 
         navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev"
-        }
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
       },
-      campsiteId: "1234"
+      campsiteId: '1234',
     };
   },
   methods: {
-    clickSlide(index, reallyIndex){ 
-      var id = this.campsiteList[reallyIndex].campsite_id;
-      // console.log(id);
-      // console.log("디테일로 이동");
-      this.$store.state.detailInfo = [1];
-      this.$router.push({
-        name: "CampsiteDetail",
-        params: { campsiteId: id }
-      });
-      // console.log('index : ' + index + ' : reallyIndex : ' + reallyIndex) 
-    }
-  }
+  },
 };
 </script>
 
