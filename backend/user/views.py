@@ -2,15 +2,16 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
-from .models import User
-from .serializers import UserSignUpSerializer
-from .serializers import UserLoginSerializer
+from .models import User, Campsite, Likes, reviews
+from .serializers import UserSignUpSerializer, UserLoginSerializer, LikesSerializer, reviewsSerializer
 from django.http import Http404
+from django.db.models import Subquery
 from rest_framework.decorators import api_view
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 from rest_framework import status
 import jwt
+from django.core import serializers
 # jsonparser로 requset body 데이터 얻을수 있음
 
 ALGORITHM = "HS256"
@@ -59,3 +60,23 @@ def login(request):
 def logout(request):
     return JsonResponse("로그아웃 성공", safe=False, status=status.HTTP_201_CREATED)
 
+@csrf_exempt
+@api_view(['post'])
+@permission_classes((permissions.AllowAny,))
+def like(request):
+    like_query_sets = Campsite.objects.filter(campsite_id__in=Subquery(Likes.objects
+                                                                      .filter(user_id=request.data['user_id'])
+                                                                      .values('campsite_id')))
+    like = LikesSerializer(like_query_sets, many=True)
+    # print(like)
+    # print()
+    # print(like.data)
+    return JsonResponse(like.data, safe=False, status=status.HTTP_201_CREATED)
+
+@csrf_exempt
+@api_view(['post'])
+@permission_classes((permissions.AllowAny,))
+def review(request):
+    review_query_sets = reviews.objects.filter(user_id=request.data['user_id'])
+    review = reviewsSerializer(review_query_sets, many=True)
+    return JsonResponse(review.data, safe=False, status=status.HTTP_201_CREATED)
