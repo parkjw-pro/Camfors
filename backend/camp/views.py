@@ -118,9 +118,9 @@ def campTagResult(request):
 def addlike(request):
     if request.method == 'GET':
         try:
-
+            result=[]
 
         except Campsite.DoesNotExist:
             return HttpResponse(status=404)
 
-    return JsonResponse(result, safe=False)
+    return JsonResponse("", safe=False)
