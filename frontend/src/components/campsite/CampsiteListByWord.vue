@@ -1,17 +1,23 @@
 <template>
-  <div>
-    <div v-for="(item, index) in SearchWordList" :key="index">
-      <ListByWordSwiper :tag="item" />
-    </div>
+  <div >
+    <b-row v-for="(item, index) in SearchWordList" :key="index">
+
+<div class="col-6">
+  <swiperBlock :item = "item"/>
+  <swiperBlock :item = "item"/>
+  <swiperBlock :item = "item"/>
+</div>
+      
+    </b-row>
   </div>
 </template>
 
 <script>
 import "swiper/css/swiper.css";
-import ListByWordSwiper from "@/components/campsite/ListByWordSwiper";
+import swiperBlock from "@/components/campsite/swiperBlock";
 export default {
   components: {
-    ListByWordSwiper
+    swiperBlock
   },
   props: {
     SearchWordList: Array
@@ -31,7 +37,8 @@ export default {
     enlarge(event) {
       event.currentTarget.classList.add("large");
     }
-  }
+  },
+  
 };
 </script>
 
