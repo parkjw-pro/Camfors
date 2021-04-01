@@ -7,9 +7,9 @@
     </h3>
     <swiper class="swiper" :options="swiperOption" >
       <swiper-slide v-for="(item, index) in campsiteList" :key="index">
-        <div>
+     
           <swiperBlock :item = "item"/>
-        </div>
+      
       </swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
