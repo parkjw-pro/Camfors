@@ -62,39 +62,17 @@ def campWordResult(request):
         try:
             word = json.loads(request.body)
             searchword = word.get('word')
-            query = CampsiteTag.objects.filter(campsite_id__in=Subquery(
-                Campsite.objects.filter(Q(campsite_name__icontains=searchword)| Q(addr1__icontains=searchword)|
-                                        Q(indutyV__icontains=searchword)).values('campsite_id')
-            )).values('campsite_id', 'tag_id').order_by('tag_id')
+            query = Campsite.objects.filter(Q(campsite_name__icontains=searchword) | Q(addr1__icontains=searchword) |
+                                    Q(indutyV__icontains=searchword) | Q(glampInnerFclty__icontains=searchword) |
+                                            Q(posblFcltyCl__icontains=searchword) | Q(exprnProgrm__icontains=searchword) |
+                                            Q(themaEnvrnCl__icontains=searchword) | Q(eqpmnLendCl__icontains=searchword)).distinct()
 
-            result = []
-            idx = -1
-            default = 0
-
-            for id in query:
-                campid = id.get('campsite_id')
-                tagid = id.get('tag_id')
-
-                qs = Campsite.objects.filter(pk=campid)
-                tg = Tag.objects.filter(pk=tagid)
-
-                camp = CampsiteSerializer(qs, many=True)
-                tag = TagSerializer(tg, many=True)
-
-                if default != tagid:
-                    line = []
-                    idx = idx+1
-                    line.append(tag.data)
-                    line.append(camp.data)
-                    result.append(line)
-                    default = tagid
-                else:
-                    result[idx].append(camp.data)
+            result=CampsiteSerializer(query,many=True)
 
         except Campsite.DoesNotExist:
             return HttpResponse(status=404)
 
-    return JsonResponse(result, safe=False)
+    return JsonResponse(result.data, safe=False)
 
 
 @csrf_exempt
