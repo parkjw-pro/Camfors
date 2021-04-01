@@ -98,6 +98,9 @@ export default {
         name: "CampsiteDetail",
         params: { campsiteId: campsite_id }
       });
+    },
+    likeReview(){
+      
     }
   }
   // created : {

@@ -12,7 +12,7 @@ import {
   faFish,
   faCircle,
   faPaw,
-  faTrash
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
@@ -31,5 +31,10 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
+  beforeCreate() {
+    if (localStorage.getItem("Login-token") != undefined) {
+      this.$store.commit("userStore/GetUserInfo");
+    }
+  },
   render: h => h(App)
 }).$mount("#app");
