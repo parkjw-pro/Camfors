@@ -1,48 +1,48 @@
-import axios from 'axios';
+import axios from "axios";
 
-const SERVER_URL = process.env.VUE_APP_SERVER_URL
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 const userStore = {
   namespaced: true,
 
   state: {
     accessToken: null,
-    email: '',
-    nickname: '',
-    changeState: '',
+    email: "",
+    nickname: "",
+    changeState: "",
   },
   getters: {
     getAccessToken(state) {
-      if (localStorage.getItem('Login-token') != undefined) {
+      if (localStorage.getItem("Login-token") != undefined) {
         //return localStorage.getItem('Login-token');
-        return localStorage.getItem('token');
+        return localStorage.getItem("token");
       }
       return state.accessToken;
       //return state.accessToken = localStorage.getItem('token');
     },
     getEmail(state) {
-      if (localStorage.getItem('Login-token') != undefined) {
-        return JSON.parse(localStorage.getItem('Login-token'))['email'];
+      if (localStorage.getItem("Login-token") != undefined) {
+        return JSON.parse(localStorage.getItem("Login-token"))["email"];
       }
       return state.email;
     },
     getNickname(state) {
-      if (localStorage.getItem('Login-token') != undefined) {
-        return JSON.parse(localStorage.getItem('Login-token'))['nickname'];
+      if (localStorage.getItem("Login-token") != undefined) {
+        return JSON.parse(localStorage.getItem("Login-token"))["nickname"];
       }
       return state.nickname;
     },
   },
   mutations: {
     LOGIN(state, payload) {
-      state.accessToken = payload['token'];
-      state.email = payload['email'];
-      state.nickname = payload['nickname'];
+      state.accessToken = payload["token"];
+      state.email = payload["email"];
+      state.nickname = payload["nickname"];
     },
     LOGOUT(state) {
       state.accessToken = null;
-      state.email = '';
-      state.nickname = '';
+      state.email = "";
+      state.nickname = "";
     },
   },
 
@@ -53,15 +53,17 @@ const userStore = {
       return axios
         .post(`${SERVER_URL}/user/login`, user)
         .then((response) => {
-          console.log('axios login');
-          context.commit('LOGIN', response.data);
-          localStorage.setItem('token', response.data['token']);
+          console.log("axios login");
+          context.commit("LOGIN", response.data);
+          localStorage.setItem("token", response.data["token"]);
           //axios.defaults.headers.common["auth0-token"] = ${response.data["token"]};
           //localStorage.setItem("token",${response.data["token"]});
-          axios.defaults.headers.common['token'] = localStorage.getItem('token');
+          axios.defaults.headers.common["token"] = localStorage.getItem(
+            "token"
+          );
 
-          if (localStorage.getItem('Login-token') == undefined) {
-            localStorage.setItem('Login-token', JSON.stringify(response.data));
+          if (localStorage.getItem("Login-token") == undefined) {
+            localStorage.setItem("Login-token", JSON.stringify(response.data));
           }
 
           // axios
@@ -78,16 +80,16 @@ const userStore = {
         })
         .catch(() => {
           localStorage.clear();
-          window.location.href = '/login';
-          alert('로그인 실패 아이디및 비밀번호 확인 부탁드립니다.');
+          window.location.href = "/login";
+          alert("로그인 실패 아이디및 비밀번호 확인 부탁드립니다.");
         });
     },
     LOGOUT(context) {
-      context.commit('LOGOUT');
-      axios.defaults.headers.common['token'] = undefined;
+      context.commit("LOGOUT");
+      axios.defaults.headers.common["token"] = undefined;
       localStorage.clear();
       //window.location.reload();
-      window.location.href = '/';
+      window.location.href = "/";
     },
   },
 };
