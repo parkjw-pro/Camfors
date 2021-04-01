@@ -5,8 +5,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Subquery
 import json
 from django.db.models import Q
-from .models import Campsite, CampsiteTag, Tag
-from .serializers import CampsiteSerializer, CampsiteDetailSerializer, TagSerializer
+from .models import Campsite, CampsiteTag, Tag, Reviews
+from .serializers import CampsiteSerializer, CampsiteDetailSerializer, TagSerializer, CampCreateReviewSerializer, CampReadReviewSerializer
 # jsonparser로 requset body 데이터 얻을수 있음
 
 
@@ -113,3 +113,38 @@ def campTagResult(request):
             return HttpResponse(status=404)
 
     return JsonResponse(result, safe=False)
+
+
+@csrf_exempt
+def campCreateReview(request):
+    if request.method == 'POST':
+        serializer = CampCreateReviewSerializer(data=request.data)
+        if not serializer.is_valid():
+            return JsonResponse(status=status.HTTP_406_NOT_ACCEPTABLE)
+        else:
+            serializer.save()
+            return JsonResponse("리뷰 등록 완료", safe=False, status=status.HTTP_201_CREATED)
+
+def campReadReview(request, campsite_id):
+    try:
+        query_sets = Reviews.objects.filter(campsite_id = campsite_id)
+    except Campsite.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET' and len(query_sets) > 0:
+        serializer = CampReadReviewSerializer(query_sets, many=True)
+        return JsonResponse(serializer.data, safe=False)    
+
+def campDeleteReview(request, review_id):
+    review = Reviews.objects.get(review_id=review_id)
+    review.delete()
+    return JsonResponse("삭제 성공", safe=False, status=status.HTTP_201_CREATED)
+
+# def campUpdateReview(request):
+#     if request.method == 'PUT':
+#         serializer = CampUpdateReviewSerializer(data=request.data)
+#         if not serializer.is_valid():
+#             return JsonResponse(status=status.HTTP_406_NOT_ACCEPTABLE)
+#         else:
+#             serializer.update(review=request.data['review'])
+#             return JsonResponse("리뷰 수정 완료", safe=False, status=status.HTTP_201_CREATED)
