@@ -38,20 +38,8 @@
               <small class="ml-1">n명이 좋아합니다.</small>
             </div>
           </b-row>
-          <!-- <b-button href="#" variant="primary">구경하기!</b-button> -->
         </b-card>
-        <!-- <img height="70%" width="100%" src="@/assets/mainpage/campsite1.jpg" /> -->
       </swiper-slide>
-      <!-- <swiper-slide>Slide 2</swiper-slide>
-    <swiper-slide>Slide 3</swiper-slide>
-    <swiper-slide>Slide 4</swiper-slide>
-    <swiper-slide>Slide 5</swiper-slide>
-    <swiper-slide>Slide 6</swiper-slide>
-    <swiper-slide>Slide 7</swiper-slide>
-    <swiper-slide>Slide 8</swiper-slide>
-    <swiper-slide>Slide 9</swiper-slide>
-    <swiper-slide>Slide 10</swiper-slide> -->
-      <!-- <div class="swiper-pagination" slot="pagination"></div> -->
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
     </swiper>
