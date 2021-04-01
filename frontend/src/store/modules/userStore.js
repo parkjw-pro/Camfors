@@ -7,51 +7,48 @@ const userStore = {
 
   state: {
     accessToken: null,
-    email: '',
-    nickname: '',
-    changeState: '',
-    userId: '',
+    email: "",
+    nickname: "",
+    changeState: "",
+    userId: "",
   },
   getters: {
     getAccessToken(state) {
-      if (localStorage.getItem("Login-token") != undefined) {
-        //return localStorage.getItem('Login-token');
-        return localStorage.getItem("token");
-      }
       return state.accessToken;
-      //return state.accessToken = localStorage.getItem('token');
     },
     getEmail(state) {
-      if (localStorage.getItem("Login-token") != undefined) {
-        return JSON.parse(localStorage.getItem("Login-token"))["email"];
-      }
       return state.email;
     },
     getNickname(state) {
-      if (localStorage.getItem("Login-token") != undefined) {
-        return JSON.parse(localStorage.getItem("Login-token"))["nickname"];
-      }
       return state.nickname;
     },
     getUserId(state) {
-      if (localStorage.getItem('Login-token') != undefined) {
-        return JSON.parse(localStorage.getItem('Login-token'))['user_id'];
-      }
       return state.userId;
     },
   },
   mutations: {
     LOGIN(state, payload) {
-      state.accessToken = payload['token'];
-      state.email = payload['email'];
-      state.nickname = payload['nickname'];
-      state.userId = payload['user_id'];
+      state.accessToken = payload[1];
+      state.email = payload[0][0]["email"];
+      state.userId = payload[0][0]["user_id"];
+      state.nickname = payload[0][0]["nickname"];
+
+      localStorage.setItem("Login-token", payload[1]);
+      localStorage.setItem("email", payload[0][0]["email"]);
+      localStorage.setItem("user_id", payload[0][0]["user_id"]);
+      localStorage.setItem("nickname", payload[0][0]["nickname"]);
     },
     LOGOUT(state) {
       state.accessToken = null;
-      state.email = '';
-      state.nickname = '';
-      state.userId = '';
+      state.email = "";
+      state.nickname = "";
+      state.userId = "";
+    },
+    GetUserInfo(state) {
+      state.accessToken = localStorage.getItem("Login-token");
+      state.email = localStorage.getItem("email");
+      state.userId = localStorage.getItem("user_id");
+      state.nickname = localStorage.getItem("nickname");
     },
   },
 
@@ -62,19 +59,9 @@ const userStore = {
       return axios
         .post(`${SERVER_URL}/user/login`, user)
         .then((response) => {
-          console.log("axios login");
           context.commit("LOGIN", response.data);
-          localStorage.setItem("token", response.data["token"]);
           //axios.defaults.headers.common["auth0-token"] = ${response.data["token"]};
           //localStorage.setItem("token",${response.data["token"]});
-          axios.defaults.headers.common["token"] = localStorage.getItem(
-            "token"
-          );
-
-          if (localStorage.getItem("Login-token") == undefined) {
-            localStorage.setItem("Login-token", JSON.stringify(response.data));
-          }
-
           // axios
           //   .get(`${SERVER_URL}/user`)
           //   .then((response) => {
@@ -95,7 +82,6 @@ const userStore = {
     },
     LOGOUT(context) {
       context.commit("LOGOUT");
-      axios.defaults.headers.common["token"] = undefined;
       localStorage.clear();
       //window.location.reload();
       window.location.href = "/";
