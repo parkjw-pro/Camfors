@@ -19,7 +19,16 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 // Set up FontAwesome
-faLibrary.add(faVolleyballBall, faWater, faFish, faCircle, faPaw, faTrash, faAngleDown, faSearch);
+faLibrary.add(
+  faVolleyballBall,
+  faWater,
+  faFish,
+  faCircle,
+  faPaw,
+  faTrash,
+  faAngleDown,
+  faSearch
+);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)
@@ -33,5 +42,10 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
+  beforeCreate() {
+    if (localStorage.getItem("Login-token") != undefined) {
+      this.$store.commit("userStore/GetUserInfo");
+    }
+  },
   render: h => h(App)
 }).$mount("#app");

@@ -48,10 +48,10 @@ export default {
     })
   },
   created() {
-    console.log(this.name);
+    // console.log(this.name);
     // 크롤링
     axios
-      .get("http://localhost:3000/search", {
+      .get("http://www.camfors.shop:3000/search", {
         params: {
           // query: "새움정"
           query: this.name
@@ -61,9 +61,15 @@ export default {
         this.items = response.data.items;
 
         // html 태그 제거
-        for(let i=0; i<this.items.length; i++){
-          this.items[i].title = this.items[i].title.replace(/(<([^>]+)>)/ig,"");
-          this.items[i].description = this.items[i].description.replace(/(<([^>]+)>)/ig,"");
+        for (let i = 0; i < this.items.length; i++) {
+          this.items[i].title = this.items[i].title.replace(
+            /(<([^>]+)>)/gi,
+            ""
+          );
+          this.items[i].description = this.items[i].description.replace(
+            /(<([^>]+)>)/gi,
+            ""
+          );
         }
       })
 

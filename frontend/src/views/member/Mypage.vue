@@ -12,7 +12,7 @@
     </div> -->
     <span id="my2" style="position:relative">
       <h3>좋아요</h3>
-      <mypagelike
+      <mypagelike :likeList="likeCampsiteList"
     /></span>
     <span id="my3"><h3>댓글</h3></span>
   </div>
@@ -20,6 +20,8 @@
 
 <script>
 import mypagelike from "@/components/campsite/mypagelike";
+import axios from "axios";
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
   name: "Mypage",
   components: {
@@ -33,47 +35,42 @@ export default {
         height: "100vh",
         position: "relative"
       },
-      credentials: {
-        userId: "",
-        password: ""
-      },
-      error_check_login: true
+      email: "",
+      likeCampsiteList: [],
+      reviewList: []
     };
   },
   methods: {
-    enlarge(event) {
-      event.currentTarget.classList.add("large");
-    },
-    login: function() {
-      // LOGIN 액션 실행
-      // 서버와 통신(axios)을 해 토큰값을 얻어야 하므로 Actions를 호출.
-      this.$store
-        .dispatch("LOGIN", this.credentials)
-        .then(() => {
-          // 나중에 getUser() 함수 사용하기!!!
-          // location 정보가 있으면 Home으로 보내기!
-          // const userAddress = JSON.parse(localStorage.getItem('Login-token'))["user_address"]
-          // if (userAddress !== null) {
-          //   location.replace('/home')
-          // } else {
-          //   this.$router.replace('/location')
-          // }
-          this.selectBadge();
-          this.$router.replace("/location/first");
+    getUserCampsite: function() {
+      console.log(this.email);
+      axios
+        .post(`${SERVER_URL}/user/like`, this.email)
+        .then(res => {
+          this.likeCampsiteList = res.data;
+          console.log(res.data);
         })
-        .catch(({ message }) => (this.msg = message));
+        .catch(error => {
+          console.log(error);
+        });
     },
-    toSignup: function() {
-      this.$router.push({ name: "Register" });
+    getUserReview: function() {
+      console.log(this.email);
+      axios
+        .post(`${SERVER_URL}/user/review`, this.email)
+        .then(res => {
+          this.reviewList = res.data;
+          console.log(res.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   },
-  created: async function() {},
-  computed: {
-    bagimg() {
-      return {
-        backgroundImage: `url${require("@/assets/Login/login.jpg")}`
-      };
-    }
+  created() {
+    const userInfo = JSON.parse(localStorage.getItem("Login-token"));
+    this.email = userInfo[0][0];
+    this.getUserCampsite();
+    this.getUserReview();
   }
 };
 </script>

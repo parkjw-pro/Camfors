@@ -1,6 +1,6 @@
 <template>
   <div id="app" style="position: relative; z-index: 2;">
-    <div><Navbar /></div>
+    <div><Navbar :login="login" /></div>
     <div style="position: relative; z-index: 1;">
       <router-view></router-view>
     </div>
@@ -13,6 +13,16 @@ export default {
   name: "App",
   components: {
     Navbar
+  },
+  data: function() {
+    return {
+      login: false
+    };
+  },
+  mounted() {
+    if (localStorage.getItem("Login-token") != undefined) {
+      this.login = true;
+    }
   }
 };
 </script>

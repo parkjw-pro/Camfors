@@ -10,17 +10,17 @@
       <b-navbar-brand href="/">Phoenix</b-navbar-brand>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item href="/searchCampsite"
-            ><font-awesome-icon icon="search" class="fa-1x" /> 나만의 캠핑장을 찾아보세요</b-nav-item
+          <b-nav-item @click="goSearch"
+            ><font-awesome-icon icon="search" class="fa-1x" /> 나만의 캠핑장을
+            찾아보세요</b-nav-item
           >
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-         
-          <b-nav-item @click="goLogin">로그인</b-nav-item>
-          <b-nav-item href="#">로그아웃</b-nav-item>
-          <b-nav-item @click="goMypage">마이페이지</b-nav-item>
+          <b-nav-item v-if="!login" @click="goLogin">로그인</b-nav-item>
+          <b-nav-item v-if="login" @click="logout">로그아웃</b-nav-item>
+          <b-nav-item v-if="login" @click="goMypage">마이페이지</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -30,6 +30,9 @@
 <script>
 export default {
   name: "Navbar",
+  props: {
+    login: Boolean
+  },
   data() {
     return {
       scrollPosition: null
@@ -53,6 +56,19 @@ export default {
       // console.log("보냅니다", this.store);
       console.log("마이페이지로 이동");
       this.$router.push({ name: "Mypage" });
+    },
+    goSearch: function() {
+      console.log("검색페이지로 이동");
+      this.$router.push({ name: "SearchCampsite" });
+    },
+    logout: function() {
+      this.$store
+        .dispatch("userStore/LOGOUT")
+        .then(() => {
+          // this.$router.push({ name: 'Home' })
+          this.$router.push({ name: "/" });
+        })
+        .catch(({ message }) => (this.msg = message));
     }
   }
 };
@@ -61,25 +77,25 @@ export default {
 <style scoped>
 .navbar {
   background: rgba(0, 0, 0, 0);
-  font-family: LineSeed,system-ui,-SF Pro Text,Helvetica,Roboto,sans-serif;
+  font-family: LineSeed, system-ui, -SF Pro Text, Helvetica, Roboto, sans-serif;
   height: 70px;
   font-size: 16px;
   font-weight: 600;
   /* border-bottom: solid 1px rgba(226, 220, 220); */
   border-bottom: solid 1px;
-  border-color: rgba(255,255,255,0.3);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 .change_color {
   background-color: black;
-  border-bottom : solid 0px;
+  border-bottom: solid 0px;
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color: #f8f9fa;
+  color: #f8f9fa;
 }
 
 @media (min-width: 1281px) {
-.navbar-expand-lg .navbar-nav .nav-link {
+  .navbar-expand-lg .navbar-nav .nav-link {
     padding-right: 1rem;
     padding-left: 1rem;
   }

@@ -13,28 +13,29 @@
         <source :src="require('@/assets/mainpage/main.mp4')" type="video/mp4" />
       </video>
       <div class="text_area stagger-wrapper">
-          <p class="stagger-item" style="font-size:3em">Camping For Smart</p>
-          <p class="stagger-item">멋쟁이들을 위한 캠핑장 추천, 캠퍼스</p>
+        <p class="stagger-item" style="font-size:3em">Camping For Smart</p>
+        <p class="stagger-item">멋쟁이들을 위한 캠핑장 추천, 캠퍼스</p>
       </div>
       <div class="desc_scroll">
         <p style="margin-bottom: 0;">Scroll</p>
         <font-awesome-icon icon="angle-down" class="fa-1x" />
-        </div>
+      </div>
     </div>
     <!-- <div style="text-align: center; margin : 0 auto; width: 50%;"> -->
     <!-- <div style="background: linear-gradient(0deg, black 95%, #FF8C00);"> -->
-      <div style="background: black;"
-        v-for="(item, index) in tagList"
-        :key="index"
-      >
-        <swipertest :tag="item" />
-      </div>
+    <div
+      style="background: black;"
+      v-for="(item, index) in tagList"
+      :key="index"
+    >
+      <swipertest :tag="item" />
+    </div>
     <!-- </div> -->
   </div>
 </template>
 
 <script>
-import "swiper/swiper-bundle.css";
+import "swiper/css/swiper.css";
 import swipertest from "@/components/campsite/swipertest";
 
 export default {
@@ -107,36 +108,36 @@ export default {
 }
 
 .text_area {
-    z-index: 100;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    width: 1200px;
-    margin: -30px 0 0 -600px;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    color: rgba(255, 255, 255, 0.829);
-    font-size: 20px;
-    font-family: system-ui,-SF Pro Text,Helvetica,Roboto,sans-serif;
-    font-weight: 900;
-    letter-spacing: -2px;
+  z-index: 100;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 1200px;
+  margin: -30px 0 0 -600px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: rgba(255, 255, 255, 0.829);
+  font-size: 20px;
+  font-family: system-ui, -SF Pro Text, Helvetica, Roboto, sans-serif;
+  font-weight: 900;
+  letter-spacing: -2px;
 }
 
 .desc_scroll {
-    z-index: 110;
-    position: absolute;
-    bottom: 36px;
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-50%);
-    font-size: 1.1rem;
-    line-height: 1.3rem;
-    color: rgba(107, 103, 103, 0.829);
-    font-family: system-ui,-SF Pro Text,Helvetica,Roboto,sans-serif;
-    text-align: center;
-    font-size: 12px;
+  z-index: 110;
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  font-size: 1.1rem;
+  line-height: 1.3rem;
+  color: rgba(107, 103, 103, 0.829);
+  font-family: system-ui, -SF Pro Text, Helvetica, Roboto, sans-serif;
+  text-align: center;
+  font-size: 12px;
 }
 
 @keyframes showText {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const SERVER_URL = "http://www.camfors.shop:8000";
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 const campStore = {
   namespaced: true,
@@ -9,7 +9,7 @@ const campStore = {
     detailInfo: [],
     searchWordList: [],
     searchTagList: [[]],
-
+    searchTagListName: []
   },
   getters: {
     getDetailInfo(state) {
@@ -21,6 +21,9 @@ const campStore = {
     },
     getSearchTagList(state) {
       return state.searchTagList;
+    },
+    getSearchTagListName(state) {
+      return state.searchTagListName;
     }
   },
   mutations: {
@@ -33,8 +36,8 @@ const campStore = {
     setSearchTagList(state, payload) {
       state.searchTagList = payload;
     },
-    createReview(state, payload){
-      state.review = payload;
+    setSearchTagListName(state, payload) {
+      state.searchTagListName = payload;
     }
   },
   actions: {
@@ -70,14 +73,10 @@ const campStore = {
     },
 
     searchByTag(context, tagList) {
-      console.log("searchByTag");
-      context.commit("setSearchTagList", tagList);
       axios({
         method: "post",
         url: `${SERVER_URL}/camp/gettagresult/`,
-        data: {
-          list: tagList
-        }
+        data: tagList
       })
         .then(res => {
           console.log(res);
@@ -88,26 +87,9 @@ const campStore = {
           console.log(error);
         });
     },
-
-    createReview(user_id, campsite_id, review) {
-      console.log("createReview");
-      // context.commit("createReview", review);
-      axios({
-        method: "post",
-        url: `${SERVER_URL}/camp/createreview/`,
-        data: {
-          user_id: user_id,
-          campsite_id: campsite_id,
-          review: review
-        }
-      })
-        .then(res => {
-          console.log(res);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
+    searchByTagName(context, tagList) {
+      context.commit("setSearchTagListName", tagList);
+    }
   }
 };
 export default campStore;

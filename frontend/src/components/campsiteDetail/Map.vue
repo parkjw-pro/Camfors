@@ -10,8 +10,7 @@ export default {
   components: {},
   props: ["mapX", "mapY"],
   data: function() {
-    return {
-    };
+    return {};
   },
   mounted() {
     window.kakao && window.kakao.maps ? this.initMap() : this.addScript();
@@ -22,7 +21,7 @@ export default {
       let container = document.getElementById("map");
       let options = {
         center: new kakao.maps.LatLng(this.mapY, this.mapX),
-        level: 3
+        level: 8
       };
       var map = new kakao.maps.Map(container, options);
 

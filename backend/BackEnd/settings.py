@@ -25,7 +25,8 @@ SECRET_KEY = '-tnxrx-h#h&ip$^478@2cvdfw#$b$7k(sx5)((-x&8sstj*sg%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
 
 
 # Application definition
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'camp',
+    'user',
     'rest_framework',
     'corsheaders',
 ]

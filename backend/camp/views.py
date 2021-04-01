@@ -62,47 +62,46 @@ def campWordResult(request):
         try:
             word = json.loads(request.body)
             searchword = word.get('word')
-            query = CampsiteTag.objects.filter(campsite_id__in=Subquery(
-                Campsite.objects.filter(Q(campsite_name__icontains=searchword)| Q(addr1__icontains=searchword)|
-                                        Q(indutyV__icontains=searchword)).values('campsite_id')
-            )).values('campsite_id', 'tag_id').order_by('tag_id')
+            query = Campsite.objects.filter(Q(campsite_name__icontains=searchword) | Q(addr1__icontains=searchword) |
+                                    Q(indutyV__icontains=searchword) | Q(glampInnerFclty__icontains=searchword) |
+                                            Q(posblFcltyCl__icontains=searchword) | Q(exprnProgrm__icontains=searchword) |
+                                            Q(themaEnvrnCl__icontains=searchword) | Q(eqpmnLendCl__icontains=searchword)).distinct()
 
+            result=CampsiteSerializer(query,many=True)
+
+        except Campsite.DoesNotExist:
+            return HttpResponse(status=404)
+
+    return JsonResponse(result.data, safe=False)
+
+
+@csrf_exempt
+def campTagResult(request):
+    if request.method == 'POST':
+        try:
+            taglist = json.loads(request.body)
             result = []
-            idx = -1
-            default = 0
-
-            for id in query:
-                campid = id.get('campsite_id')
-                tagid = id.get('tag_id')
-
-                qs = Campsite.objects.filter(pk=campid)
-                tg = Tag.objects.filter(pk=tagid)
-
-                camp = CampsiteSerializer(qs, many=True)
-                tag = TagSerializer(tg, many=True)
-
-                if default != tagid:
-                    line = []
-                    idx = idx+1
-                    line.append(tag.data)
-                    line.append(camp.data)
-                    result.append(line)
-                    default = tagid
-                else:
-                    result[idx].append(camp.data)
+            for tagid in taglist:
+                queryset = Campsite.objects.filter(campsite_id__in=Subquery(CampsiteTag.objects.filter(tag_id=tagid)
+                                                                          .values('campsite_id'))).order_by('likeCount')[:50]
+                serializer = CampsiteSerializer(queryset, many=True)
+                result.append(serializer.data)
 
         except Campsite.DoesNotExist:
             return HttpResponse(status=404)
 
     return JsonResponse(result, safe=False)
 
-@csrf_exempt
-def campTagResult(request):
-    if request.method == 'POST':
+
+def addlike(request):
+    if request.method == 'GET':
         try:
-            taglist = request.POST.getlist('list[]')
-            print(taglist[0])
+            user_id=request.get['user_id']
+            camp_id=request.get['camp_id']
+
+            result=[]
+
         except Campsite.DoesNotExist:
             return HttpResponse(status=404)
 
-    return JsonResponse("qweasd", safe=False)
+    return JsonResponse("", safe=False)

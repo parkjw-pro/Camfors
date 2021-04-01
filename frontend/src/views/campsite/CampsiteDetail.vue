@@ -16,18 +16,33 @@
       <div class="row campsiteInfo">
         <div class="col-sm-6 col-md-6 campsiteInfoImg">
           <b-img
+            v-if="getDetailInfo.firstImageUrlV.length > 0"
             id="campsiteImg"
             :src="getDetailInfo.firstImageUrlV"
+            alt="Responsive image"
+          ></b-img>
+          <b-img
+            v-else
+            id="campsiteImg"
+            src="https://cdn.pixabay.com/photo/2019/07/25/17/09/camp-4363073_960_720.png"
             alt="Responsive image"
           ></b-img>
         </div>
 
         <div class="col-sm-6 col-md-6 campsiteInfoList">
           <b-list-group flush>
-            <b-list-group-item v-if="getDetailInfo.indutyV" >{{ getDetailInfo.indutyV }}</b-list-group-item>
-            <b-list-group-item v-if="getDetailInfo.addr1" >{{ getDetailInfo.addr1 }}</b-list-group-item>
-            <b-list-group-item v-if="getDetailInfo.intro" >{{ getDetailInfo.intro }}</b-list-group-item>
-            <b-list-group-item v-if="getDetailInfo.tel" >{{ getDetailInfo.tel }}</b-list-group-item>
+            <b-list-group-item v-if="getDetailInfo.indutyV">{{
+              getDetailInfo.indutyV
+            }}</b-list-group-item>
+            <b-list-group-item v-if="getDetailInfo.addr1">{{
+              getDetailInfo.addr1
+            }}</b-list-group-item>
+            <b-list-group-item v-if="getDetailInfo.intro">{{
+              getDetailInfo.intro
+            }}</b-list-group-item>
+            <b-list-group-item v-if="getDetailInfo.tel">{{
+              getDetailInfo.tel
+            }}</b-list-group-item>
             <b-list-group-item
               ><b-button variant="secondary" :href="getDetailInfo.homepage"
                 >홈페이지</b-button
@@ -57,7 +72,11 @@
           <div class="col-5">캠핑장 주요 시설 자세한 소개</div>
           <div class="col-1"></div>
           <div class="col-5">
-            <Map v-if="getDetailInfo.mapX" :mapX="getDetailInfo.mapX" :mapY="getDetailInfo.mapY" />
+            <Map
+              v-if="getDetailInfo.mapX"
+              :mapX="getDetailInfo.mapX"
+              :mapY="getDetailInfo.mapY"
+            />
           </div>
         </div>
       </div>
@@ -104,7 +123,10 @@
         <h4 style="margin-top:20px; text-align:left;">
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>블로그 리뷰
         </h4>
-        <BlogReview v-if="getDetailInfo.campsite_name" :name="getDetailInfo.campsite_name" />
+        <BlogReview
+          v-if="getDetailInfo.campsite_name"
+          :name="getDetailInfo.campsite_name"
+        />
       </div>
     </b-container>
   </div>
@@ -127,13 +149,16 @@ export default {
       "campStore/campsiteDetail",
       this.$route.params.campsiteId
     );
+    console.log(this.getUserId);
   },
   computed: {
     ...mapGetters({
-      getDetailInfo: "campStore/getDetailInfo"
+      getDetailInfo: "campStore/getDetailInfo",
+      getUserId: "userStore/getUserId"
     })
   },
   data: function() {
+    // console.log(this.$route.params.campsiteId)
     return {
       campDetail: [],
       campsiteId: "",

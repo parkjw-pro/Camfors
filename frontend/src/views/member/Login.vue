@@ -9,9 +9,9 @@
             type="text"
             class="form-control"
             style="color: #695549; width:50%; text-align:center; display:block; margin: 0 auto;"
-            placeholder="ID"
-            id="userId"
-            v-model="credentials.userId"
+            placeholder="Email"
+            id="email"
+            v-model="credentials.email"
             @keypress.enter="login"
             autofocus
           />
@@ -28,7 +28,7 @@
           />
         </div>
         <div v-if="!error_check_login">
-          <p>ID 또는 비밀번호를 다시 확인해주세요.</p>
+          <p>이메일 또는 비밀번호를 다시 확인해주세요.</p>
         </div>
         <div>
           <b-button
@@ -40,16 +40,14 @@
           >
         </div>
         <div class="small">
-          <!-- <router-link :to="{ name: 'Signup' }">회원가입</router-link>
-      |
-      <router-link :to="{ name: 'FindPassword' }">비밀번호찾기</router-link> -->
+          |
+          <router-link :to="{ name: 'FindPassword' }">비밀번호찾기</router-link>
+          -->
           <span style="color: #695549; cursor: pointer;" @click="toSignup"
             >회원가입</span
           >
           |
-          <span style="color: #695549; cursor: pointer;" @click="toFind"
-            >비밀번호찾기</span
-          >
+          <span style="color: #695549; cursor: pointer;">비밀번호찾기</span>
         </div>
       </div>
     </div>
@@ -72,7 +70,7 @@ export default {
         backgroundPosition: "center"
       },
       credentials: {
-        userId: "",
+        email: "",
         password: ""
       },
       error_check_login: true
@@ -86,18 +84,15 @@ export default {
       // LOGIN 액션 실행
       // 서버와 통신(axios)을 해 토큰값을 얻어야 하므로 Actions를 호출.
       this.$store
-        .dispatch("LOGIN", this.credentials)
+        .dispatch("userStore/LOGIN", this.credentials)
         .then(() => {
-          // 나중에 getUser() 함수 사용하기!!!
-          // location 정보가 있으면 Home으로 보내기!
-          // const userAddress = JSON.parse(localStorage.getItem('Login-token'))["user_address"]
-          // if (userAddress !== null) {
-          //   location.replace('/home')
-          // } else {
-          //   this.$router.replace('/location')
-          // }
-          this.selectBadge();
-          this.$router.replace("/location/first");
+          // 로컬스토리지 정보가 있으면 홈화면으로, 아니면 다시 로그인화면으로
+          const token = localStorage.getItem("Login-token");
+          if (token !== null) {
+            location.replace("/");
+          } else {
+            this.$router.replace("/login");
+          }
         })
         .catch(({ message }) => (this.msg = message));
     },
@@ -105,14 +100,7 @@ export default {
       this.$router.push({ name: "Register" });
     }
   },
-  created: async function() {},
-  computed: {
-    bagimg() {
-      return {
-        backgroundImage: `url${require("@/assets/Login/login.jpg")}`
-      };
-    }
-  }
+  created: async function() {}
 };
 </script>
 

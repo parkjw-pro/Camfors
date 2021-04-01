@@ -37,7 +37,7 @@
                   style="margin-top:3px"
                   size="sm"
                   @click="check_user_email"
-                  >메일 인증</b-button
+                  >확인</b-button
                 >
                 <br />
                 <br />
@@ -45,50 +45,6 @@
                   id="error3"
                   class="text-danger"
                   style=" margin-top:5px"
-                  >{{ errors[0] }}</small
-                >
-              </b-form-group>
-            </ValidationProvider>
-          </b-col>
-        </b-row>
-        <b-row
-          v-if="this.possible_email && this.credentials.email"
-          id="accountBox"
-        >
-          <b-col align-self="left">
-            <ValidationProvider
-              name="인증코드"
-              rules="required|min:4"
-              v-slot="{ errors }"
-            >
-              <b-form-group>
-                <label
-                  style="float:left; padding-right:10px; padding-top:5px; color : white"
-                  for="emailCode"
-                  >인증코드:
-                </label>
-                <b-form-input
-                  type="text"
-                  class="ml-4"
-                  style="width:50%; float:left;"
-                  v-model="emailCode"
-                  placeholder="인증코드를 입력하세요"
-                  required
-                  @keypress.enter="check_user_emailCode"
-                ></b-form-input>
-                <b-button
-                  id="btn_signup"
-                  style="margin-top:3px"
-                  size="sm"
-                  @click="check_user_emailCode"
-                  >인증 확인</b-button
-                >
-                <br />
-                <br />
-                <small
-                  id="error4"
-                  class="text-danger"
-                  style=" margin-top:5px; color : white"
                   >{{ errors[0] }}</small
                 >
               </b-form-group>
@@ -183,15 +139,7 @@
                   v-model="credentials.nickname"
                   placeholder="개성있는 닉네임을 입력하세요"
                   required
-                  @keypress.enter="check_user_nickname"
                 ></b-form-input>
-                <b-button
-                  id="btn_signup"
-                  style="margin-top:3px"
-                  size="sm"
-                  @click="check_user_nickname"
-                  >확인</b-button
-                >
                 <br />
                 <br />
                 <small
@@ -243,111 +191,56 @@ export default {
         position: "relative"
       },
       credentials: {
-        userId: "",
         nickname: "",
         email: "",
         password: ""
       },
       password_confirmation: "",
-      possible_email: false,
       emailCode: "",
 
-      checkId: false,
-      checkNickname: false,
-      checkEmail: false,
-      checkEmailCode: false
+      checkEmail: false
     };
   },
   methods: {
     onSubmit() {
       if (
-        this.checkId == false ||
-        this.checkNickname == false ||
         this.checkEmail == false ||
-        this.checkEmailCode == false ||
         document.getElementById("error5").innerHTML != "" ||
         document.getElementById("error6").innerHTML != ""
       ) {
         alert("중복체크 및 유효성 검사 확인 바랍니다.");
       } else {
         axios
-          .post(`${SERVER_URL}/user`, this.credentials)
+          .post(`${SERVER_URL}/user/signup`, this.credentials)
           .then(() => {
             alert("회원가입 성공");
-            window.location.href = "/account";
+            window.location.href = "/login";
           })
           .catch(() => {
             alert("서버에 문제가 생겼습니다. 다시 가입 바랍니다.");
-            window.location.href = "/account";
-          });
-      }
-    },
-    check_user_nickname: function() {
-      if (
-        this.credentials.nickname == "" ||
-        document.getElementById("error2").innerHTML != ""
-      ) {
-        alert("닉네임 다시입력 바랍니다.");
-        this.credentials.nickname = "";
-      } else {
-        axios
-          .get(`${SERVER_URL}/user/nickname/${this.credentials.nickname}`)
-          .then(() => {
-            alert("사용 가능한 닉네임 입니다.");
-            this.checkNickname = true;
-          })
-          .catch(() => {
-            if (this.credentials.nickname != "") {
-              alert("현재 사용중인 닉네임 입니다.");
-              this.credentials.nickname = "";
-            }
+            window.location.href = "/register";
           });
       }
     },
     check_user_email: function() {
       if (
         this.checkId == false ||
-        this.checkNickname == false ||
         this.credentials.email == "" ||
         document.getElementById("error3").innerHTML != ""
       ) {
-        alert("닉네임,아이디 중복체크 확인및 이메일 다시 입력 바랍니다.");
+        alert("이메일 다시 입력 바랍니다.");
         this.credentials.email = "";
       } else {
         axios
           .post(`${SERVER_URL}/user/email`, this.credentials)
           .then(() => {
-            alert("사용 가능한 이메일 입니다. 인증코드 입력바랍니다.");
+            alert("사용 가능한 이메일 입니다.");
             this.checkEmail = true;
-            this.possible_email = true;
           })
           .catch(() => {
             if (this.credentials.email != "") {
               alert("현재 사용중인 이메일 입니다.");
               this.credentials.email = "";
-            }
-          });
-      }
-    },
-    check_user_emailCode: function() {
-      if (
-        this.emailCode == "" ||
-        document.getElementById("error4").innerHTML != ""
-      ) {
-        alert("인증코드 다시입력 바랍니다.");
-      } else {
-        axios
-          .post(
-            `${SERVER_URL}/user/email/${this.credentials.userId}/${this.emailCode}`
-          )
-          .then(() => {
-            this.checkEmailCode = true;
-            alert("인증완료");
-          })
-          .catch(() => {
-            if (this.emailCode != "") {
-              alert("인증번호가 일치하지 않습니다.");
-              this.emailCode = "";
             }
           });
       }
