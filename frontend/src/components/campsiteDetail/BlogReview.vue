@@ -48,7 +48,7 @@ export default {
     })
   },
   created() {
-    console.log(this.name);
+    // console.log(this.name);
     // 크롤링
     axios
       .get("http://www.camfors.shop:3000/search", {
@@ -60,8 +60,8 @@ export default {
       .then(response => {
         // console.log(response.data);
         this.items = response.data.items;
-        console.log(this.items);
-        console.log(this.items[0].description);
+        // console.log(this.items);
+        // console.log(this.items[0].description);
       })
 
       .catch(response => {

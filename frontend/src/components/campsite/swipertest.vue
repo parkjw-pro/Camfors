@@ -109,14 +109,14 @@ export default {
   methods: {
     clickSlide(index, reallyIndex){ 
       var id = this.campsiteList[reallyIndex].campsite_id;
-      console.log(id);
-      console.log("디테일로 이동");
+      // console.log(id);
+      // console.log("디테일로 이동");
       this.$store.state.detailInfo = [1];
       this.$router.push({
         name: "CampsiteDetail",
         params: { campsiteId: id }
       });
-      console.log('index : ' + index + ' : reallyIndex : ' + reallyIndex) 
+      // console.log('index : ' + index + ' : reallyIndex : ' + reallyIndex) 
     }
   }
 };
