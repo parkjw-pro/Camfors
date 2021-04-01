@@ -24,10 +24,10 @@
 
         <div class="col-sm-6 col-md-6 campsiteInfoList">
           <b-list-group flush>
-            <b-list-group-item>{{ getDetailInfo.indutyV }}</b-list-group-item>
-            <b-list-group-item>{{ getDetailInfo.addr1 }}</b-list-group-item>
-            <b-list-group-item>{{ getDetailInfo.intro }}</b-list-group-item>
-            <b-list-group-item>{{ getDetailInfo.tel }}</b-list-group-item>
+            <b-list-group-item v-if="getDetailInfo.indutyV" >{{ getDetailInfo.indutyV }}</b-list-group-item>
+            <b-list-group-item v-if="getDetailInfo.addr1" >{{ getDetailInfo.addr1 }}</b-list-group-item>
+            <b-list-group-item v-if="getDetailInfo.intro" >{{ getDetailInfo.intro }}</b-list-group-item>
+            <b-list-group-item v-if="getDetailInfo.tel" >{{ getDetailInfo.tel }}</b-list-group-item>
             <b-list-group-item
               ><b-button variant="secondary" :href="getDetailInfo.homepage"
                 >홈페이지</b-button
@@ -50,9 +50,9 @@
 
       <!-- 캠핑장 소개 -->
       <div class="campsiteIntro">
-        <h3 style="margin-top:20px; text-align:left;">
+        <h4 style="margin-top:20px; text-align:left;">
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>캠핑장소개
-        </h3>
+        </h4>
         <div class="row">
           <div class="col-5">캠핑장 주요 시설 자세한 소개</div>
           <div class="col-1"></div>
@@ -64,9 +64,9 @@
 
       <!-- 편의시설 -->
       <div class="facility">
-        <h3 style="margin-top:20px; text-align:left;">
+        <h4 style="margin-top:20px; text-align:left;">
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>편의시설
-        </h3>
+        </h4>
         <div class="row facilityIcon">
           <div style="text-align:center; padding-right:50px; padding-top:10px;">
             <font-awesome-icon icon="volleyball-ball" class="fa-3x" />
@@ -93,17 +93,17 @@
 
       <!-- 한 줄 리뷰 -->
       <div class="comment">
-        <h3 style="margin-top:20px; text-align:left;">
+        <h4 style="margin-top:20px; text-align:left;">
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>한 줄 리뷰
-        </h3>
+        </h4>
         <Comment />
       </div>
 
       <!-- 블로그 리뷰 -->
       <div class="blogReview">
-        <h3 style="margin-top:20px; text-align:left;">
+        <h4 style="margin-top:20px; text-align:left;">
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>블로그 리뷰
-        </h3>
+        </h4>
         <BlogReview v-if="getDetailInfo.campsite_name" :name="getDetailInfo.campsite_name" />
       </div>
     </b-container>

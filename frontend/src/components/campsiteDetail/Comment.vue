@@ -6,6 +6,7 @@
         size="lg"
         class="mr-sm-2"
         placeholder="로그인이 필요한 서비스입니다"
+        @submit.prevent="createReview"
       ></b-form-input>
       <b-button size="lg" class="my-2 my-sm-0" type="submit">등록</b-button>
     </div>

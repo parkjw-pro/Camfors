@@ -11,23 +11,13 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item href="/searchCampsite"
-            >나만의 캠핑장을 찾아보세요</b-nav-item
+            ><font-awesome-icon icon="search" class="fa-1x" /> 나만의 캠핑장을 찾아보세요</b-nav-item
           >
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-nav-form>
-            <b-form-input
-              size="sm"
-              class="mr-sm-2"
-              placeholder=""
-            ></b-form-input>
-            <b-button size="sm" class="my-2 my-sm-0" type="submit"
-              >Search</b-button
-            >
-          </b-nav-form>
-
+         
           <b-nav-item @click="goLogin">로그인</b-nav-item>
           <b-nav-item href="#">로그아웃</b-nav-item>
           <b-nav-item @click="goMypage">마이페이지</b-nav-item>
@@ -70,9 +60,28 @@ export default {
 
 <style scoped>
 .navbar {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0);
+  font-family: LineSeed,system-ui,-SF Pro Text,Helvetica,Roboto,sans-serif;
+  height: 70px;
+  font-size: 16px;
+  font-weight: 600;
+  /* border-bottom: solid 1px rgba(226, 220, 220); */
+  border-bottom: solid 1px;
+  border-color: rgba(255,255,255,0.3);
 }
 .change_color {
   background-color: black;
+  border-bottom : solid 0px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #f8f9fa;
+}
+
+@media (min-width: 1281px) {
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
 }
 </style>

@@ -8,7 +8,8 @@ const campStore = {
   state: {
     detailInfo: [],
     searchWordList: [],
-    searchTagList: [[]]
+    searchTagList: [[]],
+
   },
   getters: {
     getDetailInfo(state) {
@@ -31,6 +32,9 @@ const campStore = {
     },
     setSearchTagList(state, payload) {
       state.searchTagList = payload;
+    },
+    createReview(state, payload){
+      state.review = payload;
     }
   },
   actions: {
@@ -83,7 +87,27 @@ const campStore = {
         .catch(error => {
           console.log(error);
         });
-    }
+    },
+
+    createReview(user_id, campsite_id, review) {
+      console.log("createReview");
+      // context.commit("createReview", review);
+      axios({
+        method: "post",
+        url: `${SERVER_URL}/camp/createreview/`,
+        data: {
+          user_id: user_id,
+          campsite_id: campsite_id,
+          review: review
+        }
+      })
+        .then(res => {
+          console.log(res);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
   }
 };
 export default campStore;

@@ -66,7 +66,10 @@ export default {
         backgroundImage: `url(${require("@/assets/Login/login.jpg")})`,
         width: "100vw",
         height: "100vh",
-        position: "relative"
+        position: "relative",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center"
       },
       credentials: {
         userId: "",

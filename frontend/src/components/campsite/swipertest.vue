@@ -108,9 +108,9 @@ export default {
   methods: {
     goDetailList: function(campsite_id) {
       // 리뷰 작성 페이지로 넘어가준다!!
-      // console.log("보냅니다", this.store);
-      console.log("디테일로 이동");
-      console.log(campsite_id);
+      console.log(campsite_id ," 디테일로 이동");
+      // 캠핑장 상세페이지로 이동 전 store에 저장되어 있는 캠핑장 정보 비우기
+      this.$store.state.campStore.detailInfo = []
       this.$router.push({
         name: "CampsiteDetail",
         params: { campsiteId: campsite_id }
