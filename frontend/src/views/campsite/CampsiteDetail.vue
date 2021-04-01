@@ -143,8 +143,7 @@ export default {
       "campStore/campsiteDetail",
       this.$route.params.campsiteId
     );
-    console.log("1"+this.$store.state.userid);
-    console.log("2"+localStorage.getItem["Login-token"]);
+    console.log(this.getUserId);
   },
   computed: {
     ...mapGetters({

@@ -23,7 +23,6 @@ export default {
     if (localStorage.getItem('Login-token') != undefined) {
         this.login = true
     }
-  // router.push( "/account");
   }
 };
 </script>

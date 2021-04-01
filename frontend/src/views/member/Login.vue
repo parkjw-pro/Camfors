@@ -86,9 +86,9 @@ export default {
         .then(() => {
 
           // 로컬스토리지 정보가 있으면 홈화면으로, 아니면 다시 로그인화면으로
-          const userId = JSON.parse(localStorage.getItem('Login-token'))["user_id"]
-          if (userId !== null) {
-            location.replace('/')
+          const token = localStorage.getItem("Login-token")
+          if (token !== null) {
+            location.replace('/');
           } else {
             this.$router.replace('/login')
           }
