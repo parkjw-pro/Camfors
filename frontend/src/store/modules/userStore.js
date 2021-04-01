@@ -7,10 +7,10 @@ const userStore = {
 
   state: {
     accessToken: null,
-    email: "",
-    nickname: "",
-    changeState: "",
-    userid: ""
+    email: '',
+    nickname: '',
+    changeState: '',
+    userId: '',
   },
   getters: {
     getAccessToken(state) {
@@ -34,24 +34,24 @@ const userStore = {
       return state.nickname;
     },
     getUserId(state) {
-      if (localStorage.getItem("Login-token") != undefined) {
-        return JSON.parse(localStorage.getItem("Login-token"))["userid"];
+      if (localStorage.getItem('Login-token') != undefined) {
+        return JSON.parse(localStorage.getItem('Login-token'))['user_id'];
       }
-      return state.userid;
+      return state.userId;
     },
   },
   mutations: {
     LOGIN(state, payload) {
-      state.accessToken = payload[1];
-      state.email = payload[0][0]["email"];
-      state.userid = payload[0][0]["user_id"];
-      state.nickname = payload[0][0]["nickname"];
+      state.accessToken = payload['token'];
+      state.email = payload['email'];
+      state.nickname = payload['nickname'];
+      state.userId = payload['user_id'];
     },
     LOGOUT(state) {
       state.accessToken = null;
-      state.email = "";
-      state.nickname = "";
-      state.userid = "";
+      state.email = '';
+      state.nickname = '';
+      state.userId = '';
     },
   },
 
