@@ -3,23 +3,27 @@
     <h3 style="text-align: left; font-family: 'Hanna', sans-serif;">
     </h3>
     <swiper class="swiper" :options="swiperOption">
-      <swiper-slide v-for="(item, index) in campsiteList" :key="index">
-        <b-card
-          title="SSAFY 캠핑장"
-          img-src="https://gocamping.or.kr/upload/camp/3/thumb/thumb_720_6791ufBTEV41l7kb7jgUuvkF.jpg"
-          img-alt="Image"
-          img-top
-          tag="article"
-          style=""
-          class="shadow-sm"
-          @click="goDetailList"
-        >
-          <b-card-text> 경기도 가평군 </b-card-text>
+      <swiper-slide v-for="(item, index) in likeList" :key="index">
+        <b-card>
+          <b-card-img
+            v-if="item.firstImageUrlV.length > 0"
+            :src="item.firstImageUrlV"
+            height="170px"
+          ></b-card-img>
+          <b-card-img
+            v-else
+            src="https://cdn.pixabay.com/photo/2019/07/25/17/09/camp-4363073_960_720.png"
+            height="170px"
+          ></b-card-img>
+          <span class="my-2" style="font-size:18px">{{
+            item.campsite_name
+          }}</span>
+          <b-card-text>{{ item.doNm }} {{ item.sigunguNm }}</b-card-text>
           <b-row class="ml-1 pl-1">
             <div style="text-align: left;">
-              <span class="reviewLike mt-4">
+              <span class="reviewLike mt-4" >
                 <!--좋아요 여부와 좋아요 수-->
-
+                
                 <b-icon
                   icon="suit-heart-fill"
                   variant="danger"
@@ -35,7 +39,7 @@
                   @click="likeReview()"
                 ></b-icon>
               </span>
-              <small class="ml-1">n명이 좋아합니다.</small>
+              <small class="ml-1">{{ item.likeCount }}명이 좋아합니다.</small>
             </div>
           </b-row>
         </b-card>
@@ -62,27 +66,6 @@ export default {
   },
   data() {
     return {
-      campsiteList: [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19
-      ],
       swiperOption: {
         slidesPerView: 2,
         spaceBetween: 20,
@@ -99,7 +82,6 @@ export default {
           prevEl: ".swiper-button-prev"
         }
       },
-      campsiteId: "1234"
     };
   },
   methods: {
