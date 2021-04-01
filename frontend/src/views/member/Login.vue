@@ -93,7 +93,7 @@ export default {
           // } else {
           //   this.$router.replace('/location')
           // }
-          window.location.href = '/';
+          window.location.href='/';
         })
         .catch(({ message }) => (this.msg = message));
     },

@@ -118,6 +118,9 @@ def campTagResult(request):
 def addlike(request):
     if request.method == 'GET':
         try:
+            user_id=request.get['user_id']
+            camp_id=request.get['camp_id']
+
             result=[]
 
         except Campsite.DoesNotExist:

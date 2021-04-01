@@ -47,7 +47,7 @@ const campStore = {
         url: `${SERVER_URL}/camp/getDetail/${campsite_id}`
       })
         .then(res => {
-          // console.log(res.data);
+          console.log(res.data);
           context.commit("setDetailInfo", res.data);
         })
         .catch(error => {
@@ -89,7 +89,6 @@ const campStore = {
     },
     searchByTagName(context, tagList) {
       context.commit("setSearchTagListName", tagList);
-
     },
   }
 };

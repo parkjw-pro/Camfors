@@ -10,6 +10,7 @@ const userStore = {
     email: "",
     nickname: "",
     changeState: "",
+    userid: ""
   },
   getters: {
     getAccessToken(state) {
@@ -32,17 +33,25 @@ const userStore = {
       }
       return state.nickname;
     },
+    getUserId(state) {
+      if (localStorage.getItem("Login-token") != undefined) {
+        return JSON.parse(localStorage.getItem("Login-token"))["userid"];
+      }
+      return state.userid;
+    },
   },
   mutations: {
     LOGIN(state, payload) {
-      state.accessToken = payload["token"];
-      state.email = payload["email"];
-      state.nickname = payload["nickname"];
+      state.accessToken = payload[1];
+      state.email = payload[0][0]["email"];
+      state.userid = payload[0][0]["user_id"];
+      state.nickname = payload[0][0]["nickname"];
     },
     LOGOUT(state) {
       state.accessToken = null;
       state.email = "";
       state.nickname = "";
+      state.userid = "";
     },
   },
 
@@ -52,15 +61,11 @@ const userStore = {
       localStorage.clear();
       return axios
         .post(`${SERVER_URL}/user/login`, user)
-        .then((response) => {
+        .then(response => {
           console.log("axios login");
           context.commit("LOGIN", response.data);
-          localStorage.setItem("token", response.data["token"]);
           //axios.defaults.headers.common["auth0-token"] = ${response.data["token"]};
           //localStorage.setItem("token",${response.data["token"]});
-          axios.defaults.headers.common["token"] = localStorage.getItem(
-            "token"
-          );
 
           if (localStorage.getItem("Login-token") == undefined) {
             localStorage.setItem("Login-token", JSON.stringify(response.data));

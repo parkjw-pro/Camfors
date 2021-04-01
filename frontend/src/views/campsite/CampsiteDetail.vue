@@ -16,12 +16,14 @@
       <div class="row campsiteInfo">
         <div class="col-sm-6 col-md-6 campsiteInfoImg">
           <b-img
-          v-if="getDetailInfo.firstImageUrlV.length>0"
+            v-if="
+                getDetailInfo.firstImageUrlV.length > 0
+            "
             id="campsiteImg"
             :src="getDetailInfo.firstImageUrlV"
             alt="Responsive image"
           ></b-img>
-            <b-img
+          <b-img
             v-else
             id="campsiteImg"
             src="https://cdn.pixabay.com/photo/2019/07/25/17/09/camp-4363073_960_720.png"
@@ -64,7 +66,11 @@
           <div class="col-5">캠핑장 주요 시설 자세한 소개</div>
           <div class="col-1"></div>
           <div class="col-5">
-            <Map v-if="getDetailInfo.mapX" :mapX="getDetailInfo.mapX" :mapY="getDetailInfo.mapY" />
+            <Map
+              v-if="getDetailInfo.mapX"
+              :mapX="getDetailInfo.mapX"
+              :mapY="getDetailInfo.mapY"
+            />
           </div>
         </div>
       </div>
@@ -111,7 +117,10 @@
         <h3 style="margin-top:20px; text-align:left;">
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>블로그 리뷰
         </h3>
-        <BlogReview v-if="getDetailInfo.campsite_name" :name="getDetailInfo.campsite_name" />
+        <BlogReview
+          v-if="getDetailInfo.campsite_name"
+          :name="getDetailInfo.campsite_name"
+        />
       </div>
     </b-container>
   </div>
@@ -127,18 +136,21 @@ export default {
   components: {
     Map,
     Comment,
-    BlogReview
+    BlogReview,
   },
   created() {
     this.$store.dispatch(
       "campStore/campsiteDetail",
       this.$route.params.campsiteId
     );
+    console.log("1"+this.$store.state.userid);
+    console.log("2"+localStorage.getItem["token"]);
   },
   computed: {
     ...mapGetters({
-      getDetailInfo: "campStore/getDetailInfo"
-    })
+      getDetailInfo: "campStore/getDetailInfo",
+      getUserId : "userStore/getUserId"
+    }),
   },
   data: function() {
     // console.log(this.$route.params.campsiteId)
@@ -149,10 +161,10 @@ export default {
         "#가족들과 가기 좋은",
         "#물놀이 하기 좋은",
         "#봄",
-        "#바다가 보이는"
-      ]
+        "#바다가 보이는",
+      ],
     };
-  }
+  },
 };
 </script>
 <style scoped>
