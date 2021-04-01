@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import User
 from .models import Campsite
 from .models import Likes
-from .models import Reviews
+from .models import reviews
 
 class UserSignUpSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,10 +15,10 @@ class UserLoginSerializer(serializers.ModelSerializer):
         model = User
         fields = ['email','user_id','nickname']
 
-class ReviewsSerializer(serializers.ModelSerializer):
+class reviewsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Campsite
-        fields = ['campsite_id','user_id','comment']
+        model = reviews
+        fields = ['campsite_id','user_id','review']
 
 class LikesSerializer(serializers.ModelSerializer):
     class Meta:

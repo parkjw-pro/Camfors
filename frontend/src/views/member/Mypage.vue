@@ -36,7 +36,8 @@ export default {
         position: "relative"
       },
       email: '',
-      likeCampsiteList: []
+      likeCampsiteList: [],
+      reviewList:[]
 
     };
   },
@@ -52,6 +53,18 @@ export default {
       .catch(error => {
         console.log(error);
       });
+    },
+    getUserReview: function (){
+      console.log(this.email)
+      axios
+      .post(`${SERVER_URL}/user/review`, this.email)
+      .then(res => {
+        this.reviewList = res.data;
+        console.log(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
     }
 
   },
@@ -59,7 +72,7 @@ export default {
     const userInfo = JSON.parse(localStorage.getItem('Login-token'))
     this.email = userInfo[0][0]
     this.getUserCampsite()
-
+    this.getUserReview()
   },
 };
 </script>
