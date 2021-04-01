@@ -141,7 +141,7 @@ export default {
     })
   },
   data: function() {
-    console.log(this.$route.params.campsiteId)
+    // console.log(this.$route.params.campsiteId)
     return {
       campDetail: [],
       campsiteId: "",

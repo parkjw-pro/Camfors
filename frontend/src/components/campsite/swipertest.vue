@@ -7,11 +7,10 @@
     >
       {{ tag.name }}
     </h3>
-    <swiper class="swiper" :options="swiperOption">
+    <swiper class="swiper" :options="swiperOption" @click-slide="clickSlide">
       <swiper-slide v-for="(item, index) in campsiteList" :key="index" >
-        <b-card >
+        <b-card>
           <b-card-img
-          @click="goDetailList(item.campsite_id)"
             v-if="item.firstImageUrlV.length > 0"
             :src="item.firstImageUrlV"
             height="170px"
@@ -27,8 +26,9 @@
           <b-card-text>{{ item.doNm }} {{ item.sigunguNm }}</b-card-text>
           <b-row class="ml-1 pl-1">
             <div style="text-align: left;">
-              <span class="reviewLike mt-4">
+              <span class="reviewLike mt-4" >
                 <!--좋아요 여부와 좋아요 수-->
+                
                 <b-icon
                   icon="suit-heart-fill"
                   variant="danger"
@@ -107,18 +107,16 @@ export default {
     };
   },
   methods: {
-    goDetailList: function(campsite_id) {
-      // 리뷰 작성 페이지로 넘어가준다!!
-      // console.log("보냅니다", this.store);
-      console.log("디테일로 이동");
-      console.log(campsite_id);
-      console.log(this.$store.state.detailInfo);
+    clickSlide(index, reallyIndex){ 
+      var id = this.campsiteList[reallyIndex].campsite_id;
+      // console.log(id);
+      // console.log("디테일로 이동");
       this.$store.state.detailInfo = [1];
       this.$router.push({
         name: "CampsiteDetail",
-        params: { campsiteId: campsite_id }
+        params: { campsiteId: id }
       });
-      console.log(this.$store.state.detailInfo);
+      // console.log('index : ' + index + ' : reallyIndex : ' + reallyIndex) 
     }
   }
 };
