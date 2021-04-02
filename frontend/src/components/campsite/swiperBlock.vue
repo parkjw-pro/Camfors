@@ -56,8 +56,13 @@ export default {
   },
   computed: {
     ...mapGetters({
+<<<<<<< HEAD
+      getUserId: "userStore/getUserId",
+    }),
+=======
       getUserId: "userStore/getUserId"
     })
+>>>>>>> da34a12757ade6f75ab8fb289765badb0bc9fa91
   },
   data() {
     return {
@@ -66,11 +71,20 @@ export default {
   },
   methods: {
     likeCampsite(campsite_id) {
+<<<<<<< HEAD
+      axios
+        .post(`${SERVER_URL}/camp/addlike`, {
+          data: {
+            campsite_id: campsite_id,
+            user_id: this.getUserId
+          },
+=======
       console.log(campsite_id, this.getUserId, "좋아요");
       axios
         .post(`${SERVER_URL}/campsite/like`, {
           userId: this.getUserId,
           campsiteId: campsite_id
+>>>>>>> da34a12757ade6f75ab8fb289765badb0bc9fa91
         })
         .then(response => {
           this.liked = response.data;
@@ -78,18 +92,44 @@ export default {
         });
     },
     unlikeCampsite(campsite_id) {
+<<<<<<< HEAD
+      axios
+        .post(`${SERVER_URL}/camp/unlike`, {
+          data: {
+            campsite_id: campsite_id,
+            user_id: this.getUserId
+          }
+=======
       console.log(campsite_id, this.getUserId, "좋아요취소");
       axios
         .post(`${SERVER_URL}/campsite/unlike`, {
           userId: this.getUserId,
           campsiteId: campsite_id
+>>>>>>> da34a12757ade6f75ab8fb289765badb0bc9fa91
         })
         .then(response => {
           this.liked = response.data;
+          console.log(this.liked)
           this.item.likeCount = this.item.likeCount * 1 - 1;
         });
     },
     getLikeInfo() {
+<<<<<<< HEAD
+      axios
+        .get(`${SERVER_URL}/camp/getlikeinfo`, {
+          params: {
+            userId: this.getUserId,
+            campsiteId: this.item.campsite_id,
+          },
+        })
+        .then((response) => {
+          if (response.data == 0) {
+            this.liked = false;
+          } else {
+            this.liked = true;
+          }
+        });
+=======
       // axios
       //   .get(`${SERVER_URL}/campsite/like`, {
       //     params: {
@@ -98,11 +138,16 @@ export default {
       //     }
       //   })
       //   .then(response => (this.liked = response.data));
+>>>>>>> da34a12757ade6f75ab8fb289765badb0bc9fa91
     },
     campsiteDetail() {
       this.$router.push({
         name: "CampsiteDetail",
+<<<<<<< HEAD
+        params: { campsiteId: this.item.campsite_id },
+=======
         params: { campsiteId: this.item.campsite_id }
+>>>>>>> da34a12757ade6f75ab8fb289765badb0bc9fa91
       });
       // console.log('index : ' + index + ' : reallyIndex : ' + reallyIndex)
     }
