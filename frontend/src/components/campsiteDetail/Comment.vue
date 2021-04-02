@@ -55,10 +55,6 @@ export default {
 };
 </script>
 <style scoped>
-.form-control {
-  width: 90%;
-}
-
 .comments {
   width: 90%;
   margin: 0 auto;
