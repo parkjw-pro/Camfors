@@ -47,7 +47,7 @@
               ><b-button variant="secondary" :href="getDetailInfo.homepage"
                 >홈페이지</b-button
               >
-              <b-button variant="secondary"
+              <b-button variant="secondary" :href="getDetailInfo.homepage"
                 >예약하기</b-button
               ></b-list-group-item
             >
@@ -115,7 +115,19 @@
         <h4 style="margin-top:20px; text-align:left;">
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>한 줄 리뷰
         </h4>
-        <Comment />
+        <!-- 댓글 남기기 -->
+        <div class="row comments">
+          <b-form-input
+            size="lg"
+            class="mr-sm-2"
+            placeholder="로그인이 필요한 서비스입니다"
+            v-model="comment"
+          ></b-form-input>
+          <b-button size="lg" class="my-2 my-sm-0" type="submit" @click="createReview">등록</b-button>
+        </div>
+        <Comment 
+        v-if="this.commentList"
+        :commentList="this.commentList" />
       </div>
 
       <!-- 블로그 리뷰 -->
@@ -133,6 +145,9 @@
 </template>
 
 <script>
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
+import axios from "axios";
+
 import Map from "@/components/campsiteDetail/Map";
 import Comment from "@/components/campsiteDetail/Comment";
 import BlogReview from "@/components/campsiteDetail/BlogReview";
@@ -150,6 +165,19 @@ export default {
       this.$route.params.campsiteId
     );
     console.log(this.getUserId);
+
+    console.log(this.campsiteId)
+    axios({
+      method: "get",
+      url: `${SERVER_URL}/camp/readreview/${this.campsiteId}`
+    })
+      .then(res => {
+        console.log(res.data);
+        this.commentList = res.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
   },
   computed: {
     ...mapGetters({
@@ -161,14 +189,43 @@ export default {
     // console.log(this.$route.params.campsiteId)
     return {
       campDetail: [],
-      campsiteId: "",
+      campsiteId: this.$route.params.campsiteId,
       tagList: [
         "#가족들과 가기 좋은",
         "#물놀이 하기 좋은",
         "#봄",
         "#바다가 보이는"
-      ]
+      ],
+      commentList: [],
     };
+  },
+  methods: {
+    createReview() {
+      console.log(Number(this.getUserId), Number(this.campsiteId), this.comment);
+      axios
+        .post(`${SERVER_URL}/camp/createreview`, {
+          user_id:Number(this.getUserId),
+          campsite_id:Number(this.campsiteId),
+          review:this.comment
+        })
+        .then(response => {
+          console.log(response)
+          alert("댓글 등록")
+        });
+    },
+    removeReview() {
+      console.log(this.review_id)
+      axios({
+        method: "delete",
+        url: `${SERVER_URL}/camp/deletereview/${this.review_id}`
+      })
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      }
   }
 };
 </script>

@@ -1,16 +1,6 @@
 <template>
   <div>
-    <!-- 댓글 남기기 -->
-    <div class="row comments">
-      <b-form-input
-        size="lg"
-        class="mr-sm-2"
-        placeholder="로그인이 필요한 서비스입니다"
-        @submit.prevent="createReview"
-      ></b-form-input>
-      <b-button size="lg" class="my-2 my-sm-0" type="submit">등록</b-button>
-    </div>
-
+    
     <!-- 댓글 리스트 -->
     <!-- <b-list-group flush v-for="(item, index) in commentList" :key="index"> -->
     <b-list-group flush>
@@ -25,7 +15,7 @@
             사장님이 친절하고 좋아요
           </h5>
           <small
-            ><font-awesome-icon icon="trash" class="fa-2x" style="color:gray"
+            ><font-awesome-icon icon="trash" class="fa-2x" style="color:gray" @click="removeReview"
           /></small>
         </div>
       </b-list-group-item>
@@ -33,12 +23,35 @@
   </div>
 </template>
 <script>
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
+import axios from "axios";
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      commentList: []
     };
-  }
+  },
+  props:["commentList"],
+  methods: {
+    removeReview() {
+      console.log(this.review_id)
+      axios({
+        method: "delete",
+        url: `${SERVER_URL}/camp/deletereview/${this.review_id}`
+      })
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      }
+  },
+   computed: {
+    ...mapGetters({
+      getUserId: "userStore/getUserId"
+    })
+  },
 };
 </script>
 <style scoped>
