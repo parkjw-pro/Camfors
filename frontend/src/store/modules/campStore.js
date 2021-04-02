@@ -9,14 +9,14 @@ const campStore = {
     detailInfo: [],
     searchWordList: [],
     searchTagList: [[]],
-    searchTagListName: []
+    searchTagListName: [],
+    searchWordName: ""
   },
   getters: {
     getDetailInfo(state) {
       return state.detailInfo;
     },
     getSearchWordList(state) {
-      console.log(state.searchWordList[0]);
       return state.searchWordList;
     },
     getSearchTagList(state) {
@@ -24,6 +24,9 @@ const campStore = {
     },
     getSearchTagListName(state) {
       return state.searchTagListName;
+    },
+    getSearchWordName(state) {
+      return state.searchWordName;
     }
   },
   mutations: {
@@ -38,6 +41,9 @@ const campStore = {
     },
     setSearchTagListName(state, payload) {
       state.searchTagListName = payload;
+    },
+    setSearchWordName(state, payload) {
+      state.searchWordName = payload;
     }
   },
   actions: {
@@ -56,6 +62,7 @@ const campStore = {
     },
     searchByWord(context, word) {
       console.log("searchByWord");
+      context.commit("setSearchWordName", word);
       axios({
         method: "post",
         url: `${SERVER_URL}/camp/getwordresult/`,

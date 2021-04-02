@@ -35,16 +35,16 @@ export default {
         height: "100vh",
         position: "relative"
       },
-      email: "",
+      userId: "",
       likeCampsiteList: [],
       reviewList: []
     };
   },
   methods: {
     getUserCampsite: function() {
-      console.log(this.email);
+      console.log(this.userId);
       axios
-        .post(`${SERVER_URL}/user/like`, this.email)
+        .post(`${SERVER_URL}/user/like`, { user_id: this.userId })
         .then(res => {
           this.likeCampsiteList = res.data;
           console.log(res.data);
@@ -54,9 +54,9 @@ export default {
         });
     },
     getUserReview: function() {
-      console.log(this.email);
+      console.log(this.userId);
       axios
-        .post(`${SERVER_URL}/user/review`, this.email)
+        .post(`${SERVER_URL}/user/review`, { user_id: this.userId })
         .then(res => {
           this.reviewList = res.data;
           console.log(res.data);
@@ -67,8 +67,8 @@ export default {
     }
   },
   created() {
-    const userInfo = JSON.parse(localStorage.getItem("Login-token"));
-    this.email = userInfo[0][0];
+    const userId = localStorage.getItem("user_id");
+    this.userId = userId;
     this.getUserCampsite();
     this.getUserReview();
   }

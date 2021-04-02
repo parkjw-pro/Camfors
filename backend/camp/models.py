@@ -89,13 +89,11 @@ class User(models.Model):
     email = models.CharField(max_length=50)
     password = models.CharField(max_length=30)
     nickname = models.CharField(max_length=30)
-    address = models.CharField(max_length=100)
     admin = models.IntegerField()
-    birth = models.DateTimeField()
 
     class Meta:
         managed = False
-        db_table = 'user'
+        db_table = 'User'
 
 
 class Likes(models.Model):
@@ -106,8 +104,8 @@ class Likes(models.Model):
         managed = False
         db_table = 'Likes'
 
-
 class Reviews(models.Model):
+    review_id = models.AutoField(primary_key=True)
     campsite_id = models.ForeignKey(Campsite, on_delete=models.CASCADE, db_column="campsite_id")
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column="user_id")
     review = models.CharField(max_length=1000, blank=True, null=True)
