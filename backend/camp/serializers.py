@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Campsite, Tag
+from .models import Campsite, Tag, Likes
 
 
 class CampsiteSerializer(serializers.ModelSerializer):
@@ -18,5 +18,12 @@ class TagSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tag
-        fields = ['tag_id','tag_name']
+        fields = ['tag_id', 'tag_name']
+
+
+class LikeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Likes
+        fields = ['campsite_id', 'user_id']
 

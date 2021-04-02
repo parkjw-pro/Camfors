@@ -8,5 +8,7 @@ urlpatterns = [
     path('camplikeslist/', views.campLikesList),
     path('getwordresult/', views.campWordResult),
     path('gettagresult/', views.campTagResult),
-    path('addlike/',views.addlike),
+    path('addlike', views.addlike),
+    path('unlike', views.unlike),
+    path('getlikeinfo/', views.getlikeinfo)
 ]
