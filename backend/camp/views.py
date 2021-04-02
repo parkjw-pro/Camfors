@@ -11,7 +11,7 @@ from .serializers import CampsiteSerializer, CampsiteDetailSerializer, LikeSeria
 from django.db.models import Count
 
 from .models import Campsite, CampsiteTag, Tag, Reviews
-from .serializers import CampsiteSerializer, CampsiteDetailSerializer, TagSerializer, CampCreateReviewSerializer, CampReadReviewSerializer
+from .serializers import CampsiteSerializer, CampsiteDetailSerializer, TagSerializer, CampCreateReviewSerializer
 # jsonparser로 requset body 데이터 얻을수 있음
 
 

@@ -18,7 +18,6 @@
       <div style="text-align: left;">
         <span class="reviewLike mt-4">
           <!--좋아요 여부와 좋아요 수-->
-
           <b-icon
             icon="suit-heart-fill"
             variant="danger"
@@ -30,7 +29,7 @@
             icon="suit-heart"
             variant="danger"
             font-scale="1.5"
-            v-else
+            v-if="!liked"
             @click="likeCampsite(item.campsite_id)"
           ></b-icon>
         </span>
@@ -49,7 +48,7 @@ export default {
   name: "swiperBlock",
   title: "Loop mode with multiple slides per group",
   props: {
-    item: Object
+    item: Object,
   },
   created() {
     if (this.getUserId != "") this.getLikeInfo();
@@ -61,7 +60,7 @@ export default {
   },
   data() {
     return {
-      liked: false
+      liked: null,
     };
   },
   methods: {
@@ -70,11 +69,12 @@ export default {
         .post(`${SERVER_URL}/camp/addlike`, {
           data: {
             campsite_id: campsite_id,
-            user_id: this.getUserId
+            user_id: this.getUserId,
           },
         })
-        .then(response => {
-          this.liked = response.data;
+        .then((response) => {
+          console.log(response.data);
+          this.liked = true;
           this.item.likeCount = this.item.likeCount * 1 + 1;
         });
     },
@@ -83,12 +83,12 @@ export default {
         .post(`${SERVER_URL}/camp/unlike`, {
           data: {
             campsite_id: campsite_id,
-            user_id: this.getUserId
-          }
+            user_id: this.getUserId,
+          },
         })
-        .then(response => {
-          this.liked = response.data;
-          console.log(this.liked)
+        .then((response) => {
+          console.log(response.data);
+          this.liked = false;
           this.item.likeCount = this.item.likeCount * 1 - 1;
         });
     },
@@ -114,8 +114,8 @@ export default {
         params: { campsiteId: this.item.campsite_id },
       });
       // console.log('index : ' + index + ' : reallyIndex : ' + reallyIndex)
-    }
-  }
+    },
+  },
 };
 </script>
 
