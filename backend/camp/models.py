@@ -89,13 +89,11 @@ class User(models.Model):
     email = models.CharField(max_length=50)
     password = models.CharField(max_length=30)
     nickname = models.CharField(max_length=30)
-    address = models.CharField(max_length=100)
-    admin = models.IntegerField()
-    birth = models.DateTimeField()
+    admin = models.IntegerField(default=0)
 
     class Meta:
         managed = False
-        db_table = 'user'
+        db_table = 'User'
 
 
 class Likes(models.Model):
