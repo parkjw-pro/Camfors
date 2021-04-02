@@ -70,6 +70,13 @@ export default {
             /(<([^>]+)>)/gi,
             ""
           );
+
+          this.items[i].title = this.items[i].title.replace(/&quot;/g, "");
+
+          this.items[i].description = this.items[i].description.replace(
+            /&quot;/g,
+            ""
+          );
         }
       })
 

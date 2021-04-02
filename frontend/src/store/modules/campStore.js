@@ -10,7 +10,7 @@ const campStore = {
     searchWordList: [],
     searchTagList: [[]],
     searchTagListName: [],
-    searchWordName: ''
+    searchWordName: ""
   },
   getters: {
     getDetailInfo(state) {
@@ -27,7 +27,6 @@ const campStore = {
     },
     getSearchWordName(state) {
       return state.searchWordName;
-;
     }
   },
   mutations: {
