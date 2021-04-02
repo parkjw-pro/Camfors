@@ -4,13 +4,13 @@
       v-if="item.firstImageUrlV.length > 0"
       @click="campsiteDetail"
       :src="item.firstImageUrlV"
-      height="65%"
+      height="170px"
     ></b-card-img>
     <b-card-img
       v-else
       @click="campsiteDetail"
       src="https://cdn.pixabay.com/photo/2019/07/25/17/09/camp-4363073_960_720.png"
-      height="65%"
+      height="170px"
     ></b-card-img>
     <span class="my-2" style="font-size:18px">{{ item.campsite_name }}</span>
     <b-card-text>{{ item.doNm }} {{ item.sigunguNm }}</b-card-text>

@@ -3,8 +3,8 @@
     <!-- 캠핑장 소개 컨텐츠 (이름, 태그) -->
     <div class="contentsBox">
       <h2 style="color:white;">{{ getDetailInfo.campsite_name }}</h2>
-      <div class="tag" v-for="(tag, idx) in tagList" :key="idx">
-        {{ tag }}
+      <div class="tag">
+        {{ getDetailInfo.featureNmV }}
       </div>
     </div>
 
@@ -178,6 +178,7 @@ export default {
       .catch(error => {
         console.log(error);
       });
+      
   },
   computed: {
     ...mapGetters({
@@ -190,12 +191,7 @@ export default {
     return {
       campDetail: [],
       campsiteId: this.$route.params.campsiteId,
-      tagList: [
-        "#가족들과 가기 좋은",
-        "#물놀이 하기 좋은",
-        "#봄",
-        "#바다가 보이는"
-      ],
+      tagList: '',
       commentList: [],
     };
   },
@@ -299,6 +295,15 @@ export default {
 .blogReview {
   margin-top: 40px;
   border-top: 1px solid rgba(77, 74, 74, 0.459);
+}
+
+.form-control {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.row {
+  margin-right: 0;
 }
 
 @media (min-width: 1281px) {
