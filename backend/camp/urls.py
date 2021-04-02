@@ -9,6 +9,6 @@ urlpatterns = [
     path('getwordresult/', views.campWordResult),
     path('gettagresult/', views.campTagResult),
     path('createreview/', views.campCreateReview),
-    path('readreview/', views.campReadReview),
-    path('deletereview/', views.campDeleteReview)
+    path('readreview/<int:campsite_id>/', views.campReadReview),
+    path('deletereview/<int:review_id>/', views.campDeleteReview)
 ]
