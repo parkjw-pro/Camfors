@@ -44,9 +44,7 @@ export default {
     getUserCampsite: function() {
       console.log(this.userId);
       axios
-        .post(`${SERVER_URL}/user/like`, 
-        {user_id  :this.userId}
-        )
+        .post(`${SERVER_URL}/user/like`, { user_id: this.userId })
         .then(res => {
           this.likeCampsiteList = res.data;
           console.log(res.data);
@@ -58,9 +56,7 @@ export default {
     getUserReview: function() {
       console.log(this.userId);
       axios
-        .post(`${SERVER_URL}/user/review`, 
-        {user_id  :this.userId}
-        )
+        .post(`${SERVER_URL}/user/review`, { user_id: this.userId })
         .then(res => {
           this.reviewList = res.data;
           console.log(res.data);
