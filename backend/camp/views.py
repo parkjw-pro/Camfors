@@ -5,13 +5,13 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Subquery
 import json
 from django.db.models import Q
+from rest_framework import status
 
-from .models import Campsite, CampsiteTag, Likes
-from .serializers import CampsiteSerializer, CampsiteDetailSerializer, LikeSerializer
+from .models import Campsite, CampsiteTag, Likes, Reviews
+from .serializers import CampsiteSerializer, CampsiteDetailSerializer, LikeSerializer, \
+    CampReadReviewSerializer, CampCreateReviewSerializer
 from django.db.models import Count
 
-from .models import Campsite, CampsiteTag, Tag, Reviews
-from .serializers import CampsiteSerializer, CampsiteDetailSerializer, TagSerializer, CampCreateReviewSerializer
 # jsonparser로 requset body 데이터 얻을수 있음
 
 
@@ -38,7 +38,7 @@ def camptaglist(request, tag_id):
     try:
         query_sets = Campsite.objects.filter(campsite_id__in=Subquery(CampsiteTag.objects
                                                                       .filter(tag_id=tag_id)
-                                                                      .values('campsite_id'))).order_by('likeCount')[:20]
+                                                                      .values('campsite_id'))).order_by('-likeCount')[:20]
     except Campsite.DoesNotExist:
         return HttpResponse(status=404)
 
