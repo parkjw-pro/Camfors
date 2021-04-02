@@ -10,7 +10,7 @@ const userStore = {
     email: "",
     nickname: "",
     changeState: "",
-    userId: "",
+    userId: ""
   },
   getters: {
     getAccessToken(state) {
@@ -24,7 +24,7 @@ const userStore = {
     },
     getUserId(state) {
       return state.userId;
-    },
+    }
   },
   mutations: {
     LOGIN(state, payload) {
@@ -49,7 +49,7 @@ const userStore = {
       state.email = localStorage.getItem("email");
       state.userId = localStorage.getItem("user_id");
       state.nickname = localStorage.getItem("nickname");
-    },
+    }
   },
 
   actions: {
@@ -58,7 +58,7 @@ const userStore = {
       localStorage.clear();
       return axios
         .post(`${SERVER_URL}/user/login`, user)
-        .then((response) => {
+        .then(response => {
           context.commit("LOGIN", response.data);
           //axios.defaults.headers.common["auth0-token"] = ${response.data["token"]};
           //localStorage.setItem("token",${response.data["token"]});
@@ -85,7 +85,7 @@ const userStore = {
       localStorage.clear();
       //window.location.reload();
       window.location.href = "/";
-    },
-  },
+    }
+  }
 };
 export default userStore;

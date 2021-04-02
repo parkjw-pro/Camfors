@@ -51,17 +51,26 @@ export default {
     // console.log(this.name);
     // 크롤링
     axios
-      .get("http://www.camfors.shop:3000/search", {
+      .get("http://15.164.219.18:3000/search", {
         params: {
           // query: "새움정"
           query: this.name
         }
       })
       .then(response => {
-        // console.log(response.data);
         this.items = response.data.items;
-        // console.log(this.items);
-        // console.log(this.items[0].description);
+
+        // html 태그 제거
+        for (let i = 0; i < this.items.length; i++) {
+          this.items[i].title = this.items[i].title.replace(
+            /(<([^>]+)>)/gi,
+            ""
+          );
+          this.items[i].description = this.items[i].description.replace(
+            /(<([^>]+)>)/gi,
+            ""
+          );
+        }
       })
 
       .catch(response => {
@@ -72,7 +81,7 @@ export default {
 </script>
 <style scoped>
 .BlogReview {
-  width: 95%;
-  margin: 0 auto;
+  width: 80%;
+  margin-left: 3%;
 }
 </style>

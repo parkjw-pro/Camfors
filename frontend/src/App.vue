@@ -14,14 +14,14 @@ export default {
   components: {
     Navbar
   },
-  data: function () {
+  data: function() {
     return {
-      login: false,
-    }
+      login: false
+    };
   },
   mounted() {
-    if (localStorage.getItem('Login-token') != undefined) {
-        this.login = true
+    if (localStorage.getItem("Login-token") != undefined) {
+      this.login = true;
     }
   }
 };

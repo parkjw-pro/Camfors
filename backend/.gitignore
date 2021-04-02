@@ -4,7 +4,7 @@ target/
 !**/src/main/**
 !**/src/test/**
 .DS_Store
-
+*.pyc
 .idea/workspace.xml
 Backend/__pycache__
 user/__pycache__
@@ -24,6 +24,7 @@ camp/__pycache__
 *.iws
 *.iml
 *.ipr
+
 
 ### NetBeans ###
 /nbproject/private/

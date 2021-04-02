@@ -5,46 +5,7 @@
         v-for="(item, index) in tag"
         :key="index"
       >
-        <b-card @click="goDetailList(item.campsite_id)">
-          <b-card-img
-            v-if="item.firstImageUrlV.length > 0"
-            :src="item.firstImageUrlV"
-            height="170px"
-          ></b-card-img>
-          <b-card-img
-            v-else
-            src="https://cdn.pixabay.com/photo/2019/07/25/17/09/camp-4363073_960_720.png"
-            height="170px"
-          ></b-card-img>
-          <span class="my-2" style="font-size:18px">{{
-            item.campsite_name
-          }}</span>
-          <b-card-text>{{ item.doNm }} {{ item.sigunguNm }}</b-card-text>
-          <b-row class="ml-1 pl-1">
-            <div style="text-align: left;">
-              <span class="reviewLike mt-4">
-                <!--좋아요 여부와 좋아요 수-->
-                <b-icon
-                  icon="suit-heart-fill"
-                  variant="danger"
-                  font-scale="1.5"
-                  v-if="liked"
-                  @click="likeReview()"
-                ></b-icon>
-                <b-icon
-                  icon="suit-heart"
-                  variant="danger"
-                  font-scale="1.5"
-                  v-else
-                  @click="likeReview()"
-                ></b-icon>
-              </span>
-              <small class="ml-1"
-                >{{ item.likeCount }}명이 좋아합니다.</small
-              >
-            </div>
-          </b-row>
-        </b-card>
+ <swiperBlock :item = "item"/>
       </swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
@@ -53,6 +14,7 @@
 </template>
 
 <script>
+import swiperBlock from "@/components/campsite/swiperBlock";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import "swiper/css/swiper.css";
 
@@ -61,11 +23,12 @@ export default {
   title: "Loop mode with multiple slides per group",
   props: {
     tag: Array,
-    tagName : String
+    tagName: String
   },
   components: {
     Swiper,
-    SwiperSlide
+    SwiperSlide,
+    swiperBlock
   },
   data() {
     return {
@@ -89,19 +52,6 @@ export default {
     };
   },
   methods: {
-    goDetailList: function(campsite_id) {
-      // 리뷰 작성 페이지로 넘어가준다!!
-      // console.log("보냅니다", this.store);
-      console.log("디테일로 이동");
-      console.log(campsite_id);
-      this.$router.push({
-        name: "CampsiteDetail",
-        params: { campsiteId: campsite_id }
-      });
-    },
-    likeReview(){
-      
-    }
   }
   // created : {
 

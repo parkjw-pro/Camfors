@@ -3,8 +3,8 @@
     <!-- 캠핑장 소개 컨텐츠 (이름, 태그) -->
     <div class="contentsBox">
       <h2 style="color:white;">{{ getDetailInfo.campsite_name }}</h2>
-      <div class="tag" v-for="(tag, idx) in tagList" :key="idx">
-        {{ tag }}
+      <div class="tag">
+        {{ getDetailInfo.featureNmV }}
       </div>
     </div>
 
@@ -16,9 +16,7 @@
       <div class="row campsiteInfo">
         <div class="col-sm-6 col-md-6 campsiteInfoImg">
           <b-img
-            v-if="
-                getDetailInfo.firstImageUrlV.length > 0
-            "
+            v-if="getDetailInfo.firstImageUrlV.length > 0"
             id="campsiteImg"
             :src="getDetailInfo.firstImageUrlV"
             alt="Responsive image"
@@ -33,15 +31,23 @@
 
         <div class="col-sm-6 col-md-6 campsiteInfoList">
           <b-list-group flush>
-            <b-list-group-item>{{ getDetailInfo.indutyV }}</b-list-group-item>
-            <b-list-group-item>{{ getDetailInfo.addr1 }}</b-list-group-item>
-            <b-list-group-item>{{ getDetailInfo.intro }}</b-list-group-item>
-            <b-list-group-item>{{ getDetailInfo.tel }}</b-list-group-item>
+            <b-list-group-item v-if="getDetailInfo.indutyV">{{
+              getDetailInfo.indutyV
+            }}</b-list-group-item>
+            <b-list-group-item v-if="getDetailInfo.addr1">{{
+              getDetailInfo.addr1
+            }}</b-list-group-item>
+            <b-list-group-item v-if="getDetailInfo.intro">{{
+              getDetailInfo.intro
+            }}</b-list-group-item>
+            <b-list-group-item v-if="getDetailInfo.tel">{{
+              getDetailInfo.tel
+            }}</b-list-group-item>
             <b-list-group-item
               ><b-button variant="secondary" :href="getDetailInfo.homepage"
                 >홈페이지</b-button
               >
-              <b-button variant="secondary"
+              <b-button variant="secondary" :href="getDetailInfo.homepage"
                 >예약하기</b-button
               ></b-list-group-item
             >
@@ -59,9 +65,9 @@
 
       <!-- 캠핑장 소개 -->
       <div class="campsiteIntro">
-        <h3 style="margin-top:20px; text-align:left;">
+        <h4 style="margin-top:20px; text-align:left;">
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>캠핑장소개
-        </h3>
+        </h4>
         <div class="row">
           <div class="col-5">캠핑장 주요 시설 자세한 소개</div>
           <div class="col-1"></div>
@@ -77,9 +83,9 @@
 
       <!-- 편의시설 -->
       <div class="facility">
-        <h3 style="margin-top:20px; text-align:left;">
+        <h4 style="margin-top:20px; text-align:left;">
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>편의시설
-        </h3>
+        </h4>
         <div class="row facilityIcon">
           <div style="text-align:center; padding-right:50px; padding-top:10px;">
             <font-awesome-icon icon="volleyball-ball" class="fa-3x" />
@@ -106,17 +112,29 @@
 
       <!-- 한 줄 리뷰 -->
       <div class="comment">
-        <h3 style="margin-top:20px; text-align:left;">
+        <h4 style="margin-top:20px; text-align:left;">
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>한 줄 리뷰
-        </h3>
-        <Comment />
+        </h4>
+        <!-- 댓글 남기기 -->
+        <div class="row comments">
+          <b-form-input
+            size="lg"
+            class="mr-sm-2"
+            placeholder="로그인이 필요한 서비스입니다"
+            v-model="comment"
+          ></b-form-input>
+          <b-button size="lg" class="my-2 my-sm-0" type="submit" @click="createReview">등록</b-button>
+        </div>
+        <Comment 
+        v-if="this.commentList"
+        :commentList="this.commentList" />
       </div>
 
       <!-- 블로그 리뷰 -->
       <div class="blogReview">
-        <h3 style="margin-top:20px; text-align:left;">
+        <h4 style="margin-top:20px; text-align:left;">
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>블로그 리뷰
-        </h3>
+        </h4>
         <BlogReview
           v-if="getDetailInfo.campsite_name"
           :name="getDetailInfo.campsite_name"
@@ -127,6 +145,9 @@
 </template>
 
 <script>
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
+import axios from "axios";
+
 import Map from "@/components/campsiteDetail/Map";
 import Comment from "@/components/campsiteDetail/Comment";
 import BlogReview from "@/components/campsiteDetail/BlogReview";
@@ -136,7 +157,7 @@ export default {
   components: {
     Map,
     Comment,
-    BlogReview,
+    BlogReview
   },
   created() {
     this.$store.dispatch(
@@ -144,26 +165,64 @@ export default {
       this.$route.params.campsiteId
     );
     console.log(this.getUserId);
+
+    console.log(this.campsiteId)
+    axios({
+      method: "get",
+      url: `${SERVER_URL}/camp/readreview/${this.campsiteId}`
+    })
+      .then(res => {
+        console.log(res.data);
+        this.commentList = res.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
+      
   },
   computed: {
     ...mapGetters({
       getDetailInfo: "campStore/getDetailInfo",
-      getUserId : "userStore/getUserId"
-    }),
+      getUserId: "userStore/getUserId"
+    })
   },
   data: function() {
     // console.log(this.$route.params.campsiteId)
     return {
       campDetail: [],
-      campsiteId: "",
-      tagList: [
-        "#가족들과 가기 좋은",
-        "#물놀이 하기 좋은",
-        "#봄",
-        "#바다가 보이는",
-      ],
+      campsiteId: this.$route.params.campsiteId,
+      tagList: '',
+      commentList: [],
     };
   },
+  methods: {
+    createReview() {
+      console.log(Number(this.getUserId), Number(this.campsiteId), this.comment);
+      axios
+        .post(`${SERVER_URL}/camp/createreview`, {
+          user_id:Number(this.getUserId),
+          campsite_id:Number(this.campsiteId),
+          review:this.comment
+        })
+        .then(response => {
+          console.log(response)
+          alert("댓글 등록")
+        });
+    },
+    removeReview() {
+      console.log(this.review_id)
+      axios({
+        method: "delete",
+        url: `${SERVER_URL}/camp/deletereview/${this.review_id}`
+      })
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+      }
+  }
 };
 </script>
 <style scoped>
@@ -236,6 +295,15 @@ export default {
 .blogReview {
   margin-top: 40px;
   border-top: 1px solid rgba(77, 74, 74, 0.459);
+}
+
+.form-control {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.row {
+  margin-right: 0;
 }
 
 @media (min-width: 1281px) {

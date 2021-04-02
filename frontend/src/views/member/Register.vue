@@ -198,7 +198,7 @@ export default {
       password_confirmation: "",
       emailCode: "",
 
-      checkEmail: false,
+      checkEmail: false
     };
   },
   methods: {
@@ -244,7 +244,7 @@ export default {
             }
           });
       }
-    },
+    }
   }
 };
 </script>

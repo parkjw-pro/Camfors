@@ -1,13 +1,14 @@
 <template>
   <b-card>
     <b-card-img
-      @click="campsiteDetail"
       v-if="item.firstImageUrlV.length > 0"
+      @click="campsiteDetail"
       :src="item.firstImageUrlV"
       height="170px"
     ></b-card-img>
     <b-card-img
       v-else
+      @click="campsiteDetail"
       src="https://cdn.pixabay.com/photo/2019/07/25/17/09/camp-4363073_960_720.png"
       height="170px"
     ></b-card-img>
@@ -48,29 +49,42 @@ export default {
   name: "swiperBlock",
   title: "Loop mode with multiple slides per group",
   props: {
-    item: Object,
+    item: Object
   },
   created() {
     if (this.getUserId != "") this.getLikeInfo();
   },
   computed: {
     ...mapGetters({
+<<<<<<< HEAD
       getUserId: "userStore/getUserId",
     }),
+=======
+      getUserId: "userStore/getUserId"
+    })
+>>>>>>> da34a12757ade6f75ab8fb289765badb0bc9fa91
   },
   data() {
     return {
-      liked: false,
+      liked: false
     };
   },
   methods: {
     likeCampsite(campsite_id) {
+<<<<<<< HEAD
       axios
         .post(`${SERVER_URL}/camp/addlike`, {
           data: {
             campsite_id: campsite_id,
             user_id: this.getUserId
           },
+=======
+      console.log(campsite_id, this.getUserId, "좋아요");
+      axios
+        .post(`${SERVER_URL}/campsite/like`, {
+          userId: this.getUserId,
+          campsiteId: campsite_id
+>>>>>>> da34a12757ade6f75ab8fb289765badb0bc9fa91
         })
         .then(response => {
           this.liked = response.data;
@@ -78,12 +92,20 @@ export default {
         });
     },
     unlikeCampsite(campsite_id) {
+<<<<<<< HEAD
       axios
         .post(`${SERVER_URL}/camp/unlike`, {
           data: {
             campsite_id: campsite_id,
             user_id: this.getUserId
           }
+=======
+      console.log(campsite_id, this.getUserId, "좋아요취소");
+      axios
+        .post(`${SERVER_URL}/campsite/unlike`, {
+          userId: this.getUserId,
+          campsiteId: campsite_id
+>>>>>>> da34a12757ade6f75ab8fb289765badb0bc9fa91
         })
         .then(response => {
           this.liked = response.data;
@@ -92,6 +114,7 @@ export default {
         });
     },
     getLikeInfo() {
+<<<<<<< HEAD
       axios
         .get(`${SERVER_URL}/camp/getlikeinfo`, {
           params: {
@@ -106,15 +129,29 @@ export default {
             this.liked = true;
           }
         });
+=======
+      // axios
+      //   .get(`${SERVER_URL}/campsite/like`, {
+      //     params: {
+      //       userId: this.getUserId,
+      //       campsiteId: this.item.campsite_id
+      //     }
+      //   })
+      //   .then(response => (this.liked = response.data));
+>>>>>>> da34a12757ade6f75ab8fb289765badb0bc9fa91
     },
     campsiteDetail() {
       this.$router.push({
         name: "CampsiteDetail",
+<<<<<<< HEAD
         params: { campsiteId: this.item.campsite_id },
+=======
+        params: { campsiteId: this.item.campsite_id }
+>>>>>>> da34a12757ade6f75ab8fb289765badb0bc9fa91
       });
       // console.log('index : ' + index + ' : reallyIndex : ' + reallyIndex)
-    },
-  },
+    }
+  }
 };
 </script>
 
