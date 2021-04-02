@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
-from .models import User, Campsite, Likes, reviews
-from .serializers import UserSignUpSerializer, UserLoginSerializer, LikesSerializer, reviewsSerializer
+from .models import User, Campsite, Likes, Reviews
+from .serializers import UserSignUpSerializer, UserLoginSerializer, LikesSerializer, ReviewsSerializer
 from django.http import Http404
 from django.db.models import Subquery
 from rest_framework.decorators import api_view
@@ -68,15 +68,12 @@ def like(request):
                                                                       .filter(user_id=request.data['user_id'])
                                                                       .values('campsite_id')))
     like = LikesSerializer(like_query_sets, many=True)
-    # print(like)
-    # print()
-    # print(like.data)
     return JsonResponse(like.data, safe=False, status=status.HTTP_201_CREATED)
 
 @csrf_exempt
 @api_view(['post'])
 @permission_classes((permissions.AllowAny,))
 def review(request):
-    review_query_sets = reviews.objects.filter(user_id=request.data['user_id'])
-    review = reviewsSerializer(review_query_sets, many=True)
+    review_query_sets = Reviews.objects.filter(user_id=request.data['user_id'])
+    review = ReviewsSerializer(review_query_sets, many=True)
     return JsonResponse(review.data, safe=False, status=status.HTTP_201_CREATED)
