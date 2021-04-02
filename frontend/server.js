@@ -31,6 +31,6 @@ app.get("/search", function(req, res) {
 });
 app.listen(3000, function() {
   console.log(
-    "http://www.camfors.shop:3000/search/blog?query=검색어 app listening on port 3000!"
+    "http://15.164.219.18:3000/search/blog?query=검색어 app listening on port 3000!"
   );
 });

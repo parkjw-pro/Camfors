@@ -52,7 +52,7 @@ export default {
     item: Object
   },
   created() {
-    this.getLikeInfo();
+    if (this.getUserId != "") this.getLikeInfo();
   },
   computed: {
     ...mapGetters({
@@ -90,14 +90,14 @@ export default {
         });
     },
     getLikeInfo() {
-      axios
-        .get(`${SERVER_URL}/campsite/like`, {
-          params: {
-            userId: this.getUserId,
-            campsiteId: this.item.campsite_id
-          }
-        })
-        .then(response => (this.liked = response.data));
+      // axios
+      //   .get(`${SERVER_URL}/campsite/like`, {
+      //     params: {
+      //       userId: this.getUserId,
+      //       campsiteId: this.item.campsite_id
+      //     }
+      //   })
+      //   .then(response => (this.liked = response.data));
     },
     campsiteDetail() {
       this.$router.push({
