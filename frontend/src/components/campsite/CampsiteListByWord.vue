@@ -1,14 +1,12 @@
 <template>
-  <div >
-    <b-row v-for="(item, index) in SearchWordList" :key="index">
+  <div class="row" style="margin:0 auto; width:1300px;">
+    <div v-for="(item, index) in SearchWordList" :key="index" style="margin:0 auto;">
 
-<div class="col-6">
-  <swiperBlock :item = "item"/>
-  <swiperBlock :item = "item"/>
-  <swiperBlock :item = "item"/>
-</div>
+      <div class="col-md-3">
+        <swiperBlock :item = "item" style="width: 20rem; height:20rem; margin-bottom:2rem;"/>
+      </div>
       
-    </b-row>
+    </div>
   </div>
 </template>
 

@@ -9,7 +9,7 @@ const campStore = {
     detailInfo: [],
     searchWordList: [],
     searchTagList: [[]],
-    searchTagListName: [],
+    searchTagListName: []
   },
   getters: {
     getDetailInfo(state) {
@@ -89,7 +89,7 @@ const campStore = {
     },
     searchByTagName(context, tagList) {
       context.commit("setSearchTagListName", tagList);
-    },
+    }
   }
 };
 export default campStore;

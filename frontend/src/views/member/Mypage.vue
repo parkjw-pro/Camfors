@@ -35,45 +35,43 @@ export default {
         height: "100vh",
         position: "relative"
       },
-      email: '',
+      email: "",
       likeCampsiteList: [],
-      reviewList:[]
-
+      reviewList: []
     };
   },
   methods: {
-    getUserCampsite: function (){
-      console.log(this.email)
+    getUserCampsite: function() {
+      console.log(this.email);
       axios
-      .post(`${SERVER_URL}/user/like`, this.email)
-      .then(res => {
-        this.likeCampsiteList = res.data;
-        console.log(res.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+        .post(`${SERVER_URL}/user/like`, this.email)
+        .then(res => {
+          this.likeCampsiteList = res.data;
+          console.log(res.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
-    getUserReview: function (){
-      console.log(this.email)
+    getUserReview: function() {
+      console.log(this.email);
       axios
-      .post(`${SERVER_URL}/user/review`, this.email)
-      .then(res => {
-        this.reviewList = res.data;
-        console.log(res.data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+        .post(`${SERVER_URL}/user/review`, this.email)
+        .then(res => {
+          this.reviewList = res.data;
+          console.log(res.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
-
   },
   created() {
-    const userInfo = JSON.parse(localStorage.getItem('Login-token'))
-    this.email = userInfo[0][0]
-    this.getUserCampsite()
-    this.getUserReview()
-  },
+    const userInfo = JSON.parse(localStorage.getItem("Login-token"));
+    this.email = userInfo[0][0];
+    this.getUserCampsite();
+    this.getUserReview();
+  }
 };
 </script>
 

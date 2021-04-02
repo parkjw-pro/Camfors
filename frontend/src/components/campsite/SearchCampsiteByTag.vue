@@ -43,7 +43,7 @@ export default {
         { caption: "#자동차", state: false, id: 16 },
         { caption: "#체험 프로그램이 있는", state: false, id: 17 },
         { caption: "#장비 대여가 가능한", state: false, id: 18 },
-        { caption: "#개인 트레일러 동반 가능한", state: false, id: 19 },
+        { caption: "#개인 트레일러 동반 가능한", state: false, id: 19 }
       ],
       checkedTag: [],
       selectedTag: [],
@@ -64,7 +64,12 @@ export default {
       for (let index = 0; index < this.buttons.length; index++) {
         if (this.buttons[index].state === true) {
           this.selectedTag.push(this.buttons[index].id);
-          this.selectedTagName.push(this.buttons[index].caption.substring(1,this.buttons[index].caption.length));
+          this.selectedTagName.push(
+            this.buttons[index].caption.substring(
+              1,
+              this.buttons[index].caption.length
+            )
+          );
         }
       }
       this.$store.dispatch("campStore/searchByTagName", this.selectedTagName);

@@ -40,15 +40,14 @@
           >
         </div>
         <div class="small">
-      |
-      <router-link :to="{ name: 'FindPassword' }">비밀번호찾기</router-link> -->
+          |
+          <router-link :to="{ name: 'FindPassword' }">비밀번호찾기</router-link>
+          -->
           <span style="color: #695549; cursor: pointer;" @click="toSignup"
             >회원가입</span
           >
           |
-          <span style="color: #695549; cursor: pointer;"
-            >비밀번호찾기</span
-          >
+          <span style="color: #695549; cursor: pointer;">비밀번호찾기</span>
         </div>
       </div>
     </div>
@@ -65,7 +64,10 @@ export default {
         backgroundImage: `url(${require("@/assets/Login/login.jpg")})`,
         width: "100vw",
         height: "100vh",
-        position: "relative"
+        position: "relative",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center"
       },
       credentials: {
         email: "",
@@ -84,13 +86,12 @@ export default {
       this.$store
         .dispatch("userStore/LOGIN", this.credentials)
         .then(() => {
-
           // 로컬스토리지 정보가 있으면 홈화면으로, 아니면 다시 로그인화면으로
-          const token = localStorage.getItem("Login-token")
+          const token = localStorage.getItem("Login-token");
           if (token !== null) {
-            location.replace('/');
+            location.replace("/");
           } else {
-            this.$router.replace('/login')
+            this.$router.replace("/login");
           }
         })
         .catch(({ message }) => (this.msg = message));
@@ -99,7 +100,7 @@ export default {
       this.$router.push({ name: "Register" });
     }
   },
-  created: async function() {},
+  created: async function() {}
 };
 </script>
 
