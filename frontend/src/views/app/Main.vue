@@ -16,7 +16,7 @@
         <p class="stagger-item" style="font-size:3em">Camping For Smart</p>
         <p class="stagger-item">멋쟁이들을 위한 캠핑장 추천, 캠퍼스</p>
       </div>
-      <div class="desc_scroll">
+      <div class="desc_scroll" id="scrollBtn" @click="moveToList">
         <p style="margin-bottom: 0;">Scroll</p>
         <font-awesome-icon icon="angle-down" class="fa-1x" />
       </div>
@@ -44,7 +44,7 @@ export default {
     // Movie,
     // swiper,
     // swiperSlide,
-    swipertest
+    swipertest,
     // Slider,
     // CampsiteList,
   },
@@ -55,22 +55,27 @@ export default {
         { name: "바다가 보이는 곳", id: 7 },
         { name: "산책하기 좋은 곳", id: 12 },
         { name: "가족들과 가기 좋은", id: 5 },
-        { name: "아이들이랑 가고 싶은 곳", id: 13 }
+        { name: "아이들이랑 가고 싶은 곳", id: 13 },
       ],
+      visible: true,
       swiperOption: {
         direction: "vertical",
         pagination: {
           el: ".swiper-pagination",
-          type: "bullets"
-        }
-      }
+          type: "bullets",
+        },
+      },
     };
   },
   methods: {
     enlarge(event) {
       event.currentTarget.classList.add("large");
-    }
-  }
+    },
+    moveToList() {
+      var location = document.querySelector("#scrollBtn").offsetTop;
+      window.scrollTo({ top: location + 30, behavior: "smooth" });
+    },
+  },
 };
 </script>
 
@@ -134,10 +139,11 @@ export default {
   transform: translateX(-50%);
   font-size: 1.1rem;
   line-height: 1.3rem;
-  color: rgba(107, 103, 103, 0.829);
+  color: white;
   font-family: system-ui, -SF Pro Text, Helvetica, Roboto, sans-serif;
   text-align: center;
   font-size: 12px;
+  cursor: pointer;
 }
 
 @keyframes showText {
