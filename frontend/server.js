@@ -9,7 +9,7 @@ app.use(cors());
 app.get("/search", function(req, res) {
   var api_url =
     "https://openapi.naver.com/v1/search/blog?query=" +
-    encodeURI(req.query.query); // json 결과
+    encodeURI('"' + req.query.query + '"'); // json 결과
   //   var api_url = 'https://openapi.naver.com/v1/search/blog.xml?query=' + encodeURI(req.query.query); // xml 결과
   var request = require("request");
   var options = {

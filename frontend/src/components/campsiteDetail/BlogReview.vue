@@ -51,7 +51,7 @@ export default {
     // console.log(this.name);
     // 크롤링
     axios
-      .get("http://www.camfors.shop:3000/search", {
+      .get("http://15.164.219.18:3000/search", {
         params: {
           // query: "새움정"
           query: this.name
@@ -68,6 +68,13 @@ export default {
           );
           this.items[i].description = this.items[i].description.replace(
             /(<([^>]+)>)/gi,
+            ""
+          );
+
+          this.items[i].title = this.items[i].title.replace(/&quot;/g, "");
+
+          this.items[i].description = this.items[i].description.replace(
+            /&quot;/g,
             ""
           );
         }

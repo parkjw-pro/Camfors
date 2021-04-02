@@ -1,11 +1,16 @@
 <template>
   <div class="row" style="margin:0 auto; width:1300px;">
-    <div v-for="(item, index) in SearchWordList" :key="index" style="margin:0 auto;">
-
+    <div
+      v-for="(item, index) in SearchWordList"
+      :key="index"
+      style="margin:0 auto;"
+    >
       <div class="col-md-3">
-        <swiperBlock :item = "item" style="width: 20rem; height:20rem; margin-bottom:2rem;"/>
+        <swiperBlock
+          :item="item"
+          style="width: 20rem; height:20rem; margin-bottom:2rem;"
+        />
       </div>
-      
     </div>
   </div>
 </template>
@@ -35,8 +40,7 @@ export default {
     enlarge(event) {
       event.currentTarget.classList.add("large");
     }
-  },
-  
+  }
 };
 </script>
 
