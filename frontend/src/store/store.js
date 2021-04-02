@@ -8,8 +8,8 @@ Vue.use(Vuex);
 const store = new Vuex.Store({
   modules: {
     userStore: userStore,
-    campStore: campStore,
-  },
+    campStore: campStore
+  }
 });
 
 export default store;

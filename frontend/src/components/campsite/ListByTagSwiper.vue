@@ -23,7 +23,7 @@ export default {
   title: "Loop mode with multiple slides per group",
   props: {
     tag: Array,
-    tagName : String
+    tagName: String
   },
   components: {
     Swiper,
@@ -52,7 +52,6 @@ export default {
     };
   },
   methods: {
-
   }
   // created : {
 

@@ -1,7 +1,6 @@
 <template>
   <div id="taglist">
-    <h3 style="text-align: left; font-family: 'Hanna', sans-serif;">
-    </h3>
+    <h3 style="text-align: left; font-family: 'Hanna', sans-serif;"></h3>
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide v-for="(item, index) in likeList" :key="index">
         <b-card>
@@ -21,9 +20,9 @@
           <b-card-text>{{ item.doNm }} {{ item.sigunguNm }}</b-card-text>
           <b-row class="ml-1 pl-1">
             <div style="text-align: left;">
-              <span class="reviewLike mt-4" >
+              <span class="reviewLike mt-4">
                 <!--좋아요 여부와 좋아요 수-->
-                
+
                 <b-icon
                   icon="suit-heart-fill"
                   variant="danger"
@@ -58,7 +57,7 @@ export default {
   name: "swiper-example-loop-group",
   title: "Loop mode with multiple slides per group",
   props: {
-    likeList : Array
+    likeList: Array
   },
   components: {
     Swiper,
@@ -81,7 +80,7 @@ export default {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev"
         }
-      },
+      }
     };
   },
   methods: {

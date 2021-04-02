@@ -4,13 +4,13 @@
       v-if="item.firstImageUrlV.length > 0"
       @click="campsiteDetail"
       :src="item.firstImageUrlV"
-      height="170px"
+      height="65%"
     ></b-card-img>
     <b-card-img
       v-else
       @click="campsiteDetail"
       src="https://cdn.pixabay.com/photo/2019/07/25/17/09/camp-4363073_960_720.png"
-      height="170px"
+      height="65%"
     ></b-card-img>
     <span class="my-2" style="font-size:18px">{{ item.campsite_name }}</span>
     <b-card-text>{{ item.doNm }} {{ item.sigunguNm }}</b-card-text>
@@ -41,50 +41,50 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { mapGetters } from 'vuex';
+import axios from "axios";
+import { mapGetters } from "vuex";
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
-  name: 'swiperBlock',
-  title: 'Loop mode with multiple slides per group',
+  name: "swiperBlock",
+  title: "Loop mode with multiple slides per group",
   props: {
-    item: Object,
+    item: Object
   },
   created() {
     this.getLikeInfo();
   },
   computed: {
     ...mapGetters({
-      getUserId: 'userStore/getUserId',
-    }),
+      getUserId: "userStore/getUserId"
+    })
   },
   data() {
     return {
-      liked: false,
+      liked: false
     };
   },
   methods: {
     likeCampsite(campsite_id) {
-      console.log(campsite_id, this.getUserId, '좋아요');
+      console.log(campsite_id, this.getUserId, "좋아요");
       axios
         .post(`${SERVER_URL}/campsite/like`, {
           userId: this.getUserId,
-          campsiteId: campsite_id,
+          campsiteId: campsite_id
         })
-        .then((response) => {
+        .then(response => {
           this.liked = response.data;
           this.item.likeCount = this.item.likeCount * 1 + 1;
         });
     },
     unlikeCampsite(campsite_id) {
-      console.log(campsite_id, this.getUserId, '좋아요취소');
+      console.log(campsite_id, this.getUserId, "좋아요취소");
       axios
         .post(`${SERVER_URL}/campsite/unlike`, {
           userId: this.getUserId,
-          campsiteId: campsite_id,
+          campsiteId: campsite_id
         })
-        .then((response) => {
+        .then(response => {
           this.liked = response.data;
           this.item.likeCount = this.item.likeCount * 1 - 1;
         });
@@ -94,19 +94,19 @@ export default {
         .get(`${SERVER_URL}/campsite/like`, {
           params: {
             userId: this.getUserId,
-            campsiteId: this.item.campsite_id,
-          },
+            campsiteId: this.item.campsite_id
+          }
         })
-        .then((response) => (this.liked = response.data));
+        .then(response => (this.liked = response.data));
     },
     campsiteDetail() {
       this.$router.push({
-        name: 'CampsiteDetail',
-        params: { campsiteId: this.item.campsite_id },
+        name: "CampsiteDetail",
+        params: { campsiteId: this.item.campsite_id }
       });
       // console.log('index : ' + index + ' : reallyIndex : ' + reallyIndex)
-    },
-  },
+    }
+  }
 };
 </script>
 
