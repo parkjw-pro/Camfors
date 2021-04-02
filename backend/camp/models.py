@@ -108,6 +108,7 @@ class Likes(models.Model):
 
 
 class Reviews(models.Model):
+    review_id = models.AutoField(primary_key=True)
     campsite_id = models.ForeignKey(Campsite, on_delete=models.CASCADE, db_column="campsite_id")
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column="user_id")
     review = models.CharField(max_length=1000, blank=True, null=True)
