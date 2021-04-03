@@ -14,18 +14,22 @@
       <h3>좋아요</h3>
       <mypagelike :likeList="likeCampsiteList"
     /></span>
-    <span id="my3"><h3>댓글</h3></span>
+    <span id="my3"><h3>댓글</h3>
+           <Comment v-if="this.reviewList" :commentList="this.reviewList" />
+    </span>
   </div>
 </template>
 
 <script>
 import mypagelike from "@/components/campsite/mypagelike";
+import Comment from "@/components/campsiteDetail/Comment";
 import axios from "axios";
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
   name: "Mypage",
   components: {
-    mypagelike
+    mypagelike,
+    Comment
   },
   data: function() {
     return {
