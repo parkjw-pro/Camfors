@@ -31,7 +31,6 @@ def campSite_detail(request, pk):
         serializer = CampsiteDetailSerializer(campsite)
         return JsonResponse(serializer.data, safe=False)
 
-
 def camptaglist(request, tag_id):
     try:
         query_sets = Campsite.objects.filter(campsite_id__in=Subquery(CampsiteTag.objects

@@ -7,7 +7,6 @@ class Campsite(models.Model):
     lineintro = models.CharField(max_length=100, blank=True, null=True)
     intro = models.TextField(blank=True, null=True)
     featureNmV = models.TextField(db_column='featureNmV', blank=True, null=True)  # Field name made lowercase.
-    indutyV = models.CharField(db_column='indutyV', max_length=200, blank=True, null=True)  # Field name made lowercase.
     lctCI = models.CharField(db_column='lctCl', max_length=50, blank=True, null=True)  # Field name made lowercase.
     doNm = models.CharField(db_column='doNm', max_length=20, blank=True, null=True)  # Field name made lowercase.
     sigunguNm = models.CharField(db_column='sigunguNm', max_length=20, blank=True, null=True)  # Field name made lowercase.
@@ -19,7 +18,6 @@ class Campsite(models.Model):
     homepage = models.TextField(blank=True, null=True)
     resveUrl = models.TextField(db_column='resveUrl', blank=True, null=True)  # Field name made lowercase.
     resveCl = models.CharField(db_column='resveCl', max_length=100, blank=True, null=True)  # Field name made lowercase.
-    gnrlSiteCo = models.CharField(db_column='gnrlSiteCo', max_length=5)  # Field name made lowercase.
     autoSiteCo = models.CharField(db_column='autoSiteCo', max_length=5)  # Field name made lowercase.
     glampSiteCo = models.CharField(db_column='glampSiteCo', max_length=5)  # Field name made lowercase.
     caravSiteCo = models.CharField(db_column='caravSiteCo', max_length=5)  # Field name made lowercase.
@@ -42,6 +40,8 @@ class Campsite(models.Model):
     animalCmgCl = models.CharField(db_column='animalCmgCl', max_length=100, blank=True, null=True)  # Field name made lowercase.
     firstImageUrlV = models.CharField(db_column='firstImageUrlV', max_length=300, blank=True, null=True)  # Field name made lowercase.
     likeCount = models.IntegerField(db_column='likeCount')  # Field name made lowercase.
+    outRestroom = models.CharField(db_column='outRestroom', max_length=5)
+    outShowerroom = models.CharField(db_column='outShowerroom', max_length=5)
 
     class Meta:
         managed = False
