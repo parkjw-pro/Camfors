@@ -10,48 +10,51 @@
       </h2>
       <br />
       <div class="row" style="text-align: center;">
-          <div v-for="(item, index) in SearchWordList" :key="index">
-            <div class="col-md-3">
-              <swiperBlock :item="item" style="width: 20rem; height:20rem; margin-bottom:2rem;" />
-            </div>
+        <div v-for="(item, index) in SearchWordList" :key="index">
+          <div class="col-md-3">
+            <swiperBlock
+              :item="item"
+              style="width: 20rem; height:20rem; margin-bottom:2rem;"
+            />
           </div>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import 'swiper/css/swiper.css';
-import swiperBlock from '@/components/campsite/swiperBlock';
-import { mapGetters } from 'vuex';
+import "swiper/css/swiper.css";
+import swiperBlock from "@/components/campsite/swiperBlock";
+import { mapGetters } from "vuex";
 export default {
   components: {
-    swiperBlock,
+    swiperBlock
   },
   props: {
-    SearchWordList: Array,
+    SearchWordList: Array
   },
   data: function() {
     return {
       swiperOption: {
-        direction: 'vertical',
+        direction: "vertical",
         pagination: {
-          el: '.swiper-pagination',
-          type: 'bullets',
-        },
-      },
+          el: ".swiper-pagination",
+          type: "bullets"
+        }
+      }
     };
   },
   methods: {
     enlarge(event) {
-      event.currentTarget.classList.add('large');
-    },
+      event.currentTarget.classList.add("large");
+    }
   },
   computed: {
     ...mapGetters({
-      getSearchWordName: 'campStore/getSearchWordName',
-    }),
-  },
+      getSearchWordName: "campStore/getSearchWordName"
+    })
+  }
 };
 </script>
 

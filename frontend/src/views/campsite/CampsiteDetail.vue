@@ -16,7 +16,7 @@
       <div class="row campsiteInfo">
         <div class="col-sm-6 col-md-6 campsiteInfoImg">
           <b-img
-            v-if="getDetailInfo.firstImageUrlV.length > 0"
+            v-if="getDetailInfo.firstImageUrlV"
             id="campsiteImg"
             :src="getDetailInfo.firstImageUrlV"
             alt="Responsive image"
@@ -44,10 +44,18 @@
               getDetailInfo.tel
             }}</b-list-group-item>
             <b-list-group-item
-              ><b-button variant="secondary" :href="getDetailInfo.homepage"
+              ><b-button
+                variant="secondary"
+                v-if="getDetailInfo.homepage"
+                :href="getDetailInfo.homepage"
+                target="_blank"
                 >홈페이지</b-button
               >
-              <b-button variant="secondary" :href="getDetailInfo.homepage"
+              <b-button
+                variant="secondary"
+                v-if="getDetailInfo.homepage"
+                :href="getDetailInfo.homepage"
+                target="_blank"
                 >예약하기</b-button
               ></b-list-group-item
             >
@@ -60,24 +68,6 @@
               <b-icon icon="chat-left-dots" font-scale="1.5"></b-icon
             ></b-list-group-item>
           </b-list-group>
-        </div>
-      </div>
-
-      <!-- 캠핑장 소개 -->
-      <div class="campsiteIntro">
-        <h4 style="margin-top:20px; text-align:left;">
-          <b-icon icon="caret-right-fill" font-scale="1"></b-icon>캠핑장소개
-        </h4>
-        <div class="row">
-          <div class="col-5">캠핑장 주요 시설 자세한 소개</div>
-          <div class="col-1"></div>
-          <div class="col-5">
-            <Map
-              v-if="getDetailInfo.mapX"
-              :mapX="getDetailInfo.mapX"
-              :mapY="getDetailInfo.mapY"
-            />
-          </div>
         </div>
       </div>
 
@@ -110,6 +100,21 @@
         </div>
       </div>
 
+      <!-- 캠핑장 소개 -->
+      <div class="campsiteIntro">
+        <h4 style="margin-top:20px; text-align:left;">
+          <b-icon icon="caret-right-fill" font-scale="1"></b-icon>캠핑장 위치
+        </h4>
+        <Map
+          v-if="getDetailInfo.mapX"
+          :mapX="getDetailInfo.mapX"
+          :mapY="getDetailInfo.mapY"
+        />
+        <!-- <div class="row">
+          <div class="col-5">캠핑장 주요 시설 자세한 소개</div>
+        </div> -->
+      </div>
+
       <!-- 한 줄 리뷰 -->
       <div class="comment">
         <h4 style="margin-top:20px; text-align:left;">
@@ -117,17 +122,42 @@
         </h4>
         <!-- 댓글 남기기 -->
         <div class="row comments">
+          <!-- 로그인 했을 때 -->
           <b-form-input
             size="lg"
             class="mr-sm-2"
-            placeholder="로그인이 필요한 서비스입니다"
+            placeholder="댓글을 입력해주세요"
+            v-if="getUserId"
             v-model="comment"
           ></b-form-input>
-          <b-button size="lg" class="my-2 my-sm-0" type="submit" @click="createReview">등록</b-button>
+          <b-button
+            size="lg"
+            v-if="getUserId"
+            class="my-2 my-sm-0"
+            type="submit"
+            @click="createReview"
+            >등록</b-button
+          >
+          <!-- 로그인 안했을 시 -->
+          <b-form-input
+            size="lg"
+            class="mr-sm-2"
+            v-if="!getUserId"
+            placeholder="로그인이 필요한 서비스입니다"
+            disabled
+            v-model="comment"
+          ></b-form-input>
+          <b-button
+            size="lg"
+            v-if="!getUserId"
+            disabled
+            class="my-2 my-sm-0"
+            type="submit"
+            @click="createReview"
+            >등록</b-button
+          >
         </div>
-        <Comment 
-        v-if="this.commentList"
-        :commentList="this.commentList" />
+        <Comment v-if="this.commentList" :commentList="this.commentList" />
       </div>
 
       <!-- 블로그 리뷰 -->
@@ -160,25 +190,24 @@ export default {
     BlogReview
   },
   created() {
+    this.$store.state.campStore.detailInfo = [];
     this.$store.dispatch(
       "campStore/campsiteDetail",
       this.$route.params.campsiteId
     );
-    console.log(this.getUserId);
 
-    console.log(this.campsiteId)
     axios({
       method: "get",
       url: `${SERVER_URL}/camp/readreview/${this.campsiteId}`
     })
       .then(res => {
+        this.commentList = [];
         console.log(res.data);
-        this.commentList = res.data;
+        if (res.data !== "리뷰가 없습니다") this.commentList = res.data;
       })
       .catch(error => {
         console.log(error);
       });
-      
   },
   computed: {
     ...mapGetters({
@@ -191,26 +220,31 @@ export default {
     return {
       campDetail: [],
       campsiteId: this.$route.params.campsiteId,
-      tagList: '',
+      tagList: "",
       commentList: [],
+      comment: ""
     };
   },
   methods: {
     createReview() {
-      console.log(Number(this.getUserId), Number(this.campsiteId), this.comment);
+      console.log(
+        Number(this.getUserId),
+        Number(this.campsiteId),
+        this.comment
+      );
       axios
         .post(`${SERVER_URL}/camp/createreview`, {
-          user_id:Number(this.getUserId),
-          campsite_id:Number(this.campsiteId),
-          review:this.comment
+          user_id: Number(this.getUserId),
+          campsite_id: Number(this.campsiteId),
+          review: this.comment
         })
         .then(response => {
-          console.log(response)
-          alert("댓글 등록")
+          console.log(response);
+          alert("댓글 등록");
         });
     },
     removeReview() {
-      console.log(this.review_id)
+      console.log(this.review_id);
       axios({
         method: "delete",
         url: `${SERVER_URL}/camp/deletereview/${this.review_id}`
@@ -221,7 +255,7 @@ export default {
         .catch(error => {
           console.log(error);
         });
-      }
+    }
   }
 };
 </script>

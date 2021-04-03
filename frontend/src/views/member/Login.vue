@@ -46,7 +46,7 @@
           <span style="color: #695549; cursor: pointer;" @click="toSignup"
             >회원가입</span
           >
-          |
+
           <span style="color: #695549; cursor: pointer;">비밀번호찾기</span>
         </div>
       </div>

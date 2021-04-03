@@ -5,11 +5,14 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Subquery
 import json
 from django.db.models import Q
+
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 from rest_framework import status
-from .models import Campsite, CampsiteTag, Tag, Reviews
+from .models import Campsite, CampsiteTag, Tag, Reviews, Likes
 from .serializers import CampsiteSerializer, CampsiteDetailSerializer, TagSerializer, CampCreateReviewSerializer, CampReadReviewSerializer
+from django.db.models import Count
+
 # jsonparser로 requset body 데이터 얻을수 있음
 
 
@@ -35,7 +38,7 @@ def camptaglist(request, tag_id):
     try:
         query_sets = Campsite.objects.filter(campsite_id__in=Subquery(CampsiteTag.objects
                                                                       .filter(tag_id=tag_id)
-                                                                      .values('campsite_id'))).order_by('likeCount')[:20]
+                                                                      .values('campsite_id'))).order_by('-likeCount')[:20]
     except Campsite.DoesNotExist:
         return HttpResponse(status=404)
 
@@ -65,11 +68,11 @@ def campWordResult(request):
             word = json.loads(request.body)
             searchword = word.get('word')
             query = Campsite.objects.filter(Q(campsite_name__icontains=searchword) | Q(addr1__icontains=searchword) |
-                                    Q(indutyV__icontains=searchword) | Q(glampInnerFclty__icontains=searchword) |
+                                            Q(glampInnerFclty__icontains=searchword) |
                                             Q(posblFcltyCl__icontains=searchword) | Q(exprnProgrm__icontains=searchword) |
                                             Q(themaEnvrnCl__icontains=searchword) | Q(eqpmnLendCl__icontains=searchword)).distinct()
 
-            result=CampsiteSerializer(query,many=True)
+            result = CampsiteSerializer(query,many=True)
 
         except Campsite.DoesNotExist:
             return HttpResponse(status=404)
@@ -95,18 +98,60 @@ def campTagResult(request):
     return JsonResponse(result, safe=False)
 
 
+@csrf_exempt
 def addlike(request):
-    if request.method == 'GET':
+    if request.method == 'POST':
         try:
-            user_id=request.get['user_id']
-            camp_id=request.get['camp_id']
+            data = json.loads(request.body).get('data')
 
-            result=[]
+            serializer = LikeSerializer(data=data)
+
+            if serializer.is_valid():
+                serializer.save()
+                camp = Campsite.objects.get(pk=data.get('campsite_id'))
+                camp.likeCount = camp.likeCount+1
+                camp.save()
+            else:
+                print("invalid")
 
         except Campsite.DoesNotExist:
             return HttpResponse(status=404)
 
-    return JsonResponse("", safe=False)
+    return JsonResponse("true", safe=False)
+
+
+@csrf_exempt
+def unlike(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body).get('data')
+
+            object = Likes.objects.filter(campsite_id=data.get('campsite_id'), user_id=data.get('user_id'))
+            object.delete()
+
+            camp = Campsite.objects.get(pk=data.get('campsite_id'))
+            camp.likeCount = camp.likeCount-1
+            camp.save()
+
+        except Campsite.DoesNotExist:
+            return HttpResponse(status=404)
+
+    return JsonResponse("false", safe=False)
+
+
+def getlikeinfo(request):
+    if request.method == 'GET':
+        try:
+            userid = request.GET.get('userId', None)
+            campid = request.GET.get('campsiteId', None)
+
+            query = Likes.objects.filter(user_id=userid, campsite_id=campid).aggregate(Count('campsite_id'))
+
+        except Campsite.DoesNotExist:
+            return HttpResponse(status=404)
+
+    return HttpResponse(query.get('campsite_id__count'))
+
 
 @csrf_exempt
 @api_view(['post'])
@@ -116,7 +161,7 @@ def campCreateReview(request):
         print(request.data)
         serializer = CampCreateReviewSerializer(data=request.data)
         if not serializer.is_valid():
-            return JsonResponse(status=status.HTTP_406_NOT_ACCEPTABLE)
+            return JsonResponse(status= status.HTTP_406_NOT_ACCEPTABLE)
         else:
             serializer.save()
             return JsonResponse("리뷰 등록 완료", safe=False, status=status.HTTP_201_CREATED)
