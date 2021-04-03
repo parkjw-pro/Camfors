@@ -5,11 +5,12 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Subquery
 import json
 from django.db.models import Q
-from rest_framework import status
 
-from .models import Campsite, CampsiteTag, Likes, Reviews
-from .serializers import CampsiteSerializer, CampsiteDetailSerializer, LikeSerializer, \
-    CampReadReviewSerializer, CampCreateReviewSerializer
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework import permissions
+from rest_framework import status
+from .models import Campsite, CampsiteTag, Tag, Reviews, Likes
+from .serializers import CampsiteSerializer, CampsiteDetailSerializer, TagSerializer, CampCreateReviewSerializer, CampReadReviewSerializer
 from django.db.models import Count
 
 # jsonparser로 requset body 데이터 얻을수 있음
@@ -32,7 +33,6 @@ def campSite_detail(request, pk):
     if request.method == 'GET':
         serializer = CampsiteDetailSerializer(campsite)
         return JsonResponse(serializer.data, safe=False)
-
 
 def camptaglist(request, tag_id):
     try:
@@ -154,6 +154,8 @@ def getlikeinfo(request):
 
 
 @csrf_exempt
+@api_view(['post'])
+@permission_classes((permissions.AllowAny,))
 def campCreateReview(request):
     if request.method == 'POST':
         print(request.data)
