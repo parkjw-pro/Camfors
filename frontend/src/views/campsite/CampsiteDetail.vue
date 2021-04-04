@@ -66,14 +66,14 @@
                 variant="danger"
                 font-scale="1.5"
                 v-if="liked"
-                @click="unlikeCampsite(this.campsiteId)"
+                @click="unlikeCampsite(getDetailInfo.campsite_id)"
               ></b-icon>
               <b-icon
                 icon="suit-heart"
                 variant="danger"
                 font-scale="1.5"
                 v-if="!liked"
-                @click="likeCampsite(this.campsiteId)"
+                @click="likeCampsite(getDetailInfo.campsite_id)"
               ></b-icon>
               <b-icon icon="chat-left-dots" font-scale="1.5"></b-icon
             ></b-list-group-item>
@@ -167,7 +167,7 @@
             >등록</b-button
           >
         </div>
-        <Comment v-if="this.commentList" :commentList="this.commentList" />
+        <Comment v-if="this.commentList" :commentList="this.commentList" v-on:refresh="refresh"/>
       </div>
 
       <!-- 블로그 리뷰 -->
@@ -209,6 +209,8 @@ export default {
     const userId = localStorage.getItem("user_id");
     this.userId = userId;
 
+    if (this.getUserId != "") this.getLikeInfo();
+
     axios({
       method: "get",
       url: `${SERVER_URL}/camp/readreview/${this.campsiteId}`
@@ -220,7 +222,8 @@ export default {
       })
       .catch(error => {
         console.log(error);
-      });
+    });
+      
   },
   computed: {
     ...mapGetters({
@@ -229,7 +232,6 @@ export default {
     })
   },
   data: function() {
-    // console.log(this.$route.params.campsiteId)
     return {
       campDetail: [],
       campsiteId: this.$route.params.campsiteId,
@@ -255,23 +257,9 @@ export default {
         })
         .then(response => {
           console.log(response);
-          alert("댓글 등록");
         });
 
       this.$router.go();
-    },
-    removeReview() {
-      console.log(this.review_id);
-      axios({
-        method: "get",
-        url: `${SERVER_URL}/camp/deletereview/${this.review_id}`
-      })
-        .then(res => {
-          console.log(res.data);
-        })
-        .catch(error => {
-          console.log(error);
-        });
     },
     likeCampsite(campsite_id) {
       axios
@@ -284,7 +272,6 @@ export default {
         .then(response => {
           console.log(response.data);
           this.liked = true;
-          this.item.likeCount = this.item.likeCount * 1 + 1;
         });
     },
     unlikeCampsite(campsite_id) {
@@ -298,7 +285,6 @@ export default {
         .then(response => {
           console.log(response.data);
           this.liked = false;
-          this.item.likeCount = this.item.likeCount * 1 - 1;
         });
     },
     getLikeInfo() {
@@ -316,8 +302,12 @@ export default {
             this.liked = true;
           }
         });
+    },
+    refresh() {
+    this.$router.go();
     }
-  }
+  },
+  
 };
 </script>
 <style scoped>
