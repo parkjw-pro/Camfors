@@ -58,6 +58,7 @@ class Campsite(models.Model):
         managed = False
         db_table = 'Campsite'
 
+
 class Likes(models.Model):
     campsite_id = models.ForeignKey(Campsite, on_delete=models.CASCADE, db_column="campsite_id")
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column="user_id")
@@ -65,6 +66,7 @@ class Likes(models.Model):
     class Meta:
         managed = False
         db_table = 'Likes'
+
 
 class Reviews(models.Model):
     review_id = models.AutoField(primary_key=True)
@@ -76,3 +78,4 @@ class Reviews(models.Model):
     class Meta:
         managed = False
         db_table = 'Reviews'
+
