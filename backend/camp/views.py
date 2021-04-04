@@ -9,13 +9,8 @@ from django.db.models import Q
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 from rest_framework import status
-<<<<<<< HEAD
 from .models import Campsite, CampsiteTag, Tag, Reviews, Likes, User
-from .serializers import CampsiteSerializer, CampsiteDetailSerializer, TagSerializer, CampCreateReviewSerializer, CampReadReviewSerializer, TagSerializer, CampReadReviewUSerializer
-=======
-from .models import Campsite, CampsiteTag, Tag, Reviews, Likes
-from .serializers import CampsiteSerializer, CampsiteDetailSerializer, CampCreateReviewSerializer, CampReadReviewSerializer, TagSerializer, LikeSerializer
->>>>>>> 874d15ccd7c56011165b8d7ec8de726e92a11dfb
+from .serializers import CampsiteSerializer, CampsiteDetailSerializer, CampCreateReviewSerializer, CampReadReviewSerializer, TagSerializer, CampReadReviewUSerializer, LikeSerializer
 from django.db.models import Count
 import collections
 
