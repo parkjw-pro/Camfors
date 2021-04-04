@@ -11,7 +11,7 @@ class User(models.Model):
     class Meta:
         managed = False
         db_table = 'User'
-        
+
 class Campsite(models.Model):
     campsite_id = models.AutoField(primary_key=True)
     campsite_name = models.CharField(max_length=30)
@@ -58,6 +58,7 @@ class Campsite(models.Model):
         managed = False
         db_table = 'Campsite'
 
+
 class Likes(models.Model):
     campsite_id = models.ForeignKey(Campsite, on_delete=models.CASCADE, db_column="campsite_id")
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column="user_id")
@@ -66,12 +67,15 @@ class Likes(models.Model):
         managed = False
         db_table = 'Likes'
 
+
 class Reviews(models.Model):
     review_id = models.AutoField(primary_key=True)
     campsite_id = models.ForeignKey(Campsite, on_delete=models.CASCADE, db_column="campsite_id")
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column="user_id")
     review = models.CharField(max_length=1000, blank=True, null=True)
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    
     class Meta:
         managed = False
         db_table = 'Reviews'
+

@@ -33,8 +33,10 @@
   </div>
 </template>
 <script>
+const C_SERVER_URL = process.env.VUE_APP_SERVER_URL_C;
 import { mapGetters } from "vuex";
 import axios from "axios";
+
 export default {
   data() {
     return {
@@ -51,7 +53,7 @@ export default {
     // console.log(this.name);
     // 크롤링
     axios
-      .get("http://15.164.219.18:3000/search", {
+      .get(`${C_SERVER_URL}`, {
         params: {
           // query: "새움정"
           query: this.name

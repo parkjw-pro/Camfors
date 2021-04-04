@@ -73,9 +73,10 @@ export default {
           }
         })
         .then(response => {
-          console.log(response.data);
-          this.liked = true;
-          this.item.likeCount = this.item.likeCount * 1 + 1;
+          if (response.data) {
+            this.liked = true;
+            this.item.likeCount = this.item.likeCount * 1 + 1;
+          }
         });
     },
     unlikeCampsite(campsite_id) {
@@ -87,9 +88,10 @@ export default {
           }
         })
         .then(response => {
-          console.log(response.data);
-          this.liked = false;
-          this.item.likeCount = this.item.likeCount * 1 - 1;
+          if (response.data != true) {
+            this.liked = false;
+            this.item.likeCount = this.item.likeCount * 1 - 1;
+          }
         });
     },
     getLikeInfo() {

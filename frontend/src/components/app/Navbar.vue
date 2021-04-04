@@ -6,7 +6,9 @@
       type="dark"
       fixed="top"
     >
-      <b-navbar-brand href="/" style="margin-right:3px; padding:0px"><img height="35px" width="80px" src="@/assets/logo3.png" /></b-navbar-brand>
+      <b-navbar-brand href="/" style="margin-right:3px; padding:0px"
+        ><img height="35px" width="80px" src="@/assets/logo3.png"
+      /></b-navbar-brand>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item @click="goSearch"
