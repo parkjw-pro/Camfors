@@ -57,7 +57,7 @@ export default {
   },
   methods: {
     changeIsTag() {
-      this.$emit("IsTag", false);
+      this.$emit("IsTag", true);
     },
     searchTag() {
       console.log("태그검색");

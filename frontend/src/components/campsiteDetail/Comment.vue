@@ -78,6 +78,7 @@ export default {
         .catch(error => {
           console.log(error);
         });
+      this.$emit('refresh');
     },
     nextPage() {
       this.pageNum += 1;
