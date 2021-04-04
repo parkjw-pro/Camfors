@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     changeIsTag() {
-      this.$emit("IsTag", true);
+      this.$emit("IsTag", false);
     },
     searchWord() {
       console.log(this.word);
