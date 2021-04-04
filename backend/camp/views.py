@@ -9,8 +9,13 @@ from django.db.models import Q
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 from rest_framework import status
+<<<<<<< HEAD
 from .models import Campsite, CampsiteTag, Tag, Reviews, Likes, User
 from .serializers import CampsiteSerializer, CampsiteDetailSerializer, TagSerializer, CampCreateReviewSerializer, CampReadReviewSerializer, TagSerializer, CampReadReviewUSerializer
+=======
+from .models import Campsite, CampsiteTag, Tag, Reviews, Likes
+from .serializers import CampsiteSerializer, CampsiteDetailSerializer, CampCreateReviewSerializer, CampReadReviewSerializer, TagSerializer, LikeSerializer
+>>>>>>> 874d15ccd7c56011165b8d7ec8de726e92a11dfb
 from django.db.models import Count
 import collections
 
@@ -87,6 +92,7 @@ def campTagResult(request):
         try:
             taglist = json.loads(request.body)
             result = []
+
             for tagid in taglist:
                 queryset = Campsite.objects.filter(campsite_id__in=Subquery(CampsiteTag.objects.filter(tag_id=tagid)
                                                                           .values('campsite_id'))).order_by('likeCount')[:50]
@@ -188,6 +194,7 @@ def campCreateReview(request):
             serializer.save()
             return JsonResponse("리뷰 등록 완료", safe=False, status=status.HTTP_201_CREATED)
 
+
 @csrf_exempt
 def campReadReview(request, campsite_id):
     try:
@@ -195,7 +202,7 @@ def campReadReview(request, campsite_id):
             '''select R.campsite_id, R.created_at, R.review, U.nickname, R.review_id 
             from User as U, Reviews as R 
             where U.user_id = R.user_id
-            and R.campsite_id = {campsite_id}'''.format(campsite_id = campsite_id)
+            and R.campsite_id = {campsite_id}'''.format(campsite_id=campsite_id)
         )
 
     except Reviews.DoesNotExist:

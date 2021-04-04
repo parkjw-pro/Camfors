@@ -1,6 +1,6 @@
 <template>
   <div id="box1" style="margin:0 auto;">
-    <div style="text-align: center;">
+    <div v-if="SearchWordList.length>0" style="text-align: center;">
       <br />
       <h2
         v-if="getSearchWordName"
@@ -9,8 +9,8 @@
         {{ getSearchWordName }}의 검색결과입니다.
       </h2>
       <br />
-      <div class="row" style="text-align: center;">
-        <div v-for="(item, index) in SearchWordList" :key="index">
+      <div class="row">
+        <div v-for="(item, index) in paginatedData" :key="index">
           <div class="col-md-3">
             <swiperBlock
               :item="item"
@@ -19,7 +19,38 @@
           </div>
         </div>
       </div>
+      <div
+        v-if="SearchWordList.length > 0"
+        class="btn-cover"
+        style="text-align: center;"
+      >
+        <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
+          이전
+        </button>
+        <span class="page-count"
+          >{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
+        >
+        <button
+          :disabled="pageNum >= pageCount - 1"
+          @click="nextPage"
+          class="page-btn"
+        >
+          다음
+        </button>
+      </div>
     </div>
+      <div v-else class="mt-5 pt-5">
+        <img alt="Vue logo" src="@/assets/udonge.png" style="width: 10%" />
+        <br />
+        <div class="mb-2">
+          이런 검색어는 어떠세요?
+        </div>
+        <div>
+          <a class="mx-1">수영장</a>
+          <a class="mx-1">산책로</a>
+          <a class="mx-1">놀이터</a>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -32,7 +63,16 @@ export default {
     swiperBlock
   },
   props: {
-    SearchWordList: Array
+    // SearchWordList: Array,
+    SearchWordList: {
+      type: Array,
+      required: true
+    },
+    pageSize: {
+      type: Number,
+      required: false,
+      default: 12
+    }
   },
   data: function() {
     return {
@@ -42,18 +82,42 @@ export default {
           el: ".swiper-pagination",
           type: "bullets"
         }
-      }
+      },
+      pageNum: 0
     };
   },
   methods: {
     enlarge(event) {
       event.currentTarget.classList.add("large");
+    },
+    nextPage() {
+      this.pageNum += 1;
+    },
+    prevPage() {
+      this.pageNum -= 1;
     }
   },
   computed: {
     ...mapGetters({
       getSearchWordName: "campStore/getSearchWordName"
-    })
+    }),
+    pageCount() {
+      let listLeng = this.SearchWordList.length,
+        listSize = this.pageSize,
+        page = Math.floor(listLeng / listSize);
+      if (listLeng % listSize > 0) page += 1;
+
+      /*
+      아니면 page = Math.floor((listLeng - 1) / listSize) + 1;
+      이런식으로 if 문 없이 고칠 수도 있다!
+      */
+      return page;
+    },
+    paginatedData() {
+      const start = this.pageNum * this.pageSize,
+        end = start + this.pageSize;
+      return this.SearchWordList.slice(start, end);
+    }
   }
 };
 </script>

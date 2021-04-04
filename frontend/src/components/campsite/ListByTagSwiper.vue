@@ -59,6 +59,7 @@ export default {
 .swiper {
   height: 100%;
   width: 100%;
+  margin: 15px 0;
 
   .swiper-slide {
     display: flex;

@@ -1,17 +1,13 @@
-from django.shortcuts import render
+
 from django.http import HttpResponse, JsonResponse
-from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
 from .models import User, Campsite, Likes, Reviews
 from .serializers import UserSignUpSerializer, UserLoginSerializer, LikesSerializer, ReviewsSerializer
-from django.http import Http404
 from django.db.models import Subquery
-from rest_framework.decorators import api_view
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 from rest_framework import status
 import jwt
-from django.core import serializers
 # jsonparser로 requset body 데이터 얻을수 있음
 
 ALGORITHM = "HS256"
@@ -30,6 +26,7 @@ def signup(request):
             serializer.save()
             return JsonResponse("회원 가입 완료.", safe=False, status=status.HTTP_201_CREATED)
 
+
 @csrf_exempt
 @api_view(['post'])
 @permission_classes((permissions.AllowAny,))
@@ -39,13 +36,18 @@ def checkEmail(request):
     else:
         return JsonResponse("가입 가능한 이메일입니다.", safe=False, status=status.HTTP_201_CREATED)
 
+<<<<<<< HEAD
 @csrf_exempt
+=======
+
+>>>>>>> 874d15ccd7c56011165b8d7ec8de726e92a11dfb
 def delete(request, email):
     if not User.objects.filter(email = email).exists():
         return JsonResponse(status=status.HTTP_406_NOT_ACCEPTABLE)
     user = User.objects.get(email=email)
     user.delete()
     return JsonResponse("삭제 성공", safe=False, status=status.HTTP_201_CREATED)
+
 
 @csrf_exempt
 @api_view(['post'])
@@ -58,8 +60,10 @@ def login(request):
         return JsonResponse([serializer.data, token], safe=False, status=status.HTTP_201_CREATED)
     return JsonResponse("로그인 실패", safe=False, status=status.HTTP_406_NOT_ACCEPTABLE)
 
+
 def logout(request):
     return JsonResponse("로그아웃 성공", safe=False, status=status.HTTP_201_CREATED)
+
 
 @csrf_exempt
 @api_view(['post'])
@@ -70,6 +74,7 @@ def like(request):
                                                                       .values('campsite_id')))
     like = LikesSerializer(like_query_sets, many=True)
     return JsonResponse(like.data, safe=False, status=status.HTTP_201_CREATED)
+
 
 @csrf_exempt
 @api_view(['post'])

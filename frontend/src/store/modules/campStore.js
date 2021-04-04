@@ -62,7 +62,6 @@ const campStore = {
     },
     searchByWord(context, word) {
       console.log("searchByWord");
-      context.commit("setSearchWordName", word);
       axios({
         method: "post",
         url: `${SERVER_URL}/camp/getwordresult/`,

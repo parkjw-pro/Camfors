@@ -5,7 +5,7 @@
     <h3
       style="text-align: left; font-family: 'Hanna', sans-serif; color: white;"
     >
-      {{ tag.name }}
+      {{ tag.tag_name }}
     </h3>
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide v-for="(item, index) in campsiteList" :key="index">
@@ -40,10 +40,10 @@ export default {
   created() {
     axios({
       method: "get",
-      url: `${SERVER_URL}/camp/camptaglist/${this.tag.id}`
+      url: `${SERVER_URL}/camp/camptaglist/${this.tag.tag_id}`
     })
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         this.campsiteList = res.data;
       })
       .catch(error => {

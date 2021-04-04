@@ -3,11 +3,12 @@
     <b-navbar
       class="navbar"
       :class="{ change_color: scrollPosition > 50 }"
-      toggleable="lg"
       type="dark"
       fixed="top"
     >
-      <b-navbar-brand href="/">Phoenix</b-navbar-brand>
+      <b-navbar-brand href="/" style="margin-right:3px; padding:0px"
+        ><img height="35px" width="80px" src="@/assets/logo3.png"
+      /></b-navbar-brand>
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item @click="goSearch"
@@ -78,7 +79,7 @@ export default {
 .navbar {
   background: rgba(0, 0, 0, 0);
   font-family: LineSeed, system-ui, -SF Pro Text, Helvetica, Roboto, sans-serif;
-  height: 70px;
+  height: 88px;
   font-size: 16px;
   font-weight: 600;
   /* border-bottom: solid 1px rgba(226, 220, 220); */
