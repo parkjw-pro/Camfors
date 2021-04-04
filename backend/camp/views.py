@@ -160,26 +160,37 @@ def campCreateReview(request):
     if request.method == 'POST':
         print(request.data)
         serializer = CampCreateReviewSerializer(data=request.data)
+        print(serializer)
         if not serializer.is_valid():
             return JsonResponse(status= status.HTTP_406_NOT_ACCEPTABLE)
         else:
             serializer.save()
             return JsonResponse("리뷰 등록 완료", safe=False, status=status.HTTP_201_CREATED)
 
+@csrf_exempt
 def campReadReview(request, campsite_id):
     try:
-        query_sets = Reviews.objects.filter(campsite_id = campsite_id)
+        query_sets = Reviews.objects.raw(
+            '''select R.campsite_id, R.created_at, R.review, U.nickname, R.review_id 
+            from User as U, Reviews as R 
+            where U.user_id = R.user_id
+            and R.campsite_id = {campsite_id}'''.format(campsite_id = campsite_id)
+        )
+
     except Campsite.DoesNotExist:
         return HttpResponse(status=404)
 
     if request.method == 'GET' and len(query_sets) > 0:
         serializer = CampReadReviewSerializer(query_sets, many=True)
+        print("******************")
+        print(serializer)
+        print("******************")
         return JsonResponse(serializer.data, safe=False) 
 
     else:
         return JsonResponse("리뷰가 없습니다", safe=False) 
 
 def campDeleteReview(request, review_id):
-    review = Reviews.objects.get(review_id=review_id)
+    review = Reviews.objects.filter(review_id=review_id)
     review.delete()
     return JsonResponse("삭제 성공", safe=False, status=status.HTTP_201_CREATED)
