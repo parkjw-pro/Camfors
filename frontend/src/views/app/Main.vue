@@ -25,7 +25,7 @@
     <!-- <div style="background: linear-gradient(0deg, black 95%, #FF8C00);"> -->
     <div
       style="background: black;"
-      v-for="(item, index) in tagList"
+      v-for="(item, index) in tagList2"
       :key="index"
     >
       <swipertest :tag="item" />
@@ -83,7 +83,7 @@ export default {
   created() {
     axios({
       method: "get",
-      url: `${SERVER_URL}/camp/taglist/`
+      url: `${SERVER_URL}/camp/camppoptag`
     })
       .then(res => {
         console.log(res.data);

@@ -22,6 +22,7 @@
               @click="removeReview(comment.review_id)"
           /></small>
         </div>
+        <!-- <button v-if="(index%3)==0"></button> -->
       </b-list-group-item>
     </b-list-group>
   </div>
