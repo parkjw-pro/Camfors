@@ -113,7 +113,7 @@ export default {
 #my3 {
   display: block;
   width: 66%;
-  height: 35%;
+  height: 42%;
   position: absolute;
   left: 15%;
   top: 50%;
