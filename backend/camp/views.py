@@ -9,9 +9,14 @@ from django.db.models import Q
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 from rest_framework import status
+<<<<<<< HEAD
 from .models import Campsite, CampsiteTag, Reviews, Likes
 from .serializers import CampsiteSerializer, CampsiteDetailSerializer, CampCreateReviewSerializer,\
     LikeSerializer, CampReadReviewSerializer
+=======
+from .models import Campsite, CampsiteTag, Tag, Reviews, Likes
+from .serializers import CampsiteSerializer, CampsiteDetailSerializer, TagSerializer, CampCreateReviewSerializer, CampReadReviewSerializer, TagSerializer
+>>>>>>> efa07a1111da5e88632c4d6fc67c9a41dc5fab24
 from django.db.models import Count
 
 # jsonparser로 requset body 데이터 얻을수 있음
@@ -101,6 +106,26 @@ def campTagResult(request):
 
 
 @csrf_exempt
+def campPopTagResult(request):
+    try:
+        query_sets = Tag.objects.raw(
+            '''select ct.tag_id , sum(c.likeCount) as tagLikeCount 
+                from Campsite c, Campsite_Tag ct  
+                where c.campsite_id = ct.campsite_id 
+                GROUP BY ct.tag_id
+                order by tagLikeCount desc
+                limit 5'''
+        )
+
+    except Tag.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET' and len(query_sets) > 0:
+        serializer = TagSerializer(query_sets, many=True)
+        print(serializer)
+        return JsonResponse(serializer.data, safe=False) 
+
+@csrf_exempt
 def addlike(request):
     if request.method == 'POST':
         try:
@@ -162,28 +187,46 @@ def campCreateReview(request):
     if request.method == 'POST':
         print(request.data)
         serializer = CampCreateReviewSerializer(data=request.data)
+        print(serializer)
         if not serializer.is_valid():
             return JsonResponse(status= status.HTTP_406_NOT_ACCEPTABLE)
         else:
             serializer.save()
             return JsonResponse("리뷰 등록 완료", safe=False, status=status.HTTP_201_CREATED)
 
+<<<<<<< HEAD
 
+=======
+@csrf_exempt
+>>>>>>> efa07a1111da5e88632c4d6fc67c9a41dc5fab24
 def campReadReview(request, campsite_id):
     try:
-        query_sets = Reviews.objects.filter(campsite_id = campsite_id)
+        query_sets = Reviews.objects.raw(
+            '''select R.campsite_id, R.created_at, R.review, U.nickname, R.review_id 
+            from User as U, Reviews as R 
+            where U.user_id = R.user_id
+            and R.campsite_id = {campsite_id}'''.format(campsite_id = campsite_id)
+        )
+
     except Campsite.DoesNotExist:
         return HttpResponse(status=404)
 
     if request.method == 'GET' and len(query_sets) > 0:
         serializer = CampReadReviewSerializer(query_sets, many=True)
+        print("******************")
+        print(serializer)
+        print("******************")
         return JsonResponse(serializer.data, safe=False) 
 
     else:
         return JsonResponse("리뷰가 없습니다", safe=False) 
 
+<<<<<<< HEAD
 
+=======
+@csrf_exempt
+>>>>>>> efa07a1111da5e88632c4d6fc67c9a41dc5fab24
 def campDeleteReview(request, review_id):
-    review = Reviews.objects.get(review_id=review_id)
+    review = Reviews.objects.filter(review_id=review_id)
     review.delete()
     return JsonResponse("삭제 성공", safe=False, status=status.HTTP_201_CREATED)
