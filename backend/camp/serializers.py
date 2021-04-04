@@ -20,7 +20,6 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         fields = ['tag_id', 'tag_name']
 
-
 class LikeSerializer(serializers.ModelSerializer):
 
     class Meta:
