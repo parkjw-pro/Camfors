@@ -2,11 +2,12 @@
   <!-- <div :style="cssProps"> -->
   <div :style="cssProps" class="loginimg">
     <span id="my2" style="position:relative">
-      <h3 style= "font-family: 'Hanna', sans-serif;">내가 좋아하는 캠핑장</h3>
+      <h3 style="font-family: 'Hanna', sans-serif;">내가 좋아하는 캠핑장</h3>
       <mypagelike :likeList="likeCampsiteList"
     /></span>
-    <span id="my3"><h3 style= "font-family: 'Hanna', sans-serif;">내가 쓴 댓글</h3>
-           <Comment v-if="this.reviewList" :commentList="this.reviewList" />
+    <span id="my3"
+      ><h3 style="font-family: 'Hanna', sans-serif;">내가 쓴 댓글</h3>
+      <Comment v-if="this.reviewList" :commentList="this.reviewList" />
     </span>
   </div>
 </template>

@@ -40,8 +40,12 @@
           >
         </div>
         <div class="small">
-          <span style="color: #695549; cursor: pointer;" @click="toSignup">비밀번호찾기 </span>
-          <span style="color: #695549; cursor: pointer;" @click="toSignup">회원가입 </span>
+          <span style="color: #695549; cursor: pointer;" @click="toSignup"
+            >비밀번호찾기
+          </span>
+          <span style="color: #695549; cursor: pointer;" @click="toSignup"
+            >회원가입
+          </span>
         </div>
       </div>
     </div>
@@ -50,58 +54,58 @@
 
 <script>
 export default {
-  name: 'Login',
+  name: "Login",
   components: {},
   data: function() {
     return {
       cssProps: {
-        backgroundImage: `url(${require('@/assets/Login/login.jpg')})`,
-        width: '100vw',
-        height: '100vh',
-        position: 'relative',
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundImage: `url(${require("@/assets/Login/login.jpg")})`,
+        width: "100vw",
+        height: "100vh",
+        position: "relative",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center"
       },
       credentials: {
-        email: '',
-        password: '',
+        email: "",
+        password: ""
       },
-      error_check_login: true,
+      error_check_login: true
     };
   },
   methods: {
     enlarge(event) {
-      event.currentTarget.classList.add('large');
+      event.currentTarget.classList.add("large");
     },
     login: function() {
       // LOGIN 액션 실행
       // 서버와 통신(axios)을 해 토큰값을 얻어야 하므로 Actions를 호출.
       this.$store
-        .dispatch('userStore/LOGIN', this.credentials)
+        .dispatch("userStore/LOGIN", this.credentials)
         .then(() => {
           // 로컬스토리지 정보가 있으면 홈화면으로, 아니면 다시 로그인화면으로
-          const token = localStorage.getItem('Login-token');
+          const token = localStorage.getItem("Login-token");
           if (token !== null) {
-            location.replace('/');
+            location.replace("/");
           } else {
-            this.$router.replace('/login');
+            this.$router.replace("/login");
           }
         })
         .catch(({ message }) => (this.msg = message));
     },
     toSignup: function() {
-      this.$router.push({ name: 'Register' });
-    },
+      this.$router.push({ name: "Register" });
+    }
   },
-  created: async function() {},
+  created: async function() {}
 };
 </script>
 
 <style scoped>
 .loginimg::before {
   background-color: #000;
-  content: '';
+  content: "";
   opacity: 0.5;
   position: absolute;
   top: 0px;

@@ -51,20 +51,19 @@ export default {
   name: 'swiperBlock',
   title: 'Loop mode with multiple slides per group',
   props: {
-    item: Object,
+    item: Object
   },
   created() {
     if (this.getUserId != '') this.getLikeInfo();
   },
   computed: {
     ...mapGetters({
-      getUserId: 'userStore/getUserId',
-    }),
+      getUserId: "userStore/getUserId"
+    })
   },
   data() {
     return {
-      liked: null,
-      is_show: false,
+      liked: null
     };
   },
   methods: {
@@ -77,10 +76,10 @@ export default {
         .post(`${SERVER_URL}/camp/addlike`, {
           data: {
             campsite_id: campsite_id,
-            user_id: this.getUserId,
-          },
+            user_id: this.getUserId
+          }
         })
-        .then((response) => {
+        .then(response => {
           if (response.data) {
             this.liked = true;
             this.item.likeCount = this.item.likeCount * 1 + 1;
@@ -96,10 +95,10 @@ export default {
         .post(`${SERVER_URL}/camp/unlike`, {
           data: {
             campsite_id: campsite_id,
-            user_id: this.getUserId,
-          },
+            user_id: this.getUserId
+          }
         })
-        .then((response) => {
+        .then(response => {
           if (response.data != true) {
             this.liked = false;
             this.item.likeCount = this.item.likeCount * 1 - 1;
@@ -111,10 +110,10 @@ export default {
         .get(`${SERVER_URL}/camp/getlikeinfo`, {
           params: {
             userId: this.getUserId,
-            campsiteId: this.item.campsite_id,
-          },
+            campsiteId: this.item.campsite_id
+          }
         })
-        .then((response) => {
+        .then(response => {
           if (response.data == 0) {
             this.liked = false;
           } else {
@@ -124,12 +123,12 @@ export default {
     },
     campsiteDetail() {
       this.$router.push({
-        name: 'CampsiteDetail',
-        params: { campsiteId: this.item.campsite_id },
+        name: "CampsiteDetail",
+        params: { campsiteId: this.item.campsite_id }
       });
       // console.log('index : ' + index + ' : reallyIndex : ' + reallyIndex)
-    },
-  },
+    }
+  }
 };
 </script>
 
