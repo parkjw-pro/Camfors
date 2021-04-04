@@ -60,11 +60,22 @@
               ></b-list-group-item
             >
             <b-list-group-item
-              ><b-icon
-                icon="heart"
-                font-scale="1.5"
-                style="margin-top: 1%; margin-right: 3%;"
-              ></b-icon>
+              >
+               <!--좋아요 여부 -->
+            <b-icon
+              icon="suit-heart-fill"
+              variant="danger"
+              font-scale="1.5"
+              v-if="liked"
+              @click="unlikeCampsite(this.campsiteId)"
+            ></b-icon>
+            <b-icon
+              icon="suit-heart"
+              variant="danger"
+              font-scale="1.5"
+              v-if="!liked"
+              @click="likeCampsite(this.campsiteId)"
+            ></b-icon> 
               <b-icon icon="chat-left-dots" font-scale="1.5"></b-icon
             ></b-list-group-item>
           </b-list-group>
@@ -227,6 +238,7 @@ export default {
       commentList: [],
       comment: "",
       userId: "",
+      liked: null,
     };
   },
   methods: {
@@ -263,7 +275,51 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    }
+    },
+    likeCampsite(campsite_id) {
+      axios
+        .post(`${SERVER_URL}/camp/addlike`, {
+          data: {
+            campsite_id: campsite_id,
+            user_id: this.getUserId
+          }
+        })
+        .then(response => {
+          console.log(response.data);
+          this.liked = true;
+          this.item.likeCount = this.item.likeCount * 1 + 1;
+        });
+    },
+    unlikeCampsite(campsite_id) {
+      axios
+        .post(`${SERVER_URL}/camp/unlike`, {
+          data: {
+            campsite_id: campsite_id,
+            user_id: this.getUserId
+          }
+        })
+        .then(response => {
+          console.log(response.data);
+          this.liked = false;
+          this.item.likeCount = this.item.likeCount * 1 - 1;
+        });
+    },
+     getLikeInfo() {
+      axios
+        .get(`${SERVER_URL}/camp/getlikeinfo`, {
+          params: {
+            userId: this.getUserId,
+            campsiteId: this.campsiteId
+          }
+        })
+        .then(response => {
+          if (response.data == 0) {
+            this.liked = false;
+          } else {
+            this.liked = true;
+          }
+        });
+    },
   }
 };
 </script>

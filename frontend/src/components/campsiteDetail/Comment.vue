@@ -6,7 +6,7 @@
       <b-list-group-item class="flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
           <p class="mb-1">닉네임</p>
-          <small>2021.04.02</small>
+          <small> {{comment.created_at}} </small>
         </div>
 
         <div class="d-flex w-100 justify-content-between">
