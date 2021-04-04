@@ -48,3 +48,9 @@ class CampReadReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reviews
         fields = ['user_id','campsite_id','review','review_id','created_at']
+
+class CampReadReviewUSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ['user_id','nickname']
