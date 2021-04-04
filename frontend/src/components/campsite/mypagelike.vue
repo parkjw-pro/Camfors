@@ -47,8 +47,7 @@ export default {
       }
     };
   },
-  methods: {
-  }
+  methods: {}
 };
 </script>
 
@@ -72,5 +71,4 @@ export default {
   margin-right: 20px;
   margin-left: 20px;
 }
-
 </style>

@@ -6,7 +6,7 @@
       <b-list-group-item class="flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
           <p class="mb-1">닉네임</p>
-          <small> {{comment.created_at}} </small>
+          <small> {{ comment.created_at }} </small>
         </div>
 
         <div class="d-flex w-100 justify-content-between">
@@ -25,12 +25,20 @@
         <!-- <button v-if="(index%3)==0"></button> -->
       </b-list-group-item>
     </b-list-group>
-    <div v-if="commentList.length>4" class="btn-cover" style="text-align: center;">
+    <div
+      v-if="commentList.length > 4"
+      class="btn-cover"
+      style="text-align: center;"
+    >
       <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
         이전
       </button>
       <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
-      <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
+      <button
+        :disabled="pageNum >= pageCount - 1"
+        @click="nextPage"
+        class="page-btn"
+      >
         다음
       </button>
     </div>
@@ -38,36 +46,36 @@
 </template>
 <script>
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
-import axios from 'axios';
-import { mapGetters } from 'vuex';
+import axios from "axios";
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      pageNum: 0,
+      pageNum: 0
     };
   },
   props: {
     commentList: {
       type: Array,
-      required: true,
+      required: true
     },
     pageSize: {
       type: Number,
       required: false,
-      default: 4,
-    },
+      default: 4
+    }
   },
   methods: {
     removeReview(review_id) {
       console.log(review_id);
       axios({
-        method: 'delete',
-        url: `${SERVER_URL}/camp/deletereview/${review_id}`,
+        method: "delete",
+        url: `${SERVER_URL}/camp/deletereview/${review_id}`
       })
-        .then((res) => {
+        .then(res => {
           console.log(res.data);
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
@@ -76,11 +84,11 @@ export default {
     },
     prevPage() {
       this.pageNum -= 1;
-    },
+    }
   },
   computed: {
     ...mapGetters({
-      getUserId: 'userStore/getUserId',
+      getUserId: "userStore/getUserId"
     }),
     pageCount() {
       let listLeng = this.commentList.length,
@@ -98,8 +106,8 @@ export default {
       const start = this.pageNum * this.pageSize,
         end = start + this.pageSize;
       return this.commentList.slice(start, end);
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped>

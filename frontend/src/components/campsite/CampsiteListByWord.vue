@@ -12,16 +12,29 @@
       <div class="row">
         <div v-for="(item, index) in paginatedData" :key="index">
           <div class="col-md-3">
-            <swiperBlock :item="item" style="width: 20rem; height:20rem; margin-bottom:2rem;" />
+            <swiperBlock
+              :item="item"
+              style="width: 20rem; height:20rem; margin-bottom:2rem;"
+            />
           </div>
         </div>
       </div>
-      <div v-if="SearchWordList.length>0" class="btn-cover" style="text-align: center;">
+      <div
+        v-if="SearchWordList.length > 0"
+        class="btn-cover"
+        style="text-align: center;"
+      >
         <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
           이전
         </button>
-        <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
-        <button :disabled="pageNum >= pageCount - 1" @click="nextPage" class="page-btn">
+        <span class="page-count"
+          >{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
+        >
+        <button
+          :disabled="pageNum >= pageCount - 1"
+          @click="nextPage"
+          class="page-btn"
+        >
           다음
         </button>
       </div>
@@ -30,51 +43,51 @@
 </template>
 
 <script>
-import 'swiper/css/swiper.css';
-import swiperBlock from '@/components/campsite/swiperBlock';
-import { mapGetters } from 'vuex';
+import "swiper/css/swiper.css";
+import swiperBlock from "@/components/campsite/swiperBlock";
+import { mapGetters } from "vuex";
 export default {
   components: {
-    swiperBlock,
+    swiperBlock
   },
   props: {
     // SearchWordList: Array,
     SearchWordList: {
       type: Array,
-      required: true,
+      required: true
     },
     pageSize: {
       type: Number,
       required: false,
-      default: 12,
-    },
+      default: 12
+    }
   },
   data: function() {
     return {
       swiperOption: {
-        direction: 'vertical',
+        direction: "vertical",
         pagination: {
-          el: '.swiper-pagination',
-          type: 'bullets',
-        },
+          el: ".swiper-pagination",
+          type: "bullets"
+        }
       },
-      pageNum: 0,
+      pageNum: 0
     };
   },
   methods: {
     enlarge(event) {
-      event.currentTarget.classList.add('large');
+      event.currentTarget.classList.add("large");
     },
     nextPage() {
       this.pageNum += 1;
     },
     prevPage() {
       this.pageNum -= 1;
-    },
+    }
   },
   computed: {
     ...mapGetters({
-      getSearchWordName: 'campStore/getSearchWordName',
+      getSearchWordName: "campStore/getSearchWordName"
     }),
     pageCount() {
       let listLeng = this.SearchWordList.length,
@@ -92,8 +105,8 @@ export default {
       const start = this.pageNum * this.pageSize,
         end = start + this.pageSize;
       return this.SearchWordList.slice(start, end);
-    },
-  },
+    }
+  }
 };
 </script>
 

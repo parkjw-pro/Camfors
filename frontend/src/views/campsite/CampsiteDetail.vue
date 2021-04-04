@@ -59,23 +59,22 @@
                 >예약하기</b-button
               ></b-list-group-item
             >
-            <b-list-group-item
-              >
-               <!--좋아요 여부 -->
-            <b-icon
-              icon="suit-heart-fill"
-              variant="danger"
-              font-scale="1.5"
-              v-if="liked"
-              @click="unlikeCampsite(this.campsiteId)"
-            ></b-icon>
-            <b-icon
-              icon="suit-heart"
-              variant="danger"
-              font-scale="1.5"
-              v-if="!liked"
-              @click="likeCampsite(this.campsiteId)"
-            ></b-icon> 
+            <b-list-group-item>
+              <!--좋아요 여부 -->
+              <b-icon
+                icon="suit-heart-fill"
+                variant="danger"
+                font-scale="1.5"
+                v-if="liked"
+                @click="unlikeCampsite(this.campsiteId)"
+              ></b-icon>
+              <b-icon
+                icon="suit-heart"
+                variant="danger"
+                font-scale="1.5"
+                v-if="!liked"
+                @click="likeCampsite(this.campsiteId)"
+              ></b-icon>
               <b-icon icon="chat-left-dots" font-scale="1.5"></b-icon
             ></b-list-group-item>
           </b-list-group>
@@ -238,7 +237,7 @@ export default {
       commentList: [],
       comment: "",
       userId: "",
-      liked: null,
+      liked: null
     };
   },
   methods: {
@@ -257,11 +256,9 @@ export default {
         .then(response => {
           console.log(response);
           alert("댓글 등록");
-          
         });
 
-      
-      this.$router.go()
+      this.$router.go();
     },
     removeReview() {
       console.log(this.review_id);
@@ -304,7 +301,7 @@ export default {
           this.item.likeCount = this.item.likeCount * 1 - 1;
         });
     },
-     getLikeInfo() {
+    getLikeInfo() {
       axios
         .get(`${SERVER_URL}/camp/getlikeinfo`, {
           params: {
@@ -319,7 +316,7 @@ export default {
             this.liked = true;
           }
         });
-    },
+    }
   }
 };
 </script>

@@ -47,7 +47,7 @@ export default {
     // Movie,
     // swiper,
     // swiperSlide,
-    swipertest,
+    swipertest
     // Slider,
     // CampsiteList,
   },
@@ -58,17 +58,17 @@ export default {
         { name: "바다가 보이는 곳", id: 7 },
         { name: "산책하기 좋은 곳", id: 12 },
         { name: "가족들과 가기 좋은", id: 5 },
-        { name: "아이들이랑 가고 싶은 곳", id: 13 },
+        { name: "아이들이랑 가고 싶은 곳", id: 13 }
       ],
-      tagList2:[],
+      tagList2: [],
       visible: true,
       swiperOption: {
         direction: "vertical",
         pagination: {
           el: ".swiper-pagination",
-          type: "bullets",
-        },
-      },
+          type: "bullets"
+        }
+      }
     };
   },
   methods: {
@@ -78,7 +78,7 @@ export default {
     moveToList() {
       var location = document.querySelector("#scrollBtn").offsetTop;
       window.scrollTo({ top: location + 30, behavior: "smooth" });
-    },
+    }
   },
   created() {
     axios({
@@ -92,7 +92,7 @@ export default {
       .catch(error => {
         console.log(error);
       });
-  },
+  }
 };
 </script>
 
