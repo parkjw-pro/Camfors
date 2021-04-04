@@ -43,7 +43,7 @@ export default {
       url: `${SERVER_URL}/camp/camptaglist/${this.tag.id}`
     })
       .then(res => {
-        console.log(res.data);
+        // console.log(res.data);
         this.campsiteList = res.data;
       })
       .catch(error => {
