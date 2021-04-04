@@ -10,7 +10,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 from rest_framework import status
 from .models import Campsite, CampsiteTag, Tag, Reviews, Likes
-from .serializers import CampsiteSerializer, CampsiteDetailSerializer, TagSerializer, CampCreateReviewSerializer, CampReadReviewSerializer
+from .serializers import CampsiteSerializer, CampsiteDetailSerializer, TagSerializer, CampCreateReviewSerializer, CampReadReviewSerializer, TagSerializer
 from django.db.models import Count
 
 # jsonparser로 requset body 데이터 얻을수 있음
@@ -97,6 +97,26 @@ def campTagResult(request):
 
     return JsonResponse(result, safe=False)
 
+
+@csrf_exempt
+def campPopTagResult(request):
+    try:
+        query_sets = Tag.objects.raw(
+            '''select ct.tag_id , sum(c.likeCount) as tagLikeCount 
+                from Campsite c, Campsite_Tag ct  
+                where c.campsite_id = ct.campsite_id 
+                GROUP BY ct.tag_id
+                order by tagLikeCount desc
+                limit 5'''
+        )
+
+    except Tag.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET' and len(query_sets) > 0:
+        serializer = TagSerializer(query_sets, many=True)
+        print(serializer)
+        return JsonResponse(serializer.data, safe=False) 
 
 @csrf_exempt
 def addlike(request):
@@ -190,6 +210,7 @@ def campReadReview(request, campsite_id):
     else:
         return JsonResponse("리뷰가 없습니다", safe=False) 
 
+@csrf_exempt
 def campDeleteReview(request, review_id):
     review = Reviews.objects.filter(review_id=review_id)
     review.delete()
