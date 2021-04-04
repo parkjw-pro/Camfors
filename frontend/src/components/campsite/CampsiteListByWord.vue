@@ -1,6 +1,6 @@
 <template>
   <div id="box1" style="margin:0 auto;">
-    <div style="text-align: center;">
+    <div v-if="SearchWordList.length>0" style="text-align: center;">
       <br />
       <h2
         v-if="getSearchWordName"
@@ -26,6 +26,18 @@
         </button>
       </div>
     </div>
+      <div v-else class="mt-5 pt-5">
+        <img alt="Vue logo" src="@/assets/udonge.png" style="width: 10%" />
+        <br />
+        <div class="mb-2">
+          이런 검색어는 어떠세요?
+        </div>
+        <div>
+          <a class="mx-1">수영장</a>
+          <a class="mx-1">산책로</a>
+          <a class="mx-1">놀이터</a>
+        </div>
+      </div>
   </div>
 </template>
 
