@@ -54,7 +54,7 @@
               <b-button
                 variant="secondary"
                 v-if="getDetailInfo.homepage"
-                :href="getDetailInfo.homepage"
+                :href="getDetailInfo.resveUrl"
                 target="_blank"
                 >예약하기</b-button
               ></b-list-group-item
@@ -196,6 +196,9 @@ export default {
       this.$route.params.campsiteId
     );
 
+    const userId = localStorage.getItem("user_id");
+    this.userId = userId;
+
     axios({
       method: "get",
       url: `${SERVER_URL}/camp/readreview/${this.campsiteId}`
@@ -222,7 +225,8 @@ export default {
       campsiteId: this.$route.params.campsiteId,
       tagList: "",
       commentList: [],
-      comment: ""
+      comment: "",
+      userId: "",
     };
   },
   methods: {
@@ -241,12 +245,16 @@ export default {
         .then(response => {
           console.log(response);
           alert("댓글 등록");
+          
         });
+
+      
+      this.$router.go()
     },
     removeReview() {
       console.log(this.review_id);
       axios({
-        method: "delete",
+        method: "get",
         url: `${SERVER_URL}/camp/deletereview/${this.review_id}`
       })
         .then(res => {
