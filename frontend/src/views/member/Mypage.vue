@@ -1,31 +1,26 @@
 <template>
   <!-- <div :style="cssProps"> -->
   <div :style="cssProps" class="loginimg">
-    <div id="my1">
-      <h3>내정보</h3>
-    </div>
-    <!-- <span id="my2">
-
-    /></span>
-    <div id="like">
-      <mypagelike/>
-    </div> -->
     <span id="my2" style="position:relative">
-      <h3>좋아요</h3>
+      <h3 style= "font-family: 'Hanna', sans-serif;">내가 좋아하는 캠핑장</h3>
       <mypagelike :likeList="likeCampsiteList"
     /></span>
-    <span id="my3"><h3>댓글</h3></span>
+    <span id="my3"><h3 style= "font-family: 'Hanna', sans-serif;">내가 쓴 댓글</h3>
+           <Comment v-if="this.reviewList" :commentList="this.reviewList" />
+    </span>
   </div>
 </template>
 
 <script>
 import mypagelike from "@/components/campsite/mypagelike";
+import Comment from "@/components/campsiteDetail/Comment";
 import axios from "axios";
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
   name: "Mypage",
   components: {
-    mypagelike
+    mypagelike,
+    Comment
   },
   data: function() {
     return {
@@ -106,21 +101,21 @@ export default {
 
 #my2 {
   display: block;
-  width: 33%;
-  height: 40%;
+  width: 66%;
+  height: 35%;
   position: absolute;
   left: 15%;
-  top: 50%;
+  top: 10%;
   color: black;
   background-color: rgba(255, 255, 255, 0.356);
   opacity: 0.7;
 }
 #my3 {
   display: block;
-  width: 33%;
-  height: 40%;
+  width: 66%;
+  height: 42%;
   position: absolute;
-  left: 53%;
+  left: 15%;
   top: 50%;
   color: black;
   background-color: rgba(255, 255, 255, 0.356);

@@ -25,7 +25,7 @@
     <!-- <div style="background: linear-gradient(0deg, black 95%, #FF8C00);"> -->
     <div
       style="background: black;"
-      v-for="(item, index) in tagList"
+      v-for="(item, index) in tagList2"
       :key="index"
     >
       <swipertest :tag="item" />
@@ -37,6 +37,9 @@
 <script>
 import "swiper/css/swiper.css";
 import swipertest from "@/components/campsite/swipertest";
+import axios from "axios";
+
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   name: "Main",
@@ -57,6 +60,7 @@ export default {
         { name: "가족들과 가기 좋은", id: 5 },
         { name: "아이들이랑 가고 싶은 곳", id: 13 },
       ],
+      tagList2:[],
       visible: true,
       swiperOption: {
         direction: "vertical",
@@ -75,6 +79,19 @@ export default {
       var location = document.querySelector("#scrollBtn").offsetTop;
       window.scrollTo({ top: location + 30, behavior: "smooth" });
     },
+  },
+  created() {
+    axios({
+      method: "get",
+      url: `${SERVER_URL}/camp/camppoptag`
+    })
+      .then(res => {
+        console.log(res.data);
+        this.tagList2 = res.data;
+      })
+      .catch(error => {
+        console.log(error);
+      });
   },
 };
 </script>
