@@ -9,9 +9,15 @@ from django.db.models import Q
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 from rest_framework import status
+<<<<<<< HEAD
+from .models import Campsite, CampsiteTag, Tag, Reviews, Likes, User
+from .serializers import CampsiteSerializer, CampsiteDetailSerializer, TagSerializer, CampCreateReviewSerializer, CampReadReviewSerializer, TagSerializer, CampReadReviewUSerializer
+=======
 from .models import Campsite, CampsiteTag, Tag, Reviews, Likes
 from .serializers import CampsiteSerializer, CampsiteDetailSerializer, CampCreateReviewSerializer, CampReadReviewSerializer, TagSerializer, LikeSerializer
+>>>>>>> 874d15ccd7c56011165b8d7ec8de726e92a11dfb
 from django.db.models import Count
+import collections
 
 # jsonparser로 requset body 데이터 얻을수 있음
 
@@ -199,15 +205,34 @@ def campReadReview(request, campsite_id):
             and R.campsite_id = {campsite_id}'''.format(campsite_id=campsite_id)
         )
 
-    except Campsite.DoesNotExist:
+    except Reviews.DoesNotExist:
         return HttpResponse(status=404)
 
-    if request.method == 'GET' and len(query_sets) > 0:
+    try:
+        query_sets2 = User.objects.raw(
+            '''select U.user_id, R.campsite_id, R.created_at, R.review, U.nickname, R.review_id 
+            from User as U, Reviews as R 
+            where U.user_id = R.user_id
+            and R.campsite_id = {campsite_id}'''.format(campsite_id = campsite_id)
+        )
+
+    except User.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET' and len(query_sets) > 0 and len(query_sets2) > 0:
         serializer = CampReadReviewSerializer(query_sets, many=True)
-        print("******************")
-        print(serializer)
-        print("******************")
-        return JsonResponse(serializer.data, safe=False) 
+        serializer2 = CampReadReviewUSerializer(query_sets2, many=True)
+        result = []
+        review_len = len(serializer.data)
+        for i in range(review_len):
+            sub_result = collections.OrderedDict()
+            for k, v in serializer.data[i].items():
+                sub_result[k] = v
+            for k, v in serializer2.data[i].items():
+                sub_result[k] = v
+            result.append(sub_result)
+        print(result)
+        return JsonResponse(result, safe=False) 
 
     else:
         return JsonResponse("리뷰가 없습니다", safe=False) 

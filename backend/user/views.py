@@ -36,7 +36,11 @@ def checkEmail(request):
     else:
         return JsonResponse("가입 가능한 이메일입니다.", safe=False, status=status.HTTP_201_CREATED)
 
+<<<<<<< HEAD
+@csrf_exempt
+=======
 
+>>>>>>> 874d15ccd7c56011165b8d7ec8de726e92a11dfb
 def delete(request, email):
     if not User.objects.filter(email = email).exists():
         return JsonResponse(status=status.HTTP_406_NOT_ACCEPTABLE)
