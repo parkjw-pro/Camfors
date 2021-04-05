@@ -107,7 +107,7 @@ export default {
         end = start + this.pageSize;
       return this.commentList.slice(start, end);
     }
-  }
+  },
 };
 </script>
 <style scoped>
