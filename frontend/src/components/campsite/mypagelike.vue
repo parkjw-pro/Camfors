@@ -30,9 +30,9 @@ export default {
   data() {
     return {
       swiperOption: {
-        slidesPerView: 2,
+        slidesPerView: 3,
         spaceBetween: 20,
-        slidesPerGroup: 2,
+        slidesPerGroup: 3,
         loop: true,
         loopFillGroupWithBlank: false,
         pagination: {
