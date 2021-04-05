@@ -5,7 +5,7 @@
     <b-list-group flush v-for="(comment, index) in paginatedData" :key="index">
       <b-list-group-item class="flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
-          <p class="mb-1">닉네임</p>
+          <p class="mb-1">{{comment.nickname}}</p>
           <small> {{ comment.created_at }} </small>
         </div>
 
