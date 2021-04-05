@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import mypagelike from "@/components/campsite/mypagelike";
+import mypagelike from "@/components/mypage/mypagelike";
 import Comment from "@/components/campsiteDetail/Comment";
 import axios from "axios";
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;

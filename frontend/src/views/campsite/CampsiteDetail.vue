@@ -234,7 +234,7 @@ export default {
 
     axios({
       method: "get",
-      url: `${SERVER_URL}/camp/readreview/${this.campsiteId}`
+      url: `${SERVER_URL}/camp/readreview/${this.campsiteId}/`
     })
       .then(res => {
         this.commentList = [];

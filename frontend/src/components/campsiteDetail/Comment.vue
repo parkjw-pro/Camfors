@@ -8,7 +8,6 @@
           <p class="mb-1">{{comment.nickname}}</p>
           <small> {{ comment.created_at }} </small>
         </div>
-
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1" style="text-align:left;">
             {{ comment.review }}
@@ -97,7 +96,6 @@ export default {
         listSize = this.pageSize,
         page = Math.floor(listLeng / listSize);
       if (listLeng % listSize > 0) page += 1;
-
       /*
       아니면 page = Math.floor((listLeng - 1) / listSize) + 1;
       이런식으로 if 문 없이 고칠 수도 있다!

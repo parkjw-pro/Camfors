@@ -1,6 +1,5 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
-from rest_framework.parsers import JSONParser
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Subquery
 import json
@@ -100,6 +99,47 @@ def campTagResult(request):
     return JsonResponse(result, safe=False)
 
 
+def gettaglist(request):
+    if request.method == 'GET':
+        try:
+            query = Tag.objects.all()
+            taglist = TagSerializer(query,many=True)
+
+        except Tag.DoesNotExist:
+            return HttpResponse(status=404)
+
+    return JsonResponse(taglist.data, safe=False)
+
+
+def listbyuser(request, user_id):
+    if request.method == 'GET':
+        try:
+            check = Likes.objects.filter(user_id=user_id).aggregate(Count('campsite_id'))
+            cnt = check.get('campsite_id__count')
+            if cnt > 0:
+                query = Tag.objects.raw('''SELECT tag_id, count(campsite_id) FROM CFS.Campsite_Tag 
+                    where campsite_id in (select campsite_id from Likes where user_id={user_id}) 
+                    group by tag_id order by count(campsite_id) desc
+                    limit 5;'''.format(user_id=user_id))
+                serializer = TagSerializer(query, many=True)
+
+            else :
+                query = Tag.objects.raw(
+                    '''select ct.tag_id , sum(c.likeCount) as tagLikeCount 
+                        from Campsite c, Campsite_Tag ct  
+                        where c.campsite_id = ct.campsite_id 
+                        GROUP BY ct.tag_id
+                        order by tagLikeCount desc
+                        limit 5'''
+                )
+                serializer = TagSerializer(query, many=True)
+
+        except Campsite.DoesNotExist:
+            return HttpResponse(status=404)
+
+    return JsonResponse(serializer.data, safe=False)
+
+
 @csrf_exempt
 def campPopTagResult(request):
     try:
@@ -119,6 +159,7 @@ def campPopTagResult(request):
         serializer = TagSerializer(query_sets, many=True)
         print(serializer)
         return JsonResponse(serializer.data, safe=False) 
+
 
 @csrf_exempt
 def addlike(request):
@@ -231,6 +272,7 @@ def campReadReview(request, campsite_id):
 
     else:
         return JsonResponse("리뷰가 없습니다", safe=False) 
+
 
 @csrf_exempt
 def campDeleteReview(request, review_id):
