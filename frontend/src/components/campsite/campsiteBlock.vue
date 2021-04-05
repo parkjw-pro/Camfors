@@ -122,10 +122,10 @@ export default {
         });
     },
     campsiteDetail() {
-      this.$router.push({
+      this.$router.go(this.$router.push({
         name: "CampsiteDetail",
         params: { campsiteId: this.item.campsite_id }
-      });
+      }));
       // console.log('index : ' + index + ' : reallyIndex : ' + reallyIndex)
     }
   }

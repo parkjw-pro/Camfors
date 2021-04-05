@@ -365,6 +365,10 @@ export default {
     },
 
     likeCampsite(campsite_id) {
+      if (this.getUserId == '') {
+        this.$refs['modal'].show() // PopUp Open
+        return;
+      }
       axios
         .post(`${SERVER_URL}/camp/addlike`, {
           data: {
@@ -378,6 +382,10 @@ export default {
         });
     },
     unlikeCampsite(campsite_id) {
+      if (this.getUserId == '') {
+        this.$refs['modal'].show() // PopUp Open
+        return;
+      }
       axios
         .post(`${SERVER_URL}/camp/unlike`, {
           data: {
