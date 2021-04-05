@@ -75,6 +75,9 @@
                 @click="likeCampsite(getDetailInfo.campsite_id)"
                 ><i class="fas fa-heart"></i></b-button
               >
+              <b-modal ref="modal">
+                <p>로그인 후 이용 가능합니다!</p>
+              </b-modal>
           </div>
           
         </div>
@@ -289,6 +292,10 @@ export default {
       this.$router.go();
     },
     likeCampsite(campsite_id) {
+      if (this.getUserId == '') {
+        this.$refs['modal'].show() // PopUp Open
+        return;
+      }
       axios
         .post(`${SERVER_URL}/camp/addlike`, {
           data: {
@@ -302,6 +309,10 @@ export default {
         });
     },
     unlikeCampsite(campsite_id) {
+      if (this.getUserId == '') {
+        this.$refs['modal'].show() // PopUp Open
+        return;
+      }
       axios
         .post(`${SERVER_URL}/camp/unlike`, {
           data: {
