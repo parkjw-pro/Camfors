@@ -7,10 +7,9 @@ import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 //fort-awesome
 import { library as faLibrary } from "@fortawesome/fontawesome-svg-core";
 import {
-  faVolleyballBall,
-  faWater,
-  faFish,
-  faCircle,
+  faTrailer,
+  faCaravan,
+  faTruck,
   faPaw,
   faTrash,
   faAngleDown,
@@ -20,10 +19,9 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 // Set up FontAwesome
 faLibrary.add(
-  faVolleyballBall,
-  faWater,
-  faFish,
-  faCircle,
+  faTrailer,
+  faCaravan,
+  faTruck,
   faPaw,
   faTrash,
   faAngleDown,
