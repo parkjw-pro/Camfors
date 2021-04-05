@@ -240,6 +240,11 @@ export default {
         this.commentList = [];
         console.log(res.data);
         if (res.data !== "리뷰가 없습니다") this.commentList = res.data;
+
+        for(let i=0; i<this.commentList.length; i++){
+          this.commentList[i].created_at = this.commentList[i].created_at.replace("T", " ")
+        }
+        
       })
       .catch(error => {
         console.log(error);
