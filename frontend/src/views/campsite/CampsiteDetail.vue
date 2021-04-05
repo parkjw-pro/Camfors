@@ -14,7 +14,7 @@
     <!-- 캠핑장 상세페이지 컨테이너 -->
     <b-container>
       <div class="row campsiteInfo">
-        <div class="col-sm-6 col-md-6 campsiteInfoImg">
+        <div class="col-sm-7 col-md-7 campsiteInfoImg">
           <b-img
             v-if="getDetailInfo.firstImageUrlV"
             id="campsiteImg"
@@ -29,55 +29,54 @@
           ></b-img>
         </div>
 
-        <div class="col-sm-6 col-md-6 campsiteInfoList">
-          <b-list-group flush>
-            <b-list-group-item v-if="getDetailInfo.indutyV">{{
-              getDetailInfo.indutyV
-            }}</b-list-group-item>
-            <b-list-group-item v-if="getDetailInfo.addr1">{{
-              getDetailInfo.addr1
-            }}</b-list-group-item>
-            <b-list-group-item v-if="getDetailInfo.intro">{{
-              getDetailInfo.intro
-            }}</b-list-group-item>
-            <b-list-group-item v-if="getDetailInfo.tel">{{
-              getDetailInfo.tel
-            }}</b-list-group-item>
-            <b-list-group-item
-              ><b-button
+        <div class="col-sm-5 col-md-5 campsiteInfoList">
+          <table id="list">
+            <tbody>
+              <tr v-if="getDetailInfo.addr1"><th>상세주소</th><td>{{getDetailInfo.addr1}}</td></tr>
+              <tr v-if="getDetailInfo.lineintro"><th>한줄소개</th><td>{{getDetailInfo.lineintro}}</td></tr>
+              <tr v-if="getDetailInfo.lctCl"><th>입지구분</th><td>{{getDetailInfo.lctCl}}</td></tr>
+              <tr v-if="getDetailInfo.tel"><th>문의처</th><td>{{getDetailInfo.tel}}</td></tr>
+              <tr v-if="getDetailInfo.operPdCl"><th>운영기간</th><td>{{getDetailInfo.operPdCl}}</td></tr>
+              <tr v-if="getDetailInfo.operDeCl"><th>운영일</th><td>{{getDetailInfo.operDeCl}}</td></tr>
+              <tr v-if="getDetailInfo.posblFcltyCl"><th>주변시설</th><td>{{getDetailInfo.posblFcltyCl}}</td></tr>
+              <tr v-if="getDetailInfo.themaEnvrnCl"><th>테마환경</th><td>{{getDetailInfo.themaEnvrnCl}}</td></tr>
+              <tr v-if="getDetailInfo.exprnProgrm"><th>체험프로그램</th><td>{{getDetailInfo.exprnProgrm}}</td></tr>
+              <tr v-if="getDetailInfo.glampInnerFclty"><th>글램핑<br>내부시설</th><td>{{getDetailInfo.glampInnerFclty}}</td></tr>
+              <tr v-if="getDetailInfo.caravInnerFclty"><th>카라반<br>내부시설</th><td>{{getDetailInfo.caravInnerFclty}}</td></tr>
+            </tbody>
+          </table>
+
+          <div class="pageBtn">
+            <b-button
                 variant="secondary"
                 v-if="getDetailInfo.homepage"
                 :href="getDetailInfo.homepage"
                 target="_blank"
+                style="margin-right:10px;"
                 >홈페이지</b-button
               >
               <b-button
                 variant="secondary"
-                v-if="getDetailInfo.homepage"
+                v-if="getDetailInfo.resveUrl"
                 :href="getDetailInfo.resveUrl"
                 target="_blank"
+                style="margin-right:10px;"
                 >예약하기</b-button
-              ></b-list-group-item
-            >
-            <b-list-group-item>
-              <!--좋아요 여부 -->
-              <b-icon
-                icon="suit-heart-fill"
-                variant="danger"
-                font-scale="1.5"
+              >
+              <b-button
+                variant="outline-danger"
                 v-if="liked"
                 @click="unlikeCampsite(getDetailInfo.campsite_id)"
-              ></b-icon>
-              <b-icon
-                icon="suit-heart"
-                variant="danger"
-                font-scale="1.5"
+                ><i class="fas fa-heart"></i></b-button
+              >
+              <b-button
+                variant="outline-secondary"
                 v-if="!liked"
                 @click="likeCampsite(getDetailInfo.campsite_id)"
-              ></b-icon>
-              <b-icon icon="chat-left-dots" font-scale="1.5"></b-icon
-            ></b-list-group-item>
-          </b-list-group>
+                ><i class="fas fa-heart"></i></b-button
+              >
+          </div>
+          
         </div>
       </div>
 
@@ -126,7 +125,7 @@
       </div>
 
       <!-- 한 줄 리뷰 -->
-      <div class="comment">
+      <div id="comment">
         <h4 style="margin-top:20px; text-align:left;">
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>한 줄 리뷰
         </h4>
@@ -239,7 +238,8 @@ export default {
       commentList: [],
       comment: "",
       userId: "",
-      liked: null
+      liked: null,
+      likeCount: ""
     };
   },
   methods: {
@@ -296,6 +296,7 @@ export default {
           }
         })
         .then(response => {
+          console.log(response)
           if (response.data == 0) {
             this.liked = false;
           } else {
@@ -341,7 +342,7 @@ export default {
 
 #campsiteImg {
   width: 100%;
-  height: 400px;
+  height: 500px;
 }
 .campsiteInfoList {
   text-align: left;
@@ -372,7 +373,7 @@ export default {
   margin: 0 auto;
 }
 
-.comment {
+#comment {
   margin-top: 40px;
   border-top: 1px solid rgba(77, 74, 74, 0.459);
 }
@@ -391,6 +392,35 @@ export default {
   margin-right: 0;
 }
 
+th {
+  width: 120px;
+  padding: 11px 10px;
+  border-bottom: 1px solid #c8c8c8;
+  text-align: left;
+  color: #000;
+  line-height: 25px;
+}
+
+td {
+  width: 480px;
+  padding: 11px 10px;
+  border-bottom: 1px solid #c8c8c8;
+  text-align: left;
+  color: #000;
+  line-height: 25px;
+}
+
+tbody tr:nth-child(1) th, tbody tr:nth-child(1) td {
+    border-top: 2px solid #000;
+}
+
+.pageBtn {
+  margin-top: 10px;
+}
+
+.iconBtn {
+  margin-top: 10px;
+}
 @media (min-width: 1281px) {
   .container,
   .container-sm,
