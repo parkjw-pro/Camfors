@@ -359,9 +359,10 @@ export default {
         })
         .then((response) => {
           console.log(response);
+          this.getReview();
         });
 
-      this.$router.go();
+      
     },
 
     likeCampsite(campsite_id) {
@@ -416,7 +417,8 @@ export default {
         });
     },
     refresh() {
-      this.$router.go();
+      // this.$router.go();
+      this.getReview()
     },
   },
 };
