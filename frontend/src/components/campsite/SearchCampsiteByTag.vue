@@ -25,6 +25,8 @@
   </div>
 </template>
 <script>
+// const SERVER_URL = process.env.VUE_APP_SERVER_URL;
+// import axios from "axios";
 export default {
   data() {
     return {
@@ -78,7 +80,21 @@ export default {
       this.selectedTagName = [];
       //this.$emit("IsTag", false);
     }
-  }
+  },
+  // created() {
+  //   axios({
+  //     method: "get",
+  //     url: `${SERVER_URL}/camp/gettaglist`
+  //   })
+  //     .then(res => {
+  //       this.commentList = [];
+  //       console.log(res.data);
+  //       if (res.data !== "리뷰가 없습니다") this.commentList = res.data;
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //   });
+  // }
 };
 </script>
 <style scoped>
