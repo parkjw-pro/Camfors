@@ -12,8 +12,8 @@
   </div>
 </template>
 <script>
-import SearchCampsiteByTag from "@/components/campsite/SearchCampsiteByTag";
-import SearchCampsiteByWord from "@/components/campsite/SearchCampsiteByWord";
+import SearchCampsiteByTag from "@/components/campsiteSearch/SearchCampsiteByTag";
+import SearchCampsiteByWord from "@/components/campsiteSearch/SearchCampsiteByWord";
 import CampsiteListByTag from "@/components/campsite/CampsiteListByTag";
 import CampsiteListByWord from "@/components/campsite/CampsiteListByWord";
 import { mapGetters } from "vuex";

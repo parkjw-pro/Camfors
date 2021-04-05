@@ -3,12 +3,12 @@
   <div>
     <div :style="cssProps" class="loginimg">
       <div id="box">
-        <h2>로그인</h2>
+        <h2 style="margin-bottom:40px;">로그인</h2>
         <div class="form-group">
           <input
             type="text"
             class="form-control"
-            style="color: #695549; width:50%; text-align:center; display:block; margin: 0 auto;"
+            style="color: #695549; width:80%; text-align:center; display:block; margin: 0 auto;"
             placeholder="Email"
             id="email"
             v-model="credentials.email"
@@ -20,7 +20,7 @@
           <input
             type="password"
             class="form-control"
-            style="color: #695549; width:50%; text-align:center; display:block; margin: 0 auto;"
+            style="color: #695549; width:80%; text-align:center; display:block; margin: 0 auto;"
             placeholder="Password"
             id="password"
             v-model="credentials.password"
@@ -35,15 +35,16 @@
             @click="login"
             type="submit"
             class="mb-2"
-            style="width:50%; background-color: #695549;"
+            variant="secondary"
+            style="width:50%;"
             >Login</b-button
           >
         </div>
         <div class="small">
-          <span style="color: #695549; cursor: pointer;" @click="toSignup"
+          <!-- <span style="color: #fff; cursor: pointer;" @click="toSignup"
             >비밀번호찾기
-          </span>
-          <span style="color: #695549; cursor: pointer;" @click="toSignup"
+          </span> -->
+          <span style="color: rgba(161, 161, 161); cursor: pointer;" @click="toSignup"
             >회원가입
           </span>
         </div>
@@ -62,7 +63,6 @@ export default {
         backgroundImage: `url(${require("@/assets/Login/login.jpg")})`,
         width: "100vw",
         height: "100vh",
-        position: "relative",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         backgroundPosition: "center"
@@ -119,10 +119,19 @@ export default {
   font-weight: bold;
 }
 #box {
-  display: block;
-  width: 50%;
   position: absolute;
-  left: 25%;
-  margin-top: 15%;
+  vertical-align:middle;
+  width: 400px;
+  height: 400px;
+  padding: 30px;
+  padding-top: 60px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(20, 20, 20, 0.747);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
 }
 </style>

@@ -10,7 +10,8 @@ const campStore = {
     searchWordList: [],
     searchTagList: [[]],
     searchTagListName: [],
-    searchWordName: ""
+    searchWordName: "",
+    pageNum : 0
   },
   getters: {
     getDetailInfo(state) {
@@ -27,6 +28,9 @@ const campStore = {
     },
     getSearchWordName(state) {
       return state.searchWordName;
+    },
+    getPageNum(state) {
+      return state.pageNum;
     }
   },
   mutations: {
@@ -48,9 +52,10 @@ const campStore = {
   },
   actions: {
     campsiteDetail(context, campsite_id) {
+      
       axios({
         method: "get",
-        url: `${SERVER_URL}/camp/getDetail/${campsite_id}`
+        url: `${SERVER_URL}/camp/getDetail/${campsite_id}/`
       })
         .then(res => {
           console.log(res.data);
@@ -61,6 +66,8 @@ const campStore = {
         });
     },
     searchByWord(context, word) {
+      context.commit("setSearchTagList", [[]])
+      context.commit("setSearchWordName", word);
       console.log("searchByWord");
       axios({
         method: "post",
@@ -79,6 +86,7 @@ const campStore = {
     },
 
     searchByTag(context, tagList) {
+      context.commit("setSearchWordList", []);
       axios({
         method: "post",
         url: `${SERVER_URL}/camp/gettagresult/`,

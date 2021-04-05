@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import mypagelike from "@/components/campsite/mypagelike";
+import mypagelike from "@/components/mypage/mypagelike";
 import Comment from "@/components/campsiteDetail/Comment";
 import axios from "axios";
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
@@ -98,6 +98,7 @@ export default {
   color: black;
   background-color: rgba(255, 255, 255, 0.356);
   opacity: 0.7;
+  pointer-events: none; 
 }
 
 #my2 {

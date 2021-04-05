@@ -32,7 +32,7 @@ export default {
       var map = new kakao.maps.Map(container, options);
 
       // 마커 이미지 변경
-      let imageSrc = 'https://ifh.cc/g/1iFQaF.png';
+      let imageSrc = 'https://ifh.cc/g/ZpX0DY.png';
       let imageSize = new kakao.maps.Size(42, 43);
       let imageOption = {offset: new kakao.maps.Point(27, 69)};
 
@@ -69,7 +69,7 @@ export default {
 
       script.onload = () => kakao.maps.load(this.initMap);
       script.src =
-        "http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=" +
+        "https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=" +
         KAKAO_API_KEY;
       document.head.appendChild(script);
     }

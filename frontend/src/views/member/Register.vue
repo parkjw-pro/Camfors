@@ -11,7 +11,7 @@
       <b-col class="mx-3">
         <!-- 2.1.1 아이디 -->
         <b-row id="accountBox">
-          <b-col align-self="right">
+          <b-col>
             <ValidationProvider
               name="이메일"
               rules="required|email"
@@ -26,19 +26,12 @@
                 <b-form-input
                   type="email"
                   class="ml-5"
-                  style="width:50%; float:left;"
+                  style="width:60%; float:left;"
                   v-model="credentials.email"
                   placeholder="이메일을 입력하세요"
                   required
-                  @keypress.enter="check_user_email"
+                  @keypress.enter="onSubmit()"
                 ></b-form-input>
-                <b-button
-                  id="btn_signup"
-                  style="margin-top:3px"
-                  size="sm"
-                  @click="check_user_email"
-                  >확인</b-button
-                >
                 <br />
                 <br />
                 <small
@@ -52,7 +45,7 @@
           </b-col>
         </b-row>
         <b-row id="accountBox">
-          <b-col align-self="left">
+          <b-col>
             <ValidationProvider
               name="비밀번호"
               rules="required|min:6"
@@ -67,7 +60,7 @@
                 <b-form-input
                   type="password"
                   class="mx-4"
-                  style="width:50%; float:left; font-color : black;"
+                  style="width:60%; float:left; font-color : black;"
                   v-model="credentials.password"
                   placeholder="비밀번호를 입력하세요"
                   required
@@ -86,7 +79,7 @@
           </b-col>
         </b-row>
         <b-row id="accountBox">
-          <b-col align-self="left">
+          <b-col>
             <ValidationProvider
               name="비밀번호 확인"
               rules="required|confirmed:비밀번호"
@@ -100,7 +93,7 @@
                 </label>
                 <b-form-input
                   type="password"
-                  style="width:50%; float:left;"
+                  style="width:60%; float:left;"
                   v-model="password_confirmation"
                   placeholder="비밀번호를 한 번 더 입력하세요"
                   required
@@ -120,7 +113,7 @@
         </b-row>
         <!-- 2.1.2 닉네임 -->
         <b-row id="accountBox">
-          <b-col align-self="left">
+          <b-col>
             <ValidationProvider
               name="닉네임"
               rules="required|min:2"
@@ -135,10 +128,11 @@
                 <b-form-input
                   type="text"
                   class="ml-5"
-                  style="width:50%; float:left;"
+                  style="width:60%; float:left;"
                   v-model="credentials.nickname"
                   placeholder="개성있는 닉네임을 입력하세요"
                   required
+                  @keypress.enter="onSubmit()"
                 ></b-form-input>
                 <br />
                 <br />
@@ -155,16 +149,14 @@
       </b-col>
       <!-- 버튼 -->
       <div>
-        <b-button
-          id="btn_signup"
-          class="mx-3"
-          @click="$router.push({ name: 'Login' })"
-        >
-          로그인 페이지
+       <b-button variant="secondary" style="width:30%; margin-bottom:10px;" class="mx-3" @click="onSubmit()">
+          가입 완료
         </b-button>
-        <b-button id="btn_signup" class="mx-3" @click="onSubmit()">
-          가입완료
-        </b-button>
+        <div class="small">
+        <span style="color: rgba(161, 161, 161); cursor: pointer;" @click="$router.push({ name: 'Login' })"
+            >로그인
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -187,8 +179,7 @@ export default {
       cssProps: {
         backgroundImage: `url(${require("@/assets/register/register.jpg")})`,
         width: "100vw",
-        height: "100vh",
-        position: "relative"
+        height: "100vh"
       },
       credentials: {
         nickname: "",
@@ -204,7 +195,6 @@ export default {
   methods: {
     onSubmit() {
       if (
-        this.checkEmail == false ||
         document.getElementById("error5").innerHTML != "" ||
         document.getElementById("error6").innerHTML != ""
       ) {
@@ -222,29 +212,6 @@ export default {
           });
       }
     },
-    check_user_email: function() {
-      if (
-        this.checkId == false ||
-        this.credentials.email == "" ||
-        document.getElementById("error3").innerHTML != ""
-      ) {
-        alert("이메일 다시 입력 바랍니다.");
-        this.credentials.email = "";
-      } else {
-        axios
-          .post(`${SERVER_URL}/user/email`, this.credentials)
-          .then(() => {
-            alert("사용 가능한 이메일 입니다.");
-            this.checkEmail = true;
-          })
-          .catch(() => {
-            if (this.credentials.email != "") {
-              alert("현재 사용중인 이메일 입니다.");
-              this.credentials.email = "";
-            }
-          });
-      }
-    }
   }
 };
 </script>
@@ -279,10 +246,14 @@ input[type="password"] {
 }
 
 #box {
-  display: block;
-  width: 50%;
   position: absolute;
-  left: 25%;
-  margin-top: 8%;
+  width: 600px;
+  height: 500px;
+  padding: 30px;
+  padding-top: 60px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(20, 20, 20, 0.747);
 }
 </style>
