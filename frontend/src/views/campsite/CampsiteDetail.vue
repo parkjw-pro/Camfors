@@ -108,7 +108,7 @@
             <p>화로대 {{getDetailInfo.brazierCl}}</p>
           </div>
           <div v-if="getDetailInfo.animalCmgCl !== '불가능'" style="text-align:center; padding-right:50px; padding-top:10px;">
-            <font-awesome-icon icon="paw" class="fa-2x" />
+             <i class="fas fa-paw fa-2x"></i>
             <p>출입{{getDetailInfo.animalCmgCl}}</p>
           </div>
           <div v-if="typeof getDetailInfo.posblFcltyCl === 'string' && getDetailInfo.posblFcltyCl.indexOf('어린이') != -1" style="text-align:center; padding-right:50px; padding-top:10px;">

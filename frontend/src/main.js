@@ -7,10 +7,6 @@ import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 //fort-awesome
 import { library as faLibrary } from "@fortawesome/fontawesome-svg-core";
 import {
-  faTrailer,
-  faCaravan,
-  faTruck,
-  faPaw,
   faTrash,
   faAngleDown,
   faSearch
@@ -19,10 +15,6 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 // Set up FontAwesome
 faLibrary.add(
-  faTrailer,
-  faCaravan,
-  faTruck,
-  faPaw,
   faTrash,
   faAngleDown,
   faSearch
