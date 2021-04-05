@@ -10,10 +10,15 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework import permissions
 from rest_framework import status
 from .models import Campsite, CampsiteTag, Tag, Reviews, Likes, User
-from .serializers import CampsiteSerializer, CampsiteDetailSerializer, CampCreateReviewSerializer, CampReadReviewSerializer, TagSerializer, CampReadReviewUSerializer, LikeSerializer
+from .serializers import CampsiteSerializer, CampsiteDetailSerializer, CampCreateReviewSerializer, CampReadReviewSerializer, TagSerializer, CampReadReviewUSerializer, LikeSerializer, CampsiteTagSerializer
 from django.db.models import Count
 import collections
 
+import pandas as pd
+import numpy as np
+import re
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
 # jsonparser로 requset body 데이터 얻을수 있음
 
 
@@ -92,7 +97,22 @@ def campTagResult(request):
                 queryset = Campsite.objects.filter(campsite_id__in=Subquery(CampsiteTag.objects.filter(tag_id=tagid)
                                                                           .values('campsite_id'))).order_by('likeCount')[:50]
                 serializer = CampsiteSerializer(queryset, many=True)
-                result.append(serializer.data)
+                camp_len = len(serializer.data)
+                tag_result = []
+                for i in range(camp_len):
+                    sub_result = collections.OrderedDict()
+                    camp_id = serializer.data[i]['campsite_id']
+                    sub_queryset = Tag.objects.raw(
+                        '''select tag_id
+                        from Campsite_Tag
+                        where campsite_id = {campsite_id}'''.format(campsite_id = camp_id)
+                    )
+                    sub_serializer = TagSerializer(sub_queryset, many = True)
+                    for k, v in serializer.data[i].items():
+                        sub_result[k] = v
+                    sub_result['taglist'] = sub_serializer.data
+                    tag_result.append(sub_result)
+                result.append(tag_result)
 
         except Campsite.DoesNotExist:
             return HttpResponse(status=404)
@@ -117,7 +137,6 @@ def campPopTagResult(request):
 
     if request.method == 'GET' and len(query_sets) > 0:
         serializer = TagSerializer(query_sets, many=True)
-        print(serializer)
         return JsonResponse(serializer.data, safe=False) 
 
 @csrf_exempt
@@ -174,6 +193,33 @@ def getlikeinfo(request):
 
     return HttpResponse(query.get('campsite_id__count'))
 
+@csrf_exempt
+def campRecommend(request,campsite_id):
+    data = pd.read_csv("data.csv",encoding = 'euc-kr')
+
+    count_vector = CountVectorizer(ngram_range=(1,1))
+    c_vector_tag = count_vector.fit_transform(data['태그'])
+
+    tag_c_sim = cosine_similarity(c_vector_tag,c_vector_tag).argsort()[:,::-1]
+
+    # 코사인 유사도를 이용하여 단어의 유사도를 통해 추천
+    def get_recommend_camping_list(data,camping_index,top=30):
+        target_camping_index = data[data['캠핑장ID'] == camping_index].index.values
+    
+        sim_index = tag_c_sim[target_camping_index, :top].reshape(-1)
+    
+        sim_index = sim_index[sim_index != target_camping_index]
+        result = data.iloc[sim_index][:10]
+        return result
+
+    result = []
+    recom = get_recommend_camping_list(data,camping_index = campsite_id)
+    for i in recom['캠핑장ID']:
+        query_sets = Campsite.objects.filter(campsite_id = i)
+        serializer = CampsiteSerializer(query_sets, many=True)
+        result.append(serializer.data)
+
+    return JsonResponse(result, safe=False, status=status.HTTP_201_CREATED)
 
 @csrf_exempt
 @api_view(['post'])
@@ -226,7 +272,6 @@ def campReadReview(request, campsite_id):
             for k, v in serializer2.data[i].items():
                 sub_result[k] = v
             result.append(sub_result)
-        print(result)
         return JsonResponse(result, safe=False) 
 
     else:

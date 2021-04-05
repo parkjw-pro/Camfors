@@ -15,6 +15,7 @@ urlpatterns = [
     path('unlike', views.unlike),
     path('getlikeinfo/', views.getlikeinfo),
 
+    path('camprecommend/<int:campsite_id>/', views.campRecommend),
     # path('addlike/',views.addlike),
     path('createreview', views.campCreateReview),
     path('readreview/<int:campsite_id>/', views.campReadReview),
