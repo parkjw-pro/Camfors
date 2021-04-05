@@ -1,8 +1,9 @@
 <template>
   <div id="taglist">
+    <h3 style="text-align: left; font-family: 'Hanna', sans-serif;"></h3>
     <swiper class="swiper" :options="swiperOption">
-      <swiper-slide v-for="(item, index) in tag" :key="index">
-        <swiperBlock :item="item" />
+      <swiper-slide v-for="(item, index) in likeList" :key="index">
+        <campsiteBlock :item="item" />
       </swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
@@ -11,29 +12,28 @@
 </template>
 
 <script>
-import swiperBlock from "@/components/campsite/swiperBlock";
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
+import campsiteBlock from "@/components/campsite/campsiteBlock";
 import "swiper/css/swiper.css";
 
 export default {
   name: "swiper-example-loop-group",
   title: "Loop mode with multiple slides per group",
   props: {
-    tag: Array,
-    tagName: String
+    likeList: Array
   },
   components: {
     Swiper,
     SwiperSlide,
-    swiperBlock
+    campsiteBlock
   },
   data() {
     return {
       swiperOption: {
-        slidesPerView: 5,
+        slidesPerView: 3,
         spaceBetween: 20,
-        slidesPerGroup: 5,
-        loop: false,
+        slidesPerGroup: 3,
+        loop: true,
         loopFillGroupWithBlank: false,
         pagination: {
           el: ".swiper-pagination",
@@ -45,13 +45,9 @@ export default {
           prevEl: ".swiper-button-prev"
         }
       }
-      // tagName : Array
     };
   },
   methods: {}
-  // created : {
-
-  // }
 };
 </script>
 
@@ -59,7 +55,6 @@ export default {
 .swiper {
   height: 100%;
   width: 100%;
-  margin: 15px 0;
 
   .swiper-slide {
     display: flex;
@@ -76,23 +71,4 @@ export default {
   margin-right: 20px;
   margin-left: 20px;
 }
-.card-body {
-  margin-top: 0;
-  padding: 0;
-  background-color: rgb(71, 64, 64);
-  color: whitesmoke;
-}
-.card-text {
-  margin-bottom: 5px;
-}
-.card-title {
-  margin-bottom: 5px;
-  margin-top: 5px;
-}
-.shadow-sm {
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
-}
-/* .card- {
-
-} */
 </style>

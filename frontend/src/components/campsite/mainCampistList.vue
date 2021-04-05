@@ -9,7 +9,7 @@
     </h3>
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide v-for="(item, index) in campsiteList" :key="index">
-        <swiperBlock :item="item" />
+        <campsiteBlock :item="item" />
       </swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
@@ -19,7 +19,7 @@
 
 <script>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
-import swiperBlock from "@/components/campsite/swiperBlock";
+import campsiteBlock from "@/components/campsite/campsiteBlock";
 import "swiper/css/swiper.css";
 import axios from "axios";
 import { mapGetters } from "vuex";
@@ -35,7 +35,7 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
-    swiperBlock
+    campsiteBlock
   },
   created() {
     axios({

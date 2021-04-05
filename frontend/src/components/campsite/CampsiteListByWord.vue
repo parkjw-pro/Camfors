@@ -12,7 +12,7 @@
       <div class="row">
         <div v-for="(item, index) in paginatedData" :key="index">
           <div class="col-md-3">
-            <swiperBlock
+            <campsiteBlock
               :item="item"
               style="width: 20rem; height:20rem; margin-bottom:2rem;"
             />
@@ -56,11 +56,11 @@
 
 <script>
 import "swiper/css/swiper.css";
-import swiperBlock from "@/components/campsite/swiperBlock";
+import campsiteBlock from "@/components/campsite/campsiteBlock";
 import { mapGetters } from "vuex";
 export default {
   components: {
-    swiperBlock
+    campsiteBlock
   },
   props: {
     // SearchWordList: Array,

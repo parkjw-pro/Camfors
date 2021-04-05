@@ -48,7 +48,7 @@ import { mapGetters } from 'vuex';
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
-  name: 'swiperBlock',
+  name: 'campsiteBlock',
   title: 'Loop mode with multiple slides per group',
   props: {
     item: Object
