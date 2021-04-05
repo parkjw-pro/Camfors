@@ -98,6 +98,7 @@ export default {
   color: black;
   background-color: rgba(255, 255, 255, 0.356);
   opacity: 0.7;
+  pointer-events: none; 
 }
 
 #my2 {
