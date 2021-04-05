@@ -20,40 +20,40 @@ const routes = [
     name: "Login",
     component: Login,
     meta: {
-      title: '캠퍼스 | 로그인',
-    },
+      title: "캠퍼스 | 로그인"
+    }
   },
   {
     path: "/register",
     name: "Register",
     component: Register,
     meta: {
-      title: '캠퍼스 | 회원가입',
-    },
+      title: "캠퍼스 | 회원가입"
+    }
   },
   {
     path: "/mypage",
     name: "Mypage",
     component: Mypage,
     meta: {
-      title: '캠퍼스 | 마이페이지',
-    },
+      title: "캠퍼스 | 마이페이지"
+    }
   },
   {
     path: "/searchCampsite",
     name: "SearchCampsite",
     component: SearchCampsite,
     meta: {
-      title: '캠퍼스 | 검색페이지',
-    },
+      title: "캠퍼스 | 검색페이지"
+    }
   },
   {
     path: "/campsiteDetail/:campsiteId",
     name: "CampsiteDetail",
     component: CampsiteDetail,
     meta: {
-      title: '캠퍼스 | 상세페이지',
-    },
+      title: "캠퍼스 | 상세페이지"
+    }
   }
 ];
 const router = new VueRouter({

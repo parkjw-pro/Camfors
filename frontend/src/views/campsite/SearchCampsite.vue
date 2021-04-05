@@ -5,10 +5,9 @@
     <SearchCampsiteByWord @IsTag="parents" v-else-if="IsTag" />
 
     <CampsiteListByTag :SearchTagList="getSearchTagList" v-if="!IsTag" />
-    <CampsiteListByWord
-      :SearchWordList="getSearchWordList"
-      v-else-if="IsTag"
-    />
+    <CampsiteListByWord :SearchWordList="getSearchWordList" v-else-if="IsTag" />
+
+    <Footer />
   </div>
 </template>
 <script>
@@ -16,6 +15,7 @@ import SearchCampsiteByTag from "@/components/campsiteSearch/SearchCampsiteByTag
 import SearchCampsiteByWord from "@/components/campsiteSearch/SearchCampsiteByWord";
 import CampsiteListByTag from "@/components/campsite/CampsiteListByTag";
 import CampsiteListByWord from "@/components/campsite/CampsiteListByWord";
+import Footer from "@/components/app/Footer";
 import { mapGetters } from "vuex";
 export default {
   name: "SearchCampsite",
@@ -23,7 +23,8 @@ export default {
     CampsiteListByTag,
     SearchCampsiteByTag,
     CampsiteListByWord,
-    SearchCampsiteByWord
+    SearchCampsiteByWord,
+    Footer
   },
   data() {
     return {

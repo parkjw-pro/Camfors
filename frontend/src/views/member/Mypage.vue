@@ -3,10 +3,10 @@
   <div :style="cssProps" class="loginimg">
     <div id="my2" style="position:relative">
       <h3 style="font-family: 'Hanna', sans-serif;">내가 좋아하는 캠핑장</h3>
-      <mypagelike :likeList="likeCampsiteList"
-    /></div>
-    <div id="my3"
-      ><h3 style="font-family: 'Hanna', sans-serif;">내가 쓴 댓글</h3>
+      <mypagelike :likeList="likeCampsiteList" />
+    </div>
+    <div id="my3">
+      <h3 style="font-family: 'Hanna', sans-serif;">내가 쓴 댓글</h3>
       <Comment v-if="this.reviewList" :commentList="this.reviewList" />
     </div>
   </div>
@@ -98,7 +98,7 @@ export default {
   color: black;
   background-color: rgba(255, 255, 255, 0.356);
   opacity: 0.7;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 #my2 {
@@ -133,7 +133,4 @@ export default {
   color: black;
   background-color: white;
 }
-
-
-
 </style>
