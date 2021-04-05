@@ -36,22 +36,25 @@
         <small class="ml-1">{{ item.likeCount }}명이 좋아합니다.</small>
       </div>
     </b-row>
+  <b-modal ref="modal">
+    <p>회원가입후 이용 가능합니다!</p>
+  </b-modal>
   </b-card>
 </template>
 
 <script>
-import axios from "axios";
-import { mapGetters } from "vuex";
+import axios from 'axios';
+import { mapGetters } from 'vuex';
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
-  name: "swiperBlock",
-  title: "Loop mode with multiple slides per group",
+  name: 'swiperBlock',
+  title: 'Loop mode with multiple slides per group',
   props: {
     item: Object
   },
   created() {
-    if (this.getUserId != "") this.getLikeInfo();
+    if (this.getUserId != '') this.getLikeInfo();
   },
   computed: {
     ...mapGetters({
@@ -65,6 +68,10 @@ export default {
   },
   methods: {
     likeCampsite(campsite_id) {
+      if (this.getUserId == '') {
+        this.$refs['modal'].show() // PopUp Open
+        return;
+      }
       axios
         .post(`${SERVER_URL}/camp/addlike`, {
           data: {
@@ -80,6 +87,10 @@ export default {
         });
     },
     unlikeCampsite(campsite_id) {
+      if (this.getUserId == '') {
+        this.$refs['modal'].show() // PopUp Open
+        return;
+      }
       axios
         .post(`${SERVER_URL}/camp/unlike`, {
           data: {
