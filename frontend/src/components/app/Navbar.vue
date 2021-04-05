@@ -50,17 +50,17 @@ export default {
       // 리뷰 작성 페이지로 넘어가준다!!
       // console.log("보냅니다", this.store);
       console.log("로그인페이지로 이동");
-      this.$router.push({ name: "Login" });
+      this.$router.go(this.$router.push({ name: "Login" }));
     },
     goMypage: function() {
       // 리뷰 작성 페이지로 넘어가준다!!
       // console.log("보냅니다", this.store);
       console.log("마이페이지로 이동");
-      this.$router.push({ name: "Mypage" });
+      this.$router.go(this.$router.push({ name: "Mypage" }));
     },
     goSearch: function() {
       console.log("검색페이지로 이동");
-      this.$router.push({ name: "SearchCampsite" });
+      this.$router.go(this.$router.push({ name: "SearchCampsite" }));
     },
     logout: function() {
       this.$store
