@@ -20,6 +20,7 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         fields = ['tag_id', 'tag_name']
 
+
 class LikeSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -40,6 +41,7 @@ class CampCreateReviewSerializer(serializers.ModelSerializer):
 #         model = User
 #         fields = ['user_id','nickname','reviews']
 
+
 class CampReadReviewSerializer(serializers.ModelSerializer):
 
     # user = serializers.StringRelatedField()
@@ -48,6 +50,7 @@ class CampReadReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reviews
         fields = ['user_id','campsite_id','review','review_id','created_at']
+
 
 class CampReadReviewUSerializer(serializers.ModelSerializer):
 

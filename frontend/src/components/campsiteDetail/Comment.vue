@@ -73,11 +73,12 @@ export default {
       })
         .then(res => {
           console.log(res.data);
+          this.$emit('refresh');
         })
         .catch(error => {
           console.log(error);
         });
-      this.$emit('refresh');
+      
     },
     nextPage() {
       this.pageNum += 1;
