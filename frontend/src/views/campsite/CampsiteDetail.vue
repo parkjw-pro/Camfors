@@ -249,6 +249,17 @@ export default {
       .catch(error => {
         console.log(error);
     });
+
+    axios({
+      method: "get",
+      url: `${SERVER_URL}/camp/camprecommend/${this.campsiteId}`
+    })
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+    });
       
   },
   computed: {

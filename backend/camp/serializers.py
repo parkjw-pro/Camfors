@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Campsite, Tag, Likes, Reviews, User
+from .models import Campsite, Tag, Likes, Reviews, User, CampsiteTag
 
 
 class CampsiteSerializer(serializers.ModelSerializer):
@@ -20,7 +20,6 @@ class TagSerializer(serializers.ModelSerializer):
         model = Tag
         fields = ['tag_id', 'tag_name']
 
-
 class LikeSerializer(serializers.ModelSerializer):
 
     class Meta:
@@ -34,18 +33,7 @@ class CampCreateReviewSerializer(serializers.ModelSerializer):
         model = Reviews
         fields = ['user_id','campsite_id','review','created_at']
 
-# class UserSerializer(serializers.ModelSerializer):
-#     reviews = serializers.StringRelatedField(many=True)
-
-#     class Meta:
-#         model = User
-#         fields = ['user_id','nickname','reviews']
-
-
 class CampReadReviewSerializer(serializers.ModelSerializer):
-
-    # user = serializers.StringRelatedField()
-    # user = UserSerializer(read_only = True)
 
     class Meta:
         model = Reviews
