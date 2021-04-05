@@ -9,8 +9,8 @@ urlpatterns = [
     path('getwordresult/', views.campWordResult),
     path('gettagresult/', views.campTagResult),
 
-    path('gettaglist', views.gettagname),
-    path('listbyuser/<int:user_id>/', views.camplistbyuser),
+    path('gettaglist', views.gettaglist),
+    path('listbyuser/<int:user_id>/', views.listbyuser),
     path('camppoptag', views.campPopTagResult),
 
     path('addlike', views.addlike),
