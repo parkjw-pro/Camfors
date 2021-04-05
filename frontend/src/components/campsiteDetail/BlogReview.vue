@@ -51,7 +51,7 @@ export default {
   },
   created() {
     // console.log(this.name);
-    // 크롤링
+    // 네이버 블로그 리뷰 api
     axios
       .get(`${C_SERVER_URL}`, {
         params: {
