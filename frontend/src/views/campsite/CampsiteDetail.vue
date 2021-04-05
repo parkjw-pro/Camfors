@@ -86,26 +86,48 @@
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>편의시설
         </h4>
         <div class="row facilityIcon">
-          <div style="text-align:center; padding-right:50px; padding-top:10px;">
-            <font-awesome-icon icon="volleyball-ball" class="fa-3x" />
-            <p>운동시설</p>
+
+          <div v-if="getDetailInfo.autoSiteCo === 'Y'" style="text-align:center; padding-right:50px; padding-top:10px;">
+            <i class="fas fa-truck-pickup fa-2x"></i>
+            <p>자동차야영장</p>
           </div>
-          <div style="text-align:center; padding-right:50px; padding-top:10px;">
-            <font-awesome-icon icon="water" class="fa-3x" />
-            <p>물놀이/강</p>
+          <div v-if="getDetailInfo.caravSiteCo === 'Y'" style="text-align:center; padding-right:50px; padding-top:10px;">
+            <i class="fas fa-caravan fa-2x"></i>
+            <p>카라반</p>
           </div>
-          <div style="text-align:center; padding-right:50px; padding-top:10px;">
-            <font-awesome-icon icon="fish" class="fa-3x" />
-            <p>낚시</p>
+          <div v-if="getDetailInfo.caravSiglampSiteCoteCo === 'Y'" style="text-align:center; padding-right:50px; padding-top:10px;">
+            <i class="fas fa-campground fa-2x"></i>
+            <p>글램핑</p>
           </div>
-          <div style="text-align:center; padding-right:50px; padding-top:10px;">
-            <font-awesome-icon icon="circle" class="fa-3x" />
-            <p>운동장</p>
+          <div v-if="getDetailInfo.trlerAcmpnyAt === 'Y'" style="text-align:center; padding-right:50px; padding-top:10px;">
+            <i class="fas fa-trailer fa-2x"></i>
+            <p>개인 트레일러</p>
           </div>
-          <div style="text-align:center; padding-right:50px; padding-top:10px;">
-            <font-awesome-icon icon="paw" class="fa-3x" />
-            <p>반려견 동반</p>
+          <div v-if="getDetailInfo.brazierCl" style="text-align:center; padding-right:50px; padding-top:10px;">
+            <i class="fas fa-fire-alt fa-2x"></i>
+            <p>화로대 {{getDetailInfo.brazierCl}}</p>
           </div>
+          <div v-if="getDetailInfo.animalCmgCl !== '불가능'" style="text-align:center; padding-right:50px; padding-top:10px;">
+             <i class="fas fa-paw fa-2x"></i>
+            <p>출입{{getDetailInfo.animalCmgCl}}</p>
+          </div>
+          <div v-if="typeof getDetailInfo.posblFcltyCl === 'string' && getDetailInfo.posblFcltyCl.indexOf('어린이') != -1" style="text-align:center; padding-right:50px; padding-top:10px;">
+            <i class="fas fa-child fa-2x"></i>
+            <p>어린이놀이시설</p>
+          </div>
+          <div v-if="typeof getDetailInfo.posblFcltyCl === 'string' && getDetailInfo.posblFcltyCl.indexOf('산책로') != -1 " style="text-align:center; padding-right:50px; padding-top:10px;">
+            <i class="fas fa-walking fa-2x"></i>
+            <p>산책로</p>
+          </div>
+          <div v-if="typeof getDetailInfo.posblFcltyCl === 'string' && getDetailInfo.posblFcltyCl.indexOf('물놀이') != -1 " style="text-align:center; padding-right:50px; padding-top:10px;">
+            <i class="fas fa-swimmer fa-2x"></i>
+            <p>물놀이</p>
+          </div>
+          <div v-if="typeof getDetailInfo.lctCl === 'string' && getDetailInfo.lctCl.indexOf('산') != -1 " style="text-align:center; padding-right:50px; padding-top:10px;">
+            <i class="fas fa-mountain fa-2x"></i>
+            <p>산</p>
+          </div>
+
         </div>
       </div>
 
@@ -393,7 +415,7 @@ export default {
 }
 
 th {
-  width: 120px;
+  width: 150px;
   padding: 11px 10px;
   border-bottom: 1px solid #c8c8c8;
   text-align: left;
