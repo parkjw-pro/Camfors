@@ -26,19 +26,12 @@
                 <b-form-input
                   type="email"
                   class="ml-5"
-                  style="width:50%; float:left;"
+                  style="width:60%; float:left;"
                   v-model="credentials.email"
                   placeholder="이메일을 입력하세요"
                   required
                   @keypress.enter="check_user_email"
                 ></b-form-input>
-                <b-button
-                  id="btn_signup"
-                  style="margin-top:3px"
-                  size="sm"
-                  @click="check_user_email"
-                  >확인</b-button
-                >
                 <br />
                 <br />
                 <small
@@ -67,7 +60,7 @@
                 <b-form-input
                   type="password"
                   class="mx-4"
-                  style="width:50%; float:left; font-color : black;"
+                  style="width:60%; float:left; font-color : black;"
                   v-model="credentials.password"
                   placeholder="비밀번호를 입력하세요"
                   required
@@ -100,7 +93,7 @@
                 </label>
                 <b-form-input
                   type="password"
-                  style="width:50%; float:left;"
+                  style="width:60%; float:left;"
                   v-model="password_confirmation"
                   placeholder="비밀번호를 한 번 더 입력하세요"
                   required
@@ -135,7 +128,7 @@
                 <b-form-input
                   type="text"
                   class="ml-5"
-                  style="width:50%; float:left;"
+                  style="width:60%; float:left;"
                   v-model="credentials.nickname"
                   placeholder="개성있는 닉네임을 입력하세요"
                   required
@@ -155,16 +148,14 @@
       </b-col>
       <!-- 버튼 -->
       <div>
-        <b-button
-          id="btn_signup"
-          class="mx-3"
-          @click="$router.push({ name: 'Login' })"
-        >
-          로그인 페이지
+       <b-button variant="secondary" style="width:30%; margin-bottom:10px;" class="mx-3" @click="onSubmit()">
+          가입 완료
         </b-button>
-        <b-button id="btn_signup" class="mx-3" @click="onSubmit()">
-          가입완료
-        </b-button>
+        <div class="small">
+        <span style="color: rgba(161, 161, 161); cursor: pointer;" @click="$router.push({ name: 'Login' })"
+            >로그인
+          </span>
+        </div>
       </div>
     </div>
   </div>
@@ -187,8 +178,7 @@ export default {
       cssProps: {
         backgroundImage: `url(${require("@/assets/register/register.jpg")})`,
         width: "100vw",
-        height: "100vh",
-        position: "relative"
+        height: "100vh"
       },
       credentials: {
         nickname: "",
@@ -279,10 +269,15 @@ input[type="password"] {
 }
 
 #box {
-  display: block;
-  width: 50%;
   position: absolute;
-  left: 25%;
-  margin-top: 8%;
+  vertical-align:middle;
+  width: 600px;
+  height: 500px;
+  padding: 30px;
+  padding-top: 60px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(20, 20, 20, 0.747);
 }
 </style>

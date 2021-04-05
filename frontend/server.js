@@ -29,8 +29,8 @@ app.get("/search", function(req, res) {
     }
   });
 });
-app.listen(3000, function() {
+app.listen(2000, function() {
   console.log(
-    "http://15.164.219.18:3000/search/blog?query=검색어 app listening on port 3000!"
+    "https://j4a304.p.ssafy.io/search/search/blog?query=검색어 app listening on port 3000!"
   );
 });
