@@ -40,14 +40,12 @@
           >
         </div>
         <div class="small">
-          |
-          <router-link :to="{ name: 'FindPassword' }">비밀번호찾기</router-link>
-          -->
           <span style="color: #695549; cursor: pointer;" @click="toSignup"
-            >회원가입</span
-          >
-
-          <span style="color: #695549; cursor: pointer;">비밀번호찾기</span>
+            >비밀번호찾기
+          </span>
+          <span style="color: #695549; cursor: pointer;" @click="toSignup"
+            >회원가입
+          </span>
         </div>
       </div>
     </div>

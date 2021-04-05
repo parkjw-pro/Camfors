@@ -1,13 +1,13 @@
 <template>
   <div>
     <!-- 태그 검색 -->
-    <SearchCampsiteByTag @IsTag="parents" v-if="IsTag" />
-    <SearchCampsiteByWord @IsTag="parents" v-else-if="!IsTag" />
+    <SearchCampsiteByTag @IsTag="parents" v-if="!IsTag" />
+    <SearchCampsiteByWord @IsTag="parents" v-else-if="IsTag" />
 
-    <CampsiteListByTag :SearchTagList="getSearchTagList" v-if="IsTag" />
+    <CampsiteListByTag :SearchTagList="getSearchTagList" v-if="!IsTag" />
     <CampsiteListByWord
       :SearchWordList="getSearchWordList"
-      v-else-if="!IsTag"
+      v-else-if="IsTag"
     />
   </div>
 </template>
