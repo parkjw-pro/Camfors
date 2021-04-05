@@ -23,11 +23,7 @@
     </div>
     <!-- <div style="text-align: center; margin : 0 auto; width: 50%;"> -->
     <!-- <div style="background: linear-gradient(0deg, black 95%, #FF8C00);"> -->
-    <div
-      style="background: black;"
-      v-for="(item, index) in tagList2"
-      :key="index"
-    >
+    <div style="background: black;" v-for="(item, index) in tagList" :key="index">
       <mainCampistList :tag="item" />
     </div>
     <!-- </div> -->
@@ -35,64 +31,82 @@
 </template>
 
 <script>
-import "swiper/css/swiper.css";
-import mainCampistList from "@/components/campsite/mainCampistList";
-import axios from "axios";
+import 'swiper/css/swiper.css';
+import mainCampistList from '@/components/campsite/mainCampistList';
+import axios from 'axios';
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
-  name: "Main",
+  name: 'Main',
   components: {
     // Movie,
     // swiper,
     // swiperSlide,
-    mainCampistList
+    mainCampistList,
     // Slider,
     // CampsiteList,
   },
   data: function() {
     return {
-      tagList: [
-        { name: "산과 함께하는 곳", id: 6 },
-        { name: "바다가 보이는 곳", id: 7 },
-        { name: "산책하기 좋은 곳", id: 12 },
-        { name: "가족들과 가기 좋은", id: 5 },
-        { name: "아이들이랑 가고 싶은 곳", id: 13 }
-      ],
-      tagList2: [],
+      tagList: [],
       visible: true,
       swiperOption: {
-        direction: "vertical",
+        direction: 'vertical',
         pagination: {
-          el: ".swiper-pagination",
-          type: "bullets"
-        }
-      }
+          el: '.swiper-pagination',
+          type: 'bullets',
+        },
+      },
+      userId: '',
     };
   },
   methods: {
     enlarge(event) {
-      event.currentTarget.classList.add("large");
+      event.currentTarget.classList.add('large');
     },
     moveToList() {
-      var location = document.querySelector("#scrollBtn").offsetTop;
-      window.scrollTo({ top: location + 30, behavior: "smooth" });
-    }
+      var location = document.querySelector('#scrollBtn').offsetTop;
+      window.scrollTo({ top: location + 30, behavior: 'smooth' });
+    },
+    no_member() {
+      console.log('로그인 안 한 유저입니다.');
+      axios({
+        method: 'get',
+        url: `${SERVER_URL}/camp/camppoptag`,
+      })
+        .then((res) => {
+          console.log(res.data);
+          this.tagList = res.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    member() {
+      console.log('로그인 한 유저입니다.');
+      axios({
+        method: 'get',
+        url: `${SERVER_URL}/camp/listbyuser/${this.userId}/`,
+      })
+        .then((res) => {
+          console.log(res.data);
+          this.tagList = res.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
   },
   created() {
-    axios({
-      method: "get",
-      url: `${SERVER_URL}/camp/camppoptag`
-    })
-      .then(res => {
-        console.log(res.data);
-        this.tagList2 = res.data;
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }
+    const userId = localStorage.getItem('user_id');
+    this.userId = userId;
+    if (this.userId == null) {
+      this.no_member();
+    } else {
+      this.member();
+    }
+  },
 };
 </script>
 

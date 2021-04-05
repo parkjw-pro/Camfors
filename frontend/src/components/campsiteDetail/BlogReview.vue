@@ -35,17 +35,17 @@
       class="btn-cover"
       style="text-align: center;"
     >
-      <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
+      <b-button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
         이전
-      </button>
+      </b-button>
       <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
-      <button
+      <b-button
         :disabled="pageNum >= pageCount - 1"
         @click="nextPage"
         class="page-btn"
       >
         다음
-      </button>
+      </b-button>
     </div>
   </div>
 </template>

@@ -11,7 +11,7 @@
       <b-col class="mx-3">
         <!-- 2.1.1 아이디 -->
         <b-row id="accountBox">
-          <b-col align-self="right">
+          <b-col>
             <ValidationProvider
               name="이메일"
               rules="required|email"
@@ -30,7 +30,7 @@
                   v-model="credentials.email"
                   placeholder="이메일을 입력하세요"
                   required
-                  @keypress.enter="check_user_email"
+                  @keypress.enter="onSubmit()"
                 ></b-form-input>
                 <br />
                 <br />
@@ -45,7 +45,7 @@
           </b-col>
         </b-row>
         <b-row id="accountBox">
-          <b-col align-self="left">
+          <b-col>
             <ValidationProvider
               name="비밀번호"
               rules="required|min:6"
@@ -79,7 +79,7 @@
           </b-col>
         </b-row>
         <b-row id="accountBox">
-          <b-col align-self="left">
+          <b-col>
             <ValidationProvider
               name="비밀번호 확인"
               rules="required|confirmed:비밀번호"
@@ -113,7 +113,7 @@
         </b-row>
         <!-- 2.1.2 닉네임 -->
         <b-row id="accountBox">
-          <b-col align-self="left">
+          <b-col>
             <ValidationProvider
               name="닉네임"
               rules="required|min:2"
@@ -132,6 +132,7 @@
                   v-model="credentials.nickname"
                   placeholder="개성있는 닉네임을 입력하세요"
                   required
+                  @keypress.enter="onSubmit()"
                 ></b-form-input>
                 <br />
                 <br />
@@ -194,7 +195,6 @@ export default {
   methods: {
     onSubmit() {
       if (
-        this.checkEmail == false ||
         document.getElementById("error5").innerHTML != "" ||
         document.getElementById("error6").innerHTML != ""
       ) {
@@ -212,29 +212,6 @@ export default {
           });
       }
     },
-    check_user_email: function() {
-      if (
-        this.checkId == false ||
-        this.credentials.email == "" ||
-        document.getElementById("error3").innerHTML != ""
-      ) {
-        alert("이메일 다시 입력 바랍니다.");
-        this.credentials.email = "";
-      } else {
-        axios
-          .post(`${SERVER_URL}/user/email`, this.credentials)
-          .then(() => {
-            alert("사용 가능한 이메일 입니다.");
-            this.checkEmail = true;
-          })
-          .catch(() => {
-            if (this.credentials.email != "") {
-              alert("현재 사용중인 이메일 입니다.");
-              this.credentials.email = "";
-            }
-          });
-      }
-    }
   }
 };
 </script>
@@ -270,7 +247,6 @@ input[type="password"] {
 
 #box {
   position: absolute;
-  vertical-align:middle;
   width: 600px;
   height: 500px;
   padding: 30px;
