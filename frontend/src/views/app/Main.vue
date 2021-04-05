@@ -28,7 +28,7 @@
       v-for="(item, index) in tagList2"
       :key="index"
     >
-      <swipertest :tag="item" />
+      <mainCampistList :tag="item" />
     </div>
     <!-- </div> -->
   </div>
@@ -36,7 +36,7 @@
 
 <script>
 import "swiper/css/swiper.css";
-import swipertest from "@/components/campsite/swipertest";
+import mainCampistList from "@/components/campsite/mainCampistList";
 import axios from "axios";
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
@@ -47,7 +47,7 @@ export default {
     // Movie,
     // swiper,
     // swiperSlide,
-    swipertest
+    mainCampistList
     // Slider,
     // CampsiteList,
   },

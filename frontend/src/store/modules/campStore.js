@@ -50,7 +50,7 @@ const campStore = {
     campsiteDetail(context, campsite_id) {
       axios({
         method: "get",
-        url: `${SERVER_URL}/camp/getDetail/${campsite_id}`
+        url: `${SERVER_URL}/camp/getDetail/${campsite_id}/`
       })
         .then(res => {
           console.log(res.data);

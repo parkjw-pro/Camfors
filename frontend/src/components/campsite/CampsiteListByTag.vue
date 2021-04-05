@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import ListByTagSwiper from '@/components/campsite/ListByTagSwiper';
+import ListByTagSwiper from '@/components/campsiteSearch/ListByTagSwiper';
 import { mapGetters } from 'vuex';
 export default {
   components: {
