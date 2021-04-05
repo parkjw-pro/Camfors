@@ -212,6 +212,7 @@ def campReadReview(request, campsite_id):
     else:
         return JsonResponse("리뷰가 없습니다", safe=False) 
 
+
 @csrf_exempt
 def campDeleteReview(request, review_id):
     review = Reviews.objects.filter(review_id=review_id)
