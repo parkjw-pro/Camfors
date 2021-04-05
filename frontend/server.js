@@ -31,10 +31,6 @@ app.get("/search", function(req, res) {
 });
 app.listen(2000, function() {
   console.log(
-<<<<<<< HEAD
-    "https://j4a304.p.ssafy.io/search=검색어 app listening on port 2000!"
-=======
     "https://j4a304.p.ssafy.io/search/search/blog?query=검색어 app listening on port 3000!"
->>>>>>> ddf31a0e73b673c0c1708ec72ccb21fcda372a0d
   );
 });

@@ -10,7 +10,7 @@
           :pressed.sync="btn.state"
           variant="outline-light"
         >
-          {{ btn.caption }}
+          #{{ btn.tag_name }}
         </b-button>
       </div>
       <div class="searchButton">
@@ -25,27 +25,13 @@
   </div>
 </template>
 <script>
-// const SERVER_URL = process.env.VUE_APP_SERVER_URL;
-// import axios from "axios";
+const SERVER_URL = process.env.VUE_APP_SERVER_URL;
+import axios from "axios";
 export default {
   data() {
     return {
       buttons: [
-        { caption: "#반려견 동반이 가능한", state: false, id: 5 },
-        { caption: "#산이 보이는", state: false, id: 6 },
-        { caption: "#바다가 보이는", state: false, id: 7 },
-        { caption: "#계곡 옆에 있는", state: false, id: 8 },
-        { caption: "#도심 속에 있는", state: false, id: 9 },
-        { caption: "#섬 속에 있는", state: false, id: 10 },
-        { caption: "#물 놀이 하기 좋은", state: false, id: 11 },
-        { caption: "#산책 하기 좋은", state: false, id: 12 },
-        { caption: "#아이들 놀기 좋은", state: false, id: 13 },
-        { caption: "#카라반", state: false, id: 14 },
-        { caption: "#글램핑", state: false, id: 15 },
-        { caption: "#자동차", state: false, id: 16 },
-        { caption: "#체험 프로그램이 있는", state: false, id: 17 },
-        { caption: "#장비 대여가 가능한", state: false, id: 18 },
-        { caption: "#개인 트레일러 동반 가능한", state: false, id: 19 }
+        
       ],
       checkedTag: [],
       selectedTag: [],
@@ -65,12 +51,9 @@ export default {
       console.log("태그검색");
       for (let index = 0; index < this.buttons.length; index++) {
         if (this.buttons[index].state === true) {
-          this.selectedTag.push(this.buttons[index].id);
+          this.selectedTag.push(this.buttons[index].tag_id);
           this.selectedTagName.push(
-            this.buttons[index].caption.substring(
-              1,
-              this.buttons[index].caption.length
-            )
+            this.buttons[index].tag_name
           );
         }
       }
@@ -81,20 +64,25 @@ export default {
       //this.$emit("IsTag", false);
     }
   },
-  // created() {
-  //   axios({
-  //     method: "get",
-  //     url: `${SERVER_URL}/camp/gettaglist`
-  //   })
-  //     .then(res => {
-  //       this.commentList = [];
-  //       console.log(res.data);
-  //       if (res.data !== "리뷰가 없습니다") this.commentList = res.data;
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //   });
-  // }
+  created() {
+    axios({
+      method: "get",
+      url: `${SERVER_URL}/camp/gettaglist`
+    })
+      .then(res => {
+        this.buttons = res.data
+        
+        // state 추가
+        for(let i=0; i<this.buttons.length; i++){
+          this.$set(this.buttons[i], 'state', false);
+        }
+
+        console.log(this.buttons)
+      })
+      .catch(error => {
+        console.log(error);
+    });
+  }
 };
 </script>
 <style scoped>
