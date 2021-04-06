@@ -3,13 +3,14 @@
   <div :style="cssProps" class="loginimg">
     <div id="my2" style="position:relative">
       <h3 style="font-family: 'Hanna', sans-serif;">내가 좋아하는 캠핑장</h3>
-      <mypagelike :likeList="likeCampsiteList"
-    /></div>
+      <mypagelike :likeList="likeCampsiteList"/>
+    </div>
     <div id="my3"
       ><h3 style="font-family: 'Hanna', sans-serif;">내가 쓴 댓글</h3>
       <Comment v-if="this.commentList" :commentList="this.commentList" />
     </div>
   </div>
+
 </template>
 
 <script>
