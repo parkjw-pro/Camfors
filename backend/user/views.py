@@ -76,6 +76,6 @@ def like(request):
 @api_view(['post'])
 @permission_classes((permissions.AllowAny,))
 def review(request):
-    review_query_sets = Reviews.objects.filter(user_id=request.data['user_id'])
+    review_query_sets = Reviews.objects.filter(user_id=request.data['user_id']).order_by('-created_at')
     review = ReviewsSerializer(review_query_sets, many=True)
     return JsonResponse(review.data, safe=False, status=status.HTTP_201_CREATED)
