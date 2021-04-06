@@ -23,7 +23,6 @@ export default {
   },
   methods: {
     initMap() {
-      console.log(this.mapX, this.mapY);
       let container = document.getElementById("map");
       let options = {
         center: new kakao.maps.LatLng(this.mapY, this.mapX),

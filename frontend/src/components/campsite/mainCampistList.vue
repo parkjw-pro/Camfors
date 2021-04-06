@@ -1,6 +1,5 @@
 <template>
   <div id="taglist">
-    
     <br />
     <br />
     <h3
@@ -11,7 +10,7 @@
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide v-for="(item, index) in campsiteList" :key="index">
         <campsiteBlock :item="item" />
-        <div v-if="index === campsiteList.length-1">{{ endLoading()}}}</div>
+        <div v-if="index === campsiteList.length - 1">{{ endLoading() }}}</div>
       </swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
@@ -26,7 +25,6 @@ import "swiper/css/swiper.css";
 import axios from "axios";
 import { mapGetters } from "vuex";
 
-
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
@@ -38,7 +36,7 @@ export default {
   components: {
     Swiper,
     SwiperSlide,
-    campsiteBlock,
+    campsiteBlock
   },
   created() {
     axios({
@@ -52,8 +50,6 @@ export default {
       .catch(error => {
         console.log(error);
       });
-
-      
   },
   computed: {
     ...mapGetters({
@@ -79,12 +75,12 @@ export default {
           prevEl: ".swiper-button-prev"
         }
       },
-      campsiteId: "1234",
+      campsiteId: "1234"
     };
   },
   methods: {
     endLoading() {
-      this.$emit('endLoading');
+      this.$emit("endLoading");
     }
   }
 };

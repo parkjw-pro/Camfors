@@ -8,7 +8,11 @@
       >
         {{ getSearchWordName }}의 검색결과입니다.
       </h2>
-      <pulse-loader :loading="false" :size="size" style="position:absolute; left:50%; top:120vh; transform: translateX(-50%); z-index:999; }"></pulse-loader>
+      <pulse-loader
+        :loading="false"
+        :size="size"
+        style="position:absolute; left:50%; top:120vh; transform: translateX(-50%); z-index:999; }"
+      ></pulse-loader>
       <br />
       <div class="row">
         <div v-for="(item, index) in paginatedData" :key="index">
@@ -58,7 +62,7 @@
 <script>
 import "swiper/css/swiper.css";
 import campsiteBlock from "@/components/campsite/campsiteBlock";
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 import { mapGetters } from "vuex";
 export default {
   components: {
@@ -88,7 +92,7 @@ export default {
       },
       pageNum: 0,
       loading: true,
-      size: "20px",
+      size: "20px"
     };
   },
   methods: {

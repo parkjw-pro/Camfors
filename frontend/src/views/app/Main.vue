@@ -24,11 +24,12 @@
     <!-- <div style="text-align: center; margin : 0 auto; width: 50%;"> -->
     <!-- <div style="background: linear-gradient(0deg, black 95%, #FF8C00);"> -->
     <div style="background: black;">
-      <pulse-loader :loading="this.loading" :size="size" style="position:absolute; left:50%; top:120vh; transform: translateX(-50%); z-index:999; }"></pulse-loader>
-      <div
-        v-for="(item, index) in tagList"
-        :key="index"
-      >
+      <pulse-loader
+        :loading="this.loading"
+        :size="size"
+        style="position:absolute; left:50%; top:120vh; transform: translateX(-50%); z-index:999; }"
+      ></pulse-loader>
+      <div v-for="(item, index) in tagList" :key="index">
         <mainCampistList :tag="item" v-on:endLoading="endLoading" />
       </div>
     </div>
@@ -43,7 +44,7 @@ import "swiper/css/swiper.css";
 import mainCampistList from "@/components/campsite/mainCampistList";
 import Footer from "@/components/app/Footer";
 import axios from "axios";
-import PulseLoader from 'vue-spinner/src/PulseLoader.vue'
+import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
@@ -71,7 +72,7 @@ export default {
       },
       userId: "",
       size: "20px",
-      loading: true,
+      loading: true
     };
   },
   methods: {
@@ -83,13 +84,11 @@ export default {
       window.scrollTo({ top: location + 30, behavior: "smooth" });
     },
     no_member() {
-      console.log("로그인 안 한 유저입니다.");
       axios({
         method: "get",
         url: `${SERVER_URL}/camp/camppoptag`
       })
         .then(res => {
-          console.log(res.data);
           this.tagList = res.data;
         })
         .catch(error => {
@@ -97,13 +96,11 @@ export default {
         });
     },
     member() {
-      console.log("로그인 한 유저입니다.");
       axios({
         method: "get",
         url: `${SERVER_URL}/camp/listbyuser/${this.userId}/`
       })
         .then(res => {
-          console.log(res.data);
           this.tagList = res.data;
         })
         .catch(error => {
@@ -111,11 +108,9 @@ export default {
         });
     },
     endLoading() {
-      
       setTimeout(() => {
         this.loading = false;
       }, 500);
-      
     }
   },
   created() {

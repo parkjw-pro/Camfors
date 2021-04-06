@@ -15,7 +15,7 @@
 
     <!-- gray bar -->
     <div class="bar"></div>
-    
+
     <!-- 캠핑장 상세페이지 컨테이너 -->
     <b-container>
       <div class="row campsiteInfo">
@@ -341,10 +341,7 @@ export default {
         url: `${SERVER_URL}/camp/camprecommend/${this.campsiteId}/`
       })
         .then(res => {
-          
           this.recCampsite = res.data;
-          console.log(res);
-          console.log(this.recCampsite);
         })
         .catch(error => {
           console.log(error);
@@ -357,7 +354,6 @@ export default {
       })
         .then(res => {
           this.commentList = [];
-          console.log(res.data);
           if (res.data !== "리뷰가 없습니다") this.commentList = res.data;
           for (let i = 0; i < this.commentList.length; i++) {
             this.commentList[i].created_at = this.commentList[
@@ -370,19 +366,14 @@ export default {
         });
     },
     createReview() {
-      console.log(
-        Number(this.getUserId),
-        Number(this.campsiteId),
-        this.comment
-      );
       axios
         .post(`${SERVER_URL}/camp/createreview`, {
           user_id: Number(this.getUserId),
           campsite_id: Number(this.campsiteId),
           review: this.comment
         })
-        .then(response => {
-          console.log(response);
+        .then(() => {
+          this.comment = "";
           this.getReview();
         });
     },
@@ -399,8 +390,7 @@ export default {
             user_id: this.getUserId
           }
         })
-        .then(response => {
-          console.log(response.data);
+        .then(() => {
           this.liked = true;
         });
     },
@@ -416,8 +406,7 @@ export default {
             user_id: this.getUserId
           }
         })
-        .then(response => {
-          console.log(response.data);
+        .then(() => {
           this.liked = false;
         });
     },
@@ -430,7 +419,6 @@ export default {
           }
         })
         .then(response => {
-          console.log(response);
           if (response.data == 0) {
             this.liked = false;
           } else {

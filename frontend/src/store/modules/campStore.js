@@ -11,7 +11,7 @@ const campStore = {
     searchTagList: [[]],
     searchTagListName: [],
     searchWordName: "",
-    pageNum: 0,
+    pageNum: 0
   },
   getters: {
     getDetailInfo(state) {
@@ -32,7 +32,7 @@ const campStore = {
     getPageNum(state) {
       return state.pageNum;
     },
-    getLoading(state){
+    getLoading(state) {
       return state.loading;
     }
   },
@@ -51,7 +51,7 @@ const campStore = {
     },
     setSearchWordName(state, payload) {
       state.searchWordName = payload;
-    },
+    }
   },
   actions: {
     campsiteDetail(context, campsite_id) {
@@ -60,7 +60,6 @@ const campStore = {
         url: `${SERVER_URL}/camp/getDetail/${campsite_id}/`
       })
         .then(res => {
-          console.log(res.data);
           context.commit("setDetailInfo", res.data);
         })
         .catch(error => {
@@ -70,7 +69,6 @@ const campStore = {
     searchByWord(context, word) {
       context.commit("setSearchTagList", [[]]);
       context.commit("setSearchWordName", word);
-      console.log("searchByWord");
       axios({
         method: "post",
         url: `${SERVER_URL}/camp/getwordresult/`,
@@ -79,7 +77,6 @@ const campStore = {
         }
       })
         .then(res => {
-          console.log(res.data);
           context.commit("setSearchWordList", res.data);
         })
         .catch(error => {
@@ -95,7 +92,6 @@ const campStore = {
         data: tagList
       })
         .then(res => {
-          console.log(res);
           context.commit("setSearchTagList", res.data);
           //context.commit("searchTagList", tagList);
         })

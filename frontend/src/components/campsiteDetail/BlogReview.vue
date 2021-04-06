@@ -34,7 +34,9 @@
       <b-button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
         이전
       </b-button>
-      <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
+      <span class="page-count">
+        {{ pageNum + 1 }} / {{ pageCount }} 페이지
+      </span>
       <b-button
         :disabled="pageNum >= pageCount - 1"
         @click="nextPage"
