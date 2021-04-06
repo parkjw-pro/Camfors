@@ -41,7 +41,7 @@
 
 - 메인 페이지로는 **추천태그별 캠핑장 리스트**가 띄워지게 된다.
 
-![](Docs/img/main.gif)
+![](Docs/img/MainPage.gif)
 
 - 로그인과 회원가입을 을 통해 개인별 추천서비스를 받을 수 있고, 좋아요와 댓글을 남길 수 있다.
 
@@ -61,7 +61,7 @@
 
 - 태그가 아닌 일반검색으로 검색하면 해당 검색어를 포함된(이름또는 지역) 캠핑장 리스트가 출력된다.
 
-![](Docs/img/keywordSearch.png)
+![](Docs/img/SearchWord.png)
 
 
 
@@ -69,7 +69,7 @@
 
 - 태그로 검색하게 되면, 캠핑장의 태그가 해당태그인 리스트를 출력 한다.
 
-![](Docs/img/TagSearch.png)
+![](Docs/img/SearchTag.png)
 
 
 
@@ -98,10 +98,16 @@ npm run serve
   
   VUE_APP_SERVER_URL=<서버 URL>
   VUE_APP_MAP_API_KEY=<카카오 지도 API Javascript 키>
+  VUE_APP_SERVER_URL_C=<크롤링 서버 URL>
   ```
+  
+- `backend` 프로젝트 폴더에서 모듈을 설치한다.
+```bash
+pip install -r requirements.txt
+python manage.py runserver
+```
 
-
-> BE 코드는 Django에서 실행한다.
+> 
 
 
 ## File Manifest
@@ -123,12 +129,26 @@ npm run serve
   3. campsite
   - 캠핑장 추천 서비스 관련
 
-
 ### Backend
 
 
+ -폴더구조는 서버 `Back-end`, 앱 단위 `main`, `camp`로 구분된다.
+ 
+    
+    1. DB 연동
+    - python manage.py inspectdb (db 감지 및 model.py 코드 작성 용이)
+        
+    2.DB가 변경 되었을 시
+    - python manage.py makemigrations
+    - python manage.py migrate
+
+
+
+### Database
+
 ### ERdiagram
 ![](Docs/img/erd.png)
+
 
 
 ## 저작권 및 사용권 정보
@@ -141,7 +161,6 @@ npm run serve
 - lodash
 - vue bootstrap-vue bootstrap
 - less less-loader
-- jquery
 - mint-ui -S
 - vue-awesome-swiper
 - vuex
@@ -167,16 +186,14 @@ npm run serve
 
 ## 알려진 버그
 
-> campsite_Tag 테이블 1437번 캠핑장 중복
+> 아직 없습니다.
 
 
 
 ## 배포
 
 
-> http://www.camfors.shop
-
-
+> https://j4a304.p.ssafy.io
 
 
 
