@@ -66,13 +66,11 @@ export default {
   },
   methods: {
     removeReview(review_id) {
-      console.log(review_id);
       axios({
         method: "delete",
         url: `${SERVER_URL}/camp/deletereview/${review_id}`
       })
-        .then(res => {
-          console.log(res.data);
+        .then(() => {
           this.$emit("refresh");
         })
         .catch(error => {

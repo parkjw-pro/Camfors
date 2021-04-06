@@ -8,13 +8,18 @@
       >
         {{ getSearchWordName }}의 검색결과입니다.
       </h2>
+      <pulse-loader
+        :loading="false"
+        :size="size"
+        style="position:absolute; left:50%; top:120vh; transform: translateX(-50%); z-index:999; }"
+      ></pulse-loader>
       <br />
       <div class="row">
         <div v-for="(item, index) in paginatedData" :key="index">
           <div class="col-md-3">
             <campsiteBlock
               :item="item"
-              style="width: 20rem; height:20rem; margin-bottom:2rem;"
+              style="width: 20rem; height:18rem; margin-bottom:2rem;"
             />
           </div>
         </div>
@@ -57,10 +62,12 @@
 <script>
 import "swiper/css/swiper.css";
 import campsiteBlock from "@/components/campsite/campsiteBlock";
+import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 import { mapGetters } from "vuex";
 export default {
   components: {
-    campsiteBlock
+    campsiteBlock,
+    PulseLoader
   },
   props: {
     // SearchWordList: Array,
@@ -83,7 +90,9 @@ export default {
           type: "bullets"
         }
       },
-      pageNum: 0
+      pageNum: 0,
+      loading: true,
+      size: "20px"
     };
   },
   methods: {
@@ -99,7 +108,8 @@ export default {
   },
   computed: {
     ...mapGetters({
-      getSearchWordName: "campStore/getSearchWordName"
+      getSearchWordName: "campStore/getSearchWordName",
+      getLoading: "campStore/getLoading"
     }),
     pageCount() {
       let listLeng = this.SearchWordList.length,
