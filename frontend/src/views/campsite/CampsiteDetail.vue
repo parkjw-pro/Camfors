@@ -91,14 +91,6 @@
               >홈페이지</b-button
             >
             <b-button
-              variant="secondary"
-              v-if="getDetailInfo.resveUrl"
-              :href="getDetailInfo.resveUrl"
-              target="_blank"
-              style="margin-right:10px;"
-              >예약하기</b-button
-            >
-            <b-button
               variant="outline-danger"
               v-if="liked"
               @click="unlikeCampsite(getDetailInfo.campsite_id)"
@@ -110,6 +102,9 @@
               @click="likeCampsite(getDetailInfo.campsite_id)"
               ><i class="fas fa-heart"></i
             ></b-button>
+            <b-modal ref="modal">
+              <p>로그인 후 이용 가능합니다!</p>
+            </b-modal>
           </div>
         </div>
       </div>
