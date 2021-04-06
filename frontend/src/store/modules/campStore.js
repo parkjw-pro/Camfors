@@ -11,7 +11,7 @@ const campStore = {
     searchTagList: [[]],
     searchTagListName: [],
     searchWordName: "",
-    pageNum : 0
+    pageNum: 0
   },
   getters: {
     getDetailInfo(state) {
@@ -52,7 +52,6 @@ const campStore = {
   },
   actions: {
     campsiteDetail(context, campsite_id) {
-      
       axios({
         method: "get",
         url: `${SERVER_URL}/camp/getDetail/${campsite_id}/`
@@ -66,7 +65,7 @@ const campStore = {
         });
     },
     searchByWord(context, word) {
-      context.commit("setSearchTagList", [[]])
+      context.commit("setSearchTagList", [[]]);
       context.commit("setSearchWordName", word);
       console.log("searchByWord");
       axios({

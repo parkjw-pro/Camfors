@@ -149,11 +149,18 @@
       </b-col>
       <!-- 버튼 -->
       <div>
-       <b-button variant="secondary" style="width:30%; margin-bottom:10px;" class="mx-3" @click="onSubmit()">
+        <b-button
+          variant="secondary"
+          style="width:30%; margin-bottom:10px;"
+          class="mx-3"
+          @click="onSubmit()"
+        >
           가입 완료
         </b-button>
         <div class="small">
-        <span style="color: rgba(161, 161, 161); cursor: pointer;" @click="$router.push({ name: 'Login' })"
+          <span
+            style="color: rgba(161, 161, 161); cursor: pointer;"
+            @click="$router.push({ name: 'Login' })"
             >로그인
           </span>
         </div>
@@ -211,7 +218,7 @@ export default {
             window.location.href = "/register";
           });
       }
-    },
+    }
   }
 };
 </script>

@@ -30,11 +30,7 @@
         </div>
       </b-list-group-item>
     </b-list-group>
-    <div
-      v-if="items.length > 5"
-      class="btn-cover"
-      style="text-align: center;"
-    >
+    <div v-if="items.length > 5" class="btn-cover" style="text-align: center;">
       <b-button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
         이전
       </b-button>
@@ -62,7 +58,7 @@ export default {
     };
   },
   props: {
-    name : String,
+    name: String,
     pageSize: {
       type: Number,
       required: false,
