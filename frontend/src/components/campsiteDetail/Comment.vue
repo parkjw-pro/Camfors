@@ -65,7 +65,6 @@ export default {
     }
   },
   methods: {
-    
     removeReview(review_id) {
       console.log(review_id);
       axios({
@@ -116,9 +115,9 @@ export default {
   margin: 0 auto;
 }
 
-.btn-cover{
-  position: absolute; 
-  left:50%; 
-  transform:translateX(-50%);
+.btn-cover {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>

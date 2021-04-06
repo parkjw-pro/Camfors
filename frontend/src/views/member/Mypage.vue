@@ -135,6 +135,6 @@ export default {
 }
 
 .btn-cover {
-  bottom: 0
+  bottom: 0;
 }
 </style>

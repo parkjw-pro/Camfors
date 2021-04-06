@@ -1,19 +1,15 @@
 <template>
   <!-- Footer -->
   <div>
-      <footer class="footer-distributed">
-
+    <footer class="footer-distributed">
       <div class="footer-right">
-
         <a href="#"><i class="fa fa-facebook"></i></a>
         <a href="#"><i class="fa fa-twitter"></i></a>
         <a href="#"><i class="fa fa-linkedin"></i></a>
         <a href="#"><i class="fa fa-github"></i></a>
-
       </div>
 
       <div class="footer-left">
-
         <p class="footer-links">
           <a class="link-1" href="#">Home</a>
 
@@ -30,14 +26,13 @@
 
         <p>Camping For Smart &copy; 2021</p>
       </div>
-
     </footer>
   </div>
 
   <!-- Footer -->
 </template>
 <style scoped>
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400, 500, 300, 700);
 
 * {
   font-family: Roboto;
@@ -77,7 +72,7 @@ section {
   color: #ffffff;
   margin: 0 0 10px;
   padding: 0;
-  transition: ease .25s;
+  transition: ease 0.25s;
 }
 
 .footer-distributed p.footer-links a {
@@ -85,7 +80,7 @@ section {
   line-height: 1.8;
   text-decoration: none;
   color: inherit;
-  transition: ease .25s;
+  transition: ease 0.25s;
 }
 
 .footer-distributed .footer-links a:before {
@@ -118,17 +113,23 @@ section {
   text-align: center;
   line-height: 35px;
   margin-left: 3px;
-  transition:all .25s;
+  transition: all 0.25s;
 }
 
-.footer-distributed .footer-right a:hover{transform:scale(1.1); -webkit-transform:scale(1.1);}
+.footer-distributed .footer-right a:hover {
+  transform: scale(1.1);
+  -webkit-transform: scale(1.1);
+}
 
-.footer-distributed p.footer-links a:hover{text-decoration:underline;}
+.footer-distributed p.footer-links a:hover {
+  text-decoration: underline;
+}
 
 /* Media Queries */
 
 @media (max-width: 600px) {
-  .footer-distributed .footer-left, .footer-distributed .footer-right {
+  .footer-distributed .footer-left,
+  .footer-distributed .footer-right {
     text-align: center;
   }
   .footer-distributed .footer-right {
@@ -139,5 +140,4 @@ section {
     line-height: 1.8;
   }
 }
-
 </style>
