@@ -91,14 +91,6 @@
               >홈페이지</b-button
             >
             <b-button
-              variant="secondary"
-              v-if="getDetailInfo.resveUrl"
-              :href="getDetailInfo.resveUrl"
-              target="_blank"
-              style="margin-right:10px;"
-              >예약하기</b-button
-            >
-            <b-button
               variant="outline-danger"
               v-if="liked"
               @click="unlikeCampsite(getDetailInfo.campsite_id)"
@@ -110,6 +102,9 @@
               @click="likeCampsite(getDetailInfo.campsite_id)"
               ><i class="fas fa-heart"></i
             ></b-button>
+            <b-modal ref="modal">
+              <p>로그인 후 이용 가능합니다!</p>
+            </b-modal>
           </div>
         </div>
       </div>
@@ -194,7 +189,8 @@
           </div>
           <div
             v-if="
-              typeof getDetailInfo.lctCl === 'string' && getDetailInfo.lctCl.indexOf('산') != -1
+              typeof getDetailInfo.lctCl === 'string' &&
+                getDetailInfo.lctCl.indexOf('산') != -1
             "
             style="text-align:center; padding-right:50px; padding-top:10px;"
           >
@@ -209,7 +205,11 @@
         <h4 style="margin-top:20px; text-align:left;">
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>캠핑장 위치
         </h4>
-        <Map v-if="getDetailInfo.mapX" :mapX="getDetailInfo.mapX" :mapY="getDetailInfo.mapY" />
+        <Map
+          v-if="getDetailInfo.mapX"
+          :mapX="getDetailInfo.mapX"
+          :mapY="getDetailInfo.mapY"
+        />
         <!-- <div class="row">
           <div class="col-5">캠핑장 주요 시설 자세한 소개</div>
         </div> -->
@@ -257,7 +257,11 @@
             >등록</b-button
           >
         </div>
-        <Comment v-if="this.commentList" :commentList="this.commentList" v-on:refresh="refresh" />
+        <Comment
+          v-if="this.commentList"
+          :commentList="this.commentList"
+          v-on:refresh="refresh"
+        />
       </div>
 
       <!-- 블로그 리뷰 -->
@@ -265,135 +269,149 @@
         <h4 style="margin-top:20px; text-align:left;">
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>블로그 리뷰
         </h4>
-        <BlogReview v-if="getDetailInfo.campsite_name" :name="getDetailInfo.campsite_name" />
+        <BlogReview
+          v-if="getDetailInfo.campsite_name"
+          :name="getDetailInfo.campsite_name"
+        />
       </div>
-      <br>
-      <br>
+      <br />
+      <br />
     </b-container>
+    <Footer />
   </div>
 </template>
 
 <script>
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
-import axios from 'axios';
+import axios from "axios";
 
-import Map from '@/components/campsiteDetail/Map';
-import Comment from '@/components/campsiteDetail/Comment';
-import BlogReview from '@/components/campsiteDetail/BlogReview';
-import recommendCampsite from '@/components/campsiteDetail/recommendCampsite';
-import { mapGetters } from 'vuex';
+import Map from "@/components/campsiteDetail/Map";
+import Comment from "@/components/campsiteDetail/Comment";
+import BlogReview from "@/components/campsiteDetail/BlogReview";
+import recommendCampsite from "@/components/campsiteDetail/recommendCampsite";
+import Footer from "@/components/app/Footer";
+import { mapGetters } from "vuex";
 export default {
-  name: 'CampsiteDetail',
+  name: "CampsiteDetail",
   components: {
     Map,
     Comment,
     BlogReview,
     recommendCampsite,
+    Footer
   },
   created() {
     this.$store.state.campStore.detailInfo = [];
-    this.$store.dispatch('campStore/campsiteDetail', this.$route.params.campsiteId);
-    const userId = localStorage.getItem('user_id');
+    this.$store.dispatch(
+      "campStore/campsiteDetail",
+      this.$route.params.campsiteId
+    );
+    const userId = localStorage.getItem("user_id");
     this.userId = userId;
-    if (this.getUserId != '') this.getLikeInfo();
+    if (this.getUserId != "") this.getLikeInfo();
     this.getReview();
     this.getRecCampsite();
   },
   computed: {
     ...mapGetters({
-      getDetailInfo: 'campStore/getDetailInfo',
-      getUserId: 'userStore/getUserId',
-    }),
+      getDetailInfo: "campStore/getDetailInfo",
+      getUserId: "userStore/getUserId"
+    })
   },
   data: function() {
     return {
       campDetail: [],
       campsiteId: this.$route.params.campsiteId,
-      tagList: '',
+      tagList: "",
       commentList: [],
-      comment: '',
-      userId: '',
+      comment: "",
+      userId: "",
       liked: null,
-      likeCount: '',
-      recCampsite: [],
+      likeCount: "",
+      recCampsite: []
     };
   },
   methods: {
     getRecCampsite() {
       axios({
-        method: 'get',
-        url: `${SERVER_URL}/camp/camprecommend/${this.campsiteId}/`,
+        method: "get",
+        url: `${SERVER_URL}/camp/camprecommend/${this.campsiteId}/`
       })
-        .then((res) => {
+        .then(res => {
           this.recCampsite = res.data;
           // console.log(res.data);
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
     getReview() {
       axios({
-        method: 'get',
-        url: `${SERVER_URL}/camp/readreview/${this.campsiteId}/`,
+        method: "get",
+        url: `${SERVER_URL}/camp/readreview/${this.campsiteId}/`
       })
-        .then((res) => {
+        .then(res => {
           this.commentList = [];
           console.log(res.data);
-          if (res.data !== '리뷰가 없습니다') this.commentList = res.data;
+          if (res.data !== "리뷰가 없습니다") this.commentList = res.data;
           for (let i = 0; i < this.commentList.length; i++) {
-            this.commentList[i].created_at = this.commentList[i].created_at.replace('T', ' ');
+            this.commentList[i].created_at = this.commentList[
+              i
+            ].created_at.replace("T", " ");
           }
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error);
         });
     },
     createReview() {
-      console.log(Number(this.getUserId), Number(this.campsiteId), this.comment);
+      console.log(
+        Number(this.getUserId),
+        Number(this.campsiteId),
+        this.comment
+      );
       axios
         .post(`${SERVER_URL}/camp/createreview`, {
           user_id: Number(this.getUserId),
           campsite_id: Number(this.campsiteId),
-          review: this.comment,
+          review: this.comment
         })
-        .then((response) => {
+        .then(response => {
           console.log(response);
+          this.getReview();
         });
-
-      this.$router.go();
     },
 
     likeCampsite(campsite_id) {
-      if (this.getUserId == '') {
-        this.$refs['modal'].show() // PopUp Open
+      if (this.getUserId == "") {
+        this.$refs["modal"].show(); // PopUp Open
         return;
       }
       axios
         .post(`${SERVER_URL}/camp/addlike`, {
           data: {
             campsite_id: campsite_id,
-            user_id: this.getUserId,
-          },
+            user_id: this.getUserId
+          }
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
           this.liked = true;
         });
     },
     unlikeCampsite(campsite_id) {
-      if (this.getUserId == '') {
-        this.$refs['modal'].show() // PopUp Open
+      if (this.getUserId == "") {
+        this.$refs["modal"].show(); // PopUp Open
         return;
       }
       axios
         .post(`${SERVER_URL}/camp/unlike`, {
           data: {
             campsite_id: campsite_id,
-            user_id: this.getUserId,
-          },
+            user_id: this.getUserId
+          }
         })
-        .then((response) => {
+        .then(response => {
           console.log(response.data);
           this.liked = false;
         });
@@ -403,10 +421,10 @@ export default {
         .get(`${SERVER_URL}/camp/getlikeinfo`, {
           params: {
             userId: this.getUserId,
-            campsiteId: this.campsiteId,
-          },
+            campsiteId: this.campsiteId
+          }
         })
-        .then((response) => {
+        .then(response => {
           console.log(response);
           if (response.data == 0) {
             this.liked = false;
@@ -416,16 +434,17 @@ export default {
         });
     },
     refresh() {
-      this.$router.go();
-    },
-  },
+      // this.$router.go();
+      this.getReview();
+    }
+  }
 };
 </script>
 <style scoped>
 .contentsBox {
   width: 100%;
   height: 30vh;
-  background-image: url('https://gocamping.or.kr/img/2018/sub/camp/camp_typebg_03.jpg');
+  background-image: url("https://gocamping.or.kr/img/2018/sub/camp/camp_typebg_03.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

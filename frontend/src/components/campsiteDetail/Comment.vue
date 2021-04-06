@@ -5,7 +5,7 @@
     <b-list-group flush v-for="(comment, index) in paginatedData" :key="index">
       <b-list-group-item class="flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
-          <p class="mb-1">{{comment.nickname}}</p>
+          <p class="mb-1">{{ comment.nickname }}</p>
           <small> {{ comment.created_at }} </small>
         </div>
         <div class="d-flex w-100 justify-content-between">
@@ -73,12 +73,11 @@ export default {
       })
         .then(res => {
           console.log(res.data);
-          this.$emit('refresh');
+          this.$emit("refresh");
         })
         .catch(error => {
           console.log(error);
         });
-      
     },
     nextPage() {
       this.pageNum += 1;
@@ -107,12 +106,18 @@ export default {
         end = start + this.pageSize;
       return this.commentList.slice(start, end);
     }
-  },
+  }
 };
 </script>
 <style scoped>
 .comments {
   width: 90%;
   margin: 0 auto;
+}
+
+.btn-cover {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>

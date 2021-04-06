@@ -44,7 +44,9 @@
           <!-- <span style="color: #fff; cursor: pointer;" @click="toSignup"
             >비밀번호찾기
           </span> -->
-          <span style="color: rgba(161, 161, 161); cursor: pointer;" @click="toSignup"
+          <span
+            style="color: rgba(161, 161, 161); cursor: pointer;"
+            @click="toSignup"
             >회원가입
           </span>
         </div>
@@ -120,7 +122,7 @@ export default {
 }
 #box {
   position: absolute;
-  vertical-align:middle;
+  vertical-align: middle;
   width: 400px;
   height: 400px;
   padding: 30px;
@@ -132,6 +134,6 @@ export default {
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 </style>

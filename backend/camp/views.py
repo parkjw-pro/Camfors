@@ -37,7 +37,22 @@ def campSite_detail(request, pk):
 
     if request.method == 'GET':
         serializer = CampsiteDetailSerializer(campsite)
-        return JsonResponse(serializer.data, safe=False)
+
+        # 태그 추가
+        sub_result = collections.OrderedDict()
+        camp_id = serializer.data['campsite_id']
+        sub_queryset = Tag.objects.raw(
+            '''select tag_id
+            from Campsite_Tag
+            where campsite_id = {campsite_id}'''.format(campsite_id = camp_id)
+        )
+        sub_serializer = TagSerializer(sub_queryset, many = True)
+        for k, v in serializer.data.items():
+            sub_result[k] = v
+        sub_result['taglist'] = sub_serializer.data
+        # print(sub_result)
+
+        return JsonResponse(sub_result, safe=False)
 
 def camptaglist(request, tag_id):
     try:
@@ -49,7 +64,26 @@ def camptaglist(request, tag_id):
 
     if request.method == 'GET' and len(query_sets) > 0:
         serializer = CampsiteSerializer(query_sets, many=True)
-        return JsonResponse(serializer.data, safe=False)
+
+        # 태그
+        camp_len = len(serializer.data)
+        tag_result = []
+        for i in range(camp_len):
+            sub_result = collections.OrderedDict()
+            camp_id = serializer.data[i]['campsite_id']
+            sub_queryset = Tag.objects.raw(
+                '''select tag_id
+                from Campsite_Tag
+                where campsite_id = {campsite_id}'''.format(campsite_id = camp_id)
+            )
+            sub_serializer = TagSerializer(sub_queryset, many = True)
+            for k, v in serializer.data[i].items():
+                sub_result[k] = v
+            sub_result['taglist'] = sub_serializer.data
+            tag_result.append(sub_result)
+        # print(tag_result)
+
+        return JsonResponse(tag_result, safe=False)
 
     else:
         return JsonResponse("조회된 데이터가 없습니다.", safe=False)
@@ -77,12 +111,30 @@ def campWordResult(request):
                                             Q(posblFcltyCl__icontains=searchword) | Q(exprnProgrm__icontains=searchword) |
                                             Q(themaEnvrnCl__icontains=searchword) | Q(eqpmnLendCl__icontains=searchword)).distinct()
 
-            result = CampsiteSerializer(query,many=True)
+            serializer = CampsiteSerializer(query,many=True)
+
+            # 태그
+            camp_len = len(serializer.data)
+            tag_result = []
+            for i in range(camp_len):
+                sub_result = collections.OrderedDict()
+                camp_id = serializer.data[i]['campsite_id']
+                sub_queryset = Tag.objects.raw(
+                    '''select tag_id
+                    from Campsite_Tag
+                    where campsite_id = {campsite_id}'''.format(campsite_id = camp_id)
+                )
+                sub_serializer = TagSerializer(sub_queryset, many = True)
+                for k, v in serializer.data[i].items():
+                    sub_result[k] = v
+                sub_result['taglist'] = sub_serializer.data
+                tag_result.append(sub_result)
+            # print(tag_result)
 
         except Campsite.DoesNotExist:
             return HttpResponse(status=404)
 
-    return JsonResponse(result.data, safe=False)
+    return JsonResponse(tag_result, safe=False)
 
 
 @csrf_exempt
@@ -96,6 +148,8 @@ def campTagResult(request):
                 queryset = Campsite.objects.filter(campsite_id__in=Subquery(CampsiteTag.objects.filter(tag_id=tagid)
                                                                           .values('campsite_id'))).order_by('likeCount')[:50]
                 serializer = CampsiteSerializer(queryset, many=True)
+
+                # 태그
                 camp_len = len(serializer.data)
                 tag_result = []
                 for i in range(camp_len):
@@ -260,7 +314,25 @@ def campRecommend(request,campsite_id):
         serializer = CampsiteSerializer(query_sets, many=True)
         result.append(serializer.data)
 
-    return JsonResponse(result, safe=False, status=status.HTTP_201_CREATED)
+    # 태그
+    camp_len = len(result)
+    tag_result = []
+    for i in range(camp_len):
+        sub_result = collections.OrderedDict()
+        camp_id = result[i][0]['campsite_id']
+        sub_queryset = Tag.objects.raw(
+            '''select tag_id
+            from Campsite_Tag
+            where campsite_id = {campsite_id}'''.format(campsite_id = camp_id)
+        )
+        sub_serializer = TagSerializer(sub_queryset, many = True)
+        for k, v in result[i][0].items():
+            sub_result[k] = v
+        sub_result['taglist'] = sub_serializer.data
+        tag_result.append(sub_result)
+    print(tag_result)
+
+    return JsonResponse(tag_result, safe=False, status=status.HTTP_201_CREATED)
 
 @csrf_exempt
 @api_view(['post'])

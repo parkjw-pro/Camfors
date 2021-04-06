@@ -30,9 +30,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      buttons: [
-        
-      ],
+      buttons: [],
       checkedTag: [],
       selectedTag: [],
       selectedTagName: []
@@ -52,9 +50,7 @@ export default {
       for (let index = 0; index < this.buttons.length; index++) {
         if (this.buttons[index].state === true) {
           this.selectedTag.push(this.buttons[index].tag_id);
-          this.selectedTagName.push(
-            this.buttons[index].tag_name
-          );
+          this.selectedTagName.push(this.buttons[index].tag_name);
         }
       }
       this.$store.dispatch("campStore/searchByTagName", this.selectedTagName);
@@ -70,18 +66,18 @@ export default {
       url: `${SERVER_URL}/camp/gettaglist`
     })
       .then(res => {
-        this.buttons = res.data
-        
+        this.buttons = res.data;
+
         // state 추가
-        for(let i=0; i<this.buttons.length; i++){
-          this.$set(this.buttons[i], 'state', false);
+        for (let i = 0; i < this.buttons.length; i++) {
+          this.$set(this.buttons[i], "state", false);
         }
 
-        console.log(this.buttons)
+        console.log(this.buttons);
       })
       .catch(error => {
         console.log(error);
-    });
+      });
   }
 };
 </script>

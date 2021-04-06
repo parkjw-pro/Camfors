@@ -28,7 +28,7 @@ export default {
       cssProps: {
         backgroundImage: `url(${require("@/assets/mypage/mypage.jpg")})`,
         width: "100vw",
-        height: "100vh",
+        height: "120vh",
         position: "relative"
       },
       userId: "",
@@ -101,7 +101,7 @@ export default {
   color: black;
   background-color: rgba(255, 255, 255, 0.356);
   opacity: 0.7;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 #my2 {
@@ -137,6 +137,7 @@ export default {
   background-color: white;
 }
 
-
-
+.btn-cover {
+  bottom: 0;
+}
 </style>
