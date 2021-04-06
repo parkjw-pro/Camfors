@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Subquery
@@ -33,6 +32,7 @@ def campSite_detail(request, pk):
     if request.method == 'GET':
         serializer = CampsiteDetailSerializer(campsite)
         return JsonResponse(serializer.data, safe=False)
+
 
 def camptaglist(request, tag_id):
     try:
@@ -123,7 +123,7 @@ def listbyuser(request, user_id):
                     limit 5;'''.format(user_id=user_id))
                 serializer = TagSerializer(query, many=True)
 
-            else :
+            else:
                 query = Tag.objects.raw(
                     '''select ct.tag_id , sum(c.likeCount) as tagLikeCount 
                         from Campsite c, Campsite_Tag ct  
