@@ -12,11 +12,7 @@
         <!-- 2.1.1 아이디 -->
         <b-row id="accountBox">
           <b-col>
-            <ValidationProvider
-              name="이메일"
-              rules="required|email"
-              v-slot="{ errors }"
-            >
+
               <b-form-group>
                 <label
                   style="float:left; padding-right:10px; padding-top:5px; color : white"
@@ -34,23 +30,11 @@
                 ></b-form-input>
                 <br />
                 <br />
-                <small
-                  id="error3"
-                  class="text-danger"
-                  style=" margin-top:5px"
-                  >{{ errors[0] }}</small
-                >
               </b-form-group>
-            </ValidationProvider>
           </b-col>
         </b-row>
         <b-row id="accountBox">
           <b-col>
-            <ValidationProvider
-              name="비밀번호"
-              rules="required|min:6"
-              v-slot="{ errors }"
-            >
               <b-form-group>
                 <label
                   style="float:left; padding-right:17px; padding-top:5px; color : white"
@@ -62,29 +46,17 @@
                   class="mx-4"
                   style="width:60%; float:left; font-color : black;"
                   v-model="credentials.password"
-                  placeholder="비밀번호를 입력하세요"
+                  placeholder="비밀번호를 입력하세요(6자 이상)"
                   required
                   @keypress.enter="onSubmit()"
                 ></b-form-input>
                 <br />
                 <br />
-                <small
-                  id="error5"
-                  class="text-danger"
-                  style=" margin-top:5px; color : white"
-                  >{{ errors[0] }}</small
-                >
               </b-form-group>
-            </ValidationProvider>
           </b-col>
         </b-row>
         <b-row id="accountBox">
           <b-col>
-            <ValidationProvider
-              name="비밀번호 확인"
-              rules="required|confirmed:비밀번호"
-              v-slot="{ errors }"
-            >
               <b-form-group>
                 <label
                   style="float:left; padding-right:10px; padding-top:5px; color : white"
@@ -101,24 +73,12 @@
                 ></b-form-input>
                 <br />
                 <br />
-                <small
-                  id="error6"
-                  class="text-danger"
-                  style=" margin-top:5px"
-                  >{{ errors[0] }}</small
-                >
               </b-form-group>
-            </ValidationProvider>
           </b-col>
         </b-row>
         <!-- 2.1.2 닉네임 -->
         <b-row id="accountBox">
           <b-col>
-            <ValidationProvider
-              name="닉네임"
-              rules="required|min:2"
-              v-slot="{ errors }"
-            >
               <b-form-group>
                 <label
                   style="float:left; padding-right:10px; padding-top:5px; color : white"
@@ -130,20 +90,13 @@
                   class="ml-5"
                   style="width:60%; float:left;"
                   v-model="credentials.nickname"
-                  placeholder="개성있는 닉네임을 입력하세요"
+                  placeholder="개성있는 닉네임을 입력하세요(2자 이상)"
                   required
                   @keypress.enter="onSubmit()"
                 ></b-form-input>
                 <br />
                 <br />
-                <small
-                  id="error2"
-                  class="text-danger"
-                  style=" margin-top:5px"
-                  >{{ errors[0] }}</small
-                >
               </b-form-group>
-            </ValidationProvider>
           </b-col>
         </b-row>
       </b-col>
@@ -171,13 +124,11 @@
 
 <script>
 import axios from "axios";
-import { ValidationProvider } from "vee-validate";
 
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
   components: {
-    ValidationProvider
     // extend,
   },
   name: "Register",
@@ -202,10 +153,12 @@ export default {
   methods: {
     onSubmit() {
       if (
-        document.getElementById("error5").innerHTML != "" ||
-        document.getElementById("error6").innerHTML != ""
+        (this.credentials.email.length<6)||
+        (this.credentials.password.length<6)||
+        (this.credentials.password!=this.credentials.password_confirmation)||
+        (this.credentials.nickname.length<2)
       ) {
-        alert("중복체크 및 유효성 검사 확인 바랍니다.");
+        alert("회원가입 양식에 맞춰주세요!");
       } else {
         axios
           .post(`${SERVER_URL}/user/signup`, this.credentials)
