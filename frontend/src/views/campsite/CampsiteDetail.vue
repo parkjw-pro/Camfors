@@ -9,7 +9,7 @@
     </div>
     <br />
     <h3 style="font-family: 'Hanna', sans-serif;">여긴 어떠세요?</h3>
-    <recommendCampsite :likeList="recCampsite" />
+    <RecommendCampsite :likeList="recCampsite" />
 
     <!-- gray bar -->
     <div class="bar"></div>
@@ -288,7 +288,7 @@ import axios from "axios";
 import Map from "@/components/campsiteDetail/Map";
 import Comment from "@/components/campsiteDetail/Comment";
 import BlogReview from "@/components/campsiteDetail/BlogReview";
-import recommendCampsite from "@/components/campsiteDetail/recommendCampsite";
+import RecommendCampsite from "@/components/campsiteDetail/RecommendCampsite";
 import Footer from "@/components/app/Footer";
 import { mapGetters } from "vuex";
 export default {
@@ -297,7 +297,7 @@ export default {
     Map,
     Comment,
     BlogReview,
-    recommendCampsite,
+    RecommendCampsite,
     Footer
   },
   created() {
