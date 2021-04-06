@@ -286,7 +286,8 @@ def campReadReview(request, campsite_id):
             '''select R.campsite_id, R.created_at, R.review, U.nickname, R.review_id 
             from User as U, Reviews as R 
             where U.user_id = R.user_id
-            and R.campsite_id = {campsite_id}'''.format(campsite_id=campsite_id)
+            and R.campsite_id = {campsite_id}
+            order by created_at desc'''.format(campsite_id=campsite_id)
         )
 
     except Reviews.DoesNotExist:
@@ -297,7 +298,8 @@ def campReadReview(request, campsite_id):
             '''select U.user_id, R.campsite_id, R.created_at, R.review, U.nickname, R.review_id 
             from User as U, Reviews as R 
             where U.user_id = R.user_id
-            and R.campsite_id = {campsite_id}'''.format(campsite_id = campsite_id)
+            and R.campsite_id = {campsite_id}
+            order by created_at desc'''.format(campsite_id = campsite_id)
         )
 
     except User.DoesNotExist:
