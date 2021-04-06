@@ -65,6 +65,25 @@ export default {
     }
   },
   methods: {
+    getReview() {
+      axios({
+        method: "get",
+        url: `${SERVER_URL}/camp/readreview/${this.campsiteId}/`
+      })
+        .then(res => {
+          this.commentList = [];
+          console.log(res.data);
+          if (res.data !== "리뷰가 없습니다") this.commentList = res.data;
+          for (let i = 0; i < this.commentList.length; i++) {
+            this.commentList[i].created_at = this.commentList[
+              i
+            ].created_at.replace("T", " ");
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
     removeReview(review_id) {
       console.log(review_id);
       axios({
@@ -73,7 +92,7 @@ export default {
       })
         .then(res => {
           console.log(res.data);
-          this.$emit("refresh");
+          this.getReview();
         })
         .catch(error => {
           console.log(error);
@@ -113,5 +132,11 @@ export default {
 .comments {
   width: 90%;
   margin: 0 auto;
+}
+
+.btn-cover{
+  position: absolute; 
+  left:50%; 
+  transform:translateX(-50%);
 }
 </style>

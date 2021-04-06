@@ -28,7 +28,7 @@ export default {
       cssProps: {
         backgroundImage: `url(${require("@/assets/mypage/mypage.jpg")})`,
         width: "100vw",
-        height: "100vh",
+        height: "120vh",
         position: "relative"
       },
       userId: "",
@@ -132,5 +132,9 @@ export default {
   top: 50%;
   color: black;
   background-color: white;
+}
+
+.btn-cover {
+  bottom: 0
 }
 </style>
