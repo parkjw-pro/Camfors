@@ -41,7 +41,7 @@
 
 - 메인 페이지로는 **추천태그별 캠핑장 리스트**가 띄워지게 된다.
 
-![](Docs/img/main.gif)
+![](Docs/img/MainPage.gif)
 
 - 로그인과 회원가입을 을 통해 개인별 추천서비스를 받을 수 있고, 좋아요와 댓글을 남길 수 있다.
 
@@ -61,7 +61,7 @@
 
 - 태그가 아닌 일반검색으로 검색하면 해당 검색어를 포함된(이름또는 지역) 캠핑장 리스트가 출력된다.
 
-![](Docs/img/keywordSearch.png)
+![](Docs/img/SearchWord.png)
 
 
 
@@ -69,7 +69,7 @@
 
 - 태그로 검색하게 되면, 캠핑장의 태그가 해당태그인 리스트를 출력 한다.
 
-![](Docs/img/TagSearch.png)
+![](Docs/img/SearchTag.png)
 
 
 
