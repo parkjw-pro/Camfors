@@ -37,7 +37,7 @@
       </div>
     </b-row>
     <b-modal ref="modal">
-      <p>회원가입후 이용 가능합니다!</p>
+      <p>로그인 후 이용 가능합니다!</p>
     </b-modal>
   </b-card>
 </template>
