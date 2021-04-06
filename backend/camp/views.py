@@ -58,7 +58,7 @@ def camptaglist(request, tag_id):
     try:
         query_sets = Campsite.objects.filter(campsite_id__in=Subquery(CampsiteTag.objects
                                                                       .filter(tag_id=tag_id)
-                                                                      .values('campsite_id'))).order_by('-likeCount')[:20]
+                                                                      .values('campsite_id')))[:20]
     except Campsite.DoesNotExist:
         return HttpResponse(status=404)
 
