@@ -377,6 +377,7 @@ export default {
           review: this.comment
         })
         .then(response => {
+          this.comment = "";
           console.log(response);
           this.getReview();
         });

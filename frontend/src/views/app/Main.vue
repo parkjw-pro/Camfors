@@ -77,13 +77,11 @@ export default {
       window.scrollTo({ top: location + 30, behavior: "smooth" });
     },
     no_member() {
-      console.log("로그인 안 한 유저입니다.");
       axios({
         method: "get",
         url: `${SERVER_URL}/camp/camppoptag`
       })
         .then(res => {
-          console.log(res.data);
           this.tagList = res.data;
         })
         .catch(error => {
@@ -91,13 +89,11 @@ export default {
         });
     },
     member() {
-      console.log("로그인 한 유저입니다.");
       axios({
         method: "get",
         url: `${SERVER_URL}/camp/listbyuser/${this.userId}/`
       })
         .then(res => {
-          console.log(res.data);
           this.tagList = res.data;
         })
         .catch(error => {
