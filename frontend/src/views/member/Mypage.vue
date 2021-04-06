@@ -7,7 +7,7 @@
     /></div>
     <div id="my3"
       ><h3 style="font-family: 'Hanna', sans-serif;">내가 쓴 댓글</h3>
-      <Comment v-if="this.reviewList" :commentList="this.reviewList" />
+      <Comment v-if="this.commentList" :commentList="this.commentList" />
     </div>
   </div>
 </template>
@@ -33,7 +33,7 @@ export default {
       },
       userId: "",
       likeCampsiteList: [],
-      reviewList: []
+      commentList: []
     };
   },
   methods: {
@@ -54,8 +54,11 @@ export default {
       axios
         .post(`${SERVER_URL}/user/review`, { user_id: this.userId })
         .then(res => {
-          this.reviewList = res.data;
+          this.commentList = res.data;
           console.log(res.data);
+          for (let i = 0; i < this.commentList.length; i++) {
+            this.commentList[i].created_at = this.commentList[i].created_at.replace('T', ' ');
+          }
         })
         .catch(error => {
           console.log(error);
