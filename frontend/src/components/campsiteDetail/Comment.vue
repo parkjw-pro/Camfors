@@ -5,10 +5,9 @@
     <b-list-group flush v-for="(comment, index) in paginatedData" :key="index">
       <b-list-group-item class="flex-column align-items-start">
         <div class="d-flex w-100 justify-content-between">
-          <p class="mb-1">{{comment.nickname}}</p>
+          <p class="mb-1">{{ comment.nickname }}</p>
           <small> {{ comment.created_at }} </small>
         </div>
-
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1" style="text-align:left;">
             {{ comment.review }}
@@ -30,17 +29,17 @@
       class="btn-cover"
       style="text-align: center;"
     >
-      <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
+      <b-button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
         이전
-      </button>
+      </b-button>
       <span class="page-count">{{ pageNum + 1 }} / {{ pageCount }} 페이지</span>
-      <button
+      <b-button
         :disabled="pageNum >= pageCount - 1"
         @click="nextPage"
         class="page-btn"
       >
         다음
-      </button>
+      </b-button>
     </div>
   </div>
 </template>
@@ -74,12 +73,11 @@ export default {
       })
         .then(res => {
           console.log(res.data);
-          this.$emit('refresh');
+          this.$emit("refresh");
         })
         .catch(error => {
           console.log(error);
         });
-      
     },
     nextPage() {
       this.pageNum += 1;
@@ -97,7 +95,6 @@ export default {
         listSize = this.pageSize,
         page = Math.floor(listLeng / listSize);
       if (listLeng % listSize > 0) page += 1;
-
       /*
       아니면 page = Math.floor((listLeng - 1) / listSize) + 1;
       이런식으로 if 문 없이 고칠 수도 있다!
@@ -116,5 +113,11 @@ export default {
 .comments {
   width: 90%;
   margin: 0 auto;
+}
+
+.btn-cover {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>

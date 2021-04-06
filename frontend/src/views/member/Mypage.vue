@@ -1,19 +1,20 @@
 <template>
   <!-- <div :style="cssProps"> -->
   <div :style="cssProps" class="loginimg">
-    <span id="my2" style="position:relative">
+    <div id="my2" style="position:relative">
       <h3 style="font-family: 'Hanna', sans-serif;">내가 좋아하는 캠핑장</h3>
-      <mypagelike :likeList="likeCampsiteList"
-    /></span>
-    <span id="my3"
+      <mypagelike :likeList="likeCampsiteList"/>
+    </div>
+    <div id="my3"
       ><h3 style="font-family: 'Hanna', sans-serif;">내가 쓴 댓글</h3>
-      <Comment v-if="this.reviewList" :commentList="this.reviewList" />
-    </span>
+      <Comment v-if="this.commentList" :commentList="this.commentList" />
+    </div>
   </div>
+
 </template>
 
 <script>
-import mypagelike from "@/components/campsite/mypagelike";
+import mypagelike from "@/components/mypage/mypagelike";
 import Comment from "@/components/campsiteDetail/Comment";
 import axios from "axios";
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
@@ -28,12 +29,12 @@ export default {
       cssProps: {
         backgroundImage: `url(${require("@/assets/mypage/mypage.jpg")})`,
         width: "100vw",
-        height: "100vh",
+        height: "120vh",
         position: "relative"
       },
       userId: "",
       likeCampsiteList: [],
-      reviewList: []
+      commentList: []
     };
   },
   methods: {
@@ -54,8 +55,11 @@ export default {
       axios
         .post(`${SERVER_URL}/user/review`, { user_id: this.userId })
         .then(res => {
-          this.reviewList = res.data;
+          this.commentList = res.data;
           console.log(res.data);
+          for (let i = 0; i < this.commentList.length; i++) {
+            this.commentList[i].created_at = this.commentList[i].created_at.replace('T', ' ');
+          }
         })
         .catch(error => {
           console.log(error);
@@ -98,16 +102,16 @@ export default {
   color: black;
   background-color: rgba(255, 255, 255, 0.356);
   opacity: 0.7;
-  pointer-events: none; 
+  pointer-events: none;
 }
 
 #my2 {
   display: block;
   width: 66%;
-  height: 35%;
+  height: 41%;
   position: absolute;
   left: 15%;
-  top: 10%;
+  top: 13%;
   color: black;
   background-color: rgba(255, 255, 255, 0.356);
   opacity: 0.7;
@@ -118,7 +122,7 @@ export default {
   height: 42%;
   position: absolute;
   left: 15%;
-  top: 50%;
+  top: 56%;
   color: black;
   background-color: rgba(255, 255, 255, 0.356);
   opacity: 0.7;
@@ -132,5 +136,9 @@ export default {
   top: 50%;
   color: black;
   background-color: white;
+}
+
+.btn-cover {
+  bottom: 0;
 }
 </style>

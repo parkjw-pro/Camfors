@@ -1,6 +1,6 @@
 <template>
   <div id="box1" style="margin:0 auto;">
-    <div v-if="SearchWordList.length>0" style="text-align: center;">
+    <div v-if="SearchWordList.length > 0" style="text-align: center;">
       <br />
       <h2
         v-if="getSearchWordName"
@@ -12,7 +12,7 @@
       <div class="row">
         <div v-for="(item, index) in paginatedData" :key="index">
           <div class="col-md-3">
-            <swiperBlock
+            <campsiteBlock
               :item="item"
               style="width: 20rem; height:20rem; margin-bottom:2rem;"
             />
@@ -24,43 +24,43 @@
         class="btn-cover"
         style="text-align: center;"
       >
-        <button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
+        <b-button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
           이전
-        </button>
-        <span class="page-count"
-          >{{ pageNum + 1 }} / {{ pageCount }} 페이지</span
-        >
-        <button
+        </b-button>
+        <span class="page-count">
+          {{ pageNum + 1 }} / {{ pageCount }} 페이지
+        </span>
+        <b-button
           :disabled="pageNum >= pageCount - 1"
           @click="nextPage"
           class="page-btn"
         >
           다음
-        </button>
+        </b-button>
       </div>
     </div>
-      <div v-else class="mt-5 pt-5">
-        <img alt="Vue logo" src="@/assets/udonge.png" style="width: 10%" />
-        <br />
-        <div class="mb-2">
-          이런 검색어는 어떠세요?
-        </div>
-        <div>
-          <a class="mx-1">수영장</a>
-          <a class="mx-1">산책로</a>
-          <a class="mx-1">놀이터</a>
-        </div>
+    <div v-else class="mt-5 pt-5">
+      <img alt="Vue logo" src="@/assets/udonge.png" style="width: 10%" />
+      <br />
+      <div class="mb-2">
+        이런 검색어는 어떠세요?
       </div>
+      <div>
+        <a class="mx-1">수영장</a>
+        <a class="mx-1">산책로</a>
+        <a class="mx-1">놀이터</a>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import "swiper/css/swiper.css";
-import swiperBlock from "@/components/campsite/swiperBlock";
+import campsiteBlock from "@/components/campsite/campsiteBlock";
 import { mapGetters } from "vuex";
 export default {
   components: {
-    swiperBlock
+    campsiteBlock
   },
   props: {
     // SearchWordList: Array,
@@ -106,7 +106,6 @@ export default {
         listSize = this.pageSize,
         page = Math.floor(listLeng / listSize);
       if (listLeng % listSize > 0) page += 1;
-
       /*
       아니면 page = Math.floor((listLeng - 1) / listSize) + 1;
       이런식으로 if 문 없이 고칠 수도 있다!
@@ -117,6 +116,11 @@ export default {
       const start = this.pageNum * this.pageSize,
         end = start + this.pageSize;
       return this.SearchWordList.slice(start, end);
+    }
+  },
+  watch: {
+    getSearchWordName() {
+      this.pageNum = 0;
     }
   }
 };
@@ -134,7 +138,7 @@ export default {
 #box1 {
   display: block;
   width: 72%;
-  position: absolute;
+  /* position: absolute; */
   left: 14%;
   margin-top: 0%;
   padding-bottom: 7%;

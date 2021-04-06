@@ -1,6 +1,6 @@
 <template>
   <div class="BlogReview">
-    <b-list-group flush v-for="(item, index) in items" :key="index">
+    <b-list-group flush v-for="(item, index) in paginatedData" :key="index">
       <b-list-group-item
         class="flex-column align-items-start"
         v-bind:href="item.link"
@@ -30,6 +30,19 @@
         </div>
       </b-list-group-item>
     </b-list-group>
+    <div v-if="items.length > 5" class="btn-cover" style="text-align: center;">
+      <b-button :disabled="pageNum === 0" @click="prevPage" class="page-btn">
+        이전
+      </b-button>
+      <span class="page-count">  {{ pageNum + 1 }} / {{ pageCount }} 페이지  </span>
+      <b-button
+        :disabled="pageNum >= pageCount - 1"
+        @click="nextPage"
+        class="page-btn"
+      >
+        다음
+      </b-button>
+    </div>
   </div>
 </template>
 <script>
@@ -40,14 +53,47 @@ import axios from "axios";
 export default {
   data() {
     return {
-      items: []
+      items: [],
+      pageNum: 0
     };
   },
-  props: ["name"],
+  props: {
+    name: String,
+    pageSize: {
+      type: Number,
+      required: false,
+      default: 5
+    }
+  },
+  methods: {
+    nextPage() {
+      this.pageNum += 1;
+    },
+    prevPage() {
+      this.pageNum -= 1;
+    }
+  },
   computed: {
     ...mapGetters({
       getDetailInfo: "campStore/getDetailInfo"
-    })
+    }),
+    pageCount() {
+      let listLeng = this.items.length,
+        listSize = this.pageSize,
+        page = Math.floor(listLeng / listSize);
+      if (listLeng % listSize > 0) page += 1;
+
+      /*
+      아니면 page = Math.floor((listLeng - 1) / listSize) + 1;
+      이런식으로 if 문 없이 고칠 수도 있다!
+      */
+      return page;
+    },
+    paginatedData() {
+      const start = this.pageNum * this.pageSize,
+        end = start + this.pageSize;
+      return this.items.slice(start, end);
+    }
   },
   created() {
     // console.log(this.name);

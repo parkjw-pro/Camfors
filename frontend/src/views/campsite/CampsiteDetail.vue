@@ -7,10 +7,12 @@
         {{ getDetailInfo.featureNmV }}
       </div>
     </div>
+    <br />
+    <h3 style="font-family: 'Hanna', sans-serif;">여긴 어떠세요?</h3>
+    <recommendCampsite :likeList="recCampsite" />
 
     <!-- gray bar -->
     <div class="bar"></div>
-
     <!-- 캠핑장 상세페이지 컨테이너 -->
     <b-container>
       <div class="row campsiteInfo">
@@ -32,51 +34,78 @@
         <div class="col-sm-5 col-md-5 campsiteInfoList">
           <table id="list">
             <tbody>
-              <tr v-if="getDetailInfo.addr1"><th>상세주소</th><td>{{getDetailInfo.addr1}}</td></tr>
-              <tr v-if="getDetailInfo.lineintro"><th>한줄소개</th><td>{{getDetailInfo.lineintro}}</td></tr>
-              <tr v-if="getDetailInfo.lctCl"><th>입지구분</th><td>{{getDetailInfo.lctCl}}</td></tr>
-              <tr v-if="getDetailInfo.tel"><th>문의처</th><td>{{getDetailInfo.tel}}</td></tr>
-              <tr v-if="getDetailInfo.operPdCl"><th>운영기간</th><td>{{getDetailInfo.operPdCl}}</td></tr>
-              <tr v-if="getDetailInfo.operDeCl"><th>운영일</th><td>{{getDetailInfo.operDeCl}}</td></tr>
-              <tr v-if="getDetailInfo.posblFcltyCl"><th>주변시설</th><td>{{getDetailInfo.posblFcltyCl}}</td></tr>
-              <tr v-if="getDetailInfo.themaEnvrnCl"><th>테마환경</th><td>{{getDetailInfo.themaEnvrnCl}}</td></tr>
-              <tr v-if="getDetailInfo.exprnProgrm"><th>체험프로그램</th><td>{{getDetailInfo.exprnProgrm}}</td></tr>
-              <tr v-if="getDetailInfo.glampInnerFclty"><th>글램핑<br>내부시설</th><td>{{getDetailInfo.glampInnerFclty}}</td></tr>
-              <tr v-if="getDetailInfo.caravInnerFclty"><th>카라반<br>내부시설</th><td>{{getDetailInfo.caravInnerFclty}}</td></tr>
+              <tr v-if="getDetailInfo.addr1">
+                <th>상세주소</th>
+                <td>{{ getDetailInfo.addr1 }}</td>
+              </tr>
+              <tr v-if="getDetailInfo.lineintro">
+                <th>한줄소개</th>
+                <td>{{ getDetailInfo.lineintro }}</td>
+              </tr>
+              <tr v-if="getDetailInfo.lctCl">
+                <th>입지구분</th>
+                <td>{{ getDetailInfo.lctCl }}</td>
+              </tr>
+              <tr v-if="getDetailInfo.tel">
+                <th>문의처</th>
+                <td>{{ getDetailInfo.tel }}</td>
+              </tr>
+              <tr v-if="getDetailInfo.operPdCl">
+                <th>운영기간</th>
+                <td>{{ getDetailInfo.operPdCl }}</td>
+              </tr>
+              <tr v-if="getDetailInfo.operDeCl">
+                <th>운영일</th>
+                <td>{{ getDetailInfo.operDeCl }}</td>
+              </tr>
+              <tr v-if="getDetailInfo.posblFcltyCl">
+                <th>주변시설</th>
+                <td>{{ getDetailInfo.posblFcltyCl }}</td>
+              </tr>
+              <tr v-if="getDetailInfo.themaEnvrnCl">
+                <th>테마환경</th>
+                <td>{{ getDetailInfo.themaEnvrnCl }}</td>
+              </tr>
+              <tr v-if="getDetailInfo.exprnProgrm">
+                <th>체험프로그램</th>
+                <td>{{ getDetailInfo.exprnProgrm }}</td>
+              </tr>
+              <tr v-if="getDetailInfo.glampInnerFclty">
+                <th>글램핑<br />내부시설</th>
+                <td>{{ getDetailInfo.glampInnerFclty }}</td>
+              </tr>
+              <tr v-if="getDetailInfo.caravInnerFclty">
+                <th>카라반<br />내부시설</th>
+                <td>{{ getDetailInfo.caravInnerFclty }}</td>
+              </tr>
             </tbody>
           </table>
 
           <div class="pageBtn">
             <b-button
-                variant="secondary"
-                v-if="getDetailInfo.homepage"
-                :href="getDetailInfo.homepage"
-                target="_blank"
-                style="margin-right:10px;"
-                >홈페이지</b-button
-              >
-              <b-button
-                variant="secondary"
-                v-if="getDetailInfo.resveUrl"
-                :href="getDetailInfo.resveUrl"
-                target="_blank"
-                style="margin-right:10px;"
-                >예약하기</b-button
-              >
-              <b-button
-                variant="outline-danger"
-                v-if="liked"
-                @click="unlikeCampsite(getDetailInfo.campsite_id)"
-                ><i class="fas fa-heart"></i></b-button
-              >
-              <b-button
-                variant="outline-secondary"
-                v-if="!liked"
-                @click="likeCampsite(getDetailInfo.campsite_id)"
-                ><i class="fas fa-heart"></i></b-button
-              >
+              variant="secondary"
+              v-if="getDetailInfo.homepage"
+              :href="getDetailInfo.homepage"
+              target="_blank"
+              style="margin-right:10px;"
+              >홈페이지</b-button
+            >
+            <b-button
+              variant="outline-danger"
+              v-if="liked"
+              @click="unlikeCampsite(getDetailInfo.campsite_id)"
+              ><i class="fas fa-heart"></i
+            ></b-button>
+            <b-button
+              variant="outline-secondary"
+              v-if="!liked"
+              @click="likeCampsite(getDetailInfo.campsite_id)"
+              ><i class="fas fa-heart"></i
+            ></b-button>
+            <b-modal ref="modal">
+              <p>로그인 후 이용 가능합니다!</p>
+            </b-modal>
           </div>
-          
         </div>
       </div>
 
@@ -86,48 +115,88 @@
           <b-icon icon="caret-right-fill" font-scale="1"></b-icon>편의시설
         </h4>
         <div class="row facilityIcon">
-
-          <div v-if="getDetailInfo.autoSiteCo === 'Y'" style="text-align:center; padding-right:50px; padding-top:10px;">
+          <div
+            v-if="getDetailInfo.autoSiteCo === 'Y'"
+            style="text-align:center; padding-right:50px; padding-top:10px;"
+          >
             <i class="fas fa-truck-pickup fa-2x"></i>
             <p>자동차야영장</p>
           </div>
-          <div v-if="getDetailInfo.caravSiteCo === 'Y'" style="text-align:center; padding-right:50px; padding-top:10px;">
+          <div
+            v-if="getDetailInfo.caravSiteCo === 'Y'"
+            style="text-align:center; padding-right:50px; padding-top:10px;"
+          >
             <i class="fas fa-caravan fa-2x"></i>
             <p>카라반</p>
           </div>
-          <div v-if="getDetailInfo.caravSiglampSiteCoteCo === 'Y'" style="text-align:center; padding-right:50px; padding-top:10px;">
+          <div
+            v-if="getDetailInfo.caravSiglampSiteCoteCo === 'Y'"
+            style="text-align:center; padding-right:50px; padding-top:10px;"
+          >
             <i class="fas fa-campground fa-2x"></i>
             <p>글램핑</p>
           </div>
-          <div v-if="getDetailInfo.trlerAcmpnyAt === 'Y'" style="text-align:center; padding-right:50px; padding-top:10px;">
+          <div
+            v-if="getDetailInfo.trlerAcmpnyAt === 'Y'"
+            style="text-align:center; padding-right:50px; padding-top:10px;"
+          >
             <i class="fas fa-trailer fa-2x"></i>
             <p>개인 트레일러</p>
           </div>
-          <div v-if="getDetailInfo.brazierCl" style="text-align:center; padding-right:50px; padding-top:10px;">
+          <div
+            v-if="getDetailInfo.brazierCl"
+            style="text-align:center; padding-right:50px; padding-top:10px;"
+          >
             <i class="fas fa-fire-alt fa-2x"></i>
-            <p>화로대 {{getDetailInfo.brazierCl}}</p>
+            <p>화로대 {{ getDetailInfo.brazierCl }}</p>
           </div>
-          <div v-if="getDetailInfo.animalCmgCl !== '불가능'" style="text-align:center; padding-right:50px; padding-top:10px;">
-             <i class="fas fa-paw fa-2x"></i>
-            <p>출입{{getDetailInfo.animalCmgCl}}</p>
+          <div
+            v-if="getDetailInfo.animalCmgCl !== '불가능'"
+            style="text-align:center; padding-right:50px; padding-top:10px;"
+          >
+            <i class="fas fa-paw fa-2x"></i>
+            <p>출입{{ getDetailInfo.animalCmgCl }}</p>
           </div>
-          <div v-if="typeof getDetailInfo.posblFcltyCl === 'string' && getDetailInfo.posblFcltyCl.indexOf('어린이') != -1" style="text-align:center; padding-right:50px; padding-top:10px;">
+          <div
+            v-if="
+              typeof getDetailInfo.posblFcltyCl === 'string' &&
+                getDetailInfo.posblFcltyCl.indexOf('어린이') != -1
+            "
+            style="text-align:center; padding-right:50px; padding-top:10px;"
+          >
             <i class="fas fa-child fa-2x"></i>
             <p>어린이놀이시설</p>
           </div>
-          <div v-if="typeof getDetailInfo.posblFcltyCl === 'string' && getDetailInfo.posblFcltyCl.indexOf('산책로') != -1 " style="text-align:center; padding-right:50px; padding-top:10px;">
+          <div
+            v-if="
+              typeof getDetailInfo.posblFcltyCl === 'string' &&
+                getDetailInfo.posblFcltyCl.indexOf('산책로') != -1
+            "
+            style="text-align:center; padding-right:50px; padding-top:10px;"
+          >
             <i class="fas fa-walking fa-2x"></i>
             <p>산책로</p>
           </div>
-          <div v-if="typeof getDetailInfo.posblFcltyCl === 'string' && getDetailInfo.posblFcltyCl.indexOf('물놀이') != -1 " style="text-align:center; padding-right:50px; padding-top:10px;">
+          <div
+            v-if="
+              typeof getDetailInfo.posblFcltyCl === 'string' &&
+                getDetailInfo.posblFcltyCl.indexOf('물놀이') != -1
+            "
+            style="text-align:center; padding-right:50px; padding-top:10px;"
+          >
             <i class="fas fa-swimmer fa-2x"></i>
             <p>물놀이</p>
           </div>
-          <div v-if="typeof getDetailInfo.lctCl === 'string' && getDetailInfo.lctCl.indexOf('산') != -1 " style="text-align:center; padding-right:50px; padding-top:10px;">
+          <div
+            v-if="
+              typeof getDetailInfo.lctCl === 'string' &&
+                getDetailInfo.lctCl.indexOf('산') != -1
+            "
+            style="text-align:center; padding-right:50px; padding-top:10px;"
+          >
             <i class="fas fa-mountain fa-2x"></i>
             <p>산</p>
           </div>
-
         </div>
       </div>
 
@@ -188,7 +257,11 @@
             >등록</b-button
           >
         </div>
-        <Comment v-if="this.commentList" :commentList="this.commentList" v-on:refresh="refresh"/>
+        <Comment
+          v-if="this.commentList"
+          :commentList="this.commentList"
+          v-on:refresh="refresh"
+        />
       </div>
 
       <!-- 블로그 리뷰 -->
@@ -201,7 +274,10 @@
           :name="getDetailInfo.campsite_name"
         />
       </div>
+      <br />
+      <br />
     </b-container>
+    <Footer />
   </div>
 </template>
 
@@ -212,13 +288,17 @@ import axios from "axios";
 import Map from "@/components/campsiteDetail/Map";
 import Comment from "@/components/campsiteDetail/Comment";
 import BlogReview from "@/components/campsiteDetail/BlogReview";
+import recommendCampsite from "@/components/campsiteDetail/recommendCampsite";
+import Footer from "@/components/app/Footer";
 import { mapGetters } from "vuex";
 export default {
   name: "CampsiteDetail",
   components: {
     Map,
     Comment,
-    BlogReview
+    BlogReview,
+    recommendCampsite,
+    Footer
   },
   created() {
     this.$store.state.campStore.detailInfo = [];
@@ -226,25 +306,11 @@ export default {
       "campStore/campsiteDetail",
       this.$route.params.campsiteId
     );
-
     const userId = localStorage.getItem("user_id");
     this.userId = userId;
-
     if (this.getUserId != "") this.getLikeInfo();
-
-    axios({
-      method: "get",
-      url: `${SERVER_URL}/camp/readreview/${this.campsiteId}`
-    })
-      .then(res => {
-        this.commentList = [];
-        console.log(res.data);
-        if (res.data !== "리뷰가 없습니다") this.commentList = res.data;
-      })
-      .catch(error => {
-        console.log(error);
-    });
-      
+    this.getReview();
+    this.getRecCampsite();
   },
   computed: {
     ...mapGetters({
@@ -261,10 +327,43 @@ export default {
       comment: "",
       userId: "",
       liked: null,
-      likeCount: ""
+      likeCount: "",
+      recCampsite: []
     };
   },
   methods: {
+    getRecCampsite() {
+      axios({
+        method: "get",
+        url: `${SERVER_URL}/camp/camprecommend/${this.campsiteId}/`
+      })
+        .then(res => {
+          this.recCampsite = res.data;
+          // console.log(res.data);
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    getReview() {
+      axios({
+        method: "get",
+        url: `${SERVER_URL}/camp/readreview/${this.campsiteId}/`
+      })
+        .then(res => {
+          this.commentList = [];
+          console.log(res.data);
+          if (res.data !== "리뷰가 없습니다") this.commentList = res.data;
+          for (let i = 0; i < this.commentList.length; i++) {
+            this.commentList[i].created_at = this.commentList[
+              i
+            ].created_at.replace("T", " ");
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
     createReview() {
       console.log(
         Number(this.getUserId),
@@ -278,12 +377,17 @@ export default {
           review: this.comment
         })
         .then(response => {
+          this.comment = "";
           console.log(response);
+          this.getReview();
         });
-
-      this.$router.go();
     },
+
     likeCampsite(campsite_id) {
+      if (this.getUserId == "") {
+        this.$refs["modal"].show(); // PopUp Open
+        return;
+      }
       axios
         .post(`${SERVER_URL}/camp/addlike`, {
           data: {
@@ -297,6 +401,10 @@ export default {
         });
     },
     unlikeCampsite(campsite_id) {
+      if (this.getUserId == "") {
+        this.$refs["modal"].show(); // PopUp Open
+        return;
+      }
       axios
         .post(`${SERVER_URL}/camp/unlike`, {
           data: {
@@ -318,7 +426,7 @@ export default {
           }
         })
         .then(response => {
-          console.log(response)
+          console.log(response);
           if (response.data == 0) {
             this.liked = false;
           } else {
@@ -327,10 +435,10 @@ export default {
         });
     },
     refresh() {
-    this.$router.go();
+      // this.$router.go();
+      this.getReview();
     }
-  },
-  
+  }
 };
 </script>
 <style scoped>
@@ -432,8 +540,9 @@ td {
   line-height: 25px;
 }
 
-tbody tr:nth-child(1) th, tbody tr:nth-child(1) td {
-    border-top: 2px solid #000;
+tbody tr:nth-child(1) th,
+tbody tr:nth-child(1) td {
+  border-top: 2px solid #000;
 }
 
 .pageBtn {

@@ -14,11 +14,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 // Set up FontAwesome
-faLibrary.add(
-  faTrash,
-  faAngleDown,
-  faSearch
-);
+faLibrary.add(faTrash, faAngleDown, faSearch);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)

@@ -18,7 +18,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
 class ReviewsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reviews
-        fields = ['campsite_id','user_id','review','created_at']
+        fields = ['campsite_id','user_id','review','created_at','review_id']
 
 class LikesSerializer(serializers.ModelSerializer):
     class Meta:

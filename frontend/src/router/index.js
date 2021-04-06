@@ -18,41 +18,56 @@ const routes = [
   {
     path: "/login",
     name: "Login",
-    component: Login
+    component: Login,
+    meta: {
+      title: "캠퍼스 | 로그인"
+    }
   },
   {
     path: "/register",
     name: "Register",
-    component: Register
+    component: Register,
+    meta: {
+      title: "캠퍼스 | 회원가입"
+    }
   },
   {
     path: "/mypage",
     name: "Mypage",
-    component: Mypage
+    component: Mypage,
+    meta: {
+      title: "캠퍼스 | 마이페이지"
+    }
   },
   {
     path: "/searchCampsite",
     name: "SearchCampsite",
-    component: SearchCampsite
+    component: SearchCampsite,
+    meta: {
+      title: "캠퍼스 | 검색페이지"
+    }
   },
   {
     path: "/campsiteDetail/:campsiteId",
     name: "CampsiteDetail",
-    component: CampsiteDetail
+    component: CampsiteDetail,
+    meta: {
+      title: "캠퍼스 | 상세페이지"
+    }
   }
-  // {
-  //   path: "/about",
-  //   name: "About",
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () =>
-  //     import(/* webpackChunkName: "about" */ "../views/About.vue")
-  // }
 ];
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
   routes
+});
+
+router.beforeEach((to, from, next) => {
+  /* It will change the title when the router is change*/
+  /* 페이지 제목 바꾸기 */
+  if (to.meta.title) {
+    document.title = to.meta.title;
+  }
+  next();
 });
 export default router;
