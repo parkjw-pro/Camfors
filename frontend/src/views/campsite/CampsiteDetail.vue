@@ -7,12 +7,15 @@
         {{ getDetailInfo.featureNmV }}
       </div>
     </div>
+    <!-- gray bar -->
+    <div class="bar"></div>
     <br />
     <h3 style="font-family: 'Hanna', sans-serif;">여긴 어떠세요?</h3>
     <recommendCampsite :likeList="recCampsite" />
 
     <!-- gray bar -->
     <div class="bar"></div>
+    
     <!-- 캠핑장 상세페이지 컨테이너 -->
     <b-container>
       <div class="row campsiteInfo">
@@ -338,8 +341,10 @@ export default {
         url: `${SERVER_URL}/camp/camprecommend/${this.campsiteId}/`
       })
         .then(res => {
+          
           this.recCampsite = res.data;
-          // console.log(res.data);
+          console.log(res);
+          console.log(this.recCampsite);
         })
         .catch(error => {
           console.log(error);

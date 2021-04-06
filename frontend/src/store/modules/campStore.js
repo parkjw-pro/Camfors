@@ -11,7 +11,7 @@ const campStore = {
     searchTagList: [[]],
     searchTagListName: [],
     searchWordName: "",
-    pageNum: 0
+    pageNum: 0,
   },
   getters: {
     getDetailInfo(state) {
@@ -31,6 +31,9 @@ const campStore = {
     },
     getPageNum(state) {
       return state.pageNum;
+    },
+    getLoading(state){
+      return state.loading;
     }
   },
   mutations: {
@@ -48,7 +51,7 @@ const campStore = {
     },
     setSearchWordName(state, payload) {
       state.searchWordName = payload;
-    }
+    },
   },
   actions: {
     campsiteDetail(context, campsite_id) {

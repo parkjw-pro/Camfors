@@ -3,7 +3,7 @@
     <h3 style="text-align: left; font-family: 'Hanna', sans-serif;"></h3>
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide v-for="(item, index) in likeList" :key="index">
-        <campsiteBlock :item="item[0]" />
+        <campsiteBlock :item="item" />
       </swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
