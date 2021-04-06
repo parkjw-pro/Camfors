@@ -71,7 +71,7 @@
 
 - 태그가 아닌 일반검색으로 검색하면 해당 검색어를 포함된(이름또는 지역) 캠핑장 리스트가 출력된다.
 
-![](Docs/img/SearchWord.png)
+![](Docs/img/SearchWord.gif)
 
 
 
@@ -79,7 +79,7 @@
 
 - 태그로 검색하게 되면, 캠핑장의 태그가 해당태그인 리스트를 출력 한다.
 
-![](Docs/img/SearchTag.png)
+![](Docs/img/SearchTag.gif)
 
 
 
