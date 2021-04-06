@@ -3,7 +3,7 @@
   <div :style="cssProps" class="loginimg">
     <div id="my2" style="position:relative">
       <h3 style="font-family: 'Hanna', sans-serif;">내가 좋아하는 캠핑장</h3>
-      <mypageLike :likeList="likeCampsiteList"/>
+      <mypagelike :likeList="likeCampsiteList"/>
     </div>
     <div id="my3"
       ><h3 style="font-family: 'Hanna', sans-serif;">내가 쓴 댓글</h3>
@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import mypageLike from "@/components/mypage/mypageLike";
+import mypagelike from "@/components/mypage/mypagelike";
 import Comment from "@/components/campsiteDetail/Comment";
 import axios from "axios";
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 export default {
   name: "Mypage",
   components: {
-    mypageLike,
+    mypagelike,
     Comment
   },
   data: function() {
