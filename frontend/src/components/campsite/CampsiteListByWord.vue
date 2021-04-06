@@ -19,7 +19,7 @@
           <div class="col-md-3">
             <campsiteBlock
               :item="item"
-              style="width: 20rem; height:20rem; margin-bottom:2rem;"
+              style="width: 20rem; height:18rem; margin-bottom:2rem;"
             />
           </div>
         </div>
