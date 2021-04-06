@@ -3,14 +3,13 @@
   <div :style="cssProps" class="loginimg">
     <div id="my2" style="position:relative">
       <h3 style="font-family: 'Hanna', sans-serif;">내가 좋아하는 캠핑장</h3>
-      <mypagelike :likeList="likeCampsiteList"/>
+      <mypagelike :likeList="likeCampsiteList" />
     </div>
-    <div id="my3"
-      ><h3 style="font-family: 'Hanna', sans-serif;">내가 쓴 댓글</h3>
+    <div id="my3">
+      <h3 style="font-family: 'Hanna', sans-serif;">내가 쓴 댓글</h3>
       <Comment v-if="this.commentList" :commentList="this.commentList" />
     </div>
   </div>
-
 </template>
 
 <script>
@@ -58,7 +57,9 @@ export default {
           this.commentList = res.data;
           console.log(res.data);
           for (let i = 0; i < this.commentList.length; i++) {
-            this.commentList[i].created_at = this.commentList[i].created_at.replace('T', ' ');
+            this.commentList[i].created_at = this.commentList[
+              i
+            ].created_at.replace("T", " ");
           }
         })
         .catch(error => {
