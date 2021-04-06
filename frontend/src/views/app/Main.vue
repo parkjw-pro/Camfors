@@ -15,6 +15,7 @@
       <div class="text_area stagger-wrapper">
         <p class="stagger-item" style="font-size:3em">Camping For Smart</p>
         <p class="stagger-item">멋쟁이들을 위한 캠핑장 추천, 캠퍼스</p>
+        <b-button class="stagger-item" variant="outline-light" @click="goSearch" style="font-family: system-ui; font-weight:900; letter-spacing: -2px;"><font-awesome-icon icon="search" class="fa-1x" /> 캠핑장 검색</b-button>
       </div>
       <div class="desc_scroll" id="scrollBtn" @click="moveToList">
         <p style="margin-bottom: 0;">Scroll</p>
@@ -130,7 +131,10 @@ export default {
       setTimeout(() => {
         this.loading = false;
       }, 500);
-    }
+    },
+    goSearch: function() {
+      this.$router.go(this.$router.push({ name: "SearchCampsite" }));
+    },
   },
   created() {
     const userId = localStorage.getItem('user_id');
