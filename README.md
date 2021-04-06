@@ -98,10 +98,16 @@ npm run serve
   
   VUE_APP_SERVER_URL=<서버 URL>
   VUE_APP_MAP_API_KEY=<카카오 지도 API Javascript 키>
+  VUE_APP_SERVER_URL_C=<크롤링 서버 URL>
   ```
+  
+- `backend` 프로젝트 폴더에서 모듈을 설치한다.
+```bash
+pip install -r requirements.txt
+python manage.py runserver
+```
 
-
-> BE 코드는 Django에서 실행한다.
+> 
 
 
 ## File Manifest
@@ -123,12 +129,26 @@ npm run serve
   3. campsite
   - 캠핑장 추천 서비스 관련
 
-
 ### Backend
 
 
+ -폴더구조는 서버 `Back-end`, 앱 단위 `main`, `camp`로 구분된다.
+ 
+    
+    1. DB 연동
+    - python manage.py inspectdb (db 감지 및 model.py 코드 작성 용이)
+        
+    2.DB가 변경 되었을 시
+    - python manage.py makemigrations
+    - python manage.py migrate
+
+
+
+### Database
+
 ### ERdiagram
 ![](Docs/img/erd.png)
+
 
 
 ## 저작권 및 사용권 정보
@@ -141,7 +161,6 @@ npm run serve
 - lodash
 - vue bootstrap-vue bootstrap
 - less less-loader
-- jquery
 - mint-ui -S
 - vue-awesome-swiper
 - vuex
@@ -167,16 +186,14 @@ npm run serve
 
 ## 알려진 버그
 
-> campsite_Tag 테이블 1437번 캠핑장 중복
+> 아직 없습니다.
 
 
 
 ## 배포
 
 
-> http://www.camfors.shop
-
-
+> https://j4a304.p.ssafy.io
 
 
 
