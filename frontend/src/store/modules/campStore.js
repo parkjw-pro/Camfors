@@ -31,6 +31,9 @@ const campStore = {
     },
     getPageNum(state) {
       return state.pageNum;
+    },
+    getLoading(state) {
+      return state.loading;
     }
   },
   mutations: {

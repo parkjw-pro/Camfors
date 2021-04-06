@@ -28,7 +28,7 @@ export default {
   name: "swiper-example-loop-group",
   title: "Loop mode with multiple slides per group",
   props: {
-    list: Object
+    list: Array
   },
   components: {
     Swiper,

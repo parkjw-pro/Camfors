@@ -10,6 +10,7 @@
     <swiper class="swiper" :options="swiperOption">
       <swiper-slide v-for="(item, index) in campsiteList" :key="index">
         <campsiteBlock :item="item" />
+        <div v-if="index === campsiteList.length - 1">{{ endLoading() }}}</div>
       </swiper-slide>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
@@ -77,7 +78,11 @@ export default {
       campsiteId: "1234"
     };
   },
-  methods: {}
+  methods: {
+    endLoading() {
+      this.$emit("endLoading");
+    }
+  }
 };
 </script>
 

@@ -159,6 +159,7 @@ export default {
   padding: 0;
   background-color: rgb(71, 64, 64);
   color: whitesmoke;
+  height: 280px;
 }
 .card-text {
   margin-bottom: 5px;

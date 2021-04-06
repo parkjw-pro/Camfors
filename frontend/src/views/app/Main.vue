@@ -23,26 +23,33 @@
     </div>
     <!-- <div style="text-align: center; margin : 0 auto; width: 50%;"> -->
     <!-- <div style="background: linear-gradient(0deg, black 95%, #FF8C00);"> -->
-   
     <div style="background: black;">
       <bestCampistList :list="bestCampsiteList" />
     </div>
-    <div style="background: black;" v-for="(item, index) in tagList" :key="index">
-      <mainCampistList :tag="item" />
+    <div style="background: black;">
+      <pulse-loader
+        :loading="this.loading"
+        :size="size"
+        style="position:absolute; left:50%; top:120vh; transform: translateX(-50%); z-index:999; }"
+      ></pulse-loader>
+      <div v-for="(item, index) in tagList" :key="index">
+        <mainCampistList :tag="item" v-on:endLoading="endLoading" />
+      </div>
     </div>
 
     <!-- </div> -->
+    <div style="height:50px; background:black;"></div>
     <Footer />
   </div>
 </template>
 
 <script>
-import 'swiper/css/swiper.css';
-import mainCampistList from '@/components/campsite/mainCampistList';
+import "swiper/css/swiper.css";
+import mainCampistList from "@/components/campsite/mainCampistList";
 import bestCampistList from '@/components/campsite/bestCampistList';
-import Footer from '@/components/app/Footer';
-import axios from 'axios';
-
+import Footer from "@/components/app/Footer";
+import axios from "axios";
+import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
@@ -54,6 +61,7 @@ export default {
     bestCampistList,
     mainCampistList,
     Footer,
+    PulseLoader
     // Slider,
     // CampsiteList,
   },
@@ -69,7 +77,9 @@ export default {
           type: 'bullets',
         },
       },
-      userId: '',
+      userId: "",
+      size: "20px",
+      loading: true
     };
   },
   methods: {
@@ -110,13 +120,17 @@ export default {
         url: `${SERVER_URL}/camp/camplikeslist/`,
       })
         .then((res) => {
-          console.log(res.data)
           this.bestCampsiteList = res.data;
         })
         .catch((error) => {
           console.log(error);
         });
     },
+    endLoading() {
+      setTimeout(() => {
+        this.loading = false;
+      }, 500);
+    }
   },
   created() {
     const userId = localStorage.getItem('user_id');
