@@ -91,8 +91,7 @@ def campwordresult(request):
                                             Q(glampInnerFclty__icontains=searchword) |
                                             Q(posblFcltyCl__icontains=searchword) | Q(exprnProgrm__icontains=searchword) |
                                             Q(themaEnvrnCl__icontains=searchword) | Q(eqpmnLendCl__icontains=searchword)).distinct()
-
-            serializer = CampsiteSerializer(query,many=True)
+            serializer = CampsiteSerializer(query, many=True)
 
         except Campsite.DoesNotExist:
             return HttpResponse(status=404)
@@ -111,9 +110,7 @@ def camptagresult(request):
                 queryset = Campsite.objects.filter(campsite_id__in=Subquery(CampsiteTag.objects.filter(tag_id=tagid)
                                                                           .values('campsite_id'))).order_by('likeCount')[:50]
                 serializer = CampsiteSerializer(queryset, many=True)
-
                 result.append(serializer.data)
-
         except Campsite.DoesNotExist:
             return HttpResponse(status=404)
 
