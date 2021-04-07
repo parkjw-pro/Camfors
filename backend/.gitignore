@@ -5,6 +5,7 @@ target/
 !**/src/test/**
 .DS_Store
 *.pyc
+
 .idea/workspace.xml
 Backend/__pycache__/**
 camp/migrations/__pycache__/**

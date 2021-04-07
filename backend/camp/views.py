@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Subquery
@@ -14,22 +13,20 @@ from django.db.models import Count
 import collections
 
 import pandas as pd
-import numpy as np
-import re
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 # jsonparser로 requset body 데이터 얻을수 있음
 
 
 # 서비스 단위 하나
-def campSite_list(request):
+def campsitelist(request):
     if request.method == 'GET':
         query_sets = Campsite.objects.all()
         serializer = CampsiteSerializer(query_sets, many=True)
         return JsonResponse(serializer.data, safe=False)
 
 
-def campSite_detail(request, pk):
+def campsitedetail(request, pk):
     try:
         campsite = Campsite.objects.get(pk=pk)
     except Campsite.DoesNotExist:
@@ -41,10 +38,11 @@ def campSite_detail(request, pk):
         # 태그 추가
         sub_result = collections.OrderedDict()
         camp_id = serializer.data['campsite_id']
+        # sub_queryset = Tag.objects.filter(campsite_id=camp_id).values('tag_id')
         sub_queryset = Tag.objects.raw(
             '''select tag_id
             from Campsite_Tag
-            where campsite_id = {campsite_id}'''.format(campsite_id = camp_id)
+            where campsite_id = {campsite_id}'''.format(campsite_id=camp_id)
         )
         sub_serializer = TagSerializer(sub_queryset, many = True)
         for k, v in serializer.data.items():
@@ -53,6 +51,7 @@ def campSite_detail(request, pk):
         # print(sub_result)
 
         return JsonResponse(sub_result, safe=False)
+
 
 def camptaglist(request, tag_id):
     try:
@@ -71,7 +70,7 @@ def camptaglist(request, tag_id):
         return JsonResponse("조회된 데이터가 없습니다.", safe=False)
 
 
-def campLikesList(request):
+def camplikeslist(request):
     try:
         query_sets = Campsite.objects.all().order_by('-likeCount')[:20]
     except Campsite.DoesNotExist:
@@ -83,7 +82,7 @@ def campLikesList(request):
 
 
 @csrf_exempt
-def campWordResult(request):
+def campwordresult(request):
     if request.method == 'POST':
         try:
             word = json.loads(request.body)
@@ -102,7 +101,7 @@ def campWordResult(request):
 
 
 @csrf_exempt
-def campTagResult(request):
+def camptagresult(request):
     if request.method == 'POST':
         try:
             taglist = json.loads(request.body)
@@ -125,7 +124,7 @@ def gettaglist(request):
     if request.method == 'GET':
         try:
             query = Tag.objects.all()
-            taglist = TagSerializer(query,many=True)
+            taglist = TagSerializer(query, many=True)
 
         except Tag.DoesNotExist:
             return HttpResponse(status=404)
@@ -145,7 +144,7 @@ def listbyuser(request, user_id):
                     limit 5;'''.format(user_id=user_id))
                 serializer = TagSerializer(query, many=True)
 
-            else :
+            else:
                 query = Tag.objects.raw(
                     '''select ct.tag_id , sum(c.likeCount) as tagLikeCount 
                         from Campsite c, Campsite_Tag ct  
@@ -163,7 +162,7 @@ def listbyuser(request, user_id):
 
 
 @csrf_exempt
-def campPopTagResult(request):
+def camppoptagresult(request):
     try:
         query_sets = Tag.objects.raw(
             '''select ct.tag_id , sum(c.likeCount) as tagLikeCount 
@@ -236,8 +235,9 @@ def getlikeinfo(request):
 
     return HttpResponse(query.get('campsite_id__count'))
 
+
 @csrf_exempt
-def campRecommend(request,campsite_id):
+def camprecommend(request,campsite_id):
     data = pd.read_csv("data.csv",encoding = 'euc-kr')
 
     count_vector = CountVectorizer(ngram_range=(1,1))
@@ -264,10 +264,11 @@ def campRecommend(request,campsite_id):
 
     return JsonResponse(result, safe=False, status=status.HTTP_201_CREATED)
 
+
 @csrf_exempt
 @api_view(['post'])
 @permission_classes((permissions.AllowAny,))
-def campCreateReview(request):
+def campcreatereview(request):
     if request.method == 'POST':
         print(request.data)
         serializer = CampCreateReviewSerializer(data=request.data)
@@ -280,7 +281,7 @@ def campCreateReview(request):
 
 
 @csrf_exempt
-def campReadReview(request, campsite_id):
+def campreadreview(request, campsite_id):
     try:
         query_sets = Reviews.objects.raw(
             '''select R.campsite_id, R.created_at, R.review, U.nickname, R.review_id 
@@ -324,7 +325,7 @@ def campReadReview(request, campsite_id):
 
 
 @csrf_exempt
-def campDeleteReview(request, review_id):
+def campdeletereview(request, review_id):
     review = Reviews.objects.filter(review_id=review_id)
     review.delete()
     return JsonResponse("삭제 성공", safe=False, status=status.HTTP_201_CREATED)
