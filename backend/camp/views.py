@@ -13,8 +13,6 @@ from django.db.models import Count
 import collections
 
 import pandas as pd
-import numpy as np
-import re
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 # jsonparser로 requset body 데이터 얻을수 있음
