@@ -78,16 +78,12 @@ WSGI_APPLICATION = 'BackEnd.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'CFS',
-        'USER': 'ssafy304',
-        'PASSWORD': 'ssafy304!!',
-        'HOST': 'j4a304.p.ssafy.io',
         'PORT': '3306',
         'OPTIONS': {
+            'read_default_file': "mysql.cnf",
             'init_command': 'SET sql_mode="STRICT_TRANS_TABLES"'
         }
     }
