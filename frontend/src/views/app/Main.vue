@@ -15,6 +15,7 @@
       <div class="text_area stagger-wrapper">
         <p class="stagger-item" style="font-size:3em">Camping For Smart</p>
         <p class="stagger-item">멋쟁이들을 위한 캠핑장 추천, 캠퍼스</p>
+        <b-button class="stagger-item" variant="outline-light" @click="goSearch" style="font-family: system-ui; font-weight:900; letter-spacing: -2px;"><font-awesome-icon icon="search" class="fa-1x" /> 캠핑장 검색</b-button>
       </div>
       <div class="desc_scroll" id="scrollBtn" @click="moveToList">
         <p style="margin-bottom: 0;">Scroll</p>
@@ -23,6 +24,9 @@
     </div>
     <!-- <div style="text-align: center; margin : 0 auto; width: 50%;"> -->
     <!-- <div style="background: linear-gradient(0deg, black 95%, #FF8C00);"> -->
+    <div style="background: black;">
+      <bestCampistList :list="bestCampsiteList" />
+    </div>
     <div style="background: black;">
       <pulse-loader
         :loading="this.loading"
@@ -33,6 +37,7 @@
         <mainCampistList :tag="item" v-on:endLoading="endLoading" />
       </div>
     </div>
+
     <!-- </div> -->
     <div style="height:50px; background:black;"></div>
     <Footer />
@@ -42,17 +47,19 @@
 <script>
 import "swiper/css/swiper.css";
 import mainCampistList from "@/components/campsite/mainCampistList";
+import bestCampistList from '@/components/campsite/bestCampistList';
 import Footer from "@/components/app/Footer";
 import axios from "axios";
 import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 const SERVER_URL = process.env.VUE_APP_SERVER_URL;
 
 export default {
-  name: "Main",
+  name: 'Main',
   components: {
     // Movie,
     // swiper,
     // swiperSlide,
+    bestCampistList,
     mainCampistList,
     Footer,
     PulseLoader
@@ -62,13 +69,14 @@ export default {
   data: function() {
     return {
       tagList: [],
+      bestCampsiteList: [],
       visible: true,
       swiperOption: {
-        direction: "vertical",
+        direction: 'vertical',
         pagination: {
-          el: ".swiper-pagination",
-          type: "bullets"
-        }
+          el: '.swiper-pagination',
+          type: 'bullets',
+        },
       },
       userId: "",
       size: "20px",
@@ -77,33 +85,45 @@ export default {
   },
   methods: {
     enlarge(event) {
-      event.currentTarget.classList.add("large");
+      event.currentTarget.classList.add('large');
     },
     moveToList() {
-      var location = document.querySelector("#scrollBtn").offsetTop;
-      window.scrollTo({ top: location + 30, behavior: "smooth" });
+      var location = document.querySelector('#scrollBtn').offsetTop;
+      window.scrollTo({ top: location + 30, behavior: 'smooth' });
     },
     no_member() {
       axios({
-        method: "get",
-        url: `${SERVER_URL}/camp/camppoptag`
+        method: 'get',
+        url: `${SERVER_URL}/camp/camppoptag`,
       })
-        .then(res => {
+        .then((res) => {
           this.tagList = res.data;
         })
-        .catch(error => {
+        .catch((error) => {
           console.log(error);
         });
     },
     member() {
       axios({
-        method: "get",
-        url: `${SERVER_URL}/camp/listbyuser/${this.userId}/`
+        method: 'get',
+        url: `${SERVER_URL}/camp/listbyuser/${this.userId}/`,
       })
-        .then(res => {
+        .then((res) => {
           this.tagList = res.data;
         })
-        .catch(error => {
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    bestCampsite() {
+      axios({
+        method: 'get',
+        url: `${SERVER_URL}/camp/camplikeslist/`,
+      })
+        .then((res) => {
+          this.bestCampsiteList = res.data;
+        })
+        .catch((error) => {
           console.log(error);
         });
     },
@@ -111,17 +131,21 @@ export default {
       setTimeout(() => {
         this.loading = false;
       }, 500);
-    }
+    },
+    goSearch: function() {
+      this.$router.go(this.$router.push({ name: "SearchCampsite" }));
+    },
   },
   created() {
-    const userId = localStorage.getItem("user_id");
+    const userId = localStorage.getItem('user_id');
     this.userId = userId;
+    this.bestCampsite();
     if (this.userId == null) {
       this.no_member();
     } else {
       this.member();
     }
-  }
+  },
 };
 </script>
 
