@@ -125,7 +125,7 @@ def gettaglist(request):
     if request.method == 'GET':
         try:
             query = Tag.objects.all()
-            taglist = TagSerializer(query,many=True)
+            taglist = TagSerializer(query, many=True)
 
         except Tag.DoesNotExist:
             return HttpResponse(status=404)
