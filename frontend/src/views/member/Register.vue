@@ -155,7 +155,7 @@ export default {
       if (
         (this.credentials.email.length<6)||
         (this.credentials.password.length<6)||
-        (this.credentials.password!=this.credentials.password_confirmation)||
+        (this.credentials.password!=this.password_confirmation)||
         (this.credentials.nickname.length<2)
       ) {
         alert("회원가입 양식에 맞춰주세요!");
