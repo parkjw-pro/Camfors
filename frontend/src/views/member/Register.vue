@@ -44,7 +44,7 @@
                 <b-form-input
                   type="password"
                   class="mx-4"
-                  style="width:60%; float:left; font-color : black;"
+                  style="width:60%; float:left; color:black;"
                   v-model="credentials.password"
                   placeholder="비밀번호를 입력하세요(6자 이상)"
                   required

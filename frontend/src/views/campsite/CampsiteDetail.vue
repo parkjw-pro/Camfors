@@ -3,8 +3,8 @@
     <!-- 캠핑장 소개 컨텐츠 (이름, 태그) -->
     <div class="contentsBox">
       <h2 style="color:white;">{{ getDetailInfo.campsite_name }}</h2>
-      <div class="tag">
-        {{ getDetailInfo.featureNmV }}
+      <div class="tag" v-for="(item, index) in getDetailInfo.taglist" :key="index">
+        #{{ item.tag_name }}
       </div>
     </div>
     <!-- gray bar -->
