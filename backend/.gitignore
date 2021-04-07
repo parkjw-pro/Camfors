@@ -12,6 +12,8 @@ camp/migrations/__pycache__/**
 user/migrations/__pycache__/**
 user/__pycache__/**
 camp/__pycache__/**
+mysql.cnf
+
 
 ### STS ###
 .apt_generated
