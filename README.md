@@ -30,6 +30,8 @@
 - AWS EC2를 이용하여 프로젝트를 서버에 배포하였다.
 - We deployed project using AWS EC2.
 
+## Data Analysis(데이터 전 처리)
+- Data Analysis폴더 안 **read me** 파일 확인
 
 ## 서비스 소개
 
