@@ -10,6 +10,7 @@ from tensorflow.keras import layers
 from tensorflow.keras import optimizers
 from tensorflow.keras import losses
 from tensorflow.keras import metrics
+import nltk
 import sys
 from pykospacing import spacing
 
@@ -207,6 +208,17 @@ pprint(train_docs[0])
 tokens = [t for d in train_docs for t in d[0]]
 print(len(tokens))
 
+
+text = nltk.Text(tokens, name='NMSC')
+
+# 전체 토큰의 개수
+print(len(text.tokens))
+
+# 중복을 제외한 토큰의 개수
+print(len(set(text.tokens)))
+
+# 출현 빈도가 높은 상위 토큰 10개
+pprint(text.vocab().most_common(10))
 
 #분석 시작
 # 시간이 꽤 걸립니다! 시간을 절약하고 싶으면 most_common의 매개변수를 줄여보세요.
