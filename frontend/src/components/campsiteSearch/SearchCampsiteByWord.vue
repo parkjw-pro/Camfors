@@ -39,7 +39,7 @@ export default {
       this.$emit("IsTag", false);
     },
     searchWord() {
-      console.log(this.word);
+      // console.log(this.word);
       this.$store.dispatch("campStore/searchByWord", this.word);
       this.word = "";
     }

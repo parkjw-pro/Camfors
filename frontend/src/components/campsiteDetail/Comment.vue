@@ -68,7 +68,7 @@ export default {
     removeReview(review_id) {
       axios({
         method: "delete",
-        url: `${SERVER_URL}/camp/deletereview/${review_id}`
+        url: `${SERVER_URL}/camp/deletereview/${review_id}/`
       })
         .then(() => {
           this.$emit("refresh");

@@ -412,7 +412,7 @@ export default {
     },
     getLikeInfo() {
       axios
-        .get(`${SERVER_URL}/camp/getlikeinfo`, {
+        .get(`${SERVER_URL}/camp/getlikeinfo/`, {
           params: {
             userId: this.getUserId,
             campsiteId: this.campsiteId

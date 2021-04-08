@@ -1,5 +1,6 @@
 [client]
-database = CFS
+database = CFS2
+#host = j4a304.p.ssafy.io
 host = j4a304.p.ssafy.io
 user = ssafy304
 password = ssafy304!!

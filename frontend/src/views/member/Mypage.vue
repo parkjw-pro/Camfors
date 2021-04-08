@@ -7,7 +7,7 @@
     </div>
     <div id="my3">
       <h3 style="font-family: 'Hanna', sans-serif;">내가 쓴 댓글</h3>
-      <Comment v-if="this.commentList" :commentList="this.commentList" />
+      <Comment v-if="this.commentList" :commentList="this.commentList"  v-on:refresh="refresh"/>
     </div>
   </div>
 </template>
@@ -38,24 +38,24 @@ export default {
   },
   methods: {
     getUserCampsite: function() {
-      console.log(this.userId);
+      // console.log(this.userId);
       axios
         .post(`${SERVER_URL}/user/like`, { user_id: this.userId })
         .then(res => {
           this.likeCampsiteList = res.data;
-          console.log(res.data);
+          // console.log(res.data);
         })
         .catch(error => {
           console.log(error);
         });
     },
     getUserReview: function() {
-      console.log(this.userId);
+      // console.log(this.userId);
       axios
         .post(`${SERVER_URL}/user/review`, { user_id: this.userId })
         .then(res => {
           this.commentList = res.data;
-          console.log(res.data);
+          // console.log(res.data);
           for (let i = 0; i < this.commentList.length; i++) {
             this.commentList[i].created_at = this.commentList[
               i
@@ -65,6 +65,10 @@ export default {
         .catch(error => {
           console.log(error);
         });
+    },
+    refresh() {
+      // this.$router.go();
+      this.getUserReview();
     }
   },
   created() {
