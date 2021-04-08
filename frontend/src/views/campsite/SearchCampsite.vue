@@ -39,9 +39,9 @@ export default {
     parents(data) {
       this.IsTag = data;
       if (data === true) {
-        console.log("태그결과화면");
+        //  console.log("태그결과화면");
       }
-      console.log(this.IsTag);
+      // console.log(this.IsTag);
     }
     // searched(data) {
     //   console.log(data);

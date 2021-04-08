@@ -46,7 +46,7 @@ export default {
       this.$emit("IsTag", true);
     },
     searchTag() {
-      console.log("태그검색");
+      // console.log("태그검색");
       for (let index = 0; index < this.buttons.length; index++) {
         if (this.buttons[index].state === true) {
           this.selectedTag.push(this.buttons[index].tag_id);
@@ -73,7 +73,7 @@ export default {
           this.$set(this.buttons[i], "state", false);
         }
 
-        console.log(this.buttons);
+        // console.log(this.buttons);
       })
       .catch(error => {
         console.log(error);
