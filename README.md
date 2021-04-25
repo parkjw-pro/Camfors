@@ -198,8 +198,7 @@ python manage.py runserver
 
 ## 알려진 버그
 
-> 아직 없습니다.
-
+> 없습니다.
 
 
 ## 배포
