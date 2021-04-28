@@ -204,6 +204,7 @@ python manage.py runserver
 ## 배포
 
 
+
 // ssafy제공 서버로 추후 폐쇄예정 
 > https://j4a304.p.ssafy.io
 > 현재 폐쇄(21.04.23)
